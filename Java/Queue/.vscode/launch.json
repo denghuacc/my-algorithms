@@ -1,0 +1,39 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - LinkedListQueue",
+      "request": "launch",
+      "mainClass": "LinkedListQueue",
+      "projectName": "Queue_4e6bd0ab"
+    },
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - Test",
+      "request": "launch",
+      "mainClass": "Test",
+      "projectName": "Queue_4e6bd0ab"
+    },
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - ArrayQueue",
+      "request": "launch",
+      "mainClass": "ArrayQueue",
+      "projectName": "Queue_4e6bd0ab"
+    },
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - LoopQueue",
+      "request": "launch",
+      "mainClass": "LoopQueue",
+      "projectName": "Queue_4e6bd0ab"
+    },
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - Main",
+      "request": "launch",
+      "mainClass": "Main",
+      "projectName": "Queue_4e6bd0ab"
+    }
+  ]
+}
