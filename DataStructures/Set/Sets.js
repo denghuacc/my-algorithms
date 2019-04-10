@@ -1,22 +1,11 @@
 /**
  * @name Sets 集合
- * @description 集合是一种包含不同元素的数据结构
- * 基于数组
+ * @description 一般集合是一种包含不同元素的数据结构
+ * 使用对象实现集合 （也可以使用数组，链表，树等结构实现集合）
  * ES6 新增了 Set 数据结构，类名 Sets 区别于 Set
- * 特性 1：无序
- * 特性 2：唯一性，不允许相同成元存在
- * @property { Object } items 数据仓库
- * @method has 判断是否有某个元素
- * @method add 增加元素
- * @method remove 删除元素
- * @method clear 清空元素
- * @method size 集合元素个数
- * @method values 展示元素的值
- * @method union 并集；两个集合中所有元素的新集合
- * @method intersection 交集；两个集合中共有元素的新集合
- * @method difference 差集；本集合有而其他集合没有的元素的集合
- * @method subset 子集 判断本集合是不是某个集合的子集
- * @method isEmpty 空集 判断本集合是不是空集
+ * 特性 1：无序 (不一定，有序集合元素是有序的)
+ * 特性 2：唯一性，不允许相同成元存在 (不一定，多重集合的元素可以是重复的)
+ * 简单集合的特性：无序 + 唯一性
  */
 class Sets {
   constructor() {
