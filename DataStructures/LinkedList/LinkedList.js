@@ -150,7 +150,26 @@ class LinkedList {
     return this.remove(this.size - 1)
   }
 
-  // 打印链表
+  // 从链表中删除元素 element
+  removeElement(element) {
+    let prev = this.dummyHead
+
+    while (prev.next !== null) {
+      if (prev.next.element === element) {
+        break
+      }
+      prev = prev.next
+    }
+
+    if (prev.next !== null) {
+      let delNode = prev.next
+      prev.next = delNode.next
+      delNode.next = null
+      this.size--
+    }
+  }
+
+  // 转成字符串
   toString() {
     let cur = this.dummyHead.next,
       str = ''
