@@ -1,0 +1,25 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - BSTSet",
+      "request": "launch",
+      "mainClass": "BSTSet",
+      "projectName": "Set_598b19b"
+    },
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - LinkedListSet",
+      "request": "launch",
+      "mainClass": "LinkedListSet",
+      "projectName": "Set_598b19b"
+    },
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - Main",
+      "request": "launch",
+      "mainClass": "Main",
+      "projectName": "Set_598b19b"
+    }
+  ]
+}
