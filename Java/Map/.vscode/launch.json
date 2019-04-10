@@ -1,0 +1,25 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - Main",
+      "request": "launch",
+      "mainClass": "Main",
+      "projectName": "Map_5989a95"
+    },
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - BSTMap",
+      "request": "launch",
+      "mainClass": "BSTMap",
+      "projectName": "Map_5989a95"
+    },
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - LinkedListMap",
+      "request": "launch",
+      "mainClass": "LinkedListMap",
+      "projectName": "Map_5989a95"
+    }
+  ]
+}
