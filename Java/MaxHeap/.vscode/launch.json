@@ -1,0 +1,25 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - Solution",
+      "request": "launch",
+      "mainClass": "Solution",
+      "projectName": "MaxHeap_fc824629"
+    },
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - MaxHeap",
+      "request": "launch",
+      "mainClass": "MaxHeap",
+      "projectName": "MaxHeap_fc824629"
+    },
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - Main",
+      "request": "launch",
+      "mainClass": "Main",
+      "projectName": "MaxHeap_fc824629"
+    }
+  ]
+}
