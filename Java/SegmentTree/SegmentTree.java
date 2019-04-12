@@ -120,7 +120,7 @@ public class SegmentTree<E> {
     int leftTreeIndex = leftChild(treeIndex);
     int rightTreeIndex = rightChild(treeIndex);
 
-    if (index > mid + 1) {
+    if (index >= mid + 1) {
       set(rightTreeIndex, mid + 1, r, index, e);
     } else {
       set(leftTreeIndex, l, mid, index, e);
