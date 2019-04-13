@@ -1,0 +1,18 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - Trie",
+      "request": "launch",
+      "mainClass": "Trie",
+      "projectName": "Trie_ad7e2601"
+    },
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - Main",
+      "request": "launch",
+      "mainClass": "Main",
+      "projectName": "Trie_ad7e2601"
+    }
+  ]
+}
