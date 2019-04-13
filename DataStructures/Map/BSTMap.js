@@ -141,3 +141,5 @@ class BSTMap {
     }
   }
 }
+
+module.exports = BSTMap
