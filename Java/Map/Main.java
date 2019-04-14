@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Main {
 
   // 测试集合的时间复杂度方法
-  // 这两个集合的增、删、查、改的时间复杂度都是一致的
+  // 这三个集合的增、删、查、改的时间复杂度都是一致的
   private static double testMap(Map<String, Integer> map, String filename) {
     long startTime = System.nanoTime();
 
@@ -36,7 +36,8 @@ public class Main {
 
     // BSTMap 的时间复杂度为 O(h) h是树的高度(层级) O(log2(n))
     // LinkedListMap 的时间复杂度为 O(n)
-    // 指的都是在一般情况下
+    // AVLMap 的时间复杂度和 BSTMap 一样，但是它是平衡二叉树，导致 h 的值大大减小，性能最好
+    // 指的都是在一般情况下；AVLMap 任何情况下时间复杂度都一样
 
     String filename = "pride-and-prejudice.txt";
 
@@ -49,5 +50,11 @@ public class Main {
     LinkedListMap<String, Integer> linkedListMap = new LinkedListMap<>();
     double time2 = testMap(linkedListMap, filename);
     System.out.println("LinkedList Map: " + time2 + " s");
+
+    System.out.println();
+
+    AVLMap<String, Integer> avlMap = new AVLMap<>();
+    double time3 = testMap(avlMap, filename);
+    System.out.println("AVLTree Map: " + time3 + " s");
   }
 }
