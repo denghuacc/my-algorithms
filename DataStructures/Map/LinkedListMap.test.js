@@ -1,6 +1,6 @@
-const ObjectMap = require('./ObjectMap')
+const LinkedListMap = require('./LinkedListMap')
 
-const map = new ObjectMap()
+const map = new LinkedListMap()
 
 // 添加元素
 map.add('Hale', 'hale@gmail.com')
@@ -13,8 +13,13 @@ console.log(map.getSize()) // 3
 console.log(map.get('Bill')) // 'bill@gmail123.com'
 console.log(map.remove('Hale')) // hale@gmail.com
 
+map.set('Amy', 'amy123@gmail.com')
+console.log(map.get('Amy')) // amy123@gmail.com
+
+console.log(map.isEmpty()) // false
+
 const testData = []
-const n = 10000
+const n = 10
 for (let i = 0; i < n; i++) {
   testData.push(Math.min(Math.floor(Math.random() * n), Number.MAX_VALUE))
 }
@@ -34,3 +39,4 @@ for (let item of testData) {
 }
 
 console.log('Test Completed. No Error!')
+

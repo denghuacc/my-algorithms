@@ -41,7 +41,7 @@ class LinkedListMap {
   }
 
   contains(key) {
-    return this._getNode !== null
+    return this._getNode(key) !== null
   }
 
   get(key) {
@@ -53,7 +53,7 @@ class LinkedListMap {
     const node = this._getNode(key)
 
     if (node === null) {
-      this.dummyHead.next = new Node(key, value, dummyHead.next) // 头部位置增加
+      this.dummyHead.next = new Node(key, value, this.dummyHead.next) // 头部位置增加
       this.size++
     } else {
       node.value = value

@@ -25,7 +25,7 @@ class BSTMap {
     this.root = this._add(this.root, key, value)
   }
 
-  _add(Node, key, value) {
+  _add(node, key, value) {
     if (node === null) {
       this.size++
       return new Node(key, value)
@@ -50,9 +50,9 @@ class BSTMap {
     if (key === node.key) {
       return node
     } else if (key < node.key) {
-      return this.getNode(node.left, key)
+      return this._getNode(node.left, key)
     } else {
-      return this.getNode(node.right, key)
+      return this._getNode(node.right, key)
     }
   }
 

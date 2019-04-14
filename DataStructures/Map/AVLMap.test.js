@@ -1,6 +1,6 @@
-const ObjectMap = require('./ObjectMap')
+const AVLMap = require('./AVLMap')
 
-const map = new ObjectMap()
+const map = new AVLMap()
 
 // 添加元素
 map.add('Hale', 'hale@gmail.com')
@@ -12,6 +12,11 @@ console.log(map.contains('Amy')) // true
 console.log(map.getSize()) // 3
 console.log(map.get('Bill')) // 'bill@gmail123.com'
 console.log(map.remove('Hale')) // hale@gmail.com
+
+map.set('Amy', 'amy123@gmail.com')
+console.log(map.get('Amy')) // amy123@gmail.com
+
+console.log(map.isEmpty()) // false
 
 const testData = []
 const n = 10000
