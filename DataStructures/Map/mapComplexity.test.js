@@ -4,7 +4,7 @@ const BSTMap = require('./BSTMap')
 const AVLMap = require('./AVLMap')
 
 function testComplexity(name, map, testData) {
-  const label = `${name}:`
+  const label = name
   console.time(label)
 
   for (let i = 0; i < n; i++) {
