@@ -1,3 +1,7 @@
+/**
+ * @name ArraySet 集合
+ * 使用数组实现集合
+ */
 class ArraySet {
   constructor() {
     this.array = []
@@ -28,3 +32,5 @@ class ArraySet {
     }
   }
 }
+
+module.exports = ArraySet

@@ -1,7 +1,8 @@
-const BST = require('../Tree/BST')
+const BST = require('../BST/BST')
 
 /**
- * BSTSet 使用二分搜索树实现集合
+ * @name BSTSet 集合
+ * @description 使用二分搜索树实现集合
  * 本集合特性：无序 + 唯一值
  */
 class BSTSet {

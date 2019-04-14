@@ -1,7 +1,8 @@
 const LinkedList = require('../LinkedList/LinkedList')
 
 /**
- * LinkedListSet 使用链表实现集合
+ * @name LinkedListSet 集合
+ * @description 使用链表实现集合
  */
 class LinkedListSet {
   constructor() {
@@ -35,3 +36,5 @@ class LinkedListSet {
     this.list.removeElement(element)
   }
 }
+
+module.exports = LinkedListSet
