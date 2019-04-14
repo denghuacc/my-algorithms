@@ -1,0 +1,18 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - Main",
+      "request": "launch",
+      "mainClass": "Main",
+      "projectName": "AVLTree_6c8bcbce"
+    },
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - AVLTree",
+      "request": "launch",
+      "mainClass": "AVLTree",
+      "projectName": "AVLTree_6c8bcbce"
+    }
+  ]
+}
