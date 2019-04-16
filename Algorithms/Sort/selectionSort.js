@@ -11,14 +11,16 @@
 function selectionSort(arr) {
   let len = arr.length,
     minIndex
+
   for (let i = 0; i < len - 1; i++) {
-    minIndex = i
+    minIndex = i // 寻找最小值，初始值为 i
+
     for (let j = i + 1; j < len; j++) {
-      // 寻找最小数
       if (arr[j] < arr[minIndex]) {
-        minIndex = j // 将最小数索引保存
+        minIndex = j // 将最小值索引保存
       }
     }
+
     // 如果一样就不用交换，节省时间
     if (minIndex !== i) {
       ;[arr[i], arr[minIndex]] = [arr[minIndex], arr[i]] // 交换变量

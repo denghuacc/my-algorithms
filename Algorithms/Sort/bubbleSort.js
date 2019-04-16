@@ -22,11 +22,11 @@ function bubbleSort(arr) {
   return arr
 }
 
-// 减少内循环不必要的比较
-function BetterBubbleSort(arr) {
+// 优化：减少内循环不必要的比较
+function bubbleSort2(arr) {
   const len = arr.length
   for (let i = 0; i < len; i++) {
-    // 修改：j < len - 1 - i; 后面的已经是拍好的比较大的数了，不用再比较了
+    // 优化：j < len - 1 - i; 后面的已经是排好的比较大的数了，不用再比较了
     for (let j = 0; j < len - 1 - i; j++) {
       if (arr[j] > arr[j + 1]) {
         ;[arr[j], arr[j + 1]] = [arr[j + 1], arr[j]] // 交换变量
@@ -36,7 +36,25 @@ function BetterBubbleSort(arr) {
   return arr
 }
 
+// 优化三
+function bubbleSort3(arr) {
+  let i = arr.length - 1
+
+  while (i > 0) {
+    let pos = 0
+    for (let j = 0; j < i; j++) {
+      if (arr[j] > arr[j + 1]) {
+        pos = j
+        ;[arr[j], arr[j + 1]] = [arr[j + 1], arr[j]] // 交换变量
+      }
+    }
+    i = pos
+  }
+  return arr
+}
+
 // test
 const arr = [1, 4, 2, 90, 3, 4]
 console.log(bubbleSort(arr))
-console.log(BetterBubbleSort(arr))
+console.log(bubbleSort2(arr))
+console.log(bubbleSort3(arr))
