@@ -14,36 +14,31 @@
  */
 function mergeSort(arr) {
   const len = arr.length
+
+  // 递归终止条件
   if (len === 1) {
     return arr
   }
 
   let mid = Math.floor(len / 2), // 中间点
-    // 对半分成 2 部分。这是左边部分，原数组的 1 / 2
-    // 然后递归，再分 （... => 4 => 2 => 1），直到数组的 len === 1 时，再返回这个数组。
-    // 此时开始使用 merge 方法（比较 + 合并），归并数组，数组的长度：1 => 2 => 4 => ...
-    // 最后返回排好序的左边部分。
-    // 下同，最后返回排好序的右边部分
     left = arr.slice(0, mid),
-    // 右边部分
     right = arr.slice(mid)
-  // 最后一步是：左边部分和右边部分进行归并，返回一个排好序的原数组
-  return merge(mergeSort(left), mergeSort(right))
+  return merge(mergeSort(left), mergeSort(right)) // 递归
 }
 
 /**
  * @name merge 归并方法
- * @description 主要分 2 步
- * 1. 比较
- * 2. 合并
- * @param { Array<Number> } left
- * @param { Array<Number> } right
+ * @description 从初始的只有一个值的数组两两比较开始，归并之后的数组变成排好序的有两个值的小数组；
+ * 之后继续两两比较，小数组变成较大的数组，最后成为一个新的排序好的新数组
+ * @param { Array<Number> } left 升序数组
+ * @param { Array<Number> } right 升序数组
  */
 function merge(left, right) {
-  let result = []
+  let result = [] // 新数组，用来保存归并的值
 
   while (left.length && right.length) {
-    // 比较 2个 数组值第一个值， 谁小把谁从原来的数组中取出来放到新的数组里
+    // 比较 left 和 right 两个数组值第一个值
+    // 谁小就把谁从原来的数组中取出来，并加入到新数组后面
     if (left[0] <= right[0]) {
       result.push(left.shift())
     } else {
@@ -51,8 +46,9 @@ function merge(left, right) {
     }
   }
 
-  // 剩下的数组如果还有值，说明是比较之后剩下的，是较大的值，然后把这个值从原来的数组取出来，再放到新的数组里面即可。
-  // 因为有些数组的长度是奇数时，拆分2个数组后， left 和 right 的长度是不一致的，所以会出现这种情况
+  // 当其中一个数组已经清空后
+  // 另外一个数组如果还有值，都是比较后剩余的较大的值
+  // 把这些值依次从数组取出放入到新数组后面
   while (left.length) {
     result.push(left.shift())
   }
@@ -61,9 +57,9 @@ function merge(left, right) {
     result.push(right.shift())
   }
 
-  return result // 返回这个新的数组
+  return result // 返回新数组
 }
 
 // test
-let arr = [1, 4, 2, 90, 3, 4]
+let arr = [1, 7, 5, 10, 3, 4, 5, 2]
 console.log(mergeSort(arr))
