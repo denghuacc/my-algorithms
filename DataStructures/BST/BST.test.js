@@ -13,38 +13,48 @@ bst.add(99)
 bst.add(22)
 
 // 中序遍历
-console.log('inOrderTraverse:')
+console.log('InOrder Traverse:')
 bst.inOrder()
 
 console.log('----------')
 
 // 先序遍历
-console.log('preOrderTraverse:')
+console.log('PreOrder Traverse:')
 bst.preOrder()
+
+// 非递归先序遍历
+console.log('PreOrder Traverse Not Recursion:')
+bst.preOrderNR()
 
 console.log('----------')
 
 // 后序遍历
-console.log('postOrderTraverse:')
+console.log('PostOrder Traverse:')
 bst.postOrder()
+
+console.log('----------')
+
+// 层序遍历
+console.log('LevelOrder Traverse:')
+bst.levelOrder()
 
 console.log('----------')
 
 // 节点个数
 
-console.log('size:', bst.getSize())
+console.log('Size:', bst.getSize())
 
 // 查找最小值
-console.log('minimum:', bst.minimum())
+console.log('Minimum:', bst.minimum())
 
 // 查找最大值
-console.log('maximum:', bst.maximum())
+console.log('Maximum:', bst.maximum())
 
 // 查找指定值
-console.log('is contains 23', bst.contains(23))
+console.log('Is Contains 23', bst.contains(23))
 
 // 删除指定值
 bst.remove(37)
-console.log('after remove 37')
+console.log('After Remove 37')
 bst.inOrder()
-console.log('size:', bst.getSize())
+console.log('Size:', bst.getSize())
