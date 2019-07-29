@@ -93,7 +93,7 @@ class BST {
   preOrderNR() {
     if (this.root === null) return
 
-    const stack = new stack()
+    const stack = new Stack()
     stack.push(this.root)
 
     while (!stack.isEmpty()) {
@@ -194,7 +194,7 @@ class BST {
   // 从二分搜索树中删除最小值所在节点, 返回最小值
   removeMin() {
     const ret = this.minimum()
-    this.root = _removeMin(this.root)
+    this.root = this._removeMin(this.root)
     return ret
   }
 
@@ -215,7 +215,7 @@ class BST {
   // 从二分搜索树中删除最大值所在节点
   removeMax() {
     const ret = this.maximum()
-    this.root = _removeMax(this.root)
+    this.root = this._removeMax(this.root)
     return ret
   }
 
@@ -271,11 +271,10 @@ class BST {
       }
 
       // 待删除节点左右子树均不为空的情况
-
       // 找到比待删除节点大的最小节点, 即待删除节点右子树的最小节点
       // 用这个节点顶替待删除节点的位置
-      const successor = minimum(node.right)
-      successor.right = removeMin(node.right)
+      const successor = this._minimum(node.right)
+      successor.right = this._removeMin(node.right)
       successor.left = node.left
 
       node.left = node.right = null
