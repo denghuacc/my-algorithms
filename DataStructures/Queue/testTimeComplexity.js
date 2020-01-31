@@ -4,8 +4,8 @@ const LinkedListQueue = require('./LinkedListQueue')
 /**
  * 测试队列的时间复杂度方法
  * Queue 和 LinkedListQueue 入列的时间时间复杂度都为 O(1)，差异不大
- * 但是，Queue 出列的时间复杂度为 O(n)
- * LinkedListQueue 出列的时间复杂度为 O(1)
+ * 但是，Queue 出列的时间复杂度为 O(n)，因为数组结构的元素出列后，后面所有的元素都需要往前移动一个位置
+ * LinkedListQueue 出列的时间复杂度为 O(1)，不需要移动元素
  * 两者出列时为不同级别的时间复杂度，差异巨大
  * @param {*} name
  * @param {*} queue
