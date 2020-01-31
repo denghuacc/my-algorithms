@@ -203,7 +203,7 @@ class AVLTree {
     return node
   }
 
-  // 返回以node为根节点的 AVL 树中，key 所在的节点
+  // 返回以 node为根节点的 AVL 树中，key 所在的节点
   _getNode(node, key) {
     if (node === null) {
       return null
