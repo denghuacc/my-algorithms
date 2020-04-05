@@ -32,12 +32,14 @@
  *     this.next = null;
  * }
  */
+
+// @lc code=start
 /**
  * @param {ListNode} l1
  * @param {ListNode} l2
  * @return {ListNode}
  */
-var addTwoNumbers = function(l1, l2) {
+var addTwoNumbers = function (l1, l2) {
   if (l1 === null || l2 === null) {
     return l1 || l2
   }
@@ -85,3 +87,4 @@ var addTwoNumbers = function(l1, l2) {
 
   return result.next
 }
+// @lc code=end

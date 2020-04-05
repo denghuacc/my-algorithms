@@ -36,18 +36,18 @@
  * 假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 [−231,  231 − 1]。请根据这个假设，如果反转后整数溢出那么就返回 0。
  *
  */
+
+// @lc code=start
 /**
  * @param {number} x
  * @return {number}
  */
-var reverse = function(x) {
-  let res = parseInt(
-    new Number(x)
-      .toString()
-      .split('')
-      .reverse()
-      .join('')
-  )
+var reverse = function (x) {
+  // 数值转字符串后再翻转
+  let str = new Number(x).toString().split('').reverse().join('')
+
+  let res = parseInt(str)
   res = x > 0 ? res : -res
   return res > 2 ** 31 - 1 || res < -(2 ** 31) ? 0 : res
 }
+// @lc code=end

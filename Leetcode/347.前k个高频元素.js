@@ -32,31 +32,34 @@
  *
  *
  */
+
+// @lc code=start
 /**
  * @param {number[]} nums
  * @param {number} k
  * @return {number[]}
  */
-var topKFrequent = function(nums, k) {
+var topKFrequent = function (nums, k) {
   const map = new Map()
 
   for (let item of nums) {
     if (map.has(item)) {
-      map.set(item, map.get(item) + 1)
+      const count = map.get(item)
+      map.set(item, count + 1)
     } else {
       map.set(item, 1)
     }
   }
 
-  // 先把 map 转成数组，然后按照 value 进行排序
-  // 最后再转成 Map
+  // 降序排序
   const sortMap = new Map([...map].sort((a, b) => b[1] - a[1]))
 
-  // 转成以 key 值 组成的数组
+  // 以 key 值组成的数组
   let keyArr = Array.from(sortMap.keys())
 
-  // 数组切片
+  // 切片
   const ret = keyArr.slice(0, k)
 
   return ret
 }
+// @lc code=end

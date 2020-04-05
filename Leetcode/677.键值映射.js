@@ -27,6 +27,7 @@
  *
  */
 
+// @lc code=start
 class Node {
   constructor(value = 0) {
     this.value = value
@@ -37,7 +38,7 @@ class Node {
 /**
  * Initialize your data structure here.
  */
-var MapSum = function() {
+var MapSum = function () {
   this.root = new Node()
 }
 
@@ -46,7 +47,7 @@ var MapSum = function() {
  * @param {number} val
  * @return {void}
  */
-MapSum.prototype.insert = function(key, val) {
+MapSum.prototype.insert = function (key, val) {
   let cur = this.root
   for (let i = 0; i < key.length; i++) {
     const c = key[i]
@@ -62,7 +63,7 @@ MapSum.prototype.insert = function(key, val) {
  * @param {string} prefix
  * @return {number}
  */
-MapSum.prototype.sum = function(prefix) {
+MapSum.prototype.sum = function (prefix) {
   let cur = this.root
   for (let i = 0; i < prefix.length; i++) {
     const c = prefix[i]
@@ -89,3 +90,4 @@ MapSum.prototype.sum = function(prefix) {
  * obj.insert(key,val)
  * var param_2 = obj.sum(prefix)
  */
+// @lc code=end

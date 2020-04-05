@@ -33,17 +33,18 @@
  *
  */
 
+// @lc code=start
 class Node {
   constructor(isWord = false) {
     this.isWord = isWord
-    this.next = new Map() // 映射
+    this.next = new Map()
   }
 }
 
 /**
  * Initialize your data structure here.
  */
-var Trie = function() {
+var Trie = function () {
   this.root = new Node()
 }
 
@@ -52,7 +53,7 @@ var Trie = function() {
  * @param {string} word
  * @return {void}
  */
-Trie.prototype.insert = function(word) {
+Trie.prototype.insert = function (word) {
   let cur = this.root
 
   for (let i = 0; i < word.length; i++) {
@@ -73,7 +74,7 @@ Trie.prototype.insert = function(word) {
  * @param {string} word
  * @return {boolean}
  */
-Trie.prototype.search = function(word) {
+Trie.prototype.search = function (word) {
   let cur = this.root
 
   for (let i = 0; i < word.length; i++) {
@@ -91,7 +92,7 @@ Trie.prototype.search = function(word) {
  * @param {string} prefix
  * @return {boolean}
  */
-Trie.prototype.startsWith = function(prefix) {
+Trie.prototype.startsWith = function (prefix) {
   let cur = this.root
   for (let i = 0; i < prefix.length; i++) {
     const c = prefix[i]
@@ -110,3 +111,4 @@ Trie.prototype.startsWith = function(prefix) {
  * var param_2 = obj.search(word)
  * var param_3 = obj.startsWith(prefix)
  */
+// @lc code=end

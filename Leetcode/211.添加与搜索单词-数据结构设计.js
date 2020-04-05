@@ -36,17 +36,18 @@
  *
  */
 
+// @lc code=start
 class Node {
   constructor(isWord = false) {
     this.isWord = isWord
-    this.next = new Map() // 映射
+    this.next = new Map()
   }
 }
 
 /**
  * Initialize your data structure here.
  */
-var WordDictionary = function() {
+var WordDictionary = function () {
   this.root = new Node()
 }
 
@@ -55,7 +56,7 @@ var WordDictionary = function() {
  * @param {string} word
  * @return {void}
  */
-WordDictionary.prototype.addWord = function(word) {
+WordDictionary.prototype.addWord = function (word) {
   let cur = this.root
 
   for (let i = 0; i < word.length; i++) {
@@ -74,7 +75,7 @@ WordDictionary.prototype.addWord = function(word) {
  * @param {string} word
  * @return {boolean}
  */
-WordDictionary.prototype.search = function(word) {
+WordDictionary.prototype.search = function (word) {
   return match(this.root, word, 0)
 
   function match(node, word, index) {
@@ -107,3 +108,4 @@ WordDictionary.prototype.search = function(word) {
  * obj.addWord(word)
  * var param_2 = obj.search(word)
  */
+// @lc code=end

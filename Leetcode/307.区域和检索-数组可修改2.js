@@ -33,6 +33,7 @@
  *
  */
 
+// @lc code=start
 class SegmentTree {
   constructor(arr = [], merge = () => {}) {
     // 数组降维
@@ -160,9 +161,9 @@ class SegmentTree {
 
 /**
  * @param {number[]} nums
- * ! 使用线段树解题
+ * 使用线段树结构解题
  */
-var NumArray = function(nums) {
+var NumArray = function (nums) {
   if (nums.length > 0) {
     this.segmentTree = new SegmentTree(nums, (a, b) => a + b)
   }
@@ -173,7 +174,7 @@ var NumArray = function(nums) {
  * @param {number} val
  * @return {void}
  */
-NumArray.prototype.update = function(i, val) {
+NumArray.prototype.update = function (i, val) {
   this.segmentTree.set(i, val)
 }
 
@@ -182,7 +183,7 @@ NumArray.prototype.update = function(i, val) {
  * @param {number} j
  * @return {number}
  */
-NumArray.prototype.sumRange = function(i, j) {
+NumArray.prototype.sumRange = function (i, j) {
   return this.segmentTree.query(i, j)
 }
 /**
@@ -191,3 +192,4 @@ NumArray.prototype.sumRange = function(i, j) {
  * obj.update(i,val)
  * var param_2 = obj.sumRange(i,j)
  */
+// @lc code=end

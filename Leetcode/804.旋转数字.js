@@ -48,11 +48,13 @@
  *
  *
  */
+
+// @lc code=start
 /**
  * @param {string[]} words
  * @return {number}
  */
-var uniqueMorseRepresentations = function(words) {
+var uniqueMorseRepresentations = function (words) {
   var dict = [
     '.-',
     '-...',
@@ -82,11 +84,11 @@ var uniqueMorseRepresentations = function(words) {
     '--..'
   ]
 
-  // 字符串 => 摩斯密码 (字符串 => 数组 => 累加成摩斯密码)
-  // => 去重 ( Set 集合)
+  // 字符串 -> 摩斯密码 -> 去重
   return new Set(
     words.map(i =>
       i.split('').reduce((acc, cur) => acc + dict[cur.charCodeAt() - 97], '')
     )
   ).size
 }
+// @lc code=end

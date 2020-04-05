@@ -29,10 +29,12 @@
  *
  *
  */
+
+// @lc code=start
 /**
  * @param {number[]} nums
  */
-var NumArray = function(nums) {
+var NumArray = function (nums) {
   // sum[i] 存储前 i 个元素和，sum[0] = 0
   // sum[i] 存储 nums[0...i-1] 的和
 
@@ -48,7 +50,7 @@ var NumArray = function(nums) {
  * @param {number} j
  * @return {number}
  */
-NumArray.prototype.sumRange = function(i, j) {
+NumArray.prototype.sumRange = function (i, j) {
   return this.sum[j + 1] - this.sum[i]
 }
 
@@ -57,3 +59,4 @@ NumArray.prototype.sumRange = function(i, j) {
  * var obj = new NumArray(nums)
  * var param_1 = obj.sumRange(i,j)
  */
+// @lc code=end

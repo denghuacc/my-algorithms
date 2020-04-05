@@ -24,12 +24,14 @@
  *
  *
  */
+
+// @lc code=start
 /**
  * @param {number[]} nums
  * @param {number} target
  * @return {number[]}
  */
-var twoSum = function(nums, target) {
+var twoSum = function (nums, target) {
   for (let i = 0; i < nums.length - 1; i++) {
     for (let j = i + 1; j < nums.length; j++) {
       if (nums[i] + nums[j] === target) {
@@ -38,3 +40,15 @@ var twoSum = function(nums, target) {
     }
   }
 }
+
+var twoSum = function (nums, target) {
+  let i = nums.length
+  while (i > 1) {
+    let last = nums.pop()
+    if (nums.indexOf(target - last) > -1) {
+      return [nums.indexOf(target - last), nums.length]
+    }
+    i--
+  }
+}
+// @lc code=end

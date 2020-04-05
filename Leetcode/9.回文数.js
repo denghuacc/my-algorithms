@@ -38,17 +38,17 @@
  * 你能不将整数转为字符串来解决这个问题吗？
  *
  */
+
+// @lc code=start
 /**
  * @param {number} x
  * @return {boolean}
  */
-var isPalindrome = function(x) {
-  const rev = parseInt(
-    new Number(x)
-      .toString()
-      .split('')
-      .reverse()
-      .join('')
-  )
-  return x < 0 ? false : (x === rev ? true : false)
+var isPalindrome = function (x) {
+  // 数值转字符串后再翻转
+  const str = new Number(x).toString().split('').reverse().join('')
+
+  const rev = parseInt(str)
+  return x < 0 ? false : x === rev ? true : false
 }
+// @lc code=end

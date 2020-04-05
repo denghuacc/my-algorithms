@@ -28,6 +28,7 @@
  * }
  */
 
+// @lc code=start
 function ListNode(val) {
   this.val = val
   this.next = null
@@ -38,20 +39,21 @@ function ListNode(val) {
  * @param {number} val
  * @return {ListNode}
  */
-var removeElements = function(head, val) {
-  // 特殊处理 head
-  while (head !== null && head.val === val) {
-    const delNode = head
-    head = head.next
-    delNode.next = null
-  }
-
+var removeElements = function (head, val) {
   if (head === null) {
     return null
   }
 
+  // 当头部节点是需要删除的节点时
+  while (head !== null && head.val === val) {
+    const delNode = head
+    head = head.next
+    delNode.next = null // leetcode 可无需优化
+  }
+
   let prev = head
 
+  // 非头部节点
   while (prev.next !== null) {
     if (prev.next.val === val) {
       const delNode = prev.next
@@ -64,3 +66,76 @@ var removeElements = function(head, val) {
 
   return head
 }
+
+// method2 -> 优化 method1
+var removeElements = function (head, val) {
+  if (head === null) {
+    return null
+  }
+
+  // 当头部节点是需要删除的节点时
+  while (head !== null && head.val === val) {
+    head = head.next
+  }
+
+  let prev = head
+
+  // 非头部节点
+  while (prev.next !== null) {
+    if (prev.next.val === val) {
+      prev.next = prev.next.next
+    } else {
+      prev = prev.next
+    }
+  }
+
+  return head
+}
+
+// method3 使用虚拟头节点
+var removeElements = function (head, val) {
+  const dummyHead = new ListNode(-1)
+  dummyHead.next = head
+
+  let prev = dummyHead // 要删除的节点的前一个节点
+
+  while (prev.next !== null) {
+    if (prev.next.val === val) {
+      const delNode = prev.next
+      prev.next = delNode.next
+      delNode.next = null
+    } else {
+      prev = prev.next
+    }
+  }
+
+  return dummyHead.next
+}
+
+// method4 -> 递归
+var removeElements = function (head, val) {
+  if (head === null) {
+    return null
+  }
+
+  const res = removeElements(head.next, val)
+
+  if (head.val === val) {
+    return res
+  } else {
+    head.next = res
+    return head
+  }
+}
+
+// method5 -> 优化 method4
+var removeElements = function (head, val) {
+  if (head === null) {
+    return null
+  }
+
+  head.next = removeElements(head.next, val)
+
+  return head.val === val ? head.next : head
+}
+// @lc code=end

@@ -52,11 +52,13 @@
  * 输出: true
  *
  */
+
+// @lc code=start
 /**
  * @param {string} s
  * @return {boolean}
  */
-var isValid = function(s) {
+var isValid = function (s) {
   let arr = []
   for (let i = 0; i < s.length; i++) {
     const c = s[i]
@@ -85,3 +87,4 @@ var isValid = function(s) {
 
   return arr.length === 0
 }
+// @lc code=end
