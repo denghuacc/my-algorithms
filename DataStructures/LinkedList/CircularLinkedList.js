@@ -14,7 +14,7 @@ class Node {
 /**
  * @name CircularLinkedList 单向循环链表
  * @description 单向循环链表最后一个节点的指向不是 null，而是 表头，所以形成一个循环。
- * 相比于普通的单向链表，需要注意边界边界条件，不然很容易造成死循环。
+ * 相比于普通的单向链表，需要注意遍历时的边界条件，不然很容易造成死循环。
  * @property { Node } head
  * @property { Number } length
  * @method append 向列表尾部添加一个新的项

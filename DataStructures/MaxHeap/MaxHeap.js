@@ -70,11 +70,9 @@ class MaxHeap {
     }
   }
 
-  // 交换堆中 2 个元素的位置
+  // 交换堆中两个元素的位置
   _swap(i, j) {
-    let temp = this.data[i]
-    this.data[i] = this.data[j]
-    this.data[j] = temp
+    ;[this.data[i], this.data[j]] = [this.data[j], this.data[i]]
   }
 
   // 查找堆中最大元素
@@ -87,10 +85,10 @@ class MaxHeap {
 
   // 取出堆中最大元素
   extractMax() {
-    const ret = this.findMax() // 先存储返回值
+    const ret = this.findMax() // 先存储返回值（第一个元素）
     this._swap(0, this.size() - 1) // 第一个元素和最后一个元素交换位置
-    this.data.pop() // 删除交换后的最后一个元素（即原来的第一个元素）
-    this._siftDown(0)
+    this.data.pop() // 删除最后一个元素（即原来的第一个元素）
+    this._siftDown(0) // 现在的第一个元素下浮
 
     return ret
   }
