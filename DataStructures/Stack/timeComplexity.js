@@ -2,13 +2,10 @@ const Stack = require('./Stack')
 const LinkedListStack = require('./LinkedListStack')
 
 /**
- * 测试栈的时间复杂度方法
+ * 测试栈的时间复杂度方法，主要测试出栈和入栈
  * 使用数组实现的栈入栈和出栈时间复杂都都是 O(1)
  * 使用链表实现的栈入栈和出栈时间复杂都都是 O(1)
- * 两者时间复杂度都为 O(1)，差异不大
- * @param {*} name
- * @param {*} stack
- * @param {*} opCount
+ * 两者时间复杂度都为 O(1)，差别不大
  */
 function testTimeComplexity(name, stack, opCount) {
   const label = `${name}, time`

@@ -19,7 +19,8 @@ class Node {
  */
 class LinkedList {
   constructor() {
-    this.dummyHead = new Node(null, null) // 虚拟头部节点，在实际头部节点的前面 -> 更好操作链表
+    this.head = null
+    this.dummyHead = new Node(null, null)
     this.size = 0
   }
 
@@ -39,18 +40,23 @@ class LinkedList {
       throw new Error('Add failed. Illegal index.')
     }
 
-    let prev = this.dummyHead
-    for (let i = 0; i < index; i++) {
-      prev = prev.next
-    }
+    if (index === 0) {
+      this.addFirst(val)
+    } else {
+      let prev = this.head
+      for (let i = 0; i < index - 1; i++) {
+        prev = prev.next
+      }
 
-    prev.next = new Node(val, prev.next)
-    this.size++
+      prev.next = new Node(val, prev.next)
+      this.size++
+    }
   }
 
   // 在表头添加值 O(1)
   addFirst(val) {
-    this.add(0, val)
+    this.head = new Node(val, this.head)
+    this.size++
   }
 
   // 在表尾添加值 O(n)
@@ -64,7 +70,7 @@ class LinkedList {
       throw new Error('Get failed. Illegal index.')
     }
 
-    let cur = this.dummyHead.next
+    let cur = this.head
     for (let i = 0; i < index; i++) {
       cur = cur.next
     }
@@ -87,7 +93,7 @@ class LinkedList {
       throw new Error('Set failed. Illegal index.')
     }
 
-    let cur = this.dummyHead.next
+    let cur = this.head
     for (let i = 0; i < index; i++) {
       cur = cur.next
     }
@@ -96,7 +102,7 @@ class LinkedList {
 
   // 查找链表中是否有某个值 O(1) ~ O(n)
   contains(val) {
-    let cur = this.dummyHead.next
+    let cur = this.head
 
     while (cur != null) {
       if (cur.val === val) {
@@ -113,16 +119,21 @@ class LinkedList {
       throw new Error('Remove failed. Illegal index.')
     }
 
-    let prev = this.dummyHead
-    for (let i = 0; i < index; i++) {
-      prev = prev.next
+    let delNode
+    if (index === 0) {
+      delNode = this.head
+      this.head = this.head.next
+    } else {
+      let prev = this.head
+      for (let i = 0; i < index - 1; i++) {
+        prev = prev.next
+      }
+      delNode = prev.next
+      prev.next = delNode.next
     }
-
-    const retNode = prev.next
-    prev.next = retNode.next
-    retNode.next = null
+    delNode.next = null
     this.size--
-    return retNode.val
+    return delNode.val
   }
 
   // 删除链表的第一个值 O(1)
@@ -137,8 +148,15 @@ class LinkedList {
 
   // 从链表中删除某个值 val 只删除前面的第一个值
   removeVal(val) {
-    let prev = this.dummyHead
+    let delNode
+    if (this.head.val === val) {
+      delNode = this.head
+      this.head = this.head.next
+      delNode.next = null
+      return
+    }
 
+    let prev = this.head
     while (prev.next != null) {
       if (prev.next.val === val) {
         break
@@ -147,7 +165,7 @@ class LinkedList {
     }
 
     if (prev.next != null) {
-      let delNode = prev.next
+      delNode = prev.next
       prev.next = delNode.next
       delNode.next = null
       this.size--
@@ -156,7 +174,7 @@ class LinkedList {
 
   // 转成字符串 -> 打印链表
   print() {
-    let cur = this.dummyHead.next,
+    let cur = this.head,
       str = ''
 
     // 遍历节点

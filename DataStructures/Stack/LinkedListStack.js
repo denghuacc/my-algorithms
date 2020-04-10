@@ -1,7 +1,7 @@
 const LinkedList = require('../LinkedList/LinkedList')
 
 /**
- * LinkedListStack 使用链表来实现栈
+ * @name LinkedListStack 栈 -> 使用链表来实现栈
  */
 class LinkedListStack {
   constructor() {
@@ -9,21 +9,21 @@ class LinkedListStack {
   }
 
   // 入栈 O(1)
-  push(element) {
-    this.list.addFirst(element)
+  push(val) {
+    this.list.addFirst(val)
   }
 
   // 出栈，返回出栈的元素 O(1)
   pop() {
-    this.list.removeFirst()
+    return this.list.removeFirst()
   }
 
-  // 返回栈顶的元素 O(1)
+  // 获取栈顶的元素 O(1)
   peek() {
     return this.list.getFirst()
   }
 
-  // 获取栈的元素个数 O(1)
+  // 获取栈的元素的数量 O(1)
   getSize() {
     return this.list.getSize()
   }
@@ -33,9 +33,10 @@ class LinkedListStack {
     return this.list.isEmpty()
   }
 
-  toString() {
+  // 打印栈
+  print() {
     let str = 'Stack: top '
-    str += this.list.toString()
+    str += this.list.print()
     return str
   }
 }
