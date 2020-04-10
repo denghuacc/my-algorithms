@@ -17,6 +17,7 @@
 11. AVL Tree AVL 树
 12. RedBlack Tree 红黑树
 13. HashTable 哈希表
+14. Graph 图
 
 ## Algorithms 算法
 
@@ -36,8 +37,8 @@
   - sequential search 线性搜索
 
 - Pattern 模式
-  - Dynamic 动态分布
-  - Greedy 贪婪算法
+  - Dynamic Programming 动态规划
+  - Greedy Algorithm 贪婪算法
   - Recursion 递归
 
 ## Leetcode 力扣
