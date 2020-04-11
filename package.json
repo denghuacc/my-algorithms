@@ -1,12 +1,14 @@
 {
   "name": "js-dsa",
   "version": "1.0.0",
+  "private": true,
   "main": "index.js",
   "repository": "git@github.com:haledc/js-dsa.git",
   "author": "Hale Deng <haledeng88@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "lint": "prettier --write \"*.js\""
   },
   "devDependencies": {
     "jest": "^25.3.0",
