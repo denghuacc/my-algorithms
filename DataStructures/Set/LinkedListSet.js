@@ -2,7 +2,7 @@ const LinkedList = require('../LinkedList/LinkedList')
 
 /**
  * @name LinkedListSet 集合
- * @description 使用链表实现集合
+ * @description 使用链表实现 ES6 的 Set 集合
  */
 class LinkedListSet {
   constructor() {
@@ -10,30 +10,32 @@ class LinkedListSet {
   }
 
   // 获取集合的元素个数 O(1)
-  gitSize() {
+  get size() {
     return this.list.getSize()
   }
 
-  // 查询集合是否为空 O(1)
-  isEmpty() {
-    return this.list.isEmpty()
+  // 添加元素 O(n)
+  add(val) {
+    if (!this.has(val)) {
+      this.list.addFirst(val) // O(1)
+    }
+    return this
   }
 
   // 查询元素是否存在 O(n)
-  contains(element) {
-    return this.list.contains(element)
+  has(val) {
+    return this.list.contains(val)
   }
 
-  // 添加元素 O(n)
-  add(element) {
-    // 查询元素是否存在的时间复杂度 O(n)
-    if (!this.contains(element)) {
-      this.list.addFirst(element) // 链表头添加元素的时间复杂度 O(1)
-    }
-  }
   // 删除元素 O(n)
-  remove(element) {
-    this.list.removeElement(element)
+  delete(val) {
+    if (!this.has(val)) return false
+    this.list.removeVal(val)
+    return true
+  }
+
+  clear() {
+    this.list = new LinkedList()
   }
 }
 

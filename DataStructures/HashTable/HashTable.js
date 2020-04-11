@@ -17,10 +17,10 @@ class HashTable {
   }
 
   // 向散列表增加一个新的项（也能更新散列表）
-  add(key, value) {
+  add(key, val) {
     const pos = this._hashCode(key)
     console.log(pos + ' - ' + key)
-    this.table[pos] = value
+    this.table[pos] = val
   }
 
   // 根据键值从散列表中移除值

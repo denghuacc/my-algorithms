@@ -2,31 +2,39 @@ const AVLTree = require('../AVLTree/AVLTree')
 
 /**
  * @name AVLSet 集合
- * @description 使用 AVLTree 实现集合
+ * @description 使用 AVLTree 实现 ES6 的 Set 集合
  */
 class AVLSet {
   constructor() {
     this.avl = new AVLTree()
   }
 
-  getSize() {
+  // 获取集合的元素个数 O(1)
+  get size() {
     return this.avl.getSize()
   }
 
-  isEmpty() {
-    return this.avl.isEmpty()
+  // 添加元素 O(log2(n))
+  add(val) {
+    this.avl.add(val)
+    return this
   }
 
-  contains(element) {
-    return this.avl.contains(element)
+  // 删除元素 O(log2(n))
+  delete(val) {
+    if (!this.has(val)) return false
+    this.avl.remove(val)
+    return true
   }
 
-  add(element) {
-    this.avl.add(element, null)
+  // 查询元素是否存在 O(log2(n))
+  has(val) {
+    return this.avl.contains(val)
   }
 
-  remove(element) {
-    this.avl.remove(element)
+  // 清除元素 O(1)
+  clear() {
+    this.avl = new AVLTree()
   }
 }
 

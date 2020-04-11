@@ -1,7 +1,5 @@
-/**
- * 使用广度优先搜索查找最短路径
- * 权限一样
- */
+//使用广度优先搜索查找最短路径 权限一样
+
 const Graph = require('./Graph')
 const Stack = require('../Stack/Stack')
 

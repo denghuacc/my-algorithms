@@ -96,6 +96,8 @@ class LinkedList {
 
   // 查找链表中是否有某个值 O(1) ~ O(n)
   contains(val) {
+    if (this.dummyHead.next == null) return false
+
     let cur = this.dummyHead.next
 
     while (cur != null) {

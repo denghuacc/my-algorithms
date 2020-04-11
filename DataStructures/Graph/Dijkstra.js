@@ -1,7 +1,4 @@
-/**
- * Dijkstra
- * Dijkstra算法是一种计算从单个源到所有其他源的最短路径的贪心算法
- */
+// Dijkstra 算法是一种计算从单个源到所有其他源的最短路径的贪心算法
 
 const Graph = require('./Graph')
 
@@ -16,7 +13,7 @@ Graph.prototype.graph = [
   [0, 0, 0, 0, 0, 0]
 ]
 
-Graph.prototype.dijkstra = function(src) {
+Graph.prototype.dijkstra = function (src) {
   const dist = [],
     visited = [],
     length = this.graph.length
@@ -46,7 +43,7 @@ Graph.prototype.dijkstra = function(src) {
   return dist
 }
 
-Graph.prototype._minDistance = function(dist, visited) {
+Graph.prototype._minDistance = function (dist, visited) {
   let min = INF,
     minIndex = -1
 

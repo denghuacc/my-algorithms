@@ -1,6 +1,5 @@
-/**
- * Prim 算法是一种求解加权无向连通图的 MST 问题的贪心算法
- */
+// Prim 算法是一种求解加权无向连通图的 MST 问题的贪心算法
+
 const Graph = require('./Graph')
 
 const INF = Number.MAX_SAFE_INTEGER
@@ -14,7 +13,7 @@ Graph.prototype.graph = [
   [0, 0, 0, 0, 0, 0]
 ]
 
-Graph.prototype.prim = function() {
+Graph.prototype.prim = function () {
   const parent = [],
     key = []
   visited = []
@@ -47,7 +46,7 @@ Graph.prototype.prim = function() {
   return parent
 }
 
-Graph.prototype.minKey = function(key, visited) {
+Graph.prototype.minKey = function (key, visited) {
   let min = INF,
     minIndex = -1
 

@@ -1,7 +1,5 @@
-/**
- * floydWarshall
- * Floyd-Warshall算法是一种计算图中所有最短路径的动态规划算法
- */
+// Floyd-Warshall算法是一种计算图中所有最短路径的动态规划算法
+
 const Graph = require('./Graph')
 
 Graph.prototype.graph = [
@@ -13,7 +11,7 @@ Graph.prototype.graph = [
   [0, 0, 0, 0, 0, 0]
 ]
 
-Graph.prototype.floydWarshall = function() {
+Graph.prototype.floydWarshall = function () {
   const dist = [],
     length = this.graph.length
 
