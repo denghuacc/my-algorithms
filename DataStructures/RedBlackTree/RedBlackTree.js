@@ -1,6 +1,3 @@
-const Stack = require('../Stack/Stack')
-const Queue = require('../Queue/Queue')
-
 // 颜色静态变量
 const RED = true
 const BLACK = false
@@ -64,10 +61,10 @@ class RedBlackTree {
   preOrderNR(arr = []) {
     if (this.root == null) return
 
-    const stack = new Stack()
+    const stack = []
     stack.push(this.root)
 
-    while (!stack.isEmpty()) {
+    while (stack.length !== 0) {
       let curNode = stack.pop()
       // console.log(curNode.val)
       arr.push(curNode.key)
@@ -112,19 +109,19 @@ class RedBlackTree {
   levelOrder(arr = []) {
     if (this.root == null) return
 
-    const queue = new Queue()
-    queue.enqueue(this.root)
+    const queue = []
+    queue.push(this.root)
 
-    while (!queue.isEmpty()) {
-      let curNode = queue.dequeue()
+    while (queue.length !== 0) {
+      let curNode = queue.shift()
       arr.push(curNode.key)
 
       if (curNode.left != null) {
-        queue.enqueue(curNode.left) // 左子节点树先入列
+        queue.push(curNode.left) // 左子节点树先入列
       }
 
       if (curNode.right != null) {
-        queue.enqueue(curNode.right)
+        queue.push(curNode.right)
       }
     }
   }
