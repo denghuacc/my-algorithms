@@ -1,5 +1,4 @@
 const RedBlackTree = require('./RedBlackTree')
-const BST = require('../BST/BST')
 let rbt
 
 describe('RedBlackTree', () => {

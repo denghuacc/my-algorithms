@@ -1,5 +1,4 @@
 const AVLTree = require('./AVLTree')
-const BST = require('../BST/BST')
 let avl
 
 describe('AVLTree', () => {
