@@ -7,10 +7,10 @@ function testMaxHeap(testData, isHeapify) {
   let maxHeap
 
   if (isHeapify) {
-    maxHeap = new MaxHeap(testData)
+    maxHeap = new MaxHeap(testData) // 把数组一次性放入堆中
   } else {
     maxHeap = new MaxHeap()
-    testData.forEach(item => maxHeap.add(item))
+    testData.forEach(item => maxHeap.add(item)) // 把数组的元素一个一个依次放入堆中
   }
 
   let arr = []
@@ -25,18 +25,21 @@ function testMaxHeap(testData, isHeapify) {
     }
   }
 
-  console.log('Test MaxHeap completed.')
-
   console.timeEnd(label)
 }
 
-
 // test
-const n = 20000000;
+const n = 2000000
 let testData = []
 for (let i = 0; i < n; i++) {
-  testData.push(Math.min(Math.floor(Math.random() * n), Number.MAX_VALUE))
+  testData.push(
+    Math.min(Math.floor(Math.random() * n), Number.MAX_SAFE_INTEGER)
+  )
 }
 
 testMaxHeap(testData, false)
 testMaxHeap(testData, true)
+
+// 结论：
+// 把数组一次性放入堆中，性能更好，从最后一个非叶子节点开始下沉直到根节点
+// 把数组的元素一个一个依次放入堆中，每一个元素都要从叶子节点开始上浮，性能较差

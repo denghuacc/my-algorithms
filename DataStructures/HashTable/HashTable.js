@@ -5,42 +5,80 @@
 class HashTable {
   constructor() {
     this.table = []
+    this.size = 0
   }
+
+  getSize() {
+    return this.size
+  }
+
+  // 原散列方法，很容易哈希冲突
+  // _hashCode(key) {
+  //   let hash = 0
+  //   for (let i = 0; i < key.length; i++) {
+  //     hash += key.charCodeAt(i)
+  //   }
+  //   return hash % 37 // 取余，37是随机素数
+  // }
 
   // 散列方法
   _hashCode(key) {
-    let hash = 0
+    let hash = 5381 // 社区建议使用这个数值
     for (let i = 0; i < key.length; i++) {
-      hash += key.charCodeAt(i)
+      hash += hash * 33 + key.charCodeAt(i)
     }
-    return hash % 37 // 取模，37是随机素数
+    return hash % 1013 // 取余，取质数 1013 即散列表数量若为 1000 左右时比较合适
   }
 
-  // 向散列表增加一个新的项（也能更新散列表）
+  // 增加值
   add(key, val) {
     const pos = this._hashCode(key)
-    console.log(pos + ' - ' + key)
+    if (this.contains(key)) {
+      this.set(key, val)
+    } else {
+      this.table[pos] = val
+      this.size++
+    }
+  }
+
+  // 设置值
+  set(key, val) {
+    const pos = this._hashCode(key)
+    if (!this.contains(key)) {
+      throw new Error(key + " doesn't exist!")
+    }
     this.table[pos] = val
   }
 
-  // 根据键值从散列表中移除值
-  remove(key) {
-    this.table[this._hashCode(key)] = null
-  }
-
-  // 返回根据键值检索到的特定的值
+  // 获取值
   get(key) {
-    return this.table[this._hashCode(key)]
+    const pos = this._hashCode(key)
+    return this.table[pos]
   }
 
-  toString() {
-    let str = ''
+  contains(key) {
+    const pos = this._hashCode(key)
+    return this.table[pos] != null
+  }
+
+  // 移除值
+  remove(key) {
+    const pos = this._hashCode(key)
+    if (this.contains(key)) {
+      this.table[pos] = null
+      this.size--
+    }
+  }
+
+  // 打印值（只测试 pos 的值，只要 pos 的数量和 size 数量相同说明没有哈希冲突）
+  print() {
+    let arr = []
     for (let i = 0; i < this.table.length; i++) {
       if (this.table[i]) {
-        str += `${i}: ${this.table[i]}\n`
+        arr.push(i)
       }
     }
-    return str
+    return arr
   }
 }
 

@@ -21,13 +21,22 @@ class PriorityQueue {
     this.maxHeap.add(element)
   }
 
-  // 出列 优先出最大值
+  // 出列 -> 最大值出列
   dequeue() {
     return this.maxHeap.extractMax()
   }
 
-  // 队列最前面的也是最大值
+  // 队列最前面的一直都是最大值
   getFront() {
     return this.maxHeap.findMax()
   }
+
+  print() {
+    let str = 'PriorityQueue: front [ '
+    str += this.maxHeap.data.join(', ')
+    str += ' ]'
+    return str
+  }
 }
+
+module.exports = PriorityQueue
