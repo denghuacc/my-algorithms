@@ -1,6 +1,6 @@
-# js-dsa
+# my-algorithms
 
-> Data Structures & Algorithms in JavaScript
+> learn algorithms note
 
 ## Data Structures 数据结构
 
@@ -21,24 +21,27 @@
 
 ## Algorithms 算法
 
-- Sort Algorithm 排序算法
+- Sorting Algorithm 排序算法
 
-  - bubble sort 冒泡排序
-  - selection sort 选择排序
-  - insertion sort 插入排序
-  - shell sort 希尔排序
-  - quick sort 快速排序
-  - merge sort 归并排序
-  - heap sort 堆排序
+  - Bubble Sort 冒泡排序
+  - Selection Sort 选择排序
+  - Insertion Sort 插入排序
+  - Shell Sort 希尔排序
+  - Quicksort 快速排序
+  - Merge Sort 归并排序
+  - Heap Sort 堆排序
+  - Counting Sort 计数排序
+  - Bucket Sort 桶排序
+  - Radix Sort 基数排序
 
 - Search Algorithm 搜索算法
 
-  - binary search 二分搜索
-  - sequential search 线性搜索
+  - Binary Search 二分搜索
+  - Sequential Search 顺序搜索
 
 - Pattern 模式
   - Dynamic Programming 动态规划
-  - Greedy Algorithm 贪婪算法
+  - Greedy 贪婪算法
   - Recursion 递归
 
 ## Leetcode 力扣
