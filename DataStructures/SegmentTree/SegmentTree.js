@@ -1,38 +1,26 @@
 /**
- * @name SegmentTree 线段树
- * @description 线段树主要解决涉及区间(线段)的问题，比如某个区间的查询、更新
- * 线段树不是完全二叉树，但是平衡二叉树
- * 线段树实现，有 2 个数据库，一个是普通的数组结构，
- * 一个是转换成树结构，容量大概为数组结构的 4 倍，倒数第二层的叶子节点的左右孩子使用 null 或者 empty 填充
- * 线段树结构是高级数据结构，面试一般比较少考
+ * @name SegmentTree 线段树（区间树）
+ * @description 线段树主要解决涉及区间（线段）的问题，比如某个区间的查询、更新
+ * 特性①：线段树不是完全二叉树，它是平衡二叉树
+ * 特性②：线段树实现，有两个数据库，一个是普通的数组结构，一个是转换成树结构
  */
 class SegmentTree {
   constructor(arr = [], merge = () => {}) {
-    // 数组降维
-    if (Array.isArray) {
-      while (arr.some(item => Array.isArray(item))) {
-        arr = [].concat(...arr)
-      }
-    }
-
-    this.data = [] // 数组数据
-    arr.forEach(item => this.data.push(item))
-
-    // this.data = new Array(...arr) //  不建议
+    this.array = [...arr] // 数组数据
     this.tree = [] // 线段树数据
-    this.merge = merge // 处理融合的函数；可以是求区间值的和、求最大值、求最小值
+    this.merge = merge // 融合函数 -> 可以是求区间值的和、求最大值、求最小值
     this._buildSegmentTree(0, 0, this.getSize() - 1)
   }
 
   // 在 treeIndex 的位置创建表示区间 [start...end] 的线段树
   _buildSegmentTree(treeIndex, start, end) {
     if (start === end) {
-      this.tree[treeIndex] = this.data[start]
+      this.tree[treeIndex] = this.array[start]
       return
     }
 
-    let leftTreeIndex = this.leftChild(treeIndex)
-    let rightTreeIndex = this.rightChild(treeIndex)
+    let leftTreeIndex = this._leftChild(treeIndex)
+    let rightTreeIndex = this._rightChild(treeIndex)
 
     let mid = Math.floor(start + (end - start) / 2)
 
@@ -47,28 +35,26 @@ class SegmentTree {
   }
 
   getSize() {
-    return this.data.length
+    return this.array.length
   }
 
   get(index) {
-    if (index < 0 || index >= this.getSize()) {
-      throw new Error('Index is Illegal.')
+    if (index >= 0 && index < this.getSize()) {
+      return this.array[index]
     }
-
-    return this.data[index]
   }
 
-  // 返回完全二叉树的数组表示中，一个索引所表示的元素的左孩子节点的索引
-  leftChild(index) {
+  // 获取左孩子节点索引
+  _leftChild(index) {
     return index * 2 + 1
   }
 
-  // 返回完全二叉树的数组表示中，一个索引所表示的元素的右孩子节点的索引
-  rightChild(index) {
+  // 获取右孩子节点索引
+  _rightChild(index) {
     return index * 2 + 2
   }
 
-  // 返回区间 [queryL, queryR] 的值
+  // 搜索区间 [queryL, queryR] 的值
   query(queryL, queryR) {
     if (
       queryL < 0 ||
@@ -89,10 +75,8 @@ class SegmentTree {
     }
 
     let mid = Math.floor(start + (end - start) / 2)
-
-    // treeIndex 的节点分为 [start...mid] 和 [mid+1...end] 两部分
-    let leftTreeIndex = this.leftChild(treeIndex)
-    let rightTreeIndex = this.rightChild(treeIndex)
+    let leftTreeIndex = this._leftChild(treeIndex)
+    let rightTreeIndex = this._rightChild(treeIndex)
 
     if (queryL >= mid + 1) {
       return this._query(rightTreeIndex, mid + 1, end, queryL, queryR)
@@ -106,32 +90,29 @@ class SegmentTree {
     return this.merge(leftResult, rightResult)
   }
 
-  // 将 index 位置的值，更新为 element
-  set(index, element) {
-    if (index < 0 || index >= this.getSize()) {
-      throw new Error('Index is Illegal.')
+  // 将 index 位置的值，设置为 val
+  set(index, val) {
+    if (index >= 0 && index < this.getSize()) {
+      this.array[index] = val
+      this._set(0, 0, this.getSize() - 1, index, val)
     }
-
-    this.data[index] = element
-    this._set(0, 0, this.getSize() - 1, index, element)
   }
 
-  // 在以 treeIndex 为根的线段树中更新 index 的值为 element
-  _set(treeIndex, start, end, index, element) {
+  // 在以 treeIndex 为根的线段树中设置 index 的值为 val
+  _set(treeIndex, start, end, index, val) {
     if (start === end) {
-      this.tree[treeIndex] = element
+      this.tree[treeIndex] = val
       return
     }
 
     let mid = Math.floor(start + (end - start) / 2)
-
-    let leftTreeIndex = this.leftChild(treeIndex)
-    let rightTreeIndex = this.rightChild(treeIndex)
+    let leftTreeIndex = this._leftChild(treeIndex)
+    let rightTreeIndex = this._rightChild(treeIndex)
 
     if (index >= mid + 1) {
-      this._set(rightTreeIndex, mid + 1, end, index, element)
+      this._set(rightTreeIndex, mid + 1, end, index, val)
     } else {
-      this._set(leftTreeIndex, start, mid, index, element)
+      this._set(leftTreeIndex, start, mid, index, val)
     }
 
     this.tree[treeIndex] = this.merge(
