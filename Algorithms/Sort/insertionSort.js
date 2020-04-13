@@ -1,27 +1,14 @@
+// 插入排序
+
 // 算法步骤
 // 将第一待排序序列第一个元素看做一个有序序列，把第二个元素到最后一个元素当成是未排序序列。
 // 从第二个元素开始，依次和前面的元素进行比较，如果发现元素比它大，交换位置，这样前二个的元素排序完成。
 // 再第三个元素开始...以此类推，最后完成排序。
 
-/**
- * @name insertionSort 插入排序
- * @param { Array<Number> } arr
- * @returns { Array<Number> }
- */
 function insertionSort(arr) {
   const len = arr.length
 
   for (let i = 0; i < len; i++) {
-    // 寻找元素 arr[i] 合适的插入位置
-    // for (let j = i; j > 0; j--) {
-    //   if (arr[j] < arr[j - 1]) {
-    //     ;[arr[j], arr[j - 1]] = [arr[j - 1], arr[j]]
-    //   } else {
-    //     break
-    //   }
-    // }
-
-    // 写法优化
     for (let j = i; j > 0 && arr[j] < arr[j - 1]; j--) {
       ;[arr[j], arr[j - 1]] = [arr[j - 1], arr[j]] // 交换变量
     }
@@ -49,7 +36,7 @@ function insertionSort2(arr) {
   return arr
 }
 
-// test
-const arr = [1, 7, 5, 90, 3, 4]
-console.log(insertionSort(arr))
-// console.log(insertionSort2(arr))
+module.exports = {
+  insertionSort,
+  insertionSort2
+}
