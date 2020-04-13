@@ -1,4 +1,4 @@
-const RedBlackTree = require('../RedBlackTree/RedBlackTree')
+const RedBlackTree = require('../red-black-tree/red-black-tree')
 
 /**
  * @name RedBlackTreeSet 集合

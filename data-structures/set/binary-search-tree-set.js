@@ -1,4 +1,4 @@
-const BST = require('../BST/BST')
+const BST = require('../binary-search-tree/binary-search-tree')
 
 /**
  * @name BSTSet 集合

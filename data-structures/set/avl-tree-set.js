@@ -1,4 +1,4 @@
-const AVLTree = require('../AVLTree/AVLTree')
+const AVLTree = require('../avl-tree/avl-tree')
 
 /**
  * @name AVLSet 集合

@@ -1,4 +1,4 @@
-const LinkedList = require('../LinkedList/LinkedList')
+const LinkedList = require('../linked-list/linked-list')
 
 /**
  * @name LinkedListSet 集合
