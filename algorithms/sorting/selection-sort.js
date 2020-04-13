@@ -5,25 +5,24 @@
 // 2. 从剩余未排序元素中继续寻找最小元素，然后放到已排序序列的末尾。
 // 3. 重复第二步，直到所有元素均排序完毕。
 
-function selectionSort(arr) {
-  let len = arr.length,
+const { swap } = require('../../utilities')
+
+function selectionSort(array) {
+  let len = array.length,
     minIndex
 
   for (let i = 0; i < len - 1; i++) {
     minIndex = i // 寻找最小值，初始值为 i
 
     for (let j = i + 1; j < len; j++) {
-      if (arr[j] < arr[minIndex]) {
+      if (array[j] < array[minIndex]) {
         minIndex = j // 更新最小值索引
       }
     }
 
-    // 如果最小值索引和 i 不一致，交换变量
-    if (minIndex !== i) {
-      ;[arr[i], arr[minIndex]] = [arr[minIndex], arr[i]]
-    }
+    swap(array, i, minIndex)
   }
-  return arr
+  return array
 }
 
 module.exports = {

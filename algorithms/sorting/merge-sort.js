@@ -8,17 +8,16 @@
 // 5. 将另一序列剩下的所有元素直接复制到合并序列尾
 
 // 归并排序是一种分治算法。其思想是将原始数组切分成较小的数组，直到每个小数组只有一个位置。
-//  接着将小数组（只有一个值）之间进行比较排序，之后归并成较大的数组，直到最后只有一个排序完毕的大数组。
+// 接着将小数组（只有一个值）之间进行比较排序，之后归并成较大的数组，直到最后只有一个排序完毕的大数组。
 
-function mergeSort(arr) {
-  const len = arr.length
+function mergeSort(array) {
+  const len = array.length
 
-  // 递归终止条件
-  if (len === 1) return arr
+  if (len < 2) return array // 递归终止条件
 
   let mid = Math.floor(len / 2), // 中间点
-    left = arr.slice(0, mid),
-    right = arr.slice(mid)
+    left = array.slice(0, mid),
+    right = array.slice(mid)
   return merge(mergeSort(left), mergeSort(right)) // 递归
 }
 
@@ -26,11 +25,11 @@ function mergeSort(arr) {
 // 从初始的只有一个值的数组两两比较开始，归并之后的数组变成排好序的有两个值的小数组。
 // 之后继续两两比较，小数组变成较大的数组，最后成为一个新的排序好的新数组。
 function merge(left, right) {
-  let ret = [] // 新数组，用来保存归并的值
+  const ret = [] // 新数组，用来保存归并后的值
 
   while (left.length && right.length) {
-    // 比较 left 和 right 两个数组值第一个值
-    // 谁小就把谁从原来的数组中取出来，并加入到新数组后面
+    // 比较 left 和 right 两个数组值的第一个值
+    // 谁小就把谁从原来的数组中提取出来并放入到新数组中
     if (left[0] <= right[0]) {
       ret.push(left.shift())
     } else {
@@ -38,13 +37,12 @@ function merge(left, right) {
     }
   }
 
-  // 当其中一个数组已经清空后
-  // 另外一个数组如果还有值，都是比较后剩余的较大的值
-  // 把这些值依次从数组取出放入到新数组后面
+  // 当其中一个数组已经清空后，另外一个数组如果还有值
+  // 把这些值依次从数组前面取出放入到新数组的后面，这些值都是比较后剩余的较大的值
   while (left.length) ret.push(left.shift())
   while (right.length) ret.push(right.shift())
 
-  return ret // 返回新数组
+  return ret
 }
 
 module.exports = {

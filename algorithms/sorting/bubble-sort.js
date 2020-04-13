@@ -1,4 +1,4 @@
-// 冒泡排序
+// Bubble Sort 冒泡排序
 
 // 算法步骤
 // 1. 比较相邻的元素。如果第一个比第二个大，就交换他们两个。
@@ -6,48 +6,49 @@
 // 3. 针对所有的元素重复以上的步骤，除了最后一个。
 // 4. 持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。
 
-function bubbleSort(arr) {
-  const len = arr.length
+const { swap } = require('../../utilities')
+
+function bubbleSort(array) {
+  const len = array.length
   for (let i = 0; i < len; i++) {
     for (let j = 0; j < len - 1; j++) {
-      if (arr[j] > arr[j + 1]) {
-        ;[arr[j], arr[j + 1]] = [arr[j + 1], arr[j]] // 交换变量
+      if (array[j] > array[j + 1]) {
+        swap(array, j, j + 1)
       }
     }
   }
-  return arr
+  return array
 }
 
-// 优化：减少内循环不必要的比较
-function bubbleSort2(arr) {
-  const len = arr.length
+// 优化：减少内循环中不必要的比较
+function bubbleSort2(array) {
+  const len = array.length
   for (let i = 0; i < len; i++) {
     // 优化：j< len -1 -> j < len - 1 - i
     // 后面的已经是排好序的比较大的数，不用重复比较
     for (let j = 0; j < len - 1 - i; j++) {
-      if (arr[j] > arr[j + 1]) {
-        ;[arr[j], arr[j + 1]] = [arr[j + 1], arr[j]] // 交换变量
+      if (array[j] > array[j + 1]) {
+        swap(array, j, j + 1)
       }
     }
   }
-  return arr
+  return array
 }
 
-// 优化三
-function bubbleSort3(arr) {
-  let i = arr.length - 1
+function bubbleSort3(array) {
+  let i = array.length - 1
 
   while (i > 0) {
     let pos = 0
     for (let j = 0; j < i; j++) {
-      if (arr[j] > arr[j + 1]) {
+      if (array[j] > array[j + 1]) {
         pos = j
-        ;[arr[j], arr[j + 1]] = [arr[j + 1], arr[j]] // 交换变量
+        swap(array, j, j + 1)
       }
     }
     i = pos
   }
-  return arr
+  return array
 }
 
 module.exports = {

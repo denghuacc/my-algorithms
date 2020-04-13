@@ -11,44 +11,42 @@
 // 除根节点外，任意节点 N 的父节点是 N/2；
 // 非叶子节点 N 的左子节点是 2N+1，右子节点是 2N+2。
 
-function heapSort(arr) {
-  let size = arr.length
-  buildHeap(arr)
+const { swap } = require('../../utilities')
+
+function heapSort(array) {
+  let size = array.length
+  buildHeap(array)
 
   while (size > 1) {
     size-- // 堆的 size 减 1， 此时把堆尾，同时也是堆的最大值取出来了。递归，再把剩下的值的最大值再取出来
-    swap(arr, 0, size) // 交换堆首和堆尾的值。使得堆尾变成了最大值。这时可能会丢失堆的属性，成为普通数组
-    heapify(arr, size, 0) // 需要重新转换成堆
+    swap(array, 0, size) // 交换堆首和堆尾的值。使得堆尾变成了最大值。这时可能会丢失堆的属性，成为普通数组
+    heapify(array, size, 0) // 需要重新转换成堆
   }
 
-  return arr // 直到数组长度 === 1时，返回原数组
+  return array // 直到数组长度 === 1时，返回原数组
 }
 
-function buildHeap(arr) {
-  let size = arr.length
-  for (let i = Math.floor(arr.length / 2); i >= 0; i--) {
-    heapify(arr, size, i)
+function buildHeap(array) {
+  let size = array.length
+  for (let i = Math.floor(array.length / 2); i >= 0; i--) {
+    heapify(array, size, i)
   }
 }
 
-function heapify(arr, size, i) {
+function heapify(array, size, i) {
   let left = i * 2 + 1, // 左子节点
     right = i * 2 + 2, // 右子节点
     largest = i // 节点
 
   // 左右子节点比父节点大时，互换位置
-  if (left < size && arr[left] > arr[largest]) largest = left
-  if (right < size && arr[right] > arr[largest]) largest = right
+  if (left < size && array[left] > array[largest]) largest = left
+  if (right < size && array[right] > array[largest]) largest = right
 
   // 当最大的值不是根节点时，互换位置，保证根节点是最大值，然后重新转换成堆
   if (largest !== i) {
-    swap(arr, i, largest)
-    heapify(arr, size, largest)
+    swap(array, i, largest)
+    heapify(array, size, largest)
   }
-}
-
-function swap(arr, i, j) {
-  ;[arr[i], arr[j]] = [arr[j], arr[i]]
 }
 
 module.exports = {
