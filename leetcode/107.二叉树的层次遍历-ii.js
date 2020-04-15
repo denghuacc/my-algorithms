@@ -49,16 +49,37 @@
  * @return {number[][]}
  */
 var levelOrderBottom = function (root) {
-  let ret = []
-  dfs(root, 0)
+  const ret = []
+  levelOrder(root, 0)
   return ret.reverse()
 
-  function dfs(node, level) {
+  function levelOrder(node, level) {
     if (node == null) return
     ret[level] ? ret[level].push(node.val) : (ret[level] = [node.val])
     level++
-    dfs(node.left, level)
-    dfs(node.right, level)
+    levelOrder(node.left, level)
+    levelOrder(node.right, level)
   }
+}
+
+var levelOrderBottom = function (root) {
+  const ret = []
+  if (root == null) return ret
+  const queue = []
+  queue.push(root)
+
+  while (queue.length !== 0) {
+    const size = queue.length
+    const levels = []
+    for (let i = 0; i < size; i++) {
+      const node = queue.shift()
+      levels.push(node.val)
+      if (node.left != null) queue.push(node.left)
+      if (node.right != null) queue.push(node.right)
+    }
+    ret.unshift(levels)
+  }
+
+  return ret
 }
 // @lc code=end
