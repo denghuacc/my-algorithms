@@ -1,4 +1,4 @@
-import { swap } from '../../utilities'
+import { swap } from '../util'
 
 /**
  * @name MaxHeap 最大堆

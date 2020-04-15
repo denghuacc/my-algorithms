@@ -9,7 +9,7 @@
 // 快速排序的复杂度为 O(n*log(n)) ，且它的性能通常比其他的复杂度为 O(n*log(n)) 的排序算法要好。
 // 和归并排序一样，快速排序也使用分治的方法，将原始数组分为较小的数组。
 
-import { swap } from '../../utilities'
+import { swap } from '../util'
 
 export function quickSort<T>(array: Array<T>, left?: number, right?: number) {
   const len = array.length

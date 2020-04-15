@@ -1,5 +1,5 @@
 import HashTable from '../hash-table'
-import { MyObj } from '../../../utilities'
+import { MyObj } from '../../util'
 
 describe('HashTable', () => {
   test('starts empty', () => {

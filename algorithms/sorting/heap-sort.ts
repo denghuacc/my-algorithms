@@ -11,7 +11,7 @@
 // 除根节点外，任意节点 N 的父节点是 N/2；
 // 非叶子节点 N 的左子节点是 2N+1，右子节点是 2N+2。
 
-import { swap } from '../../utilities'
+import { swap } from '../util'
 
 export function heapSort<T>(array: Array<T>) {
   let size = array.length

@@ -5,7 +5,7 @@
 // 2. 从剩余未排序元素中继续寻找最小元素，然后放到已排序序列的末尾。
 // 3. 重复第二步，直到所有元素均排序完毕。
 
-import { swap } from '../../utilities'
+import { swap } from '../util'
 
 export function selectionSort<T>(array: Array<T>) {
   let len = array.length,

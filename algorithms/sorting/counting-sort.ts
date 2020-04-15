@@ -1,6 +1,6 @@
 // 计数排序
 
-import { findMaxValue } from '../../utilities'
+import { findMaxValue } from '../util'
 
 export function countingSort(array: Array<number>) {
   if (array.length < 2) return array

@@ -1,6 +1,6 @@
 // Radix Sort 基数排序
 
-import { findMinValue, findMaxValue } from '../../utilities'
+import { findMinValue, findMaxValue } from '../util'
 
 export function radixSort<T extends number>(array: Array<T>, radixBase: number = 10) {
   if (array.length < 2) return array

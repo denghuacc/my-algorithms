@@ -1,5 +1,5 @@
 import { ValuePair } from '../models/value-pair'
-import { defaultToString } from '../../utilities'
+import { defaultToString } from '../util'
 
 interface Table<K, V> {
   [key: string]: ValuePair<K, V>
