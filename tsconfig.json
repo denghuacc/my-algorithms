@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "lib": ["ESNext"],
+    "strict": true
+  },
+  "include": ["algorithms", "data-structures"],
+  "exclude": ["node_modules"]
+}
