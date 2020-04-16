@@ -48,12 +48,12 @@
 var sortedArrayToBST = function (nums) {
   return _sortedArrayToBST(0, nums.length - 1)
 
-  function _sortedArrayToBST(l, r) {
-    if (l > r) return null
-    let m = Math.floor((l + r) / 2)
-    const root = new TreeNode(nums[m])
-    root.left = _sortedArrayToBST(l, m - 1)
-    root.right = _sortedArrayToBST(m + 1, r)
+  function _sortedArrayToBST(left, right) {
+    if (left > right) return null
+    let mid = Math.floor((left + right) / 2)
+    const root = new TreeNode(nums[mid])
+    root.left = _sortedArrayToBST(left, mid - 1)
+    root.right = _sortedArrayToBST(mid + 1, right)
     return root
   }
 }

@@ -44,13 +44,63 @@
 /**
  * @param {TreeNode} root
  * @return {number}
+ * recursion
  */
 var minDepth = function (root) {
   if (root == null) return 0
   if (root.left == null && root.right == null) return 1
-  let ret = Number.MAX_SAFE_INTEGER
-  if (root.left != null) ret = Math.min(minDepth(root.left), ret)
-  if (root.right != null) ret = Math.min(minDepth(root.right), ret)
-  return ret + 1
+  let min = Number.MAX_SAFE_INTEGER
+  if (root.left != null) min = Math.min(minDepth(root.left), min)
+  if (root.right != null) min = Math.min(minDepth(root.right), min)
+  return min + 1
 }
+
+// DFS iteration
+var minDepth = function (root) {
+  const stack = []
+  if (root == null) {
+    return 0
+  } else {
+    stack.push([root, 1])
+  }
+
+  let min = Number.MAX_SAFE_INTEGER
+  while (stack.length !== 0) {
+    const currentPair = stack.pop() // pop
+    const root = currentPair[0]
+    const currentDeep = currentPair[1]
+
+    if (root.left == null && root.right == null) {
+      min = Math.min(min, currentDeep)
+    }
+    if (root.left != null) stack.push([root.left, currentDeep + 1])
+    if (root.right != null) stack.push([root.right, currentDeep + 1])
+  }
+
+  return min
+}
+
+// BFS iteration
+var minDepth = function (root) {
+  const stack = []
+  if (root == null) {
+    return 0
+  } else {
+    stack.push([root, 1])
+  }
+
+  let currentDeep = 0
+  while (stack.length !== 0) {
+    const currentPair = stack.shift() // shift
+    const root = currentPair[0]
+    currentDeep = currentPair[1]
+
+    if (root.left == null && root.right == null) break
+    if (root.left != null) stack.push([root.left, currentDeep + 1])
+    if (root.right != null) stack.push([root.right, currentDeep + 1])
+  }
+
+  return currentDeep
+}
+
 // @lc code=end

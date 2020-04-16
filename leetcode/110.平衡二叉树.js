@@ -73,6 +73,7 @@ var isBalanced = function (root) {
     isBalanced(root.right)
   )
 
+  // 节点的高度
   function height(root) {
     if (root == null) return -1
     return 1 + Math.max(height(root.left), height(root.right))
@@ -85,13 +86,15 @@ var isBalanced = function (root) {
 
   function isBalancedTree(root) {
     if (root == null) return new TreeInfo(-1, true)
+
     const left = isBalancedTree(root.left)
     if (!left.balanced) return new TreeInfo(-1, false)
+
     const right = isBalancedTree(root.right)
     if (!right.balanced) return new TreeInfo(-1, false)
 
     if (Math.abs(left.height - right.height) < 2) {
-      return new TreeInfo(Math.abs(left.height, right.height) + 1, true)
+      return new TreeInfo(Math.max(left.height, right.height) + 1, true)
     }
 
     return new TreeInfo(-1, false)
@@ -105,13 +108,13 @@ var isBalanced = function (root) {
 
 // 自底向上的递归2
 var isBalanced = function (root) {
-  return recur(root) !== -1
+  return height(root) !== -1
 
-  function recur(root) {
+  function height(root) {
     if (root == null) return 0
-    const left = recur(root.left)
+    const left = height(root.left)
     if (left === -1) return -1
-    const right = recur(root.right)
+    const right = height(root.right)
     if (right === -1) return -1
     return Math.abs(left - right) < 2 ? Math.max(left, right) + 1 : -1
   }
