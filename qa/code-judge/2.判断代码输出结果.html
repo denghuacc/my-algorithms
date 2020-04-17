@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>demo</title>
+  </head>
+  <body>
+    <script>
+      //  下面的代码打印什么内容，为什么？
+
+      var a = 10
+      ;(function () {
+        console.log(a) // undefined
+        a = 5
+        console.log(window.a) // 10
+        var a = 20
+        console.log(a) // 20
+      })()
+
+      // 知识点：
+      // - IIFE 生成独立作用域
+      // - 变量提升
+
+      // 解析：在 IIFE 中产生函数作用域 local，不在全局作用域中。
+      // `var a = 20` 产生变量提升，所以第一个打印为`undefined`。
+      // 第二个打印的是全局作用域的 a。第三个打印的是独立作用域的 a。
+    </script>
+  </body>
+</html>

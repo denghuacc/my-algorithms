@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>count down</title>
+  </head>
+  <body>
+    <div class="countdown"></div>
+    <script>
+      window.onload = function () {
+        showTime()
+        function showTime() {
+          const now = new Date()
+          const endTime = new Date('2022-6-30')
+          const leftTime = formatTime(endTime - now)
+          const div = document.querySelector('.countdown')
+          div.innerHTML =
+            '倒计时:' +
+            leftTime.d +
+            '天' +
+            leftTime.h +
+            '小时' +
+            leftTime.m +
+            '分' +
+            leftTime.s +
+            '秒'
+          if (endTime - now <= 0) {
+            div.innerHTML = '活动已结束！'
+            return
+          }
+          setTimeout(showTime, 1000)
+        }
+      }
+
+      function leftPad(num) {
+        const n = parseInt(num, 10)
+        return n < 10 ? '0' + n : n
+      }
+
+      function formatTime(ms) {
+        const s = ms / 1000,
+          m = s / 60
+        return {
+          d: leftPad(m / 60 / 24),
+          h: leftPad((m / 60) % 24),
+          m: leftPad(m % 60),
+          s: leftPad(s % 60)
+        }
+      }
+    </script>
+  </body>
+</html>
