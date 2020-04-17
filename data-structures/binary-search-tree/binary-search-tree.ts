@@ -77,7 +77,7 @@ export default class BST<T> {
       const stack: Array<Node<T>> = []
       stack.push(this.root)
 
-      while (stack.length !== 0) {
+      while (stack.length) {
         let curNode = stack.pop()
         arr.push(curNode!.key)
 
@@ -124,7 +124,7 @@ export default class BST<T> {
       const queue: Array<Node<T>> = []
       queue.push(this.root)
 
-      while (queue.length !== 0) {
+      while (queue.length) {
         let curNode = queue.shift()
         arr.push(curNode!.key)
 

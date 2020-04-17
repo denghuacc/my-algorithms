@@ -50,7 +50,7 @@ export default class RedBlackTree<K, V> {
     const stack: Array<Node<K, V>> = []
     stack.push(this.root)
 
-    while (stack.length !== 0) {
+    while (stack.length) {
       let curNode = stack.pop()
       // console.log(curNode.val)
       arr.push(curNode!.key)
@@ -98,7 +98,7 @@ export default class RedBlackTree<K, V> {
     const queue = []
     queue.push(this.root)
 
-    while (queue.length !== 0) {
+    while (queue.length) {
       let curNode = queue.shift()
       arr.push(curNode!.key)
 
