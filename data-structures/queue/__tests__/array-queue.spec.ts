@@ -1,20 +1,20 @@
-import LinkedListQueue from '../linked-list-queue'
+import ArrayQueue from '../array-queue'
 
-describe('LinkedListQueue', () => {
-  let queue: LinkedListQueue<number>
+describe('ArrayQueue', () => {
+  let queue: ArrayQueue<number>
 
   beforeEach(() => {
-    queue = new LinkedListQueue()
+    queue = new ArrayQueue()
   })
 
   test('enqueue', () => {
     expect(queue.toString()).toBe('')
     queue.enqueue(1)
-    expect(queue.toString()).toBe('Queue: head { 1 -> undefined }')
+    expect(queue.toString()).toBe('1')
     queue.enqueue(2)
-    expect(queue.toString()).toBe('Queue: head { 1 -> 2 -> undefined }')
+    expect(queue.toString()).toBe('1,2')
     queue.enqueue(3)
-    expect(queue.toString()).toBe('Queue: head { 1 -> 2 -> 3 -> undefined }')
+    expect(queue.toString()).toBe('1,2,3')
   })
 
   test('dequeue', () => {

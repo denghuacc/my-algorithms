@@ -1,20 +1,20 @@
-import LinkedListQueue from '../linked-list-queue'
+import ObjectQueue from '../object-queue'
 
-describe('LinkedListQueue', () => {
-  let queue: LinkedListQueue<number>
+describe('ObjectQueue', () => {
+  let queue: ObjectQueue<number>
 
   beforeEach(() => {
-    queue = new LinkedListQueue()
+    queue = new ObjectQueue()
   })
 
   test('enqueue', () => {
     expect(queue.toString()).toBe('')
     queue.enqueue(1)
-    expect(queue.toString()).toBe('Queue: head { 1 -> undefined }')
+    expect(queue.toString()).toBe('Queue { 1 }')
     queue.enqueue(2)
-    expect(queue.toString()).toBe('Queue: head { 1 -> 2 -> undefined }')
+    expect(queue.toString()).toBe('Queue { 1, 2 }')
     queue.enqueue(3)
-    expect(queue.toString()).toBe('Queue: head { 1 -> 2 -> 3 -> undefined }')
+    expect(queue.toString()).toBe('Queue { 1, 2, 3 }')
   })
 
   test('dequeue', () => {
