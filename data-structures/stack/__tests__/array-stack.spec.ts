@@ -1,24 +1,20 @@
-import LinkedListStack from '../linked-list-stack'
+import ArrayStack from '../array-stack'
 
-describe('LinkedListStack', () => {
-  let stack: LinkedListStack<number>
+describe('ArrayStack', () => {
+  let stack: ArrayStack<number>
 
   beforeEach(() => {
-    stack = new LinkedListStack()
+    stack = new ArrayStack()
   })
 
   test('push', () => {
     expect(stack.toString()).toBe('')
     stack.push(1)
-    expect(stack.toString()).toBe('Linked List Stock Top { 1 -> undefined }')
+    expect(stack.toString()).toBe('1')
     stack.push(2)
-    expect(stack.toString()).toBe(
-      'Linked List Stock Top { 2 -> 1 -> undefined }'
-    )
+    expect(stack.toString()).toBe('1,2')
     stack.push(3)
-    expect(stack.toString()).toBe(
-      'Linked List Stock Top { 3 -> 2 -> 1 -> undefined }'
-    )
+    expect(stack.toString()).toBe('1,2,3')
   })
 
   test('pop', () => {

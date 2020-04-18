@@ -1,24 +1,20 @@
-import LinkedListStack from '../linked-list-stack'
+import ObjectStack from '../object-stack'
 
-describe('LinkedListStack', () => {
-  let stack: LinkedListStack<number>
+describe('ObjectStack', () => {
+  let stack: ObjectStack<number>
 
   beforeEach(() => {
-    stack = new LinkedListStack()
+    stack = new ObjectStack()
   })
 
   test('push', () => {
     expect(stack.toString()).toBe('')
     stack.push(1)
-    expect(stack.toString()).toBe('Linked List Stock Top { 1 -> undefined }')
+    expect(stack.toString()).toBe('Stack { 1 }')
     stack.push(2)
-    expect(stack.toString()).toBe(
-      'Linked List Stock Top { 2 -> 1 -> undefined }'
-    )
+    expect(stack.toString()).toBe('Stack { 1, 2 }')
     stack.push(3)
-    expect(stack.toString()).toBe(
-      'Linked List Stock Top { 3 -> 2 -> 1 -> undefined }'
-    )
+    expect(stack.toString()).toBe('Stack { 1, 2, 3 }')
   })
 
   test('pop', () => {
