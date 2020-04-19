@@ -37,6 +37,7 @@
 /**
  * @param {number[]} nums
  * @return {number[][]}
+ * 双指针
  */
 var threeSum = function (nums) {
   let ret = []
@@ -57,7 +58,7 @@ var threeSum = function (nums) {
         L++
         R--
       } else if (sum < 0) L++
-      else if (sum > 0) R++
+      else if (sum > 0) R--
     }
   }
   return ret

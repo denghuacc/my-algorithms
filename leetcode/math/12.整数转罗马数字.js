@@ -75,23 +75,23 @@
  */
 var intToRoman = function (num) {
   let romans = [
-      'M',
-      'CM',
-      'D',
-      'CD',
-      'C',
-      'XC',
-      'L',
-      'XL',
-      'X',
-      'IX',
-      'V',
-      'IV',
-      'I'
-    ],
-    nums = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
-  let ret = '',
-    i = 0
+    'M',
+    'CM',
+    'D',
+    'CD',
+    'C',
+    'XC',
+    'L',
+    'XL',
+    'X',
+    'IX',
+    'V',
+    'IV',
+    'I'
+  ]
+  let nums = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
+  let ret = ''
+  let i = 0
   while (i < nums.length || num > 0) {
     if (num >= nums[i]) {
       num -= nums[i]

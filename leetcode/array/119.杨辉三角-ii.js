@@ -35,6 +35,7 @@
 /**
  * @param {number} rowIndex
  * @return {number[]}
+ * dp
  */
 var getRow = function (rowIndex) {
   let ret = [1]
@@ -46,7 +47,6 @@ var getRow = function (rowIndex) {
   }
   return ret
 }
-// @lc code=end
 
 // 优化
 var getRow = function (rowIndex) {
@@ -64,3 +64,4 @@ var getRow = function (rowIndex) {
   }
   return ret
 }
+// @lc code=end

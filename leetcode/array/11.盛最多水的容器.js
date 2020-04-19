@@ -37,12 +37,31 @@
 /**
  * @param {number[]} height
  * @return {number}
+ * 双指针
  */
+var maxArea = function (height) {
+  let l = 0
+  let r = height.length - 1
+  let max = 0
+  while (l < r) {
+    const area = Math.min(height[l], height[r]) * (r - l)
+    max = Math.max(max, area)
+
+    if (height[l] <= height[r]) {
+      ++l
+    } else {
+      --r
+    }
+  }
+  return max
+}
+
+// 双遍历
 var maxArea = function (height) {
   let ret = 0
   for (let i = 0; i < height.length - 1; i++) {
     for (let j = i + 1; j < height.length; j++) {
-      let max = (j - 1) * Math.min(height[i], height[j])
+      let max = (j - i) * Math.min(height[i], height[j])
       if (max > ret) {
         ret = max
       }
@@ -52,22 +71,3 @@ var maxArea = function (height) {
   return ret
 }
 // @lc code=end
-
-// 双指针
-var maxArea = function (height) {
-  let i = 0,
-    j = height.length - 1
-  let area,
-    max = 0
-  while (j - i >= 1) {
-    if (height[i] > height[j]) {
-      area = height[j] * (j - i)
-      j--
-    } else {
-      area = height[i] * (j - i)
-      i++
-    }
-    max = Math.max(area, max)
-  }
-  return max
-}
