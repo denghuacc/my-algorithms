@@ -58,6 +58,7 @@
 /**
  * @param {TreeNode} root
  * @return {boolean}
+ * recursion
  */
 var isValidBST = function (root) {
   return _isValidBST(root, null, null)
@@ -66,6 +67,7 @@ var isValidBST = function (root) {
     if (root == null) return true
 
     const val = root.val
+
     if (lower != null && val <= lower) return false
     if (upper != null && val >= upper) return false
 
@@ -76,14 +78,14 @@ var isValidBST = function (root) {
   }
 }
 
-// 迭代
+// iteration
 var isValidBST = function (root) {
-  const stack = [],
-    lowers = [],
-    uppers = []
-  let lower = null,
-    upper = null,
-    val
+  const stack = []
+  const lowers = []
+  const uppers = []
+  let lower = null
+  let upper = null
+  let val
   update(root, lower, upper)
 
   while (stack.length !== 0) {
@@ -108,7 +110,7 @@ var isValidBST = function (root) {
   }
 }
 
-// 中序遍历
+// inorder
 var isValidBST = function (root) {
   const stack = []
   let inorder = -Number.MAX_SAFE_INTEGER

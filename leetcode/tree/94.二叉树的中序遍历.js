@@ -41,7 +41,7 @@
 /**
  * @param {TreeNode} root
  * @return {number[]}
- * 递归
+ * recursion
  */
 var inorderTraversal = function (root) {
   const ret = []
@@ -50,30 +50,26 @@ var inorderTraversal = function (root) {
 
   function inOrder(root, arr) {
     if (root != null) {
-      if (root.left != null) {
-        inOrder(root.left, arr)
-      }
+      if (root.left != null) inOrder(root.left, arr)
       ret.push(root.val)
-      if (root.right != null) {
-        inOrder(root.right, arr)
-      }
+      if (root.right != null) inOrder(root.right, arr)
     }
   }
 }
 
-// 迭代
+// iteration
 var inorderTraversal = function (root) {
   const ret = []
   const stack = []
-  let curr = root
-  while (curr != null || !stack.length === 0) {
-    while (curr != null) {
-      stack.push(curr)
-      curr = curr.left
+  let cur = root
+  while (cur != null || stack.length !== 0) {
+    while (cur != null) {
+      stack.push(cur)
+      cur = cur.left
     }
-    curr = stack.pop()
-    ret.push(curr.val)
-    curr = curr.right
+    cur = stack.pop()
+    ret.push(cur.val)
+    cur = cur.right
   }
   return ret
 }
@@ -81,20 +77,21 @@ var inorderTraversal = function (root) {
 // 线索二叉树
 var inorderTraversal = function (root) {
   const ret = []
-  let curr = root,
-    prev
-  while (curr != null) {
-    if (curr.left == null) {
-      ret.push(curr.val)
-      curr = curr.right
+  let cur = root
+  let prev
+
+  while (cur != null) {
+    if (cur.left == null) {
+      ret.push(cur.val)
+      cur = cur.right
     } else {
-      prev = curr.left
+      prev = cur.left
       while (prev.right != null) {
         prev = prev.right
       }
-      prev.right = curr
-      let temp = curr
-      curr = curr.left
+      prev.right = cur
+      let temp = cur
+      cur = cur.left
       temp.left = null
     }
   }

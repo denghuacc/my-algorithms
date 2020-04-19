@@ -49,6 +49,7 @@
 /**
  * @param {number} n
  * @return {TreeNode[]}
+ * recursion
  */
 var generateTrees = function (n) {
   if (n === 0) return []
@@ -56,10 +57,12 @@ var generateTrees = function (n) {
 
   function _generateTrees(start, end) {
     const allTrees = []
+
     if (start > end) {
       allTrees.push(null)
       return allTrees
     }
+
     for (let i = start; i <= end; i++) {
       let leftTrees = _generateTrees(start, i - 1)
       let rightTrees = _generateTrees(i + 1, end)

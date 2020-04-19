@@ -45,11 +45,41 @@
  * @param {TreeNode} root
  * @param {number} sum
  * @return {boolean}
+ * recursion
  */
 var hasPathSum = function (root, sum) {
   if (root == null) return false
   sum -= root.val
   if (root.left == null && root.right == null) return sum === 0
-  return hasPathSum(root.left, sun) || hasPathSum(root.right, sum)
+  return hasPathSum(root.left, sum) || hasPathSum(root.right, sum)
+}
+
+// iteration
+var hasPathSum = function (root, sum) {
+  if (root == null) return false
+
+  const nodeStack = []
+  const sumStack = []
+  nodeStack.push(root)
+  sumStack.push(sum - root.val)
+
+  let node
+  let currentSum
+  while (nodeStack.length !== 0) {
+    node = nodeStack.pop()
+    currentSum = sumStack.pop()
+
+    if (node.right == null && node.left == null && currentSum == 0) return true
+    if (node.right != null) {
+      nodeStack.push(node.right)
+      sumStack.push(currentSum - node.right.val)
+    }
+    if (node.left != null) {
+      nodeStack.push(node.left)
+      sumStack.push(currentSum - node.left.val)
+    }
+  }
+
+  return false
 }
 // @lc code=end

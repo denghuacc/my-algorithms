@@ -34,35 +34,8 @@
 /**
  * @param {number} n
  * @return {number}
- * 95 题数组的长度
+ * dp
  */
-var numTrees = function (n) {
-  if (n === 0) return []
-  return _generateTrees(1, n).length
-
-  function _generateTrees(start, end) {
-    const allTrees = []
-    if (start > end) {
-      allTrees.push(null)
-      return allTrees
-    }
-    for (let i = start; i <= end; i++) {
-      let leftTrees = _generateTrees(start, i - 1)
-      let rightTrees = _generateTrees(i + 1, end)
-
-      for (const leftTree of leftTrees) {
-        for (const rightTree of rightTrees) {
-          const currentTree = new TreeNode(i)
-          currentTree.left = leftTree
-          currentTree.right = rightTree
-          allTrees.push(currentTree)
-        }
-      }
-    }
-    return allTrees
-  }
-}
-
 var numTrees = function (n) {
   const dp = new Array(n + 1).fill(0)
   dp[0] = 1
@@ -76,6 +49,7 @@ var numTrees = function (n) {
   return dp[n]
 }
 
+// 数学演绎法
 var numTrees = function (n) {
   let c = 1
   for (let i = 0; i < n; ++i) {
