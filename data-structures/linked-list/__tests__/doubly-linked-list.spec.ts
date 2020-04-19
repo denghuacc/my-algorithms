@@ -1,10 +1,10 @@
-import LinkedList from '../linked-list'
+import DoublyLinkedList from '../doubly-linked-list'
 
 describe('LinkedList', () => {
-  let linkedList: LinkedList<number>
+  let linkedList: DoublyLinkedList<number>
 
   beforeEach(() => {
-    linkedList = new LinkedList()
+    linkedList = new DoublyLinkedList()
   })
 
   test('size', () => {
@@ -36,53 +36,69 @@ describe('LinkedList', () => {
   })
 
   test('addFirst', () => {
-    expect(linkedList.head).toBe(undefined)
     expect(linkedList.toString()).toBe('')
     expect(linkedList.size()).toBe(0)
     linkedList.addFirst(1)
     expect(linkedList.head?.key).toBe(1)
+    expect(linkedList.head?.prev).toBe(undefined)
     expect(linkedList.head?.next).toBe(undefined)
-    expect(linkedList.toString()).toBe('Linked List { 1 -> undefined }')
     expect(linkedList.size()).toBe(1)
+    expect(linkedList.toString()).toBe(
+      'Doubly Linked List { undefined <- 1 -> undefined }'
+    )
     linkedList.addFirst(2)
     expect(linkedList.head?.key).toBe(2)
-    expect(linkedList.head?.next?.key).toBe(1)
+    expect(linkedList.head?.prev).toBe(undefined)
+    expect(linkedList.head?.next?.prev).toBe(linkedList.head)
     expect(linkedList.head?.next?.next).toBe(undefined)
-    expect(linkedList.toString()).toBe('Linked List { 2 -> 1 -> undefined }')
+    expect(linkedList.head?.next?.key).toBe(1)
+    expect(linkedList.toString()).toBe(
+      'Doubly Linked List { undefined <- 2 <-> 1 -> undefined }'
+    )
     expect(linkedList.size()).toBe(2)
     linkedList.addFirst(3)
     expect(linkedList.head?.key).toBe(3)
+    expect(linkedList.head?.prev).toBe(undefined)
+    expect(linkedList.head?.next?.prev).toBe(linkedList.head)
     expect(linkedList.head?.next?.key).toBe(2)
     expect(linkedList.head?.next?.next?.key).toBe(1)
     expect(linkedList.head?.next?.next?.next).toBe(undefined)
     expect(linkedList.toString()).toBe(
-      'Linked List { 3 -> 2 -> 1 -> undefined }'
+      'Doubly Linked List { undefined <- 3 <-> 2 <-> 1 -> undefined }'
     )
     expect(linkedList.size()).toBe(3)
   })
 
   test('addLast', () => {
-    expect(linkedList.head).toBe(undefined)
     expect(linkedList.toString()).toBe('')
     expect(linkedList.size()).toBe(0)
     linkedList.addLast(1)
     expect(linkedList.head?.key).toBe(1)
+    expect(linkedList.head?.prev).toBe(undefined)
     expect(linkedList.head?.next).toBe(undefined)
-    expect(linkedList.toString()).toBe('Linked List { 1 -> undefined }')
+    expect(linkedList.toString()).toBe(
+      'Doubly Linked List { undefined <- 1 -> undefined }'
+    )
     expect(linkedList.size()).toBe(1)
     linkedList.addLast(2)
     expect(linkedList.head?.key).toBe(1)
-    expect(linkedList.head?.next?.key).toBe(2)
+    expect(linkedList.head?.prev).toBe(undefined)
+    expect(linkedList.head?.next?.prev).toBe(linkedList.head)
     expect(linkedList.head?.next?.next).toBe(undefined)
-    expect(linkedList.toString()).toBe('Linked List { 1 -> 2 -> undefined }')
+    expect(linkedList.head?.next?.key).toBe(2)
+    expect(linkedList.toString()).toBe(
+      'Doubly Linked List { undefined <- 1 <-> 2 -> undefined }'
+    )
     expect(linkedList.size()).toBe(2)
     linkedList.addLast(3)
     expect(linkedList.head?.key).toBe(1)
+    expect(linkedList.head?.prev).toBe(undefined)
+    expect(linkedList.head?.next?.prev).toBe(linkedList.head)
     expect(linkedList.head?.next?.key).toBe(2)
     expect(linkedList.head?.next?.next?.key).toBe(3)
     expect(linkedList.head?.next?.next?.next).toBe(undefined)
     expect(linkedList.toString()).toBe(
-      'Linked List { 1 -> 2 -> 3 -> undefined }'
+      'Doubly Linked List { undefined <- 1 <-> 2 <-> 3 -> undefined }'
     )
     expect(linkedList.size()).toBe(3)
   })
@@ -115,14 +131,17 @@ describe('LinkedList', () => {
     expect(linkedList.set(0, 3)).toBe(false)
     linkedList.addFirst(1)
     linkedList.addFirst(2)
-    expect(linkedList.toString()).toBe('Linked List { 2 -> 1 -> undefined }')
+    expect(linkedList.toString()).toBe(
+      'Doubly Linked List { undefined <- 2 <-> 1 -> undefined }'
+    )
     expect(linkedList.set(0, 3)).toBe(true)
-    expect(linkedList.head?.key).toBe(3)
-    expect(linkedList.toString()).toBe('Linked List { 3 -> 1 -> undefined }')
+    expect(linkedList.toString()).toBe(
+      'Doubly Linked List { undefined <- 3 <-> 1 -> undefined }'
+    )
     expect(linkedList.set(1, 5)).toBe(true)
-    expect(linkedList.head?.key).toBe(3)
-    expect(linkedList.head?.next?.key).toBe(5)
-    expect(linkedList.toString()).toBe('Linked List { 3 -> 5 -> undefined }')
+    expect(linkedList.toString()).toBe(
+      'Doubly Linked List { undefined <- 3 <-> 5 -> undefined }'
+    )
     expect(linkedList.set(2, 7)).toBe(false)
   })
 
@@ -151,7 +170,6 @@ describe('LinkedList', () => {
   })
 
   test('removeFirst', () => {
-    expect(linkedList.head).toBe(undefined)
     expect(linkedList.removeFirst()).toBe(undefined)
     expect(linkedList.toString()).toBe('')
     expect(linkedList.size()).toBe(0)
@@ -159,29 +177,36 @@ describe('LinkedList', () => {
     linkedList.addFirst(2)
     linkedList.addFirst(3)
     expect(linkedList.toString()).toBe(
-      'Linked List { 3 -> 2 -> 1 -> undefined }'
+      'Doubly Linked List { undefined <- 3 <-> 2 <-> 1 -> undefined }'
     )
     expect(linkedList.size()).toBe(3)
-    expect(linkedList.removeFirst()).toBe(3)
+    linkedList.removeFirst()
     expect(linkedList.head?.key).toBe(2)
+    expect(linkedList.head?.prev).toBe(undefined)
+    expect(linkedList.head?.next?.prev).toBe(linkedList.head)
     expect(linkedList.head?.next?.key).toBe(1)
     expect(linkedList.head?.next?.next).toBe(undefined)
-    expect(linkedList.toString()).toBe('Linked List { 2 -> 1 -> undefined }')
+    expect(linkedList.toString()).toBe(
+      'Doubly Linked List { undefined <- 2 <-> 1 -> undefined }'
+    )
     expect(linkedList.size()).toBe(2)
-    expect(linkedList.removeFirst()).toBe(2)
+    linkedList.removeFirst()
     expect(linkedList.head?.key).toBe(1)
+    expect(linkedList.head?.prev).toBe(undefined)
     expect(linkedList.head?.next).toBe(undefined)
-    expect(linkedList.toString()).toBe('Linked List { 1 -> undefined }')
+    expect(linkedList.toString()).toBe(
+      'Doubly Linked List { undefined <- 1 -> undefined }'
+    )
     expect(linkedList.size()).toBe(1)
-    expect(linkedList.removeFirst()).toBe(1)
+    linkedList.removeFirst()
     expect(linkedList.head).toBe(undefined)
+    expect(linkedList.head?.key).toBe(undefined)
     expect(linkedList.toString()).toBe('')
     expect(linkedList.size()).toBe(0)
     expect(linkedList.removeFirst()).toBe(undefined)
   })
 
   test('removeLast', () => {
-    expect(linkedList.head).toBe(undefined)
     expect(linkedList.removeLast()).toBe(undefined)
     expect(linkedList.toString()).toBe('')
     expect(linkedList.size()).toBe(0)
@@ -189,29 +214,36 @@ describe('LinkedList', () => {
     linkedList.addFirst(2)
     linkedList.addFirst(3)
     expect(linkedList.toString()).toBe(
-      'Linked List { 3 -> 2 -> 1 -> undefined }'
+      'Doubly Linked List { undefined <- 3 <-> 2 <-> 1 -> undefined }'
     )
     expect(linkedList.size()).toBe(3)
     expect(linkedList.removeLast()).toBe(1)
     expect(linkedList.head?.key).toBe(3)
+    expect(linkedList.head?.prev).toBe(undefined)
+    expect(linkedList.head?.next?.prev).toBe(linkedList.head)
     expect(linkedList.head?.next?.key).toBe(2)
     expect(linkedList.head?.next?.next).toBe(undefined)
-    expect(linkedList.toString()).toBe('Linked List { 3 -> 2 -> undefined }')
+    expect(linkedList.toString()).toBe(
+      'Doubly Linked List { undefined <- 3 <-> 2 -> undefined }'
+    )
     expect(linkedList.size()).toBe(2)
     expect(linkedList.removeLast()).toBe(2)
     expect(linkedList.head?.key).toBe(3)
+    expect(linkedList.head?.prev).toBe(undefined)
     expect(linkedList.head?.next).toBe(undefined)
-    expect(linkedList.toString()).toBe('Linked List { 3 -> undefined }')
+    expect(linkedList.toString()).toBe(
+      'Doubly Linked List { undefined <- 3 -> undefined }'
+    )
     expect(linkedList.size()).toBe(1)
     expect(linkedList.removeLast()).toBe(3)
     expect(linkedList.head).toBe(undefined)
+    expect(linkedList.head?.key).toBe(undefined)
     expect(linkedList.toString()).toBe('')
     expect(linkedList.size()).toBe(0)
     expect(linkedList.removeLast()).toBe(undefined)
   })
 
   test('removeKey', () => {
-    expect(linkedList.head).toBe(undefined)
     expect(linkedList.removeKey(1)).toBe(false)
     expect(linkedList.toString()).toBe('')
     expect(linkedList.size()).toBe(0)
@@ -219,39 +251,36 @@ describe('LinkedList', () => {
     linkedList.addFirst(2)
     linkedList.addFirst(3)
     expect(linkedList.toString()).toBe(
-      'Linked List { 3 -> 2 -> 1 -> undefined }'
+      'Doubly Linked List { undefined <- 3 <-> 2 <-> 1 -> undefined }'
     )
     expect(linkedList.size()).toBe(3)
     expect(linkedList.removeKey(2)).toBe(true)
     expect(linkedList.head?.key).toBe(3)
+    expect(linkedList.head?.prev).toBe(undefined)
+    expect(linkedList.head?.next?.prev).toBe(linkedList.head)
     expect(linkedList.head?.next?.key).toBe(1)
     expect(linkedList.head?.next?.next).toBe(undefined)
-    expect(linkedList.toString()).toBe('Linked List { 3 -> 1 -> undefined }')
+    expect(linkedList.toString()).toBe(
+      'Doubly Linked List { undefined <- 3 <-> 1 -> undefined }'
+    )
     expect(linkedList.size()).toBe(2)
     expect(linkedList.removeKey(5)).toBe(false)
     expect(linkedList.head?.key).toBe(3)
+    expect(linkedList.head?.prev).toBe(undefined)
+    expect(linkedList.head?.next?.prev).toBe(linkedList.head)
     expect(linkedList.head?.next?.key).toBe(1)
     expect(linkedList.head?.next?.next).toBe(undefined)
-    expect(linkedList.toString()).toBe('Linked List { 3 -> 1 -> undefined }')
+    expect(linkedList.toString()).toBe(
+      'Doubly Linked List { undefined <- 3 <-> 1 -> undefined }'
+    )
     expect(linkedList.size()).toBe(2)
     expect(linkedList.removeKey(3)).toBe(true)
     expect(linkedList.head?.key).toBe(1)
+    expect(linkedList.head?.prev).toBe(undefined)
     expect(linkedList.head?.next).toBe(undefined)
-    expect(linkedList.toString()).toBe('Linked List { 1 -> undefined }')
+    expect(linkedList.toString()).toBe(
+      'Doubly Linked List { undefined <- 1 -> undefined }'
+    )
     expect(linkedList.size()).toBe(1)
-  })
-
-  test('clear', () => {
-    expect(linkedList.size()).toBe(0)
-    expect(linkedList.isEmpty()).toBe(true)
-    expect(linkedList.head).toBe(undefined)
-    linkedList.addFirst(1)
-    linkedList.addFirst(2)
-    expect(linkedList.size()).toBe(2)
-    expect(linkedList.isEmpty()).toBe(false)
-    linkedList.clear()
-    expect(linkedList.size()).toBe(0)
-    expect(linkedList.isEmpty()).toBe(true)
-    expect(linkedList.head).toBe(undefined)
   })
 })

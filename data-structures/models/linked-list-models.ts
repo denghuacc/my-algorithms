@@ -7,3 +7,13 @@ export class KVNode<K, V> extends Node<K> {
     super(key, next)
   }
 }
+
+export class DoublyNode<K> extends Node<K> {
+  constructor(
+    public key: K,
+    public next?: DoublyNode<K>,
+    public prev?: DoublyNode<K>
+  ) {
+    super(key, next)
+  }
+}

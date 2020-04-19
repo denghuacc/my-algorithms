@@ -10,23 +10,23 @@ import { Node } from '../models/linked-list-models'
  */
 export default class LinkedList<T> {
   head: Node<T> | undefined
-  size: number = 0
+  protected count: number = 0
 
   constructor() {}
 
   // 获取链表中值的数量
-  getSize() {
-    return this.size
+  size() {
+    return this.count
   }
 
   // 返回链表是否为空
   isEmpty() {
-    return this.size === 0
+    return this.size() === 0
   }
 
   // 在链表的 index 位置添加值
-  add(index: number, key: T) {
-    if (index >= 0 && index <= this.size) {
+  protected add(index: number, key: T) {
+    if (index >= 0 && index <= this.count) {
       const node = new Node(key)
 
       if (index === 0) {
@@ -40,7 +40,7 @@ export default class LinkedList<T> {
           previous.next = node
         }
       }
-      this.size++
+      this.count++
       return true
     }
     return false
@@ -53,12 +53,12 @@ export default class LinkedList<T> {
 
   // 在表尾添加值 O(n)
   addLast(key: T) {
-    this.add(this.size, key)
+    this.add(this.count, key)
   }
 
   // 获取链表第 index 个位置的节点
-  get(index: number): Node<T> | undefined {
-    if (index >= 0 && index <= this.size) {
+  protected get(index: number): Node<T> | undefined {
+    if (index >= 0 && index <= this.count) {
       let node = this.head
       for (let i = 0; i < index && node != null; i++) {
         node = node.next
@@ -75,12 +75,12 @@ export default class LinkedList<T> {
 
   // 获取链表的最后一个值 O(n)
   getLast() {
-    return this.get(this.size - 1)?.key
+    return this.get(this.count - 1)?.key
   }
 
   // 设置链表第 index 个位置的值
   set(index: number, key: T) {
-    if (index >= 0 && index < this.size) {
+    if (index >= 0 && index < this.count) {
       const node = this.get(index)
       if (node != null) {
         node.key = key
@@ -88,6 +88,20 @@ export default class LinkedList<T> {
       }
     }
     return false
+  }
+
+  // 查找元素 key 的索引
+  indexOf(key: T) {
+    let current = this.head
+
+    for (let i = 0; i < this.size() && current != null; i++) {
+      if (current.key === key) {
+        return i
+      }
+      current = current.next
+    }
+
+    return -1
   }
 
   // 查找链表中是否有某个值 O(1) ~ O(n)
@@ -108,22 +122,22 @@ export default class LinkedList<T> {
   }
 
   // 删除链表第 index 个位置的值，返回删除的元素
-  remove(index: number) {
-    if (index >= 0 && index < this.size) {
+  protected remove(index: number) {
+    if (index >= 0 && index < this.count) {
       let current = this.head
-      if (current == null) {
-        return undefined
-      }
+
+      if (current == null) return undefined
+
       if (index === 0) {
         this.head = current.next
       } else {
         const previous = this.get(index - 1)
         if (previous != null) {
           current = previous.next
-          previous.next = current!.next
+          previous.next = current?.next
         }
       }
-      this.size--
+      this.count--
       return current?.key
     }
     return undefined
@@ -136,47 +150,58 @@ export default class LinkedList<T> {
 
   // 删除链表的最后一个值 O(n)
   removeLast() {
-    return this.remove(this.size - 1)
+    return this.remove(this.count - 1)
   }
 
-  // 从链表中删除某个值 key 只删除前面的第一个值
-  removeVal(key: T) {
+  // 从链表中删除某个元素 key 只删除前面的第一个值
+  // 也可以使用查找元素的索引，然后根据索引删除
+  removeKey(key: T) {
     let current = this.head
     let delNode
 
-    if (current == null) return undefined
+    if (current == null) return false
 
     if (current.key === key) {
       delNode = current
       this.head = delNode.next
-      this.size--
     } else {
       while (current.next != null) {
         if (current.next.key === key) {
           delNode = current.next
           const previous = current
           previous.next = current.next.next
-          this.size--
           break
         }
         current = current.next
       }
     }
-    return delNode?.key
+
+    if (delNode?.key == null) {
+      return false
+    } else {
+      this.count--
+      return true
+    }
   }
 
-  // 转成字符串 -> 打印链表
-  print() {
-    let cur = this.head,
-      str = ''
+  clear() {
+    this.head = undefined
+    this.count = 0
+  }
+
+  toString() {
+    if (this.isEmpty()) return ''
+
+    let current = this.head
+    let str = 'Linked List { '
 
     // 遍历节点
-    while (cur != null) {
-      str += cur.key + ' -> '
-      cur = cur.next
+    while (current != null) {
+      str += current.key + ' -> '
+      current = current.next
     }
 
-    str += 'undefined'
+    str += 'undefined }'
     return str
   }
 }
