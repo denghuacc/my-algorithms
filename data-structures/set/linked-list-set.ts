@@ -13,7 +13,7 @@ export default class LinkedListSet<T> {
 
   // 获取集合的元素个数 O(1)
   get size() {
-    return this.list.getSize()
+    return this.list.size()
   }
 
   // 添加元素 O(n)
@@ -31,9 +31,7 @@ export default class LinkedListSet<T> {
 
   // 删除元素 O(n)
   delete(val: T) {
-    if (!this.has(val)) return false
-    this.list.removeVal(val)
-    return true
+    return this.list.removeKey(val)
   }
 
   clear() {
