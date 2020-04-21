@@ -11,7 +11,7 @@ export default class PriorityQueue<T> {
     this.maxHeap = new MaxHeap()
   }
 
-  getSize() {
+  size() {
     return this.maxHeap.size()
   }
 
@@ -29,11 +29,16 @@ export default class PriorityQueue<T> {
   }
 
   // 队列最前面的一直都是最大值
-  getFront() {
+  peek() {
     return this.maxHeap.findMax()
   }
 
+  clear() {
+    this.maxHeap = new MaxHeap()
+  }
+
   print() {
+    if (this.isEmpty()) return ''
     let str = 'PriorityQueue: front [ '
     str += this.maxHeap.data.join(', ')
     str += ' ]'
