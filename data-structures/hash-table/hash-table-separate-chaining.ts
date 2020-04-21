@@ -1,15 +1,16 @@
 import { ValuePair } from '../models/value-pair'
 import { defaultToString } from '../util'
+import LinkedList from '../linked-list/linked-list'
 
 interface Table<K, V> {
-  [key: string]: ValuePair<K, V>
+  [key: string]: LinkedList<ValuePair<K, V>>
 }
 
 /**
- * @name HashTable 哈希表
- * @description 哈希表的作用是尽可能快地在数据结构中找到一个值
+ * @name HashTableSeparateChaining 哈希表
+ * @description 使用链表分离解决哈希冲突
  */
-export default class HashTable<K, V> {
+export default class HashTableSeparateChaining<K, V> {
   table: Table<K, V> = {}
 
   constructor() {}
@@ -18,7 +19,7 @@ export default class HashTable<K, V> {
     return this.loseloseHashCode(key)
   }
 
-  // 散列方法一
+  // 散列方法
   private loseloseHashCode(key: K) {
     if (typeof key === 'number') return key
     const tableKey = defaultToString(key)
@@ -29,21 +30,14 @@ export default class HashTable<K, V> {
     return hash % 37 // 取余，37 是随机素数
   }
 
-  // 散列方法二  更好的散列生成函数
-  // private djb2HashCode(key: K) {
-  //   const tableKey = defaultToString(key)
-  //   let hash = 5381 // 社区建议使用这个数值
-  //   for (let i = 0; i < tableKey.length; i++) {
-  //     hash += hash * 33 + tableKey.charCodeAt(i)
-  //   }
-  //   return hash % 1013 // 取余，取质数 1013 即散列表数量若为 1000 左右时比较合适（稍大）
-  // }
-
   // 增加值
   put(key: K, val: V) {
     if (key != null && val != null) {
       const position = this.hashCode(key)
-      this.table[position] = new ValuePair(key, val)
+      if (this.table[position] == null) {
+        this.table[position] = new LinkedList<ValuePair<K, V>>() // 链表存储
+      }
+      this.table[position].addLast(new ValuePair(key, val))
       return true
     }
     return false
@@ -52,17 +46,35 @@ export default class HashTable<K, V> {
   // 获取值
   get(key: K) {
     const position = this.hashCode(key)
-    const valuePair = this.table[position]
-    return valuePair == null ? undefined : valuePair.val
+    const linkedList = this.table[position]
+    if (linkedList != null && !linkedList.isEmpty()) {
+      let current = linkedList.head
+      while (current != null) {
+        if (current.key.key === key) {
+          return current.key.val
+        }
+        current = current.next
+      }
+    }
+    return undefined
   }
 
   // 移除值
   remove(key: K) {
     const position = this.hashCode(key)
-    const valuePair = this.table[position]
-    if (valuePair != null) {
-      delete this.table[position]
-      return true
+    const linkedList = this.table[position]
+    if (linkedList != null && !linkedList.isEmpty()) {
+      let current = linkedList.head
+      while (current != null) {
+        if (current.key.key === key) {
+          linkedList.removeKey(current.key)
+          if (linkedList.isEmpty()) {
+            delete this.table[position]
+          }
+          return true
+        }
+        current = current.next
+      }
     }
     return false
   }
@@ -72,7 +84,11 @@ export default class HashTable<K, V> {
   }
 
   size() {
-    return Object.keys(this.table).length
+    let count = 0
+    Object.values(this.table).forEach(
+      linkedList => (count += linkedList.size())
+    )
+    return count
   }
 
   isEmpty() {
