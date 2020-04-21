@@ -1,15 +1,16 @@
 import SegmentTree from '../segment-tree'
-let segmentTree: SegmentTree<number>, arr: Array<number>
 
 describe('SegmentTree', () => {
+  let segmentTree: SegmentTree<number>, arr: Array<number>
+
   beforeEach(() => {
     arr = [2, 3, -1, 4, -2, 0, 5, 6]
     const sum = (a: number, b: number) => a + b
     segmentTree = new SegmentTree(arr, sum)
   })
 
-  test('gitSize', () => {
-    expect(segmentTree.getSize()).toBe(8)
+  test('size', () => {
+    expect(segmentTree.size()).toBe(8)
   })
 
   test('get', () => {

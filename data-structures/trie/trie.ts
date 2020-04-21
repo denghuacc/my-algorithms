@@ -5,15 +5,15 @@ import { Node } from '../models/trie-models'
  */
 export default class Trie<K, V> {
   root: Node<K, V>
-  size: number
+  count: number
 
   constructor() {
     this.root = new Node()
-    this.size = 0
+    this.count = 0
   }
 
-  getSize() {
-    return this.size
+  size() {
+    return this.count
   }
 
   // 添加单词
@@ -30,7 +30,7 @@ export default class Trie<K, V> {
 
     if (!cur.isWord) {
       cur.isWord = true
-      this.size++
+      this.count++
     }
   }
 

@@ -13,7 +13,7 @@ export default class SegmentTree<T> {
     this.array = [...arr] // 数组数据
     this.tree = [] // 线段树数据
     this.merge = merge // 融合函数 -> 可以是求区间值的和、求最大值、求最小值
-    this._buildSegmentTree(0, 0, this.getSize() - 1)
+    this._buildSegmentTree(0, 0, this.size() - 1)
   }
 
   // 在 treeIndex 的位置创建表示区间 [start...end] 的线段树
@@ -38,12 +38,12 @@ export default class SegmentTree<T> {
     )
   }
 
-  getSize() {
+  size() {
     return this.array.length
   }
 
   get(index: number) {
-    if (index >= 0 && index < this.getSize()) {
+    if (index >= 0 && index < this.size()) {
       return this.array[index]
     }
   }
@@ -62,14 +62,14 @@ export default class SegmentTree<T> {
   query(queryL: number, queryR: number) {
     if (
       queryL < 0 ||
-      queryL >= this.getSize() ||
+      queryL >= this.size() ||
       queryR < 0 ||
-      queryR >= this.getSize() ||
+      queryR >= this.size() ||
       queryL > queryR
     ) {
       throw new Error('Index is Illegal.')
     }
-    return this._query(0, 0, this.getSize() - 1, queryL, queryR)
+    return this._query(0, 0, this.size() - 1, queryL, queryR)
   }
 
   // 在以 treeIndex 为根的线段树中 [start...end] 的范围里，搜索区间 [queryL...queryR] 的值
@@ -108,9 +108,9 @@ export default class SegmentTree<T> {
 
   // 将 index 位置的值，设置为 val
   set(index: number, val: T) {
-    if (index >= 0 && index < this.getSize()) {
+    if (index >= 0 && index < this.size()) {
       this.array[index] = val
-      this._set(0, 0, this.getSize() - 1, index, val)
+      this._set(0, 0, this.size() - 1, index, val)
     }
   }
 
