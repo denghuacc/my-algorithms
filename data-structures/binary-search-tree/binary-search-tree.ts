@@ -9,16 +9,16 @@ import { Node } from '../models/tree-models'
  */
 export default class BST<T> {
   root: Node<T> | undefined
-  size: number = 0
+  count: number = 0
 
   constructor() {}
 
-  getSize() {
-    return this.size
+  size() {
+    return this.count
   }
 
   isEmpty() {
-    return this.size === 0
+    return this.size() === 0
   }
 
   // 向二分搜索树中添加值
@@ -28,7 +28,7 @@ export default class BST<T> {
 
   private addNode(root: Node<T>, key: T): Node<T> {
     if (root == null) {
-      this.size++
+      this.count++
       return new Node(key)
     }
 
@@ -59,11 +59,11 @@ export default class BST<T> {
   }
 
   // 二分搜索树的前序遍历 -> 深度优先搜索 DFS
-  preOrder(arr: Array<T> = []) {
+  preOrder(arr: T[] = []) {
     this.preOrderTree(this.root!, arr)
   }
 
-  private preOrderTree(root: Node<T>, arr: Array<T> = []) {
+  private preOrderTree(root: Node<T>, arr: T[] = []) {
     if (root != null) {
       arr.push(root.key)
       this.preOrderTree(root.left!, arr)
@@ -71,33 +71,29 @@ export default class BST<T> {
     }
   }
 
-  // 二分搜索树的非递归前序遍历，需要借助栈 Stack 实现
-  preOrderNR(arr: Array<T> = []) {
+  // 二分搜索树的前序迭代遍历
+  preOrderIteration(arr: T[] = []) {
     if (this.root != null) {
-      const stack: Array<Node<T>> = []
+      const stack: Node<T>[] = []
       stack.push(this.root)
 
       while (stack.length) {
         let curNode = stack.pop()
         arr.push(curNode!.key)
 
-        if (curNode!.right != null) {
-          stack.push(curNode!.right) // 右子节点树先入栈
-        }
-
-        if (curNode!.left != null) {
-          stack.push(curNode!.left)
-        }
+        // 先 right 后 left 后进先出
+        if (curNode!.right != null) stack.push(curNode!.right)
+        if (curNode!.left != null) stack.push(curNode!.left)
       }
     }
   }
 
   // 二分搜索树的中序遍历 -> 数值升序排列
-  inOrder(arr: Array<T> = []) {
+  inOrder(arr: T[] = []) {
     this.inOrderTree(this.root!, arr)
   }
 
-  private inOrderTree(root: Node<T>, arr: Array<T> = []) {
+  private inOrderTree(root: Node<T>, arr: T[] = []) {
     if (root != null) {
       this.inOrderTree(root.left!, arr)
       arr.push(root.key)
@@ -105,12 +101,30 @@ export default class BST<T> {
     }
   }
 
+  // 二分搜索树的中序迭代遍历
+  inOrderIteration(arr: T[] = []) {
+    if (this.root != null) {
+      const stack: Node<T>[] = []
+      let curNode = this.root
+
+      while (curNode != null || stack.length !== 0) {
+        while (curNode != null) {
+          stack.push(curNode)
+          curNode = curNode.left!
+        }
+        curNode = stack.pop()!
+        arr.push(curNode.key)
+        curNode = curNode.right!
+      }
+    }
+  }
+
   // 二分搜索树的后序遍历
-  postOrder(arr: Array<T> = []) {
+  postOrder(arr: T[] = []) {
     this.postOrderTree(this.root!, arr)
   }
 
-  private postOrderTree(root: Node<T>, arr: Array<T> = []) {
+  private postOrderTree(root: Node<T>, arr: T[] = []) {
     if (root != null) {
       this.postOrderTree(root.left!, arr)
       this.postOrderTree(root.right!, arr)
@@ -118,10 +132,27 @@ export default class BST<T> {
     }
   }
 
-  // 二分搜索树的层序遍历，需要借助队列 Queue 实现 -> 广度优先搜索 BFS
-  levelOrder(arr: Array<T> = []) {
+  // 二分搜索树的后序迭代遍历 -> 逆前序
+  postOrderIteration(arr: T[] = []) {
     if (this.root != null) {
-      const queue: Array<Node<T>> = []
+      const stack: Node<T>[] = []
+      stack.push(this.root)
+
+      while (stack.length !== 0) {
+        let curNode = stack.pop()
+        arr.unshift(curNode!.key) // 与 push 相反
+
+        // 先 left 后 right
+        if (curNode?.left != null) stack.push(curNode.left)
+        if (curNode?.right != null) stack.push(curNode.right)
+      }
+    }
+  }
+
+  // 二分搜索树的层序遍历 -> 广度优先搜索 BFS
+  levelOrder(arr: T[] = []) {
+    if (this.root != null) {
+      const queue: Node<T>[] = []
       queue.push(this.root)
 
       while (queue.length) {
@@ -172,7 +203,7 @@ export default class BST<T> {
     if (root.left == null) {
       const rightNode = root.right
       root.right = undefined
-      this.size--
+      this.count--
       return rightNode
     }
 
@@ -191,7 +222,7 @@ export default class BST<T> {
     if (root.right == null) {
       const leftNode = root.left
       root.left = undefined
-      this.size--
+      this.count--
       return leftNode
     }
 
@@ -220,7 +251,7 @@ export default class BST<T> {
       if (root.left == null) {
         const rightNode = root.right
         root.right = undefined
-        this.size--
+        this.count--
         return rightNode
       }
 
@@ -228,7 +259,7 @@ export default class BST<T> {
       if (root.right == null) {
         const leftNode = root.left
         root.left = undefined
-        this.size--
+        this.count--
         return leftNode
       }
 

@@ -11,13 +11,13 @@ describe('RedBlackTree', () => {
     rbt.add(88, '88')
   })
 
-  test('getSize', () => {
-    expect(rbt.getSize()).toBe(5)
+  test('size', () => {
+    expect(rbt.size()).toBe(5)
     rbt.add(17, '17')
-    expect(rbt.getSize()).toBe(6)
+    expect(rbt.size()).toBe(6)
     rbt.remove(45)
     rbt.remove(16)
-    expect(rbt.getSize()).toBe(4)
+    expect(rbt.size()).toBe(4)
   })
 
   test('isEmpty', () => {
@@ -43,12 +43,6 @@ describe('RedBlackTree', () => {
   test('preOrder', () => {
     const arr: Array<number> = []
     rbt.preOrder(arr)
-    expect(arr).toEqual([23, 16, 7, 88, 45])
-  })
-
-  test('preOrderNR', () => {
-    const arr: Array<number> = []
-    rbt.preOrderNR(arr)
     expect(arr).toEqual([23, 16, 7, 88, 45])
   })
 

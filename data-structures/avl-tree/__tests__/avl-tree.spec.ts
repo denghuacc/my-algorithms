@@ -11,13 +11,13 @@ describe('AVLTree', () => {
     avl.add(88, '88')
   })
 
-  test('getSize', () => {
-    expect(avl.getSize()).toBe(5)
+  test('size', () => {
+    expect(avl.size()).toBe(5)
     avl.add(17, '17')
-    expect(avl.getSize()).toBe(6)
+    expect(avl.size()).toBe(6)
     avl.remove(45)
     avl.remove(16)
-    expect(avl.getSize()).toBe(4)
+    expect(avl.size()).toBe(4)
   })
 
   test('isEmpty', () => {
@@ -43,12 +43,6 @@ describe('AVLTree', () => {
   test('preOrder', () => {
     const arr: Array<number> = []
     avl.preOrder(arr)
-    expect(arr).toEqual([23, 16, 7, 45, 88])
-  })
-
-  test('preOrderNR', () => {
-    const arr: Array<number> = []
-    avl.preOrderNR(arr)
     expect(arr).toEqual([23, 16, 7, 45, 88])
   })
 

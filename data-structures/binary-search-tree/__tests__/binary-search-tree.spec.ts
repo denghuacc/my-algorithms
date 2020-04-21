@@ -11,13 +11,13 @@ describe('BST', () => {
     bst.add(88)
   })
 
-  test('getSize', () => {
-    expect(bst.getSize()).toBe(5)
+  test('size', () => {
+    expect(bst.size()).toBe(5)
     bst.add(17)
-    expect(bst.getSize()).toBe(6)
+    expect(bst.size()).toBe(6)
     bst.remove(45)
     bst.remove(16)
-    expect(bst.getSize()).toBe(4)
+    expect(bst.size()).toBe(4)
   })
 
   test('isEmpty', () => {
@@ -41,31 +41,43 @@ describe('BST', () => {
   })
 
   test('preOrder', () => {
-    const arr: Array<number> = []
+    const arr: number[] = []
     bst.preOrder(arr)
     expect(arr).toEqual([23, 16, 7, 45, 88])
   })
 
-  test('preOrderNR', () => {
-    const arr: Array<number> = []
-    bst.preOrderNR(arr)
+  test('preOrderIteration', () => {
+    const arr: number[] = []
+    bst.preOrderIteration(arr)
     expect(arr).toEqual([23, 16, 7, 45, 88])
   })
 
   test('inOrder', () => {
-    const arr: Array<number> = []
+    const arr: number[] = []
     bst.inOrder(arr)
     expect(arr).toEqual([7, 16, 23, 45, 88])
   })
 
+  test('inOrderIteration', () => {
+    const arr: number[] = []
+    bst.inOrderIteration(arr)
+    expect(arr).toEqual([7, 16, 23, 45, 88])
+  })
+
   test('postOrder', () => {
-    const arr: Array<number> = []
+    const arr: number[] = []
     bst.postOrder(arr)
     expect(arr).toEqual([7, 16, 88, 45, 23])
   })
 
+  test('postOrderIteration', () => {
+    const arr: number[] = []
+    bst.postOrderIteration(arr)
+    expect(arr).toEqual([7, 16, 88, 45, 23])
+  })
+
   test('levelOrder', () => {
-    const arr: Array<number> = []
+    const arr: number[] = []
     bst.levelOrder(arr)
     expect(arr).toEqual([23, 16, 45, 7, 88])
   })

@@ -8,16 +8,16 @@ import { KVNode as Node } from '../models/tree-models'
  */
 export default class AVLTree<K, V> {
   root: Node<K, V> | undefined
-  size: number = 0
+  count: number = 0
 
   constructor() {}
 
-  getSize() {
-    return this.size
+  size() {
+    return this.count
   }
 
   isEmpty() {
-    return this.size === 0
+    return this.size() === 0
   }
 
   // 判断该二叉树是否是一棵二分搜索树
@@ -43,28 +43,6 @@ export default class AVLTree<K, V> {
     arr.push(root.key)
     this.preOrderTree(root.left!, arr)
     this.preOrderTree(root.right!, arr)
-  }
-
-  // 树的非递归前序遍历，需要借助栈 Stack 实现
-  preOrderNR(arr: Array<K> = []) {
-    if (this.root == null) return
-
-    const stack: Array<Node<K, V>> = []
-    stack.push(this.root)
-
-    while (stack.length) {
-      let curNode = stack.pop()
-      // console.log(curNode.val)
-      arr.push(curNode!.key)
-
-      if (curNode!.right != null) {
-        stack.push(curNode!.right) // 右子节点树先入栈
-      }
-
-      if (curNode!.left != null) {
-        stack.push(curNode!.left)
-      }
-    }
   }
 
   // 二叉树的中序遍历
@@ -201,7 +179,7 @@ export default class AVLTree<K, V> {
 
   addNode(root: Node<K, V>, key: K, val: V) {
     if (root == null) {
-      this.size++
+      this.count++
       return new Node(key, val)
     }
 
@@ -299,7 +277,7 @@ export default class AVLTree<K, V> {
 
   // 寻找二分搜索树的最小元素
   min() {
-    if (this.size === 0) return
+    if (this.count === 0) return
     return this.minNode(this.root!).key
   }
 
@@ -310,7 +288,7 @@ export default class AVLTree<K, V> {
 
   // 寻找二分搜索树的最大元素
   max() {
-    if (this.size === 0) return
+    if (this.count === 0) return
     return this.maxNode(this.root!).key
   }
 
@@ -330,7 +308,7 @@ export default class AVLTree<K, V> {
     if (root.left == null) {
       const rightNode = root.right
       root.right = undefined
-      this.size--
+      this.count--
       return rightNode
     }
 
@@ -349,7 +327,7 @@ export default class AVLTree<K, V> {
     if (root.right == null) {
       const leftNode = root.left
       root.left = undefined
-      this.size--
+      this.count--
       return leftNode
     }
 
@@ -387,13 +365,13 @@ export default class AVLTree<K, V> {
       if (root.left == null) {
         const rightNode = root.right
         root.right = undefined
-        this.size--
+        this.count--
         // return rightNode
         retNode = rightNode
       } else if (root.right == null) {
         const leftNode = root.left
         root.left = undefined
-        this.size--
+        this.count--
         // return leftNode
         retNode = leftNode
       }
