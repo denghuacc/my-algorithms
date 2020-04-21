@@ -48,14 +48,15 @@ var inorderTraversal = function (root) {
   inOrder(root, ret)
   return ret
 
-  function inOrder(root, arr) {
-    if (root != null) {
-      if (root.left != null) inOrder(root.left, arr)
-      ret.push(root.val)
-      if (root.right != null) inOrder(root.right, arr)
+  function inOrder(node, arr) {
+    if (node != null) {
+      inOrder(node.left, arr)
+      ret.push(node.val)
+      inOrder(node.right, arr)
     }
   }
 }
+// @lc code=end
 
 // iteration
 var inorderTraversal = function (root) {
@@ -97,4 +98,3 @@ var inorderTraversal = function (root) {
   }
   return ret
 }
-// @lc code=end
