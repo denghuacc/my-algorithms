@@ -13,7 +13,7 @@ export default class AVLSet<T> {
 
   // 获取集合的元素个数 O(1)
   get size() {
-    return this.avl.getSize()
+    return this.avl.size()
   }
 
   // 添加元素 O(log2(n))

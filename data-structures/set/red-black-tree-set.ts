@@ -13,7 +13,7 @@ export default class RedBlackTreeSet<T> {
 
   // 获取集合的元素个数 O(1)
   get size() {
-    return this.rbt.getSize()
+    return this.rbt.size()
   }
 
   // 添加元素 O(log2(n))

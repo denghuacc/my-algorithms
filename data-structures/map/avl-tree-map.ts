@@ -13,7 +13,7 @@ export default class AVLMap<K, V> {
 
   // 查询元素数量 n(1)
   get size() {
-    return this.avl.getSize()
+    return this.avl.size()
   }
 
   // 设置值 n(log2(n))

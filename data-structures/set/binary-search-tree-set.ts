@@ -13,7 +13,7 @@ export default class BSTSet<T> {
 
   // 获取集合的元素数量 O(1)
   get size() {
-    return this.bst.getSize()
+    return this.bst.size()
   }
 
   // 添加元素 O(log2(n))
