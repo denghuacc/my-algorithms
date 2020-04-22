@@ -68,6 +68,7 @@
  * @param {number[]} nums
  * @param {number} val
  * @return {number}
+ * API O(N)/O(1)
  */
 var removeElement = function (nums, val) {
   for (let i = 0; i < nums.length; i++) {
@@ -76,7 +77,35 @@ var removeElement = function (nums, val) {
       i--
     }
   }
-
   return nums.length
+}
+
+// 双指针 - 拷贝覆盖 O(N)/O(1)
+var removeElement = function (nums, val) {
+  let i = 0
+  for (let j = 0; j < nums.length; j++) {
+    if (nums[j] !== val) {
+      nums[i] = nums[j]
+      i++
+    }
+  }
+  return i
+}
+
+// 双指针 - 交换移除 O(N)/O(1)
+var removeElement = function (nums, val) {
+  let i = 0
+  let n = nums.length
+
+  while (i < n) {
+    if (nums[i] === val) {
+      nums[i] = nums[n - 1]
+      n--
+    } else {
+      i++
+    }
+  }
+
+  return n
 }
 // @lc code=end

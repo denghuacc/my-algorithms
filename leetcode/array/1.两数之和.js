@@ -30,6 +30,7 @@
  * @param {number[]} nums
  * @param {number} target
  * @return {number[]}
+ * 暴力法 O(N^2)/O(1)
  */
 var twoSum = function (nums, target) {
   for (let i = 0; i < nums.length - 1; i++) {
@@ -49,6 +50,35 @@ var twoSum = function (nums, target) {
       return [nums.indexOf(target - last), nums.length]
     }
     i--
+  }
+}
+
+// 两遍哈希表 O(N)/O(N)
+var twoSum = function (nums, target) {
+  const map = new Map()
+
+  for (let i = 0; i < nums.length; i++) {
+    map.set(nums[i], i)
+  }
+
+  for (let i = 0; i < nums.length; i++) {
+    const complement = target - nums[i]
+    if (map.has(complement) && map.get(complement) !== i) {
+      return [i, map.get(complement)]
+    }
+  }
+}
+
+// 一遍哈希表 O(N)/O(N)
+var twoSum = function (nums, target) {
+  const map = new Map()
+
+  for (let i = 0; i < nums.length; i++) {
+    const complement = target - nums[i]
+    if (map.has(complement)) {
+      return [map.get(complement), i]
+    }
+    map.set(nums[i], i)
   }
 }
 // @lc code=end

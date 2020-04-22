@@ -43,17 +43,18 @@
  * @param {number[]} nums2
  * @param {number} n
  * @return {void} Do not return anything, modify nums1 in-place instead.
+ * O((n+m)log(n+m))/O(1)
  */
 var merge = function (nums1, m, nums2, n) {
   nums1.splice(m, n, ...nums2)
   nums1.sort((a, b) => a - b)
 }
 
-// 双指针
+// 双指针 O(n+m)/O(1)
 var merge = function (nums1, m, nums2, n) {
-  let i = m - 1,
-    j = n - 1,
-    k = m + n - 1
+  let i = m - 1
+  let j = n - 1
+  let k = m + n - 1
   while (i >= 0 && j >= 0) {
     if (nums1[i] > nums2[j]) {
       nums1[k] = nums1[i]

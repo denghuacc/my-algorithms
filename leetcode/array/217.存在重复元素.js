@@ -40,12 +40,14 @@
 /**
  * @param {number[]} nums
  * @return {boolean}
+ * 语言特性
  */
 var containsDuplicate = function (nums) {
   const NoneRepeatNums = [...new Set(nums)]
   return nums.length !== NoneRepeatNums.length
 }
 
+// 排序 O(N log N)/O(1)
 var containsDuplicate = function (nums) {
   const sortedNums = nums.sort((a, b) => a - b)
   for (let i = 0; i < nums.length; i++) {
@@ -54,6 +56,7 @@ var containsDuplicate = function (nums) {
   return false
 }
 
+// 集合 O(N)/O(N)
 var containsDuplicate = function (nums) {
   const set = new Set()
   for (let i = 0; i < nums.length; i++) {

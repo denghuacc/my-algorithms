@@ -33,6 +33,7 @@
 /**
  * @param {number[]} nums
  * @return {void} Do not return anything, modify nums in-place instead.
+ * O(N)/O(1)
  */
 var moveZeroes = function (nums) {
   let point = 0
@@ -45,10 +46,11 @@ var moveZeroes = function (nums) {
   return nums
 }
 
+// 双指针 O(N)/O(1)
 var moveZeroes = function (nums) {
   let point = 0
   for (let i = 0; i < nums.length; i++) {
-    if (!nums[i]) {
+    if (nums[i] !== 0) {
       nums[point++] = nums[i]
     }
   }

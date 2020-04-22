@@ -42,15 +42,17 @@
  * @param {number[]} nums1
  * @param {number[]} nums2
  * @return {number}
+ * ???
  */
 var findMedianSortedArrays = function (nums1, nums2) {
-  let len1 = nums1.length,
-    len2 = nums2.length
+  let len1 = nums1.length
+  let len2 = nums2.length
   let mid = (len1 + len2) >> 1
-  let i = 0,
-    j = 0,
-    cur
-  let n1, n2
+  let i = 0
+  let j = 0
+  let cur
+  let n1
+  let n2
   while (i < len1 || j < len2) {
     if (j === len2 || nums1[i] < nums2[j]) {
       cur = nums1[i]

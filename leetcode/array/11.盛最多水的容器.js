@@ -37,16 +37,17 @@
 /**
  * @param {number[]} height
  * @return {number}
- * 双指针
+ * 双指针 O(N)/O(1)
  */
 var maxArea = function (height) {
   let l = 0
   let r = height.length - 1
   let max = 0
   while (l < r) {
-    const area = Math.min(height[l], height[r]) * (r - l)
+    const area = Math.min(height[l], height[r]) * (r - l) // 高 * 宽
     max = Math.max(max, area)
 
+    // 改变最短高度
     if (height[l] <= height[r]) {
       ++l
     } else {
@@ -56,12 +57,12 @@ var maxArea = function (height) {
   return max
 }
 
-// 双遍历
+// 暴力法 O(N^2)/O(1)
 var maxArea = function (height) {
   let ret = 0
   for (let i = 0; i < height.length - 1; i++) {
     for (let j = i + 1; j < height.length; j++) {
-      let max = (j - i) * Math.min(height[i], height[j])
+      let max = Math.min(height[i], height[j]) * (j - i) // 高 * 宽
       if (max > ret) {
         ret = max
       }

@@ -42,6 +42,7 @@
  * 情况一举例 45 -> 46
  * 情况二举例 49 -> 50
  * 情况三举例 99 -> 100
+ * O(N)/O(1)
  */
 var plusOne = function (digits) {
   const len = digits.length

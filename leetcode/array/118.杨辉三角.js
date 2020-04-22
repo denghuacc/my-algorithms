@@ -37,6 +37,7 @@
 /**
  * @param {number} numRows
  * @return {number[][]}
+ * dp O(numRows^2)/O(numRows^2)
  */
 var generate = function (numRows) {
   let ret = []

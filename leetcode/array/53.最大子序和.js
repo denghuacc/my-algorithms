@@ -32,13 +32,14 @@
 /**
  * @param {number[]} nums
  * @return {number}
+ * 贪心算法 O(N)/O(1)
  */
 var maxSubArray = function (nums) {
   let ret = nums[0]
   let sum = 0
   for (const num of nums) {
     if (sum > 0) {
-      sum += num // 增益
+      sum += num // 增益累加
     } else {
       sum = num // 重新开始
     }
@@ -60,19 +61,17 @@ var maxSubArray = function (nums) {
   return ret
 }
 
-// 原地动态规划
+// 原地动态规划 O(N)/O(1)
 var maxSubArray = function (nums) {
   let ret = nums[0]
   for (let i = 1; i < nums.length; ++i) {
-    if (nums[i - 1] > 0) {
-      nums[i] += nums[i - 1]
-    }
+    if (nums[i - 1] > 0) nums[i] += nums[i - 1]
     ret = Math.max(ret, nums[i])
   }
   return ret
 }
 
-// 贪心法
+// 贪心算法 O(N)/O(1)
 var maxSubArray = function (nums) {
   let maxSum = (sum = nums[0])
   for (let i = 1; i < nums.length; ++i) {
