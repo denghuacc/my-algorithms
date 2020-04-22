@@ -19,5 +19,3 @@ mySetInterval(() => {
 setTimeout(() => {
   mySetInterval.clear()
 }, 5000)
-
-
