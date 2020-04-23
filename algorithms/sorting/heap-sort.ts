@@ -11,40 +11,55 @@
 // 除根节点外，任意节点 N 的父节点是 N/2；
 // 非叶子节点 N 的左子节点是 2N+1，右子节点是 2N+2。
 
-import { swap } from '../util'
+import { swap, defaultCompare, ICompareFunction, Compare } from '../util'
 
-export function heapSort<T>(array: Array<T>) {
+export function heapSort<T>(array: T[], compareFn = defaultCompare) {
   let size = array.length
-  buildHeap(array)
+  buildHeap(array, compareFn)
 
   while (size > 1) {
     size-- // 堆的 size 减 1， 此时把堆尾，同时也是堆的最大值取出来了。递归，再把剩下的值的最大值再取出来
     swap(array, 0, size) // 交换堆首和堆尾的值。使得堆尾变成了最大值。这时可能会丢失堆的属性，成为普通数组
-    heapify(array, size, 0) // 需要重新转换成堆
+    heapify(array, size, 0, compareFn) // 需要重新转换成堆
   }
 
   return array // 直到数组长度 === 1时，返回原数组
 }
 
-function buildHeap<T>(array: Array<T>) {
-  let size = array.length
+function buildHeap<T>(array: T[], compareFn: ICompareFunction<T>) {
   for (let i = Math.floor(array.length / 2); i >= 0; i--) {
-    heapify(array, size, i)
+    heapify(array, array.length, i, compareFn)
   }
 }
 
-function heapify<T>(array: Array<T>, size: number, i: number) {
-  let left = i * 2 + 1, // 左子节点
-    right = i * 2 + 2, // 右子节点
-    largest = i // 节点
+function heapify<T>(
+  array: T[],
+  size: number,
+  i: number,
+  compareFn: ICompareFunction<T>
+) {
+  let left = i * 2 + 1 // 左子节点
+  let right = i * 2 + 2 // 右子节点
+  let largest = i // 节点
 
   // 左右子节点比父节点大时，互换位置
-  if (left < size && array[left] > array[largest]) largest = left
-  if (right < size && array[right] > array[largest]) largest = right
+  if (
+    left < size &&
+    compareFn(array[left], array[largest]) === Compare.BIGGER_THAN
+  ) {
+    largest = left
+  }
+
+  if (
+    right < size &&
+    compareFn(array[right], array[largest]) === Compare.BIGGER_THAN
+  ) {
+    largest = right
+  }
 
   // 当最大的值不是根节点时，互换位置，保证根节点是最大值，然后重新转换成堆
   if (largest !== i) {
     swap(array, i, largest)
-    heapify(array, size, largest)
+    heapify(array, size, largest, compareFn)
   }
 }

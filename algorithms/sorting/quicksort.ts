@@ -9,64 +9,48 @@
 // 快速排序的复杂度为 O(n*log(n)) ，且它的性能通常比其他的复杂度为 O(n*log(n)) 的排序算法要好。
 // 和归并排序一样，快速排序也使用分治的方法，将原始数组分为较小的数组。
 
-import { swap } from '../util'
+import { swap, defaultCompare, ICompareFunction, Compare } from '../util'
 
-export function quickSort<T>(array: Array<T>, left?: number, right?: number) {
-  const len = array.length
-  let partitionIndex
-  ;(left = typeof left !== 'number' ? 0 : left),
-    (right = typeof right !== 'number' ? len - 1 : right)
+export function quickSort<T>(array: T[], compareFn = defaultCompare) {
+  return quick(array, 0, array.length - 1, compareFn)
+}
 
-  if (left < right) {
-    partitionIndex = partition(array, left, right) // 分区的索引值
-    quickSort(array, left, partitionIndex - 1) // 递归索引左边部分
-    quickSort(array, partitionIndex + 1, right) // 递归索引右边部分
+function quick<T>(
+  array: T[],
+  left: number,
+  right: number,
+  compareFn: ICompareFunction<T>
+) {
+  let index: number
+  if (array.length > 1) {
+    index = partition(array, left, right, compareFn)
+    if (left < index - 1) quick(array, left, index - 1, compareFn)
+    if (index < right) quick(array, index, right, compareFn)
   }
   return array
 }
 
 // 分区操作
-function partition<T>(array: Array<T>, left: number, right: number) {
-  let pivot = left, // 基准点，设置初始为 0
-    index = pivot + 1 // 开始遍历的索引
+function partition<T>(
+  array: T[],
+  left: number,
+  right: number,
+  compareFn: ICompareFunction<T>
+) {
+  let pivot = array[Math.floor((left + right) / 2)]
+  let i = left
+  let j = right
 
-  for (let i = index; i <= right; i++) {
-    if (array[i] < array[pivot]) {
-      swap(array, i, index)
-      index++
+  while (i <= j) {
+    while (compareFn(array[i], pivot) === Compare.LESS_THAN) i++
+    while (compareFn(array[j], pivot) === Compare.BIGGER_THAN) j--
+
+    if (i <= j) {
+      swap(array, i, j)
+      i++
+      j--
     }
   }
 
-  // 更新基准点的位置，基准点左边的值都小于它，右边的值都大于它
-  swap(array, pivot, index - 1)
-  return index - 1
-}
-
-export function quickSort2<T>(array: Array<T>, left?: number, right?: number) {
-  let len = array.length
-  ;(left = typeof left !== 'number' ? 0 : left),
-    (right = typeof right !== 'number' ? len - 1 : right)
-
-  if (left < right) {
-    const partitionIndex = partition2(array, left, right)
-    quickSort2(array, left, partitionIndex - 1)
-    quickSort2(array, partitionIndex + 1, right)
-  }
-  return array
-}
-
-function partition2<T>(array: Array<T>, low: number, high: number) {
-  let pivot = array[low]
-  while (low < high) {
-    while (low < high && array[high] > pivot) {
-      --high
-    }
-    array[low] = array[high]
-    while (low < high && array[low] <= pivot) {
-      ++low
-    }
-    array[high] = array[low]
-  }
-  array[low] = pivot
-  return low
+  return i
 }

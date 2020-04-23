@@ -10,27 +10,29 @@
 // 归并排序是一种分治算法。其思想是将原始数组切分成较小的数组，直到每个小数组只有一个位置。
 // 接着将小数组（只有一个值）之间进行比较排序，之后归并成较大的数组，直到最后只有一个排序完毕的大数组。
 
-export function mergeSort<T>(array: Array<T>): Array<T> {
-  const len = array.length
+import { defaultCompare, ICompareFunction, Compare } from '../util'
 
-  if (len < 2) return array // 递归终止条件
-
-  let mid = Math.floor(len / 2), // 中间点
-    left = array.slice(0, mid),
-    right = array.slice(mid)
-  return merge(mergeSort(left), mergeSort(right)) // 递归
+export function mergeSort<T>(array: T[], compareFn = defaultCompare): T[] {
+  if (array.length > 1) {
+    const { length } = array
+    let mid = Math.floor(length / 2) // 中间点
+    let left = mergeSort(array.slice(0, mid), compareFn)
+    let right = mergeSort(array.slice(mid), compareFn)
+    array = merge(left, right, compareFn)
+  }
+  return array
 }
 
 // 归并方法
 // 从初始的只有一个值的数组两两比较开始，归并之后的数组变成排好序的有两个值的小数组。
 // 之后继续两两比较，小数组变成较大的数组，最后成为一个新的排序好的新数组。
-function merge<T>(left: Array<T>, right: Array<T>): Array<T> {
-  const ret: Array<T> = [] // 新数组，用来保存归并后的值
+function merge<T>(left: T[], right: T[], compareFn: ICompareFunction<T>): T[] {
+  const ret: T[] = [] // 新数组，用来保存归并后的值
 
+  // 比较 left 和 right 两个数组值的第一个值
+  // 谁小就把谁从原来的数组中提取出来并放入到新数组中
   while (left.length && right.length) {
-    // 比较 left 和 right 两个数组值的第一个值
-    // 谁小就把谁从原来的数组中提取出来并放入到新数组中
-    if (left[0] <= right[0]) {
+    if (compareFn(left[0], right[0]) === Compare.LESS_THAN) {
       ret.push(left.shift()!)
     } else {
       ret.push(right.shift()!)

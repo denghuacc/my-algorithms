@@ -1,11 +1,11 @@
 // Radix Sort 基数排序
 
-import { findMinValue, findMaxValue } from '../util'
+import { findMinValue, findMaxValue } from '../search/min-max-search'
 
-export function radixSort<T extends number>(array: Array<T>, radixBase: number = 10) {
+export function radixSort(array: number[], radixBase = 10) {
   if (array.length < 2) return array
-  const minValue = findMinValue(array)
-  const maxValue = findMaxValue(array)
+  const minValue = findMinValue(array)!
+  const maxValue = findMaxValue(array)!
 
   let significantDigit = 1
 
@@ -17,8 +17,8 @@ export function radixSort<T extends number>(array: Array<T>, radixBase: number =
   return array
 }
 
-function countingSortForRadix<T extends number>(
-  array: Array<T>,
+function countingSortForRadix(
+  array: number[],
   radixBase: number,
   significantDigit: number,
   minValue: number

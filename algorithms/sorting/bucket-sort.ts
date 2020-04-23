@@ -2,47 +2,43 @@
 
 import { insertionSort } from './insertion-sort'
 
-export function bucketSort<T extends number>(
-  array: Array<T>,
-  bucketSize: number = 5
-) {
+export function bucketSort(array: number[], bucketSize = 5) {
   if (array.length < 2) return array
-
   const buckets = createBuckets(array, bucketSize)
   return sortBuckets(buckets)
 }
 
-function createBuckets<T extends number>(array: Array<T>, bucketSize: number) {
-  let minVal = array[0]
-  let maxVal = array[0]
+function createBuckets(array: number[], bucketSize: number) {
+  let minValue = array[0]
+  let maxValue = array[0]
 
   for (let i = 1; i < array.length; i++) {
-    if (array[i] < minVal) {
-      minVal = array[i]
-    } else if (array[i] > maxVal) {
-      maxVal = array[i]
+    if (array[i] < minValue) {
+      minValue = array[i]
+    } else if (array[i] > maxValue) {
+      maxValue = array[i]
     }
   }
 
-  const bucketCount = Math.floor((maxVal - minVal) / bucketSize) + 1
-  const buckets: Array<Array<T>> = []
+  const bucketCount = Math.floor((maxValue - minValue) / bucketSize) + 1
+  const buckets: number[][] = []
   for (let i = 0; i < bucketCount; i++) {
     buckets[i] = []
   }
   for (let i = 0; i < array.length; i++) {
-    const bucketIndex = Math.floor((array[i] - minVal) / bucketSize)
+    const bucketIndex = Math.floor((array[i] - minValue) / bucketSize)
     buckets[bucketIndex].push(array[i])
   }
   return buckets
 }
 
-function sortBuckets<T>(buckets: Array<Array<T>>) {
-  const sortedArr = []
+function sortBuckets(buckets: number[][]) {
+  const sortedArray = []
   for (let i = 0; i < buckets.length; i++) {
     if (buckets[i] != null) {
       insertionSort(buckets[i])
-      sortedArr.push(...buckets[i])
+      sortedArray.push(...buckets[i])
     }
   }
-  return sortedArr
+  return sortedArray
 }

@@ -6,13 +6,13 @@
 // 3. 针对所有的元素重复以上的步骤，除了最后一个。
 // 4. 持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。
 
-import { swap } from '../util'
+import { swap, defaultCompare, Compare } from '../util'
 
-export function bubbleSort<T>(array: Array<T>) {
+export function bubbleSort<T>(array: T[], compareFn = defaultCompare) {
   const len = array.length
   for (let i = 0; i < len; i++) {
     for (let j = 0; j < len - 1; j++) {
-      if (array[j] > array[j + 1]) {
+      if (compareFn(array[j], array[j + 1]) === Compare.BIGGER_THAN) {
         swap(array, j, j + 1)
       }
     }
@@ -21,13 +21,13 @@ export function bubbleSort<T>(array: Array<T>) {
 }
 
 // 优化：减少内循环中不必要的比较
-export function bubbleSort2<T>(array: Array<T>) {
+export function bubbleSortImproved<T>(array: T[], compareFn = defaultCompare) {
   const len = array.length
   for (let i = 0; i < len; i++) {
     // 优化：j< len -1 -> j < len - 1 - i
     // 后面的已经是排好序的比较大的数，不用重复比较
     for (let j = 0; j < len - 1 - i; j++) {
-      if (array[j] > array[j + 1]) {
+      if (compareFn(array[j], array[j + 1]) === Compare.BIGGER_THAN) {
         swap(array, j, j + 1)
       }
     }
@@ -35,13 +35,17 @@ export function bubbleSort2<T>(array: Array<T>) {
   return array
 }
 
-export function bubbleSort3<T>(array: Array<T>) {
+// 双指针
+export function bubbleSortDoublePointer<T>(
+  array: T[],
+  compareFn = defaultCompare
+) {
   let i = array.length - 1
 
   while (i > 0) {
     let pos = 0
     for (let j = 0; j < i; j++) {
-      if (array[j] > array[j + 1]) {
+      if (compareFn(array[j], array[j + 1]) === Compare.BIGGER_THAN) {
         pos = j
         swap(array, j, j + 1)
       }
