@@ -1,14 +1,12 @@
-/**
- * @name lcs 最长公共子序列
- * @description 找出两个字符串序列的最长子序列的长度
- * 最长子序列是指，在两个字符串序列中以相同顺序出现，
- * 但不要求连续（非字符串子串）的字符串序列。
- */
-function lcs(wordX: string, wordY: string) {
+// 最长公共子序列 lcs (longest common subsequence)
+// 最长子序列是指，在两个字符串序列中以相同顺序出现，
+// 但不要求连续（非字符串子串）的字符串序列。
+
+export function lcsPrint(wordX: string, wordY: string) {
   const m = wordX.length
   const n = wordY.length
-  const list: Array<Array<number>> = []
-  const solution: Array<Array<string>> = []
+  const list: number[][] = []
+  const solution: string[][] = []
 
   for (let i = 0; i <= m; i++) {
     list[i] = []
@@ -34,21 +32,12 @@ function lcs(wordX: string, wordY: string) {
       }
     }
   }
-  printSolution(solution, wordX, m, n)
-  return list[m][n]
+  return printSolution(solution, wordX, m, n)
+  // return list[m][n]
 }
 
-/**
- * @name printSolution 打印 lcs 的解决方案
- * @description lcs只输出长度，而不包含 lcs 的实际结果。
- * 要提取这个信息，需要对算法稍作修改，声明一个新的solution矩阵。
- * @param {*} solution
- * @param {*} wordX
- * @param {*} m
- * @param {*} n
- */
 function printSolution(
-  solution: Array<Array<string>>,
+  solution: string[][],
   wordX: string,
   m: number,
   n: number
@@ -71,10 +60,5 @@ function printSolution(
     x = solution[a][b]
   }
 
-  console.log('lcs:', answer)
+  return answer
 }
-
-// test
-console.log(lcs('acbaed', 'abcadf'))
-// lcs: acad
-// 4
