@@ -5,22 +5,22 @@
 // 2. 从剩余未排序元素中继续寻找最小元素，然后放到已排序序列的末尾。
 // 3. 重复第二步，直到所有元素均排序完毕。
 
-import { swap, defaultCompare, Compare } from '../util'
+import { swap, defaultCompare, Compare } from "../util";
 
 export function selectionSort<T>(array: T[], compareFn = defaultCompare) {
-  let { length } = array
-  let minIndex
+  let { length } = array;
+  let minIndex;
 
   for (let i = 0; i < length - 1; i++) {
-    minIndex = i // 寻找最小值，初始值为 i
+    minIndex = i; // 寻找最小值，初始值为 i
 
     for (let j = i + 1; j < length; j++) {
       if (compareFn(array[minIndex], array[j]) === Compare.BIGGER_THAN) {
-        minIndex = j // 更新最小值索引
+        minIndex = j; // 更新最小值索引
       }
     }
 
-    if (i !== minIndex) swap(array, i, minIndex)
+    if (i !== minIndex) swap(array, i, minIndex);
   }
-  return array
+  return array;
 }

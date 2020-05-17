@@ -1,4 +1,4 @@
-import { heapSort } from '../heap-sort'
-import { testSortAlgorithm } from './test-sort-algorithm'
+import { heapSort } from "../heap-sort";
+import { testSortAlgorithm } from "./test-sort-algorithm";
 
-testSortAlgorithm(heapSort, 'Heap Sort')
+testSortAlgorithm(heapSort, "Heap Sort");

@@ -4,16 +4,16 @@
 // 例如：红蓝蓝黄红黄蓝红红黄红，排序后为：黄黄黄红红红红红蓝蓝蓝。
 
 const sortColor = (str, rule) => {
-  const arr = str.split('')
-  const obj = rule.split('').reduce((acc, item, id) => {
-    acc[item] = id
-    return acc
-  }, {})
-  return arr.sort((a, b) => obj[a] - obj[b])
-}
+  const arr = str.split("");
+  const obj = rule.split("").reduce((acc, item, id) => {
+    acc[item] = id;
+    return acc;
+  }, {});
+  return arr.sort((a, b) => obj[a] - obj[b]);
+};
 
 // test
-const str = '红蓝蓝黄红黄蓝红红黄红'
-const rule = '黄红蓝'
-const ret = sortColor(str, rule)
-console.log(ret)
+const str = "红蓝蓝黄红黄蓝红红黄红";
+const rule = "黄红蓝";
+const ret = sortColor(str, rule);
+console.log(ret);

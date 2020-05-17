@@ -1,67 +1,67 @@
 // 数独解题器
 
-const UNASSIGNED = 0
+const UNASSIGNED = 0;
 
 export function sudokuSolver(grid: number[][]) {
   if (solveSudoku(grid) === true) {
-    return grid
+    return grid;
   } else {
-    return 'NO SOLUTION EXISTS!'
+    return "NO SOLUTION EXISTS!";
   }
 }
 
 function solveSudoku(grid: number[][]) {
-  let row = 0
-  let col = 0
-  let checkBlankSpaces = false
+  let row = 0;
+  let col = 0;
+  let checkBlankSpaces = false;
 
   for (row = 0; row < grid.length; row++) {
     for (col = 0; col < grid[row].length; col++) {
       if (grid[row][col] === UNASSIGNED) {
-        checkBlankSpaces = true
-        break
+        checkBlankSpaces = true;
+        break;
       }
     }
     if (checkBlankSpaces === true) {
-      break
+      break;
     }
   }
 
   if (checkBlankSpaces === false) {
-    return true
+    return true;
   }
 
   for (let num = 1; num <= 9; num++) {
     if (isSafe(grid, row, col, num)) {
-      grid[row][col] = num
+      grid[row][col] = num;
 
       if (solveSudoku(grid)) {
-        return true
+        return true;
       }
 
-      grid[row][col] = UNASSIGNED
+      grid[row][col] = UNASSIGNED;
     }
   }
 
-  return false
+  return false;
 }
 
 function usedInRow(grid: number[][], row: number, num: number) {
   for (let col = 0; col < grid.length; col++) {
     if (grid[row][col] === num) {
-      return true
+      return true;
     }
   }
-  return false
+  return false;
 }
 
 function usedInCol(grid: number[][], col: number, num: number) {
   for (let row = 0; row < grid.length; row++) {
     if (grid[row][col] === num) {
-      return true
+      return true;
     }
   }
-  return false
+  return false;
 }
 
 function usedInBox(
@@ -73,11 +73,11 @@ function usedInBox(
   for (let row = 0; row < 3; row++) {
     for (let col = 0; col < 3; col++) {
       if (grid[row + boxStartRow][col + boxStartCol] === num) {
-        return true
+        return true;
       }
     }
   }
-  return false
+  return false;
 }
 
 function isSafe(grid: number[][], row: number, col: number, num: number) {
@@ -85,7 +85,7 @@ function isSafe(grid: number[][], row: number, col: number, num: number) {
     !usedInRow(grid, row, num) &&
     !usedInCol(grid, col, num) &&
     !usedInBox(grid, row - (row % 3), col - (col % 3), num)
-  )
+  );
 }
 
 // test
@@ -98,6 +98,6 @@ const sudokuGrid = [
   [7, 0, 0, 0, 2, 0, 0, 0, 6],
   [0, 6, 0, 0, 0, 0, 2, 8, 0],
   [0, 0, 0, 4, 1, 9, 0, 0, 5],
-  [0, 0, 0, 0, 8, 0, 0, 7, 9]
-]
-console.log(sudokuSolver(sudokuGrid))
+  [0, 0, 0, 0, 8, 0, 0, 7, 9],
+];
+console.log(sudokuSolver(sudokuGrid));

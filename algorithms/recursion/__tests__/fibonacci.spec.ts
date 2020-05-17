@@ -1,8 +1,11 @@
-import { fibonacci, fibonacciIterative, fibonacciMemoization } from '../fibonacci';
+import {
+  fibonacci,
+  fibonacciIterative,
+  fibonacciMemoization,
+} from "../fibonacci";
 
-describe('Fibonacci', () => {
-
-  test('Fibonacci Recursive', () => {
+describe("Fibonacci", () => {
+  test("Fibonacci Recursive", () => {
     expect(fibonacci(-1)).toBe(0);
     expect(fibonacci(0)).toBe(0);
     expect(fibonacci(1)).toBe(1);
@@ -11,7 +14,7 @@ describe('Fibonacci', () => {
     expect(fibonacci(4)).toBe(3);
   });
 
-  test('Fibonacci Iterative', () => {
+  test("Fibonacci Iterative", () => {
     expect(fibonacciIterative(-1)).toBe(0);
     expect(fibonacciIterative(0)).toBe(0);
     expect(fibonacciIterative(1)).toBe(1);
@@ -20,7 +23,7 @@ describe('Fibonacci', () => {
     expect(fibonacciIterative(4)).toBe(3);
   });
 
-  test('Fibonacci with Memoization', () => {
+  test("Fibonacci with Memoization", () => {
     expect(fibonacciMemoization(-1)).toBe(0);
     expect(fibonacciMemoization(0)).toBe(0);
     expect(fibonacciMemoization(1)).toBe(1);
@@ -28,5 +31,4 @@ describe('Fibonacci', () => {
     expect(fibonacciMemoization(3)).toBe(2);
     expect(fibonacciMemoization(4)).toBe(3);
   });
-
 });

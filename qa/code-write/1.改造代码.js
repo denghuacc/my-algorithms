@@ -3,27 +3,27 @@
 // 输出 10 个 10
 for (var i = 0; i < 10; i++) {
   setTimeout(() => {
-    console.log(i)
-  }, 1000)
+    console.log(i);
+  }, 1000);
 }
 
 {
   // use let
   for (let i = 0; i < 10; i++) {
     setTimeout(() => {
-      console.log(i)
-    }, 1000)
+      console.log(i);
+    }, 1000);
   }
 }
 
 {
   // use IIFE
   for (var i = 0; i < 10; i++) {
-    ;(function (i) {
+    (function (i) {
       setTimeout(() => {
-        console.log(i)
-      }, 1000)
-    })(i)
+        console.log(i);
+      }, 1000);
+    })(i);
   }
 }
 
@@ -31,11 +31,11 @@ for (var i = 0; i < 10; i++) {
   // use third setTimeout paramter
   for (var i = 0; i < 10; i++) {
     setTimeout(
-      i => {
-        console.log(i)
+      (i) => {
+        console.log(i);
       },
       1000,
       i
-    )
+    );
   }
 }

@@ -10,16 +10,16 @@ export function knapsackRecursive(
   n: number
 ): number {
   if (n === 0 || capacity === 0) {
-    return 0
+    return 0;
   }
 
   if (weights[n - 1] > capacity) {
-    return knapsackRecursive(capacity, weights, values, n - 1)
+    return knapsackRecursive(capacity, weights, values, n - 1);
   } else {
     const a: number =
       values[n - 1] +
-      knapsackRecursive(capacity - weights[n - 1], weights, values, n - 1)
-    const b: number = knapsackRecursive(capacity, weights, values, n - 1)
-    return a > b ? a : b
+      knapsackRecursive(capacity - weights[n - 1], weights, values, n - 1);
+    const b: number = knapsackRecursive(capacity, weights, values, n - 1);
+    return a > b ? a : b;
   }
 }

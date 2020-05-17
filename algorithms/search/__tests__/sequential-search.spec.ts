@@ -1,4 +1,4 @@
-import { sequentialSearch } from '../sequential-search'
-import { testSearchAlgorithm } from './test-search-algorithm'
+import { sequentialSearch } from "../sequential-search";
+import { testSearchAlgorithm } from "./test-search-algorithm";
 
-testSearchAlgorithm(sequentialSearch, 'Sequential Search')
+testSearchAlgorithm(sequentialSearch, "Sequential Search");

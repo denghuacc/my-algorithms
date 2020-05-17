@@ -8,22 +8,21 @@ export function matrixChainMultiplication(
   j = p.length - 1
 ): number {
   if (i === j) {
-    return 0
+    return 0;
   }
 
-  let min = Number.MAX_SAFE_INTEGER
+  let min = Number.MAX_SAFE_INTEGER;
 
   for (let k = i; k < j; k++) {
     const count =
       matrixChainMultiplication(p, i, k) +
       matrixChainMultiplication(p, k + 1, j) +
-      p[i - 1] * p[k] * p[j]
+      p[i - 1] * p[k] * p[j];
 
     if (count < min) {
-      min = count
+      min = count;
     }
   }
 
-  return min
+  return min;
 }
-

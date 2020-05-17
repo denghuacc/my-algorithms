@@ -1,5 +1,5 @@
-import { Node } from '../models/linked-list-models'
-import LinkedList from './linked-list'
+import { Node } from "../models/linked-list-models";
+import LinkedList from "./linked-list";
 
 /**
  * @name CircularLinkedList 链表 -> 单向循环链表
@@ -8,146 +8,147 @@ import LinkedList from './linked-list'
  * 注意 while 遍历时设置边界条件，避免死循环
  */
 export default class CircularLinkedList<T> extends LinkedList<T> {
-  head: Node<T> | undefined
-  protected count: number = 0
+  head: Node<T> | undefined;
+  protected count: number = 0;
 
   constructor() {
-    super()
+    super();
   }
 
-  // 在链表的 index 位置添加值
+  // 在链表的 index 位置添加值 O(N)
   protected add(index: number, key: T) {
     if (index >= 0 && index <= this.count) {
-      const node = new Node(key)
+      const node = new Node(key);
 
       if (index === 0) {
         if (this.head == null) {
-          this.head = node
-          node.next = this.head
+          this.head = node;
+          node.next = this.head;
         } else {
-          node.next = this.head
-          const lastNode = this.get(this.size() - 1)
-          this.head = node
-          lastNode!.next = this.head
+          node.next = this.head;
+          const lastNode = this.get(this.size() - 1)!;
+          this.head = node;
+          lastNode.next = this.head;
         }
       } else {
-        const previous = this.get(index - 1)
+        const previous = this.get(index - 1);
         if (previous != null) {
-          node.next = previous.next
-          previous.next = node
+          node.next = previous.next;
+          previous.next = node;
         }
       }
-      this.count++
-      return true
+      this.count++;
+      return true;
     }
-    return false
+    return false;
   }
 
-  // 设置链表第 index 个位置的值
+  // 设置链表第 index 个位置的值 O(N)
   set(index: number, key: T) {
     if (index >= 0 && index < this.count) {
-      const node = this.get(index)
+      const node = this.get(index);
       if (node != null) {
-        node.key = key
-        return true
+        node.key = key;
+        return true;
       }
     }
-    return false
+    return false;
   }
 
-  // 查找链表中是否有某个值 O(1) ~ O(n)
+  // 查找链表中是否有某个值 O(N)
   contains(key: T) {
-    let current = this.head
+    let current = this.head;
 
     if (current == null) {
-      return false
+      return false;
     } else {
       while (current != null && current.next != null) {
         if (current.key === key) {
-          return true
+          return true;
         }
-        current = current.next
-        if (current.key !== key && current.next == this.head) break // 边界
+        current = current.next;
+        if (current.key !== key && current.next == this.head) break; // 边界
       }
     }
-    return false
+    return false;
   }
 
-  // 删除链表第 index 个位置的值，返回删除的元素
+  // 删除链表第 index 个位置的值，返回删除的元素 O(N)
   protected remove(index: number) {
     if (index >= 0 && index < this.count) {
-      let current = this.head
+      let current = this.head;
 
       if (index === 0) {
         if (this.size() === 1) {
-          this.head = undefined
+          this.head = undefined;
         } else {
-          const delNode = this.head
-          current = this.get(this.size() - 1) // last node
-          this.head = this.head!.next
-          current!.next = this.head // update new head
-          current = delNode
+          const delNode = this.head;
+          current = this.get(this.size() - 1)!; // last node
+          this.head = this.head?.next;
+          current.next = this.head; // update new head
+          current = delNode;
         }
       } else {
-        const previous = this.get(index - 1)
-        if (previous != null) {
-          current = previous.next
-          previous.next = current!.next
+        const previous = this.get(index - 1);
+        if (previous != null && previous.next != null) {
+          current = previous.next;
+          previous.next = current.next;
         }
       }
-      this.count--
-      return current?.key
+      this.count--;
+      return current?.key;
     }
-    return undefined
+    return undefined;
   }
 
-  // 从链表中删除某个元素 key 只删除前面的第一个值
+  // 从链表中删除某个元素 key 只删除前面的第一个值 O(N)
   removeKey(key: T) {
-    let delNode
+    let delNode;
 
-    if (this.head == null) return false
-
-    if (this.head.key === key) {
-      delNode = this.head
-      const lastNode = this.get(this.size() - 1)
-      this.head = delNode!.next
-      lastNode!.next = this.head // update last node
-    } else {
-      let current = this.head
-      while (current.next != null) {
-        if (current.next.key === key) {
-          delNode = current.next
-          const previous = current
-          previous.next = current.next.next
-          break
+    if (this.head == null) return false;
+    else {
+      if (this.head.key === key) {
+        delNode = this.head;
+        const lastNode = this.get(this.size() - 1)!;
+        this.head = delNode.next;
+        lastNode.next = this.head; // update last node
+      } else {
+        let current = this.head;
+        while (current.next != null) {
+          if (current.next.key === key) {
+            delNode = current.next;
+            const previous = current;
+            previous.next = current.next.next;
+            break;
+          }
+          current = current.next;
+          if (current == this.head) break; // 边界
         }
-        current = current.next
-        if (current == this.head) break // 边界
       }
     }
 
     if (delNode?.key == null) {
-      return false
+      return false;
     } else {
-      this.count--
-      return true
+      this.count--;
+      return true;
     }
   }
 
   toString() {
-    if (this.isEmpty()) return ''
+    if (this.isEmpty()) return "";
 
-    let current = this.head
-    let str = 'Circular Linked List { '
+    let current = this.head;
+    let str = "Circular Linked List { ";
 
     // 遍历节点
     while (current != null) {
-      str += current.key + ' -> '
-      current = current.next
-      if (current == this.head) break
+      str += current.key + " -> ";
+      current = current.next;
+      if (current == this.head) break;
     }
 
-    str += 'head }'
-    return str
+    str += "head }";
+    return str;
   }
 }

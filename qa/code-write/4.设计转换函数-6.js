@@ -16,11 +16,11 @@
 // 向右旋转 2 步: [3, 99, -1, -100]
 
 const rotateArr = (arr, k) => {
-  return [...arr.slice(-k), ...arr.slice(0, -k)]
-}
+  return [...arr.slice(-k), ...arr.slice(0, -k)];
+};
 
 // test
-const arr = [1, 2, 3, 4, 5, 6, 7]
-const k = 3
-const ret = rotateArr(arr, k)
-console.log(ret)
+const arr = [1, 2, 3, 4, 5, 6, 7];
+const k = 3;
+const ret = rotateArr(arr, k);
+console.log(ret);

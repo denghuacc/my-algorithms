@@ -7,37 +7,37 @@
 
 function print(n) {
   setTimeout(() => {
-    console.log(n)
-  }, Math.floor(Math.random() * 1000))
+    console.log(n);
+  }, Math.floor(Math.random() * 1000));
 }
 for (var i = 0; i < 100; i++) {
-  print(i)
+  print(i);
 }
 
 {
-  // 解法一， 增加第二个参数为常数 1
+  // 解法一 增加第二个参数为常数 1
   function print(n) {
     setTimeout(
       () => {
-        console.log(n)
+        console.log(n);
       },
       1,
       Math.floor(Math.random() * 1000)
-    )
+    );
   }
   for (var i = 0; i < 100; i++) {
-    print(i)
+    print(i);
   }
 }
 
 {
   // 解法二 直接打印 Node 会爆栈，chrome 可以输出
   function print(n) {
-    setTimeout(console.log(n), Math.floor(Math.random() * 1000))
+    setTimeout(console.log(n), Math.floor(Math.random() * 1000));
   }
 
   for (var i = 0; i < 100; i++) {
-    print(i)
+    print(i);
   }
 }
 
@@ -46,11 +46,11 @@ for (var i = 0; i < 100; i++) {
   function print(n) {
     setTimeout(() => {
       setTimeout(() => {
-        console.log(n)
-      }, 1000 * n)
-    }, Math.floor(Math.random() * 1000))
+        console.log(n);
+      }, 1000 * n);
+    }, Math.floor(Math.random() * 1000));
   }
   for (var i = 0; i < 100; i++) {
-    print(i)
+    print(i);
   }
 }

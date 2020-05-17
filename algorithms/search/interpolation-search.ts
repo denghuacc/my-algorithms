@@ -9,8 +9,8 @@ import {
   biggerEquals,
   lesserEquals,
   Compare,
-  DOES_NOT_EXIST
-} from '../util'
+  DOES_NOT_EXIST,
+} from "../util";
 
 export function interpolationSearch<T>(
   array: T[], // sorted array
@@ -19,28 +19,28 @@ export function interpolationSearch<T>(
   equalsFn = defaultEquals,
   diffFn = defaultDiff
 ) {
-  const { length } = array
-  let low = 0
-  let high = length - 1
-  let position = -1
-  let delta = -1
+  const { length } = array;
+  let low = 0;
+  let high = length - 1;
+  let position = -1;
+  let delta = -1;
 
   while (
     low <= high &&
     biggerEquals(target, array[low], compareFn) &&
     lesserEquals(target, array[high], compareFn)
   ) {
-    delta = diffFn(target, array[low]) / diffFn(array[high], array[low])
-    position = low + Math.floor((high - low) * delta)
+    delta = diffFn(target, array[low]) / diffFn(array[high], array[low]);
+    position = low + Math.floor((high - low) * delta);
 
-    if (equalsFn(array[position], target)) return position
+    if (equalsFn(array[position], target)) return position;
 
     if (compareFn(array[position], target) === Compare.LESS_THAN) {
-      low = position + 1
+      low = position + 1;
     } else {
-      high = position - 1
+      high = position - 1;
     }
   }
 
-  return DOES_NOT_EXIST
+  return DOES_NOT_EXIST;
 }

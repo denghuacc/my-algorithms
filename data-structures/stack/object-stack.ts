@@ -3,64 +3,64 @@
  * @description 使用对象实现栈
  */
 export default class ObjectStack<T> {
-  items: any
-  count: number
+  items: any;
+  count: number;
 
   constructor() {
-    this.items = {}
-    this.count = 0
+    this.items = {};
+    this.count = 0;
   }
 
   // 入栈 O(1)
   push(element: T) {
-    this.items[this.count] = element
-    this.count++
+    this.items[this.count] = element;
+    this.count++;
   }
 
   // 出栈，返回出栈的元素 O(1)
   pop() {
     if (this.isEmpty()) {
-      return undefined
+      return undefined;
     }
-    this.count--
-    const result = this.items[this.count]
-    delete this.items[this.count]
-    return result
+    this.count--;
+    const result = this.items[this.count];
+    delete this.items[this.count];
+    return result;
   }
 
   // 获取栈顶元素 O(1)
   peek() {
     if (this.isEmpty()) {
-      return undefined
+      return undefined;
     }
-    return this.items[this.count - 1]
+    return this.items[this.count - 1];
   }
 
   // 获取栈里的元素的数量 O(1)
   size() {
-    return this.count
+    return this.count;
   }
 
   // 检查栈是否为空 O(1)
   isEmpty() {
-    return this.size() === 0
+    return this.size() === 0;
   }
 
   // 清空栈 O(1)
   clear() {
-    this.items = {}
-    this.count = 0
+    this.items = {};
+    this.count = 0;
   }
 
   toString() {
     if (this.isEmpty()) {
-      return ''
+      return "";
     }
-    let objString = `Stack { ${this.items[0]}`
+    let objString = `Stack { ${this.items[0]}`;
     for (let i = 1; i < this.count; i++) {
-      objString = `${objString}, ${this.items[i]}`
+      objString = `${objString}, ${this.items[i]}`;
     }
-    objString += ' }'
-    return objString
+    objString += " }";
+    return objString;
   }
 }

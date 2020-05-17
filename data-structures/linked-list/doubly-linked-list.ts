@@ -1,143 +1,145 @@
-import { DoublyNode as Node } from '../models/linked-list-models'
-import LinkedList from './linked-list'
+import { DoublyNode as Node } from "../models/linked-list-models";
+import LinkedList from "./linked-list";
 
 /**
  * @name DoublyLinkedList 链表 -> 双向链表
  * @description 双向链表需要在增加和删除元素的时候额外维护节点的 prev 指向和 tail 属性
  */
 export default class DoublyLinkedList<T> extends LinkedList<T> {
-  head: Node<T> | undefined
-  tail: Node<T> | undefined // 表尾
-  protected count: number = 0
+  head: Node<T> | undefined;
+  tail: Node<T> | undefined; // 表尾
+  protected count: number = 0;
 
   constructor() {
-    super()
+    super();
   }
 
-  // 在链表的 index 位置添加值
+  // 在链表的 index 位置添加值 O(N)
   protected add(index: number, key: T) {
     if (index >= 0 && index <= this.count) {
-      const node = new Node(key)
-      let current = this.head
+      const node = new Node(key);
+      let current = this.head;
 
       if (index === 0) {
         if (this.head == null || this.tail == null) {
-          this.head = node
-          this.tail = node
+          this.head = node;
+          this.tail = node;
         } else {
-          node.next = this.head
-          this.head.prev = node
-          this.head = node
+          node.next = this.head;
+          this.head.prev = node;
+          this.head = node;
         }
       } else if (index === this.count) {
-        current = this.tail
-        current!.next = node
-        node.prev = current
-        this.tail = node
+        current = this.tail!;
+        current.next = node;
+        node.prev = current;
+        this.tail = node;
       } else {
-        const previous = this.get(index - 1)
-        if (previous != null) {
-          current = previous.next
-          node.next = current
-          previous.next = node
+        const previous = this.get(index - 1);
+        if (previous != null && previous.next != null) {
+          current = previous.next;
+          node.next = current;
+          previous.next = node;
 
-          current!.prev = node
-          node.prev = previous
+          current.prev = node;
+          node.prev = previous;
         }
       }
-      this.count++
-      return true
+      this.count++;
+      return true;
     }
-    return false
+    return false;
   }
 
-  // 删除链表第 index 个位置的值，返回删除的元素
+  // 删除链表第 index 个位置的值，返回删除的元素 O(N)
   protected remove(index: number) {
     if (index >= 0 && index < this.count) {
-      if (this.head == null || this.tail == null) return undefined
+      if (this.head == null || this.tail == null) return undefined;
 
-      let current = this.head
+      let current: Node<T> | undefined = this.head;
       if (index === 0) {
-        this.head = this.head.next
+        this.head = this.head.next!;
         if (this.count === 1) {
-          this.tail = undefined
+          this.tail = undefined;
         } else {
-          this.head!.prev = undefined
+          this.head.prev = undefined;
         }
       } else if (index === this.count - 1) {
-        current = this.tail
-        this.tail = current!.prev
-        this.tail!.next = undefined
+        current = this.tail;
+        this.tail = current.prev!;
+        this.tail.next = undefined;
       } else {
-        current = this.get(index)!
-        const previous = current!.prev
-        previous!.next = current!.next
-        current!.next!.prev = previous
+        current = this.get(index);
+        if (current) {
+          const previous = current.prev!;
+          previous.next = current.next;
+          current.next!.prev = previous;
+        }
       }
-      this.count--
-      return current!.key
+      this.count--;
+      return current!.key;
     }
-    return undefined
+    return undefined;
   }
 
-  // 从链表中删除某个元素 key 只删除前面的第一个值
+  // 从链表中删除某个元素 key 只删除前面的第一个值 O(N)
   removeKey(key: T) {
-    let delNode
+    let delNode;
 
-    if (this.head == null || this.tail == null) return false
+    if (this.head == null || this.tail == null) return false;
 
     if (this.head.key === key) {
-      delNode = this.head
-      this.head = delNode.next
+      delNode = this.head;
+      this.head = delNode.next;
       if (this.count === 1) {
-        this.tail = undefined
+        this.tail = undefined;
       } else {
-        this.head!.prev = undefined
+        this.head!.prev = undefined;
       }
     } else if (this.tail.key == key) {
-      delNode = this.tail
-      this.tail = delNode.prev
+      delNode = this.tail;
+      this.tail = delNode.prev;
       if (this.count === 1) {
-        this.head = undefined
+        this.head = undefined;
       } else {
-        this.tail!.next = undefined
+        this.tail!.next = undefined;
       }
     } else {
-      let current = this.head
+      let current = this.head;
       while (current.next != null) {
         if (current.next.key === key) {
-          delNode = current.next
-          const previous = current
-          const next = current.next.next
-          previous.next = next
-          if (next != null) next.prev = previous
-          break
+          delNode = current.next;
+          const previous = current;
+          const next = current.next.next;
+          previous.next = next;
+          if (next != null) next.prev = previous;
+          break;
         }
-        current = current.next
+        current = current.next;
       }
     }
 
     if (delNode?.key == null) {
-      return false
+      return false;
     } else {
-      this.count--
-      return true
+      this.count--;
+      return true;
     }
   }
 
   toString() {
-    if (this.head == null || this.tail == null) return ''
+    if (this.head == null || this.tail == null) return "";
 
-    let current = this.head
-    let str = 'Doubly Linked List { undefined <- '
+    let current = this.head;
+    let str = "Doubly Linked List { undefined <- ";
 
     // 遍历节点
     while (current != null) {
-      str += current.key + (current.next == null ? ' -> ' : ' <-> ')
-      current = current.next!
+      str += current.key + (current.next == null ? " -> " : " <-> ");
+      current = current.next!;
     }
 
-    str += 'undefined }'
-    return str
+    str += "undefined }";
+    return str;
   }
 }

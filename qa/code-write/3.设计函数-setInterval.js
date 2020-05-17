@@ -2,20 +2,20 @@
 
 function mySetInterval() {
   mySetInterval.timer = setTimeout(() => {
-    arguments[0]()
-    mySetInterval(...arguments) // 无限递归
-  }, arguments[1])
+    arguments[0]();
+    mySetInterval(...arguments); // 无限递归
+  }, arguments[1]);
 }
 
 mySetInterval.clear = function () {
-  clearTimeout(mySetInterval.timer)
-}
+  clearTimeout(mySetInterval.timer);
+};
 
 // test
 mySetInterval(() => {
-  console.log('hello world')
-}, 1000)
+  console.log("hello world");
+}, 1000);
 
 setTimeout(() => {
-  mySetInterval.clear()
-}, 5000)
+  mySetInterval.clear();
+}, 5000);

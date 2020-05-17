@@ -5,14 +5,14 @@
 // 但是综合来看，它相对执行时间来说，输出了一个可以接受的解。
 
 export function minCoinChange(coins: number[], amount: number) {
-  const change: number[] = []
-  let total = 0
+  const change: number[] = [];
+  let total = 0;
   for (let i = coins.length; i >= 0; i--) {
-    const coin = coins[i]
+    const coin = coins[i];
     while (total + coin <= amount) {
-      change.push(coin)
-      total += coin
+      change.push(coin);
+      total += coin;
     }
   }
-  return change
+  return change;
 }

@@ -1,9 +1,9 @@
-import { matrixChainMultiplication } from '../matrix-chain-multiplication'
+import { matrixChainMultiplication } from "../matrix-chain-multiplication";
 
-describe('Matrix Chain Multiplication', () => {
-  test('works with DP approach', () => {
-    const p = [10, 100, 5, 50, 1]
+describe("Matrix Chain Multiplication", () => {
+  test("works with DP approach", () => {
+    const p = [10, 100, 5, 50, 1];
 
-    expect(matrixChainMultiplication(p)).toBe(1750)
-  })
-})
+    expect(matrixChainMultiplication(p)).toBe(1750);
+  });
+});

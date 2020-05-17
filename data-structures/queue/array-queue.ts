@@ -6,43 +6,43 @@
  * 在现实中，最常见的队列例子就是排队。
  */
 export default class ArrayQueue<T> {
-  items: Array<T>
+  items: Array<T>;
 
   constructor() {
-    this.items = []
+    this.items = [];
   }
 
   // 入列 O(1)
   enqueue(element: T) {
-    this.items.push(element)
+    this.items.push(element);
   }
 
-  // 出列 O(n)
+  // 出列 O(N)
   dequeue() {
-    return this.items.shift()
+    return this.items.shift();
   }
 
   // 获取队列的第一个元素 O(1)
   peek() {
-    return this.items[0]
+    return this.items[0];
   }
 
   // 返回队列的元素的数量 O(1)
   size() {
-    return this.items.length
+    return this.items.length;
   }
 
   // 查询队列是否为空 O(1)
   isEmpty() {
-    return this.items.length === 0
+    return this.items.length === 0;
   }
 
-  // 清空队列
+  // 清空队列 O(1)
   clear() {
-    this.items = []
+    this.items = [];
   }
 
   toString() {
-    return this.items.toString()
+    return this.items.toString();
   }
 }

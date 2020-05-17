@@ -1,16 +1,16 @@
-export function floydWarshall (graph: number[][]) {
-  const dist: number[][] = []
-  const length = graph.length
+export function floydWarshall(graph: number[][]) {
+  const dist: number[][] = [];
+  const length = graph.length;
 
   for (let i = 0; i < length; i++) {
-    dist[i] = []
+    dist[i] = [];
     for (let j = 0; j < length; j++) {
       if (i === j) {
-        dist[i][j] = 0
+        dist[i][j] = 0;
       } else if (!isFinite(graph[i][j])) {
-        dist[i][j] = Infinity
+        dist[i][j] = Infinity;
       } else {
-        dist[i][j] = graph[i][j]
+        dist[i][j] = graph[i][j];
       }
     }
   }
@@ -19,11 +19,11 @@ export function floydWarshall (graph: number[][]) {
     for (let i = 0; i < length; i++) {
       for (let j = 0; j < length; j++) {
         if (dist[i][k] + dist[k][j] < dist[i][j]) {
-          dist[i][j] = dist[i][k] + dist[k][j]
+          dist[i][j] = dist[i][k] + dist[k][j];
         }
       }
     }
   }
 
-  return dist
+  return dist;
 }

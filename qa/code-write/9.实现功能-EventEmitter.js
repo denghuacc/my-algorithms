@@ -2,68 +2,68 @@
 
 class EventEmitter {
   constructor() {
-    this._events = new Map()
-    this._maxListeners = 10
+    this._events = new Map();
+    this._maxListeners = 10;
   }
 
   emit(type, ...args) {
-    const handler = this._events.get(type)
-    const self = this
+    const handler = this._events.get(type);
+    const self = this;
     if (handler) {
       Array.isArray(handler)
-        ? handler.forEach(h => applyHandler(h))
-        : applyHandler(handler)
-      return true
+        ? handler.forEach((h) => applyHandler(h))
+        : applyHandler(handler);
+      return true;
     } else {
-      return false
+      return false;
     }
 
     function applyHandler(handler) {
-      args.length > 0 ? handler.apply(self, args) : handler.apply(self)
+      args.length > 0 ? handler.apply(self, args) : handler.apply(self);
     }
   }
 
   addListener(type, fn) {
-    const handler = this._events.get(type)
+    const handler = this._events.get(type);
     if (!handler) {
-      this._events.set(type, fn)
-    } else if (handler && typeof handler === 'function') {
-      this._events.set(type, [handler, fn])
+      this._events.set(type, fn);
+    } else if (handler && typeof handler === "function") {
+      this._events.set(type, [handler, fn]);
     } else {
-      handler.push(fn)
+      handler.push(fn);
     }
   }
 
   removeListener(type, fn) {
-    const handler = this._events.get(type)
-    if (handler && typeof handler === 'function') {
-      this._events.delete(type)
+    const handler = this._events.get(type);
+    if (handler && typeof handler === "function") {
+      this._events.delete(type);
     } else {
-      let position
+      let position;
       handler.forEach((h, i) => {
-        h === fn ? (position = i) : (position = -1)
-      })
+        h === fn ? (position = i) : (position = -1);
+      });
       if (position !== -1) {
-        handler.splice(position, 1)
-        if (handler.length === 1) this._events.set(type, handler[0])
+        handler.splice(position, 1);
+        if (handler.length === 1) this._events.set(type, handler[0]);
       } else {
-        return this
+        return this;
       }
     }
   }
 }
 
 // test
-const event = new EventEmitter()
+const event = new EventEmitter();
 function fn1(title) {
-  console.log(title)
+  console.log(title);
 }
 function fn2() {
-  console.log('event')
+  console.log("event");
 }
-event.addListener('msg', fn1)
-event.addListener('msg', fn2)
-event.emit('msg', 'hello')
+event.addListener("msg", fn1);
+event.addListener("msg", fn2);
+event.emit("msg", "hello");
 
-event.removeListener('msg', fn2)
-event.emit('msg', 'hello')
+event.removeListener("msg", fn2);
+event.emit("msg", "hello");

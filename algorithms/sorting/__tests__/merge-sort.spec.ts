@@ -1,4 +1,4 @@
-import { mergeSort } from '../merge-sort'
-import { testSortAlgorithm } from './test-sort-algorithm'
+import { mergeSort } from "../merge-sort";
+import { testSortAlgorithm } from "./test-sort-algorithm";
 
-testSortAlgorithm(mergeSort, 'Merge Sort')
+testSortAlgorithm(mergeSort, "Merge Sort");

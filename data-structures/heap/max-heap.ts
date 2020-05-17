@@ -1,4 +1,4 @@
-import { swap } from '../util'
+import { swap } from "../util";
 
 /**
  * @name MaxHeap 最大堆
@@ -11,20 +11,20 @@ import { swap } from '../util'
  * 堆结构可以用来排序和实现优先队列
  */
 export default class MaxHeap<T> {
-  data: Array<T> = []
+  data: Array<T> = [];
 
   constructor(arr?: Array<T>) {
     if (!arr) {
-      this.data = new Array()
+      this.data = new Array();
     } else {
       // 将一个数组转换成堆
       if (Array.isArray(arr) && arr.length !== 0) {
-        this.data = arr
+        this.data = arr;
 
         // 从最后一个非叶子节点开始下沉，直到第一个元素
         // 因为减少了叶子节点的下沉，比起在空堆中一个一个添加元素效率更高
         for (let i = this.parent(this.size() - 1); i >= 0; i--) {
-          this.siftDown(i)
+          this.siftDown(i);
         }
       }
     }
@@ -32,89 +32,88 @@ export default class MaxHeap<T> {
 
   // 获取堆中的元素数量
   size() {
-    return this.data.length
+    return this.data.length;
   }
 
   // 判断堆是否为空
   isEmpty() {
-    return this.data.length === 0
+    return this.data.length === 0;
   }
 
   // 获取元素的父亲节点的索引
   private parent(index: number) {
     if (index !== 0) {
-      return Math.floor((index - 1) / 2)
+      return Math.floor((index - 1) / 2);
     } else {
-      return 0
+      return 0;
     }
   }
 
   // 获取左孩子节点的索引
   private leftChild(index: number) {
-    return index * 2 + 1
+    return index * 2 + 1;
   }
 
   // 获取右孩子节点的索引
   private rightChild(index: number) {
-    return index * 2 + 2
+    return index * 2 + 2;
   }
 
   // 添加元素
   add(val: T) {
-    this.data.push(val)
-    this.siftUp(this.size() - 1)
+    this.data.push(val);
+    this.siftUp(this.size() - 1);
+  }
+
+  // 查找最大元素
+  findMax() {
+    if (!this.isEmpty()) {
+      return this.data[0];
+    }
+  }
+
+  // 取出最大元素
+  extractMax() {
+    const ret = this.findMax(); // 先存储返回值（第一个元素）
+    swap(this.data, 0, this.size() - 1); // 第一个元素和最后一个元素交换位置
+    this.data.pop(); // 删除最后一个元素（即原来的第一个元素）
+    this.siftDown(0); // 现在的第一个元素下浮
+    return ret;
+  }
+
+  // 取出堆中的最大值，并且替换成 val
+  replace(val: T) {
+    const ret = this.findMax();
+    this.data[0] = val;
+    this.siftDown(0);
+    return ret;
   }
 
   // 元素上浮
   private siftUp(index: number) {
     // 父节点比子节点小时，交换节点位置
     while (index > 0 && this.data[this.parent(index)] < this.data[index]) {
-      swap(this.data, index, this.parent(index))
-      index = this.parent(index)
+      swap(this.data, index, this.parent(index));
+      index = this.parent(index);
     }
-  }
-
-  // 查找最大元素
-  findMax() {
-    if (!this.isEmpty()) {
-      return this.data[0]
-    }
-  }
-
-  // 取出最大元素
-  extractMax() {
-    const ret = this.findMax() // 先存储返回值（第一个元素）
-    swap(this.data, 0, this.size() - 1) // 第一个元素和最后一个元素交换位置
-    this.data.pop() // 删除最后一个元素（即原来的第一个元素）
-    this.siftDown(0) // 现在的第一个元素下浮
-
-    return ret
   }
 
   // 元素下沉
   private siftDown(index: number) {
     // 当存在左子节点时
     while (this.leftChild(index) < this.size()) {
-      let maxIndex = this.leftChild(index)
+      let maxIndex = this.leftChild(index);
 
       // 如果存在右子节点且比左子节点的值更大时，最大的子节点索引赋值为右子节点
       if (maxIndex + 1 && this.data[maxIndex + 1] > this.data[maxIndex]) {
-        maxIndex = this.rightChild(index)
+        maxIndex = this.rightChild(index);
       }
 
       // 父节点大于子节点时，下沉终止
-      if (this.data[index] >= this.data[maxIndex]) break
+      if (this.data[index] >= this.data[maxIndex]) break;
 
-      swap(this.data, index, maxIndex)
-      index = maxIndex // 继续下沉
+      swap(this.data, index, maxIndex);
+      index = maxIndex; // 继续下沉
     }
-  }
-
-  // 取出堆中的最大值，并且替换成 val
-  replace(val: T) {
-    const ret = this.findMax()
-    this.data[0] = val
-    this.siftDown(0)
-    return ret
   }
 }

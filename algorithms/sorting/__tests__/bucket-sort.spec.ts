@@ -1,4 +1,4 @@
-import { bucketSort } from '../bucket-sort'
-import { testSortAlgorithm } from './test-sort-algorithm'
+import { bucketSort } from "../bucket-sort";
+import { testSortAlgorithm } from "./test-sort-algorithm";
 
-testSortAlgorithm(bucketSort, 'Bucket Sort', { reverseCompare: false })
+testSortAlgorithm(bucketSort, "Bucket Sort", { reverseCompare: false });

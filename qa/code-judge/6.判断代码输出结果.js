@@ -5,7 +5,7 @@
 // [1, 2] + [2, 1]
 // 'a' + +'b'
 
-console.log(1 + '1') //  '11'
-console.log(2 * '2') // 4
-console.log([1, 2] + [2, 1]) // '1,22,1' <- '1,2' + '2,1'
-console.log('a' + +'b') // 'aNaN' <- a + NaN
+console.log(1 + "1"); //  '11'
+console.log(2 * "2"); // 4
+console.log([1, 2] + [2, 1]); // '1,22,1' <- '1,2' + '2,1'
+console.log("a" + +"b"); // 'aNaN' <- a + NaN

@@ -2,25 +2,26 @@
 // 可从 Promise、Generator、Async/Await 等角度实现
 
 // Promise
-const sleepPromise = time => new Promise(resolve => setTimeout(resolve, time))
+const sleepPromise = (time) =>
+  new Promise((resolve) => setTimeout(resolve, time));
 
-sleepPromise(1000).then(() => console.log(123))
+sleepPromise(1000).then(() => console.log(123));
 
 // Generator
 function* sleepGen(time) {
-  yield sleepPromise(time)
+  yield sleepPromise(time);
 }
 
 sleepGen(2000)
   .next()
   .value.then(() => {
-    console.log(456)
-  })
+    console.log(456);
+  });
 
 // async / await
-const sleepAsync = async time => {
-  await sleepPromise(time)
-  console.log(789)
-}
+const sleepAsync = async (time) => {
+  await sleepPromise(time);
+  console.log(789);
+};
 
-sleepAsync(3000)
+sleepAsync(3000);

@@ -7,16 +7,16 @@
 // add(1, 2, 3); // 6
 
 const curry = (fn, arity = fn.length, ...args) =>
-  arity <= args.length ? fn(...args) : curry.bind(null, fn, arity, ...args)
+  arity <= args.length ? fn(...args) : curry.bind(null, fn, arity, ...args);
 
-var add = curry(a => a)
-console.log(add(1))
+var add = curry((a) => a);
+console.log(add(1));
 
-var add = curry((a, b) => a + b)
-console.log(add(1)(2))
+var add = curry((a, b) => a + b);
+console.log(add(1)(2));
 
-var add = curry((a, b, c) => a + b + c)
-console.log(add(1)(2)(3))
-console.log(add(1)(2, 3))
-console.log(add(1, 2)(3))
-console.log(add(1, 2, 3))
+var add = curry((a, b, c) => a + b + c);
+console.log(add(1)(2)(3));
+console.log(add(1)(2, 3));
+console.log(add(1, 2)(3));
+console.log(add(1, 2, 3));
