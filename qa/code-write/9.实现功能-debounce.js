@@ -15,11 +15,12 @@
 {
   // 先执行一次，再防抖
   const debounce = (fn, wait = 200) => {
-    let timeoutId, inDebounce;
+    let timeoutId;
+    let inDebounce;
     return function (...args) {
       if (!inDebounce) {
         fn.apply(this, args); // 先执行一次
-        inDebounce = true; // 执行之后在打开防抖开关
+        inDebounce = true; // 执行之后打开防抖开关
       } else {
         clearTimeout(timeoutId);
         timeoutId = setTimeout(() => fn.apply(this, args), wait);

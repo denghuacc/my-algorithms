@@ -26,11 +26,11 @@ class EventEmitter {
   addListener(type, fn) {
     const handler = this._events.get(type);
     if (!handler) {
-      this._events.set(type, fn);
+      this._events.set(type, fn); // 新值
     } else if (handler && typeof handler === "function") {
-      this._events.set(type, [handler, fn]);
+      this._events.set(type, [handler, fn]); // 变成数组
     } else {
-      handler.push(fn);
+      handler.push(fn); // 添加到数组
     }
   }
 
@@ -39,10 +39,7 @@ class EventEmitter {
     if (handler && typeof handler === "function") {
       this._events.delete(type);
     } else {
-      let position;
-      handler.forEach((h, i) => {
-        h === fn ? (position = i) : (position = -1);
-      });
+      const position = handler.findIndex((f) => f === fn);
       if (position !== -1) {
         handler.splice(position, 1);
         if (handler.length === 1) this._events.set(type, handler[0]);

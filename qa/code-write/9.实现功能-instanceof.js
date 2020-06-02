@@ -3,8 +3,8 @@
 function selfInstanceof(left, right) {
   const proto = left.__proto__; // 隐式原型
   const prototype = right.prototype; // 原型对象
-  if (proto == null) return false;
-  if (typeof left !== "object" && typeof left !== "function") return false;
+  if (proto == null || (typeof left !== "object" && typeof left !== "function"))
+    return false;
   return proto === prototype;
 }
 

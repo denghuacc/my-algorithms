@@ -80,7 +80,7 @@
     F.prototype = proto;
     return new F();
   };
-  object.create();
+
   // test
   const obj = { name: "hale" };
   const o1 = Object.create(obj);

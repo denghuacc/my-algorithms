@@ -25,7 +25,7 @@ Function.prototype.selfBind = function (context = window) {
 
   // 返回一个函数
   return function F() {
-    return this instanceof F
+    return this instanceof F // 判断生成的函数的原型和原来的函数是否相同。this 一般指全局对象 globalThis
       ? new self(...args, ...arguments)
       : self.call(context, ...args, ...arguments);
   };
