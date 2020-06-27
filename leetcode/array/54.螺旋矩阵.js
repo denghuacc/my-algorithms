@@ -45,26 +45,28 @@
  * @return {number[]}
  */
 var spiralOrder = function (matrix) {
-  const ret = []
-  if (matrix.length === 0) return ret
-  let r1 = 0
-  let r2 = matrix.length - 1
-  let c1 = 0
-  let c2 = matrix[0].length - 1
+  const ret = [];
+  if (matrix.length === 0) return ret;
+  let r1 = 0;
+  let r2 = matrix.length - 1;
+  let c1 = 0;
+  let c2 = matrix[0].length - 1;
 
   while (r1 <= r2 && c1 <= c2) {
-    for (let c = c1; c <= c2; c++) ret.push(matrix[r1][c])
-    for (let r = r1 + 1; r <= r2; r++) ret.push(matrix[r][c2])
+    // 遍历矩阵外圈
+    for (let c = c1; c <= c2; c++) ret.push(matrix[r1][c]); // 第一行从左到右
+    for (let r = r1 + 1; r <= r2; r++) ret.push(matrix[r][c2]); // 最后一列从上到下
     if (r1 < r2 && c1 < c2) {
-      for (let c = c2 - 1; c > c1; c--) ret.push(matrix[r2][c])
-      for (let r = r2; r > r1; r--) ret.push(matrix[r][c1])
+      for (let c = c2 - 1; c > c1; c--) ret.push(matrix[r2][c]); // 最后一份从右到左
+      for (let r = r2; r > r1; r--) ret.push(matrix[r][c1]); // 第一列从下到上
     }
-    r1++
-    r2--
-    c1++
-    c2--
+    // 继续遍历内部矩阵
+    r1++;
+    r2--;
+    c1++;
+    c2--;
   }
 
-  return ret
-}
+  return ret;
+};
 // @lc code=end
