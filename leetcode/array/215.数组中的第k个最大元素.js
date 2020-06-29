@@ -39,49 +39,90 @@
  * @return {number}
  */
 var findKthLargest = function (nums, k) {
-  nums = nums.sort((a, b) => a - b)
-  return nums[nums.length - k]
-}
+  nums = nums.sort((a, b) => a - b);
+  return nums[nums.length - k];
+};
 
+// quick select
 var findKthLargest = function (nums, k) {
-  const size = nums.length
-  return quickSelect(0, size - 1, size - k)
+  const size = nums.length;
+  return quickSelect(0, size - 1, size - k);
 
   function quickSelect(left, right, targetIndex) {
-    if (left === right) return nums[left]
+    if (left === right) return nums[left];
 
-    let pivotIndex = Math.floor(Math.random() * (right - left + 1) + left)
+    // random index
+    let pivotIndex = Math.floor(Math.random() * (right - left + 1) + left);
 
-    pivotIndex = partition(left, right, pivotIndex)
+    pivotIndex = partition(left, right, pivotIndex);
 
     if (targetIndex === pivotIndex) {
-      return nums[targetIndex]
+      return nums[targetIndex];
     } else if (targetIndex < pivotIndex) {
-      return quickSelect(left, pivotIndex - 1, targetIndex)
+      return quickSelect(left, pivotIndex - 1, targetIndex);
     } else {
-      return quickSelect(pivotIndex + 1, right, targetIndex)
+      return quickSelect(pivotIndex + 1, right, targetIndex);
     }
   }
 
   function partition(left, right, pivotIndex) {
-    let pivot = nums[pivotIndex]
-    swap(nums, pivotIndex, right)
-    let storeIndex = left
+    let pivot = nums[pivotIndex];
+    swap(nums, pivotIndex, right);
+    let storeIndex = left;
 
     for (let i = left; i <= right; i++) {
       if (nums[i] < pivot) {
-        swap(nums, storeIndex, i)
-        storeIndex++
+        swap(nums, storeIndex, i);
+        storeIndex++;
       }
     }
 
-    swap(nums, storeIndex, right)
+    swap(nums, storeIndex, right);
 
-    return storeIndex
+    return storeIndex;
   }
 
   function swap(arr, a, b) {
-    ;[arr[a], arr[b]] = [arr[b], arr[a]]
+    [arr[a], arr[b]] = [arr[b], arr[a]];
   }
-}
+};
+
+// quick sorting
+var findKthLargest = function (nums, k) {
+  const sortedNums = quickSort(nums, 0, nums.length - 1);
+  return sortedNums[nums.length - k];
+
+  function quickSort(arr, left, right) {
+    let index;
+    if (arr.length > 1) {
+      index = partition(arr, left, right);
+      if (left < index - 1) quickSort(arr, left, index - 1);
+      if (index < right) quickSort(arr, index, right);
+    }
+    return arr;
+  }
+
+  function partition(arr, left, right) {
+    let pivot = arr[Math.floor((left + right) / 2)];
+    let i = left;
+    let j = right;
+
+    while (i <= j) {
+      while (arr[i] < pivot) i++;
+      while (arr[j] > pivot) j--;
+
+      if (i <= j) {
+        swap(arr, i, j);
+        i++;
+        j--;
+      }
+    }
+
+    return i;
+  }
+
+  function swap(arr, a, b) {
+    [arr[a], arr[b]] = [arr[b], arr[a]];
+  }
+};
 // @lc code=end
