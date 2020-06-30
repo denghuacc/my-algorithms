@@ -56,28 +56,28 @@
 /**
  * @param {number[]} nums
  * @return {number}
- * API O(N)/O(1)
+ * API
  */
 var removeDuplicates = function (nums) {
   for (let i = 0; i < nums.length; i++) {
     if (nums[i] === nums[i + 1]) {
-      nums.splice(i, 1)
-      i--
+      nums.splice(i, 1);
+      i--;
     }
   }
-  return nums.length
-}
+  return nums.length;
+};
 
-// 双指针 O(N)/O(1)
+// 双指针
 var removeDuplicates = function (nums) {
-  if (nums.length === 0) return 0
-  let i = 0
+  if (nums.length === 0) return 0;
+  let i = 0;
   for (let j = 1; j < nums.length; j++) {
     if (nums[j] !== nums[i]) {
-      i++
-      nums[i] = nums[j]
+      i++;
+      nums[i] = nums[j];
     }
   }
-  return i + 1
-}
+  return i + 1;
+};
 // @lc code=end
