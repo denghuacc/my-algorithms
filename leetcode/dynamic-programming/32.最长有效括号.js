@@ -67,10 +67,10 @@ var longestValidParentheses = function (s) {
   }
 };
 
-// dp error
+// dp
 var longestValidParentheses = function (s) {
   let maxLen = 0;
-  const dp = [];
+  const dp = new Array(s.length).fill(0);
 
   for (let i = 1; i < s.length; i++) {
     if (s[i] === ")") {
@@ -86,6 +86,7 @@ var longestValidParentheses = function (s) {
 
   return maxLen;
 };
+// @lc code=end
 
 // stack
 var longestValidParentheses = function (s) {
@@ -144,4 +145,3 @@ var longestValidParentheses = function (s) {
   }
   return maxLen;
 };
-// @lc code=end

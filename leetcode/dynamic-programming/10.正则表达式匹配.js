@@ -81,49 +81,49 @@
  * js API
  */
 var isMatch = function (s, p) {
-  return new RegExp('^' + p + '$').test(s)
-}
+  return new RegExp("^" + p + "$").test(s);
+};
 
 // backtrack
 var isMatch = function (s, p) {
-  if (p.length === 0) return s.length === 0
+  if (p.length === 0) return s.length === 0;
 
-  let firstMatch = s.length && (p[0] === s[0] || p[0] === '.')
+  let firstMatch = s.length && (p[0] === s[0] || p[0] === ".");
 
-  if (p.length >= 2 && p[1] === '*') {
+  if (p.length >= 2 && p[1] === "*") {
     return (
       isMatch(s, p.substring(2)) || (firstMatch && isMatch(s.substring(1), p))
-    )
+    );
   } else {
-    return firstMatch && isMatch(s.substring(1), p.substring(1))
+    return firstMatch && isMatch(s.substring(1), p.substring(1));
   }
-}
+};
 
 // dp
 var isMatch = function (s, p) {
-  let n = s.length
-  let m = p.length
-  let dp = Array.from(new Array(n + 1), () => new Array(m + 1).fill(false))
-  dp[0][0] = true
+  let n = s.length;
+  let m = p.length;
+  let dp = Array.from(new Array(n + 1), () => new Array(m + 1).fill(false));
+  dp[0][0] = true;
   for (let i = 0; i <= m; i++) {
-    if (p[i] == '*' && dp[0][i - 1]) {
-      dp[0][i + 1] = true
+    if (p[i] == "*" && dp[0][i - 1]) {
+      dp[0][i + 1] = true;
     }
   }
   for (let i = 1; i <= n; i++) {
     for (let j = 1; j <= m; j++) {
-      if (p[j - 1] == s[i - 1] || p[j - 1] == '.') {
-        dp[i][j] = dp[i - 1][j - 1]
-      } else if (p[j - 1] == '*') {
+      if (p[j - 1] == s[i - 1] || p[j - 1] == ".") {
+        dp[i][j] = dp[i - 1][j - 1];
+      } else if (p[j - 1] == "*") {
         if (p[j - 2] != s[i - 1]) {
-          dp[i][j] = dp[i][j - 2]
+          dp[i][j] = dp[i][j - 2];
         }
-        if (p[j - 2] == s[i - 1] || p[j - 2] == '.') {
-          dp[i][j] = dp[i - 1][j] || dp[i][j - 1] || dp[i][j - 2]
+        if (p[j - 2] == s[i - 1] || p[j - 2] == ".") {
+          dp[i][j] = dp[i - 1][j] || dp[i][j - 1] || dp[i][j - 2];
         }
       }
     }
   }
-  return dp[n][m]
-}
+  return dp[n][m];
+};
 // @lc code=end

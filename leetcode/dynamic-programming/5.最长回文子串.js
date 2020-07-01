@@ -34,29 +34,53 @@
 /**
  * @param {string} s
  * @return {string}
- * 中心扩展法
+ * dp
  */
 var longestPalindrome = function (s) {
-  if (!s || s.length < 2) return s
-  let start = 0,
-    end = 0
-  for (let i = 0; i < s.length; i++) {
-    let len1 = expandAroundCenter(s, i, i)
-    let len2 = expandAroundCenter(s, i, i + 1)
-    let maxLen = Math.max(len1, len2)
-    if (maxLen > end - start) {
-      start = i - ((maxLen - 1) >> 1) // 使用 >> 后 i 不会为负数
-      end = i + (maxLen >> 1)
+  let n = s.length;
+  const dp = Array.from(new Array(n), () => new Array(n).fill(false));
+  let ret = "";
+
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; i < n; j++) {
+      let k = i + j;
+      if (k >= s.length) break;
+
+      if (i === 0) dp[j][k] = true;
+      else if (i === 1) dp[j][k] = s[j] === s[k];
+      else dp[j][k] = dp[j + 1][k - 1] && s[j] === s[k];
+
+      if (dp[j][k] && i + 1 > ret.length) {
+        ret = s.substring(j, k + 1);
+      }
     }
   }
-  return s.substring(start, end + 1)
+
+  return ret;
+};
+
+// 中心扩展法
+var longestPalindrome = function (s) {
+  if (!s || s.length < 2) return s;
+  let start = 0,
+    end = 0;
+  for (let i = 0; i < s.length; i++) {
+    let len1 = expandAroundCenter(s, i, i);
+    let len2 = expandAroundCenter(s, i, i + 1);
+    let maxLen = Math.max(len1, len2);
+    if (maxLen > end - start) {
+      start = i - ((maxLen - 1) >> 1); // 使用 >> 后 i 不会为负数
+      end = i + (maxLen >> 1);
+    }
+  }
+  return s.substring(start, end + 1);
 
   function expandAroundCenter(s, left, right) {
     while (left >= 0 && right < s.length && s[left] === s[right]) {
-      left--
-      right++
+      left--;
+      right++;
     }
-    return right - left - 1
+    return right - left - 1;
   }
-}
+};
 // @lc code=end
