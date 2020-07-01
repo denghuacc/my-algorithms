@@ -2,6 +2,7 @@ import {
   fibonacci,
   fibonacciIterative,
   fibonacciMemoization,
+  fibonacciDP,
 } from "../fibonacci";
 
 describe("Fibonacci", () => {
@@ -30,5 +31,14 @@ describe("Fibonacci", () => {
     expect(fibonacciMemoization(2)).toBe(1);
     expect(fibonacciMemoization(3)).toBe(2);
     expect(fibonacciMemoization(4)).toBe(3);
+  });
+
+  test("Fibonacci with dynamic programming", () => {
+    expect(fibonacciDP(-1)).toBe(0);
+    expect(fibonacciDP(0)).toBe(0);
+    expect(fibonacciDP(1)).toBe(1);
+    expect(fibonacciDP(2)).toBe(1);
+    expect(fibonacciDP(3)).toBe(2);
+    expect(fibonacciDP(4)).toBe(3);
   });
 });
