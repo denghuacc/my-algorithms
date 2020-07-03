@@ -46,15 +46,28 @@
  * 中序遍历
  */
 var sortedArrayToBST = function (nums) {
-  return _sortedArrayToBST(0, nums.length - 1)
+  return toBST(0, nums.length - 1);
 
-  function _sortedArrayToBST(left, right) {
-    if (left > right) return null
-    let mid = Math.floor((left + right) / 2)
-    const root = new TreeNode(nums[mid])
-    root.left = _sortedArrayToBST(left, mid - 1)
-    root.right = _sortedArrayToBST(mid + 1, right)
-    return root
+  function toBST(left, right) {
+    if (left > right) return null;
+    let mid = Math.floor((left + right) / 2);
+    const root = new TreeNode(nums[mid]);
+    root.left = toBST(left, mid - 1);
+    root.right = toBST(mid + 1, right);
+    return root;
   }
-}
+};
 // @lc code=end
+
+var sortedArrayToBST = function (nums) {
+  return toBST(nums, 0, nums.length - 1);
+
+  function toBST(nums, left, right) {
+    if (left > right) return null;
+    let mid = Math.floor((left + right + 1) / 2);
+    const root = new TreeNode(nums[mid]);
+    root.left = toBST(nums, left, mid - 1);
+    root.right = toBST(nums, mid + 1, right);
+    return root;
+  }
+};
