@@ -1,5 +1,5 @@
 /*
- * @lc app=leetcode.cn id=51 lang=javascript
+ * @lc app=leetcode.cn id=51 lang=typescript
  *
  * [51] N皇后
  *
@@ -53,16 +53,13 @@
  */
 
 // @lc code=start
-/**
- * @param {number} n
- * @return {string[][]}
- */
-var solveNQueens = function (n) {
-  const ret = [];
-  dfs(n, [], ret);
+// backtrack1
+var solveNQueens = function (n: number): string[][] {
+  const ret: string[][] = [];
+  backtrack(n, [], ret);
   return ret;
 
-  function dfs(n, tmp, ret) {
+  function backtrack(n: number, tmp: number[], ret: string[][]) {
     if (tmp.length === n) {
       ret.push(
         tmp.map((i) => {
@@ -77,13 +74,13 @@ var solveNQueens = function (n) {
     for (let i = 0; i < n; i++) {
       if (isValid(tmp, i)) {
         tmp.push(i);
-        dfs(n, tmp, ret);
+        backtrack(n, tmp, ret);
         tmp.pop();
       }
     }
   }
 
-  function isValid(arr, idx) {
+  function isValid(arr: number[], idx: number) {
     const len = arr.length;
     for (let i = 0; i < len; i++) {
       const item = arr[i];
@@ -95,16 +92,16 @@ var solveNQueens = function (n) {
   }
 };
 
-// backtrack
-var solveNQueens = function (n) {
-  const obj = {};
-  const add = [];
-  const sub = [];
-  const ret = [];
+// backtrack2
+var solveNQueens = function (n: number): string[][] {
+  const obj: Record<string, number> = {};
+  const add: number[] = [];
+  const sub: number[] = [];
+  const ret: string[][] = [];
   backtrack(0);
   return ret;
 
-  function backtrack(row) {
+  function backtrack(row: number) {
     if (row === n) {
       const arr = [];
       for (const key in obj) {

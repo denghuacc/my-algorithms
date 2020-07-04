@@ -1,5 +1,5 @@
 /*
- * @lc app=leetcode.cn id=52 lang=javascript
+ * @lc app=leetcode.cn id=52 lang=typescript
  *
  * [52] N皇后 II
  *
@@ -56,15 +56,15 @@
  * @param {number} n
  * @return {number}
  */
-var totalNQueens = function (n) {
-  const obj = {};
-  const add = [];
-  const sub = [];
+var totalNQueens = function (n: number): number {
+  const obj: Record<string, number> = {};
+  const add: number[] = [];
+  const sub: number[] = [];
   let ret = 0;
   backtrack(0);
   return ret;
 
-  function backtrack(row) {
+  function backtrack(row: number) {
     if (row === n) {
       ret++;
       return;

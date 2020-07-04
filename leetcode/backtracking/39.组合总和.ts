@@ -1,5 +1,5 @@
 /*
- * @lc app=leetcode.cn id=39 lang=javascript
+ * @lc app=leetcode.cn id=39 lang=typescript
  *
  * [39] 组合总和
  *
@@ -47,19 +47,25 @@
  */
 
 // @lc code=start
-/**
- * @param {number[]} candidates
- * @param {number} target
- * @return {number[][]}
- */
-var combinationSum = function (candidates, target) {
-  const ret = [];
+// backtracking
+var combinationSum = function (
+  candidates: number[],
+  target: number
+): number[][] {
+  const ret: number[][] = [];
   const len = candidates.length;
   candidates.sort((a, b) => a - b);
-  dfs(candidates, len, target, 0, [], ret);
+  backtrack(candidates, len, target, 0, [], ret);
   return ret;
 
-  function dfs(candidates, len, residue, begin, path, ret) {
+  function backtrack(
+    candidates: number[],
+    len: number,
+    residue: number,
+    begin: number,
+    path: number[],
+    ret: number[][]
+  ) {
     if (residue === 0) {
       ret.push(path.slice());
       return;
@@ -68,7 +74,7 @@ var combinationSum = function (candidates, target) {
     for (let i = begin; i < len; i++) {
       if (residue - candidates[i] < 0) break;
       path.push(candidates[i]);
-      dfs(candidates, len, residue - candidates[i], i, path, ret);
+      backtrack(candidates, len, residue - candidates[i], i, path, ret);
       path.pop();
     }
   }

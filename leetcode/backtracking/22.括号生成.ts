@@ -1,5 +1,5 @@
 /*
- * @lc app=leetcode.cn id=22 lang=javascript
+ * @lc app=leetcode.cn id=22 lang=typescript
  *
  * [22] 括号生成
  *
@@ -32,17 +32,19 @@
  */
 
 // @lc code=start
-/**
- * @param {number} n
- * @return {string[]}
- * backtrack
- */
-var generateParenthesis = function (n) {
-  const ret = [];
+// backtracking
+var generateParenthesis = function (n: number): string[] {
+  const ret: string[] = [];
   backtrack(ret, "", 0, 0, n);
   return ret;
 
-  function backtrack(ret, cur, open, close, max) {
+  function backtrack(
+    ret: string[],
+    cur: string,
+    open: number,
+    close: number,
+    max: number
+  ) {
     if (cur.length === max * 2) {
       ret.push(cur);
       return;
@@ -62,11 +64,11 @@ var generateParenthesis = function (n) {
   }
 };
 
-var generateParenthesis = function (n) {
-  const cache = [];
+var generateParenthesis = function (n: number): string[] {
+  const cache: string[][] = [];
   return generate(n);
 
-  function generate(n) {
+  function generate(n: number): string[] {
     if (cache[n] != null) return cache[n];
     const ret = [];
 
