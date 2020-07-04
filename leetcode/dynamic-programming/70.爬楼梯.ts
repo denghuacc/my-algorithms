@@ -1,5 +1,5 @@
 /*
- * @lc app=leetcode.cn id=70 lang=javascript
+ * @lc app=leetcode.cn id=70 lang=typescript
  *
  * [70] 爬楼梯
  *
@@ -45,21 +45,21 @@
  * @return {number}
  * 斐波那契数列 -> 动态规划
  */
-var climbStairs = function (n) {
-  const dp = []
-  dp[0] = 1
-  dp[1] = 1
+var climbStairs = function (n: number): number {
+  const dp: number[] = [];
+  dp[0] = 1;
+  dp[1] = 1;
   for (let i = 2; i <= n; i++) {
-    dp[i] = dp[i - 1] + dp[i - 2]
+    dp[i] = dp[i - 1] + dp[i - 2];
   }
-  return dp[n]
-}
+  return dp[n];
+};
 
 // 斐波那契数列 -> 公式
-var climbStairs = function (n) {
-  const sqrt5 = Math.sqrt(5)
+var climbStairs = function (n: number): number {
+  const sqrt5 = Math.sqrt(5);
   const fibN =
-    Math.pow((1 + sqrt5) / 2, n + 1) - Math.pow((1 - sqrt5) / 2, n + 1)
-  return Math.round(fibN / sqrt5)
-}
+    Math.pow((1 + sqrt5) / 2, n + 1) - Math.pow((1 - sqrt5) / 2, n + 1);
+  return Math.round(fibN / sqrt5);
+};
 // @lc code=end

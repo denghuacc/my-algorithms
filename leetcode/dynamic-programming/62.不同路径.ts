@@ -1,5 +1,5 @@
 /*
- * @lc app=leetcode.cn id=62 lang=javascript
+ * @lc app=leetcode.cn id=62 lang=typescript
  *
  * [62] 不同路径
  *
@@ -53,16 +53,9 @@
  */
 
 // @lc code=start
-/**
- * @param {number} m
- * @param {number} n
- * @return {number}
- * dp
- */
-var uniquePaths = function (m, n) {
-  const dp = Array(m)
-    .fill(0)
-    .map(() => Array(n).fill(0));
+// dp
+var uniquePaths = function (m: number, n: number): number {
+  const dp = new Array(m).fill(0).map(() => new Array<number>(n).fill(0));
   for (let i = 0; i < n; i++) dp[0][i] = 1;
   for (let i = 0; i < m; i++) dp[i][0] = 1;
   for (let i = 1; i < m; i++) {
@@ -74,9 +67,9 @@ var uniquePaths = function (m, n) {
 };
 
 // optimize1
-var uniquePaths = function (m, n) {
-  let pre = Array(n).fill(1);
-  let cur = Array(n).fill(1);
+var uniquePaths = function (m: number, n: number): number {
+  let pre = new Array<number>(n).fill(1);
+  let cur = new Array<number>(n).fill(1);
 
   for (let i = 1; i < m; i++) {
     for (let j = 1; j < n; j++) {
@@ -88,8 +81,8 @@ var uniquePaths = function (m, n) {
 };
 
 // optimize2
-var uniquePaths = function (m, n) {
-  const cur = Array(n).fill(1);
+var uniquePaths = function (m: number, n: number): number {
+  const cur = new Array<number>(n).fill(1);
   for (let i = 1; i < m; i++) {
     for (let j = 1; j < n; j++) {
       cur[j] += cur[j - 1];

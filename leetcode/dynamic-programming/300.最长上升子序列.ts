@@ -1,5 +1,5 @@
 /*
- * @lc app=leetcode.cn id=300 lang=javascript
+ * @lc app=leetcode.cn id=300 lang=typescript
  *
  * [300] 最长上升子序列
  *
@@ -33,15 +33,11 @@
  */
 
 // @lc code=start
-/**
- * @param {number[]} nums
- * @return {number}
- * dp
- */
-var lengthOfLIS = function (nums) {
+// dp
+var lengthOfLIS = function (nums: number[]): number {
   if (nums.length === 0) return 0;
 
-  const dp = Array(nums.length);
+  const dp = new Array<number>(nums.length);
   dp[0] = 1;
   let len = 1;
 
@@ -60,8 +56,8 @@ var lengthOfLIS = function (nums) {
 };
 
 // dp2
-var lengthOfLIS = function (nums) {
-  const dp = Array(nums.length).fill(1); // base case
+var lengthOfLIS = function (nums: number[]): number {
+  const dp = Array<number>(nums.length).fill(1); // base case
 
   for (let i = 0; i < nums.length; i++) {
     for (let j = 0; j < i; j++) {
@@ -79,12 +75,12 @@ var lengthOfLIS = function (nums) {
 };
 
 // Greedy
-var lengthOfLIS = function (nums) {
+var lengthOfLIS = function (nums: number[]): number {
   let len = 1;
   let n = nums.length;
   if (n === 0) return 0;
 
-  const arr = new Array(n + 1);
+  const arr = new Array<number>(n + 1);
   arr[len] = nums[0];
 
   for (let i = 1; i < n; ++i) {
@@ -113,8 +109,8 @@ var lengthOfLIS = function (nums) {
 };
 
 // binary search
-var lengthOfLIS = function (nums) {
-  const top = Array(nums.length);
+var lengthOfLIS = function (nums: number[]): number {
+  const top = new Array<number>(nums.length);
   let piles = 0;
   for (let i = 0; i < nums.length; i++) {
     let poker = nums[i];

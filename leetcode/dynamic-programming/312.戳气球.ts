@@ -1,5 +1,5 @@
 /*
- * @lc app=leetcode.cn id=312 lang=javascript
+ * @lc app=leetcode.cn id=312 lang=typescript
  *
  * [312] 戳气球
  *
@@ -38,12 +38,8 @@
  */
 
 // @lc code=start
-/**
- * @param {number[]} nums
- * @return {number}
- * dp1 自底向上
- */
-var maxCoins = function (nums) {
+// dp1 自底向上
+var maxCoins = function (nums: number[]): number {
   const n = nums.length;
 
   const newNums = new Array(n + 2).fill(0);
@@ -53,7 +49,9 @@ var maxCoins = function (nums) {
   }
 
   // base case
-  const dp = Array.from(new Array(n + 2), () => new Array(n + 2).fill(0));
+  const dp = Array.from(new Array(n + 2), () =>
+    new Array<number>(n + 2).fill(0)
+  );
 
   // 从下到上
   for (let i = n; i >= 0; i--) {
@@ -73,20 +71,22 @@ var maxCoins = function (nums) {
 };
 
 // dp2 自顶向下 递归
-var maxCoins = function (nums) {
+var maxCoins = function (nums: number[]): number {
   const n = nums.length;
 
-  const newNums = new Array(n + 2).fill(0);
+  const newNums = new Array<number>(n + 2).fill(0);
   newNums[0] = newNums[n + 1] = 1; // 两侧虚拟气球数字
   for (let i = 1; i <= n; i++) {
     newNums[i] = nums[i - 1];
   }
 
-  const memo = Array.from(new Array(n + 2), () => new Array(n + 2).fill(0));
+  const memo = Array.from(new Array(n + 2), () =>
+    new Array<number>(n + 2).fill(0)
+  );
 
   return dp(memo, newNums, 0, n + 1);
 
-  function dp(memo, nums, left, right) {
+  function dp(memo: number[][], nums: number[], left: number, right: number) {
     if (left + 1 === right) return 0;
     if (memo[left][right] > 0) return memo[left][right];
     let ret = 0;

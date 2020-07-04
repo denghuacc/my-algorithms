@@ -1,5 +1,5 @@
 /*
- * @lc app=leetcode.cn id=53 lang=javascript
+ * @lc app=leetcode.cn id=53 lang=typescript
  *
  * [53] 最大子序和
  *
@@ -29,13 +29,9 @@
  */
 
 // @lc code=start
-/**
- * @param {number[]} nums
- * @return {number}
- * dp
- */
-var maxSubArray = function (nums) {
-  const dp = new Array(nums.length);
+// dp
+var maxSubArray = function (nums: number[]): number {
+  const dp = new Array<number>(nums.length);
   let ret = (dp[0] = nums[0]);
   for (let i = 1; i < nums.length; i++) {
     dp[i] = nums[i];
@@ -48,7 +44,7 @@ var maxSubArray = function (nums) {
 };
 
 // dp 空间复杂度 O(1)
-var maxSubArray = function (nums) {
+var maxSubArray = function (nums: number[]): number {
   let ret = nums[0];
   for (let i = 1; i < nums.length; i++) {
     if (nums[i - 1] > 0) nums[i] += nums[i - 1];
@@ -58,10 +54,10 @@ var maxSubArray = function (nums) {
 };
 
 // dp
-var maxSubArray = function (nums) {
+var maxSubArray = function (nums: number[]): number {
   let n = nums.length;
   if (n === 0) return 0;
-  const dp = new Array(n);
+  const dp = new Array<number>(n);
   dp[0] = nums[0];
 
   for (let i = 1; i < n; i++) {
@@ -77,7 +73,7 @@ var maxSubArray = function (nums) {
 };
 
 // dp 空间复杂度降低
-var maxSubArray = function (nums) {
+var maxSubArray = function (nums: number[]): number {
   let n = nums.length;
   if (n === 0) return 0;
   let dp0 = nums[0];
@@ -94,7 +90,7 @@ var maxSubArray = function (nums) {
 };
 
 // greedy
-var maxSubArray = function (nums) {
+var maxSubArray = function (nums: number[]): number {
   let ret = nums[0];
   let sum = 0;
   for (const num of nums) {
@@ -108,8 +104,10 @@ var maxSubArray = function (nums) {
 };
 
 // greedy2
-var maxSubArray = function (nums) {
-  let maxSum = (sum = nums[0]);
+var maxSubArray = function (nums: number[]): number {
+  let maxSum: number;
+  let sum: number;
+  maxSum = sum = nums[0];
   for (let i = 1; i < nums.length; i++) {
     sum = Math.max(nums[i], sum + nums[i]);
     maxSum = Math.max(maxSum, sum);

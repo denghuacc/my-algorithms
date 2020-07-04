@@ -1,5 +1,5 @@
 /*
- * @lc app=leetcode.cn id=10 lang=javascript
+ * @lc app=leetcode.cn id=10 lang=typescript
  *
  * [10] 正则表达式匹配
  *
@@ -74,21 +74,16 @@
  */
 
 // @lc code=start
-/**
- * @param {string} s
- * @param {string} p
- * @return {boolean}
- * js API
- */
-var isMatch = function (s, p) {
+// js API
+var isMatch = function (s: string, p: string): boolean {
   return new RegExp("^" + p + "$").test(s);
 };
 
 // backtrack
-var isMatch = function (s, p) {
+var isMatch = function (s: string, p: string): boolean {
   if (p.length === 0) return s.length === 0;
 
-  let firstMatch = s.length && (p[0] === s[0] || p[0] === ".");
+  let firstMatch = (s.length && (p[0] === s[0] || p[0] === ".")) || false;
 
   if (p.length >= 2 && p[1] === "*") {
     return (
@@ -100,10 +95,12 @@ var isMatch = function (s, p) {
 };
 
 // dp
-var isMatch = function (s, p) {
+var isMatch = function (s: string, p: string): boolean {
   let n = s.length;
   let m = p.length;
-  let dp = Array.from(new Array(n + 1), () => new Array(m + 1).fill(false));
+  let dp = Array.from(new Array(n + 1), () =>
+    new Array<boolean>(m + 1).fill(false)
+  );
   dp[0][0] = true;
   for (let i = 0; i <= m; i++) {
     if (p[i] == "*" && dp[0][i - 1]) {

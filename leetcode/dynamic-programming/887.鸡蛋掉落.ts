@@ -1,5 +1,5 @@
 /*
- * @lc app=leetcode.cn id=887 lang=javascript
+ * @lc app=leetcode.cn id=887 lang=typescript
  *
  * [887] 鸡蛋掉落
  *
@@ -65,24 +65,19 @@
  */
 
 // @lc code=start
-/**
- * @param {number} K
- * @param {number} N
- * @return {number}
- * dp timeout
- */
-var superEggDrop = function (K, N) {
-  const cache = new Map();
+// dp timeout
+var superEggDrop = function (K: number, N: number): number {
+  const cache = new Map<number, number>();
   return dp(K, N);
 
-  function dp(K, N) {
+  function dp(K: number, N: number): number {
     // base case
     if (K === 1) return N;
     if (N === 0) return 0;
 
     const key = N * 100 + K;
 
-    if (cache.has(key)) return cache.get(key);
+    if (cache.has(key)) return cache.get(key)!;
 
     let ret = Infinity;
     for (let i = 1; i < N + 1; i++) {
@@ -95,11 +90,13 @@ var superEggDrop = function (K, N) {
 };
 
 // dp + binary search
-var superEggDrop = function (K, N) {
-  const dp = Array.from(new Array(K + 1), () => new Array(N + 1).fill(-1));
+var superEggDrop = function (K: number, N: number): number {
+  const dp = Array.from(new Array(K + 1), () =>
+    new Array<number>(N + 1).fill(-1)
+  );
   return dpf(K, N);
 
-  function dpf(K, N) {
+  function dpf(K: number, N: number): number {
     if (dp[K][N] !== -1) return dp[K][N];
     if (N === 0) return 0;
     if (K === 1) return N;
@@ -129,8 +126,10 @@ var superEggDrop = function (K, N) {
 };
 
 // new dp two-dimension
-var superEggDrop = function (K, N) {
-  const dp = Array.from(new Array(K + 1), () => new Array(N + 1).fill(0));
+var superEggDrop = function (K: number, N: number): number {
+  const dp = Array.from(new Array(K + 1), () =>
+    new Array<number>(N + 1).fill(0)
+  );
   let m = 0;
 
   while (dp[K][m] < N) {
@@ -144,8 +143,8 @@ var superEggDrop = function (K, N) {
 };
 
 // new dp one-dimension
-var superEggDrop = function (K, N) {
-  const dp = new Array(K + 1).fill(0);
+var superEggDrop = function (K: number, N: number): number {
+  const dp = new Array<number>(K + 1).fill(0);
   let m = 0;
 
   while (dp[K] < N) {

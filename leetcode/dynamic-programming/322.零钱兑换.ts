@@ -1,5 +1,5 @@
 /*
- * @lc app=leetcode.cn id=322 lang=javascript
+ * @lc app=leetcode.cn id=322 lang=typescript
  *
  * [322] 零钱兑换
  *
@@ -37,16 +37,11 @@
  */
 
 // @lc code=start
-/**
- * @param {number[]} coins
- * @param {number} amount
- * @return {number}
- * 没有 memo 超时
- */
-var coinChange = function (coins, amount) {
+// 没有 memo 超时
+var coinChange = function (coins: number[], amount: number): number {
   return dp(amount);
 
-  function dp(n) {
+  function dp(n: number): number {
     if (n < 0) return -1;
     if (n === 0) return 0;
     let ret = Infinity;
@@ -62,11 +57,11 @@ var coinChange = function (coins, amount) {
 };
 
 // memo
-var coinChange = function (coins, amount) {
-  const memo = [];
+var coinChange = function (coins: number[], amount: number): number {
+  const memo: number[] = [];
   return dp(amount);
 
-  function dp(n) {
+  function dp(n: number): number {
     if (memo[n]) return memo[n];
 
     if (n < 0) return -1;
@@ -83,8 +78,8 @@ var coinChange = function (coins, amount) {
   }
 };
 
-var coinChange = function (coins, amount) {
-  const dp = Array(amount + 1).fill(amount + 1);
+var coinChange = function (coins: number[], amount: number): number {
+  const dp = new Array<number>(amount + 1).fill(amount + 1);
   dp[0] = 0;
 
   for (let i = 0; i < dp.length; i++) {

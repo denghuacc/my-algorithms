@@ -1,5 +1,5 @@
 /*
- * @lc app=leetcode.cn id=63 lang=javascript
+ * @lc app=leetcode.cn id=63 lang=typescript
  *
  * [63] 不同路径 II
  *
@@ -44,16 +44,12 @@
  */
 
 // @lc code=start
-/**
- * @param {number[][]} obstacleGrid
- * @return {number}
- */
-var uniquePathsWithObstacles = function (obstacleGrid) {
+var uniquePathsWithObstacles = function (obstacleGrid: number[][]): number {
   const n = obstacleGrid.length;
   const m = obstacleGrid[0].length;
   const dp = Array(n)
     .fill(0)
-    .map(() => Array(m).fill(0));
+    .map(() => Array<number>(m).fill(0));
   dp[0][0] = obstacleGrid[0][0] === 0 ? 1 : 0;
   if (dp[0][0] === 0) return 0;
 
@@ -82,10 +78,10 @@ var uniquePathsWithObstacles = function (obstacleGrid) {
   return dp[n - 1][m - 1];
 };
 
-var uniquePathsWithObstacles = function (obstacleGrid) {
+var uniquePathsWithObstacles = function (obstacleGrid: number[][]): number {
   const n = obstacleGrid.length;
   const m = obstacleGrid[0].length;
-  const ret = Array(m).fill(0);
+  const ret = Array<number>(m).fill(0);
 
   ret[0] = 1;
 

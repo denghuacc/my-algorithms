@@ -1,5 +1,5 @@
 /*
- * @lc app=leetcode.cn id=64 lang=javascript
+ * @lc app=leetcode.cn id=64 lang=typescript
  *
  * [64] 最小路径和
  *
@@ -32,18 +32,14 @@
  */
 
 // @lc code=start
-/**
- * @param {number[][]} grid
- * @return {number}
- * 二维 dp
- */
-var minPathSum = function (grid) {
+// dp two-dimension
+var minPathSum = function (grid: number[][]): number {
   const n = grid.length;
   const m = grid[0].length;
 
   const dp = Array(n)
     .fill(0)
-    .map(() => Array(m).fill(0));
+    .map(() => Array<number>(m).fill(0));
 
   for (let i = n - 1; i >= 0; i--) {
     for (let j = m - 1; j >= 0; j--) {
@@ -58,12 +54,12 @@ var minPathSum = function (grid) {
   return dp[0][0];
 };
 
-// 一维 dp
-var minPathSum = function (grid) {
+// dp two-dimension
+var minPathSum = function (grid: number[][]): number {
   const n = grid.length;
   const m = grid[0].length;
 
-  const dp = Array(m).fill(0);
+  const dp = Array<number>(m).fill(0);
 
   for (let i = n - 1; i >= 0; i--) {
     for (let j = m - 1; j >= 0; j--) {
@@ -79,7 +75,7 @@ var minPathSum = function (grid) {
 };
 
 // 空间复杂度 O(1)
-var minPathSum = function (grid) {
+var minPathSum = function (grid: number[][]): number {
   const n = grid.length;
   const m = grid[0].length;
 

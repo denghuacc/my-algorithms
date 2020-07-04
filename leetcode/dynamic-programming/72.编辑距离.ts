@@ -1,5 +1,5 @@
 /*
- * @lc app=leetcode.cn id=72 lang=javascript
+ * @lc app=leetcode.cn id=72 lang=typescript
  *
  * [72] 编辑距离
  *
@@ -50,13 +50,8 @@
  */
 
 // @lc code=start
-/**
- * @param {string} word1
- * @param {string} word2
- * @return {number}
- * dp
- */
-var minDistance = function (word1, word2) {
+// dp
+var minDistance = function (word1: string, word2: string): number {
   const n = word1.length;
   const m = word2.length;
 
@@ -64,7 +59,7 @@ var minDistance = function (word1, word2) {
 
   const dp = Array(n + 1)
     .fill(0)
-    .map(() => Array(m + 1).fill(0));
+    .map(() => Array<number>(m + 1).fill(0));
 
   // 边界状态
   for (let i = 0; i < n + 1; i++) {

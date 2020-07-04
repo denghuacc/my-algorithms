@@ -1,5 +1,5 @@
 /*
- * @lc app=leetcode.cn id=5 lang=javascript
+ * @lc app=leetcode.cn id=5 lang=typescript
  *
  * [5] 最长回文子串
  *
@@ -31,14 +31,10 @@
  */
 
 // @lc code=start
-/**
- * @param {string} s
- * @return {string}
- * dp
- */
-var longestPalindrome = function (s) {
+// dp
+var longestPalindrome = function (s: string): string {
   let n = s.length;
-  const dp = Array.from(new Array(n), () => new Array(n).fill(false));
+  const dp = Array.from(new Array(n), () => new Array<boolean>(n).fill(false));
   let ret = "";
 
   for (let i = 0; i < n; i++) {
@@ -60,10 +56,10 @@ var longestPalindrome = function (s) {
 };
 
 // 中心扩展法
-var longestPalindrome = function (s) {
+var longestPalindrome = function (s: string): string {
   if (!s || s.length < 2) return s;
-  let start = 0,
-    end = 0;
+  let start = 0;
+  let end = 0;
   for (let i = 0; i < s.length; i++) {
     let len1 = expandAroundCenter(s, i, i);
     let len2 = expandAroundCenter(s, i, i + 1);
@@ -75,7 +71,7 @@ var longestPalindrome = function (s) {
   }
   return s.substring(start, end + 1);
 
-  function expandAroundCenter(s, left, right) {
+  function expandAroundCenter(s: string, left: number, right: number) {
     while (left >= 0 && right < s.length && s[left] === s[right]) {
       left--;
       right++;

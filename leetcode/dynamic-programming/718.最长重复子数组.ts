@@ -1,5 +1,5 @@
 /*
- * @lc app=leetcode.cn id=718 lang=javascript
+ * @lc app=leetcode.cn id=718 lang=typescript
  *
  * [718] 最长重复子数组
  *
@@ -36,18 +36,13 @@
  */
 
 // @lc code=start
-/**
- * @param {number[]} A
- * @param {number[]} B
- * @return {number}
- * dp
- */
-var findLength = function (A, B) {
+// dp
+var findLength = function (A: number[], B: number[]): number {
   const n = A.length;
   const m = B.length;
-  const dp = Array(n + 1)
-    .fill()
-    .map(() => Array(m + 1).fill(0));
+  const dp = Array.from(new Array(n + 1), () =>
+    new Array<number>(m + 1).fill(0)
+  );
   let ret = 0;
 
   for (let i = n - 1; i >= 0; i--) {
@@ -61,7 +56,7 @@ var findLength = function (A, B) {
 };
 
 // 滑动窗口
-var findLength = function (A, B) {
+var findLength = function (A: number[], B: number[]): number {
   const n = A.length;
   const m = B.length;
   let ret = 0;
@@ -83,7 +78,13 @@ var findLength = function (A, B) {
 
   return ret;
 
-  function maxLength(A, B, addA, addB, len) {
+  function maxLength(
+    A: number[],
+    B: number[],
+    addA: number,
+    addB: number,
+    len: number
+  ) {
     let ret = 0;
     let k = 0;
     for (let i = 0; i < len; i++) {
