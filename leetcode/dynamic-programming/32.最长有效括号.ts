@@ -1,5 +1,5 @@
 /*
- * @lc app=leetcode.cn id=32 lang=javascript
+ * @lc app=leetcode.cn id=32 lang=typescript
  *
  * [32] 最长有效括号
  *
@@ -32,12 +32,8 @@
  */
 
 // @lc code=start
-/**
- * @param {string} s
- * @return {number}
- * 暴力超时
- */
-var longestValidParentheses = function (s) {
+// 暴力超时
+var longestValidParentheses = function (s: string): number {
   let maxLen = 0;
 
   for (let i = 0; i < s.length; i++) {
@@ -50,7 +46,7 @@ var longestValidParentheses = function (s) {
 
   return maxLen;
 
-  function isValid(s) {
+  function isValid(s: string): boolean {
     const stack = [];
 
     for (let i = 0; i < s.length; i++) {
@@ -68,9 +64,9 @@ var longestValidParentheses = function (s) {
 };
 
 // dp
-var longestValidParentheses = function (s) {
+var longestValidParentheses = function (s: string): number {
   let maxLen = 0;
-  const dp = new Array(s.length).fill(0);
+  const dp: number[] = new Array(s.length).fill(0);
 
   for (let i = 1; i < s.length; i++) {
     if (s[i] === ")") {
@@ -86,12 +82,11 @@ var longestValidParentheses = function (s) {
 
   return maxLen;
 };
-// @lc code=end
 
 // stack
-var longestValidParentheses = function (s) {
+var longestValidParentheses = function (s: string): number {
   let maxLen = 0;
-  const stack = [];
+  const stack: number[] = [];
   stack.push(-1);
   for (let i = 0; i < s.length; i++) {
     if (s[i] === "(") {
@@ -109,7 +104,7 @@ var longestValidParentheses = function (s) {
 };
 
 // double pointer
-var longestValidParentheses = function (s) {
+var longestValidParentheses = function (s: string): number {
   let left = 0;
   let right = 0;
   let maxLen = 0;
@@ -145,3 +140,4 @@ var longestValidParentheses = function (s) {
   }
   return maxLen;
 };
+// @lc code=end
