@@ -1,9 +1,13 @@
 {
   "compilerOptions": {
-    "target": "ES6",
-    "module": "commonjs",
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "node",
     "lib": ["ESNext", "DOM"],
-    "strict": true
+    "strict": true,
+    "allowJs": false,
+    "experimentalDecorators": true,
+    "noImplicitAny": true
   },
   "exclude": ["node_modules"]
 }
