@@ -103,7 +103,7 @@ var longestValidParentheses = function (s: string): number {
   return maxLen;
 };
 
-// double pointer
+// two pointers
 var longestValidParentheses = function (s: string): number {
   let left = 0;
   let right = 0;

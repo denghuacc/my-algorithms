@@ -1,0 +1,104 @@
+/*
+ * @lc app=leetcode.cn id=113 lang=typescript
+ *
+ * [113] 路径总和 II
+ *
+ * https://leetcode-cn.com/problems/path-sum-ii/description/
+ *
+ * algorithms
+ * Medium (51.32%)
+ * Likes:    210
+ * Dislikes: 0
+ * Total Accepted:    44K
+ * Total Submissions: 74.3K
+ * Testcase Example:  '[5,4,8,11,null,13,4,7,2,null,null,5,1]\n22'
+ *
+ * 给定一个二叉树和一个目标和，找到所有从根节点到叶子节点路径总和等于给定目标和的路径。
+ *
+ * 说明: 叶子节点是指没有子节点的节点。
+ *
+ * 示例:
+ * 给定如下二叉树，以及目标和 sum = 22，
+ *
+ * ⁠             5
+ * ⁠            / \
+ * ⁠           4   8
+ * ⁠          /   / \
+ * ⁠         11  13  4
+ * ⁠        /  \    / \
+ * ⁠       7    2  5   1
+ *
+ *
+ * 返回:
+ *
+ * [
+ * ⁠  [5,4,11,2],
+ * ⁠  [5,8,4,5]
+ * ]
+ *
+ *
+ */
+
+export {};
+
+class TreeNode {
+  val: number;
+  left: TreeNode | null;
+  right: TreeNode | null;
+  constructor(val?: number, left?: TreeNode | null, right?: TreeNode | null) {
+    this.val = val === undefined ? 0 : val;
+    this.left = left === undefined ? null : left;
+    this.right = right === undefined ? null : right;
+  }
+}
+
+// @lc code=start
+// recursive
+var pathSum = function (root: TreeNode | null, sum: number): number[][] {
+  const ret: number[][] = [];
+  _path(root, sum, ret, []);
+  return ret;
+
+  function _path(
+    root: TreeNode | null,
+    sum: number,
+    ret: number[][],
+    path: number[]
+  ) {
+    if (!root) return;
+    path = [...path, root.val];
+    if (!root.left && !root.right && root.val === sum) {
+      ret.push(path);
+      return;
+    }
+    _path(root.left, sum - root.val, ret, path);
+    _path(root.right, sum - root.val, ret, path);
+  }
+};
+
+// iterative
+var pathSum = function (root: TreeNode | null, sum: number): number[][] {
+  if (!root) return [];
+  const stack: Array<[TreeNode | null, number, number[]]> = [
+    [root, sum, [root.val]],
+  ];
+  const ret = [];
+
+  while (stack.length) {
+    const [node, num, path] = stack.pop()!;
+    if (!node?.left && !node?.right && node?.val === num) {
+      ret.push(path);
+    }
+
+    if (node?.right) {
+      stack.push([node.right, num - node.val, [...path, node.right.val]]);
+    }
+
+    if (node?.left) {
+      stack.push([node.left, num - node.val, [...path, node.left.val]]);
+    }
+  }
+
+  return ret;
+};
+// @lc code=end
