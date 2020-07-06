@@ -38,15 +38,49 @@
  *
  */
 
+export {};
+
 // @lc code=start
-/**
- * @param {number[]} prices
- * @return {number}
- * two traverse
- */
+
+// dp
+var maxProfit = function (prices: number[]): number {
+  const n = prices.length;
+  if (n === 0) return 0;
+  const dp = Array.from(new Array(n), () => new Array<number>(2).fill(0));
+
+  for (let i = 0; i < n; i++) {
+    if (i - 1 === -1) {
+      dp[i][0] = 0;
+      dp[i][1] = -prices[i];
+      continue;
+    }
+
+    dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
+    dp[i][1] = Math.max(dp[i - 1][1], -prices[i]);
+  }
+
+  return dp[n - 1][0];
+};
+
+// dp2 optimization
+var maxProfit = function (prices: number[]): number {
+  const n = prices.length;
+  let dpI0 = 0;
+  let dpI1 = -Infinity;
+
+  for (let i = 0; i < n; i++) {
+    dpI0 = Math.max(dpI0, dpI1 + prices[i]);
+    dpI1 = Math.max(dpI1, -prices[i]);
+  }
+
+  return dpI0;
+};
+
+// 暴力
+// two traverse
 var maxProfit = function (prices: number[]): number {
   let max = 0;
-  for (let i = 0; i < prices.length; i++) {
+  for (let i = 0; i < prices.length - 1; i++) {
     for (let j = i + 1; j < prices.length; j++) {
       let profit = prices[j] - prices[i];
       max = Math.max(max, profit);

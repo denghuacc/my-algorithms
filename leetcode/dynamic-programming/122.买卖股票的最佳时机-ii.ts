@@ -56,7 +56,25 @@
  *
  */
 
+export {};
+
 // @lc code=start
+// dp
+var maxProfit = function (prices: number[]): number {
+  const n = prices.length;
+  let dpI0 = 0;
+  let dpI1 = -Infinity;
+
+  for (let i = 0; i < n; i++) {
+    let tmp = dpI0;
+    dpI0 = Math.max(dpI0, dpI1 + prices[i]);
+    dpI1 = Math.max(dpI1, tmp - prices[i]);
+  }
+
+  return dpI0;
+};
+// @lc code=end
+
 // 暴力法超时
 var maxProfit = function (prices: number[]): number {
   return calculate(prices, 0);
@@ -108,6 +126,7 @@ var maxProfit = function (prices: number[]): number {
   return maxProfit;
 };
 
+// one traverse
 var maxProfit = function (prices: number[]): number {
   let maxProfit = 0;
 
@@ -119,4 +138,3 @@ var maxProfit = function (prices: number[]): number {
 
   return maxProfit;
 };
-// @lc code=end
