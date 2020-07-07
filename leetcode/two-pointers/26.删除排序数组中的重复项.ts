@@ -64,7 +64,7 @@ var removeDuplicates = function (nums: number[]): number {
   return nums.length;
 };
 
-// 双指针
+// two pointers
 var removeDuplicates = function (nums: number[]): number {
   if (nums.length === 0) return 0;
   let i = 0;

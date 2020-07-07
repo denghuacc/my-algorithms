@@ -34,17 +34,18 @@
 export {};
 
 // @lc code=start
+// two pointers
 var isPalindrome = function (s: string): boolean {
   s = s.replace(/[^0-9a-zA-Z]/g, "").toLowerCase();
-  let l = 0;
-  let r = s.length - 1;
+  let left = 0;
+  let right = s.length - 1;
 
-  while (l < r) {
-    if (s[l] !== s[r]) {
+  while (left < right) {
+    if (s[left] !== s[right]) {
       return false;
     }
-    l++;
-    r--;
+    left++;
+    right--;
   }
 
   return true;

@@ -33,6 +33,7 @@
 /**
  * Do not return anything, modify nums in-place instead.
  */
+// two pointers
 var moveZeroes = function (nums: number[]): void {
   let point = 0;
   for (let i = 0; i < nums.length; i++) {
@@ -43,7 +44,7 @@ var moveZeroes = function (nums: number[]): void {
   }
 };
 
-// 双指针
+// two pointers
 var moveZeroes = function (nums: number[]): void {
   let point = 0;
   for (let i = 0; i < nums.length; i++) {

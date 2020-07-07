@@ -34,20 +34,20 @@
  */
 
 // @lc code=start
-// 双指针
+// two pointers
 var threeSum = function (nums: number[]): number[][] {
-  let ret: number[][] = [];
-  const len = nums.length;
-  if (nums == null || len < 3) return ret;
+  const ret: number[][] = [];
+  const n = nums.length;
+  if (nums == null || n < 3) return ret;
 
   nums.sort((a, b) => a - b); // 排序
 
-  for (let i = 0; i < len; i++) {
+  for (let i = 0; i < n; i++) {
     if (nums[i] > 0) break; // 如果当前数字大于 0，则三数之和一定大于 0，所以结束循环
     if (i > 0 && nums[i] === nums[i - 1]) continue; // 去重
 
     let L = i + 1;
-    let R = len - 1;
+    let R = n - 1;
     while (L < R) {
       const sum = nums[i] + nums[L] + nums[R];
 

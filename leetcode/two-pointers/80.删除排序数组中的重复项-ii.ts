@@ -54,7 +54,7 @@
  */
 
 // @lc code=start
-// 删除多余的重复项
+// two pointers - 删除多余的重复项
 var removeDuplicates = function (nums: number[]): number {
   let i = 1;
   let count = 1;
@@ -84,7 +84,7 @@ var removeDuplicates = function (nums: number[]): number {
   }
 };
 
-// 覆盖多余的重复项
+// two pointers - 覆盖多余的重复项
 var removeDuplicates = function (nums: number[]): number {
   let i = 1;
   let count = 1;

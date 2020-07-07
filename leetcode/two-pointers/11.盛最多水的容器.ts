@@ -34,26 +34,26 @@
  */
 
 // @lc code=start
-// 双指针
+// two pointers
 var maxArea = function (height: number[]): number {
-  let l = 0;
-  let r = height.length - 1;
+  let left = 0;
+  let right = height.length - 1;
   let max = 0;
-  while (l < r) {
-    const area = Math.min(height[l], height[r]) * (r - l); // 高 * 宽
+  while (left < right) {
+    const area = Math.min(height[left], height[right]) * (right - left); // 高 * 宽
     max = Math.max(max, area);
 
     // 改变最短高度
-    if (height[l] <= height[r]) {
-      ++l;
+    if (height[left] <= height[right]) {
+      ++left;
     } else {
-      --r;
+      --right;
     }
   }
   return max;
 };
 
-// 暴力法
+// brute force
 var maxArea = function (height: number[]): number {
   let ret = 0;
   for (let i = 0; i < height.length - 1; i++) {

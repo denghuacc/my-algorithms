@@ -35,14 +35,17 @@
  * 输出: [1,2,2,3,5,6]
  *
  */
+
 export {};
+
 // @lc code=start
+// API
 var merge = function (nums1: number[], m: number, nums2: number[], n: number) {
   nums1.splice(m, n, ...nums2);
   nums1.sort((a, b) => a - b);
 };
 
-// 双指针
+// two pointers
 var merge = function (nums1: number[], m: number, nums2: number[], n: number) {
   let i = m - 1;
   let j = n - 1;

@@ -56,6 +56,7 @@
  */
 
 // @lc code=start
+// API
 var reverseWords = function (s: string): string {
   return s.split(" ").filter(Boolean).reverse().join(" ");
 };
@@ -64,7 +65,7 @@ var reverseWords = function (s: string): string {
   return s.trim().split(/\s+/).reverse().join(" ");
 };
 
-// 双端队列
+// two pointers + 双端队列
 var reverseWords = function (s: string): string {
   let left = 0;
   let right = s.length - 1;

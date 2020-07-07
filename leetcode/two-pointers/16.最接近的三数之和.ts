@@ -24,7 +24,7 @@
  */
 
 // @lc code=start
-// 双指针
+// two pointers
 var threeSumClosest = function (nums: number[], target: number): number {
   nums.sort((a, b) => a - b); // 排序
 
@@ -35,9 +35,9 @@ var threeSumClosest = function (nums: number[], target: number): number {
     let end = nums.length - 1;
 
     while (start < end) {
-      let sum = nums[i] + nums[start] + nums[end];
+      const sum = nums[i] + nums[start] + nums[end];
 
-      if (Math.abs(target - sum) < Math.abs(target - ret)) ret = sum;
+      if (Math.abs(target - sum) < Math.abs(target - ret)) ret = sum; // 交换最小值
 
       if (sum > target) end--;
       else if (sum < target) start++;

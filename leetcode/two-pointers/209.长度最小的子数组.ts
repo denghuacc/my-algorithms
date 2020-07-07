@@ -30,7 +30,7 @@
  */
 
 // @lc code=start
-// 暴力
+// brute force
 var minSubArrayLen = function (s: number, nums: number[]): number {
   let n = nums.length;
   if (n === 0) return 0;

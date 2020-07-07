@@ -75,7 +75,7 @@ var removeElement = function (nums: number[], val: number): number {
   return nums.length;
 };
 
-// 双指针 - 拷贝覆盖
+// two pointers - 拷贝覆盖
 var removeElement = function (nums: number[], val: number): number {
   let i = 0;
   for (let j = 0; j < nums.length; j++) {
@@ -87,7 +87,7 @@ var removeElement = function (nums: number[], val: number): number {
   return i;
 };
 
-// 双指针 - 交换移除
+// two pointers - 交换移除
 var removeElement = function (nums: number[], val: number): number {
   let i = 0;
   let n = nums.length;

@@ -37,23 +37,23 @@
 // @lc code=start
 var fourSum = function (nums: number[], target: number): number[][] {
   nums.sort((a, b) => a - b);
-  let ret: number[][] = [];
+  const ret: number[][] = [];
   if (nums.length < 4) return ret;
 
-  let size = nums.length;
+  const n = nums.length;
   let a: number;
   let b: number;
   let c: number;
   let d: number;
 
-  for (a = 0; a <= size - 4; a++) {
+  for (a = 0; a <= n - 4; a++) {
     if (a > 0 && nums[a] === nums[a - 1]) continue;
-    for (b = a + 1; b <= size - 3; b++) {
+    for (b = a + 1; b <= n - 3; b++) {
       if (b > a + 1 && nums[b] === nums[b - 1]) continue;
       c = b + 1;
-      d = size - 1;
+      d = n - 1;
       while (c < d) {
-        let sum = nums[a] + nums[b] + nums[c] + nums[d];
+        const sum = nums[a] + nums[b] + nums[c] + nums[d];
 
         if (sum < target) {
           c++;
