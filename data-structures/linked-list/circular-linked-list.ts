@@ -59,17 +59,14 @@ export default class CircularLinkedList<T> extends LinkedList<T> {
   contains(key: T) {
     let current = this.head;
 
-    if (current == null) {
-      return false;
-    } else {
-      while (current != null && current.next != null) {
-        if (current.key === key) {
-          return true;
-        }
-        current = current.next;
-        if (current.key !== key && current.next == this.head) break; // 边界
+    while (current != null && current.next != null) {
+      if (current.key === key) {
+        return true;
       }
+      current = current.next;
+      if (current.key !== key && current.next == this.head) break; // 边界
     }
+
     return false;
   }
 
@@ -103,10 +100,11 @@ export default class CircularLinkedList<T> extends LinkedList<T> {
 
   // 从链表中删除某个元素 key 只删除前面的第一个值 O(N)
   removeKey(key: T) {
-    let delNode;
+    let delNode: Node<T> | undefined;
 
-    if (this.head == null) return false;
-    else {
+    if (this.head == null) {
+      return false;
+    } else {
       if (this.head.key === key) {
         delNode = this.head;
         const lastNode = this.get(this.size() - 1)!;

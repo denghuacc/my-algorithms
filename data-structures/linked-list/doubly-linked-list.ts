@@ -84,7 +84,7 @@ export default class DoublyLinkedList<T> extends LinkedList<T> {
 
   // 从链表中删除某个元素 key 只删除前面的第一个值 O(N)
   removeKey(key: T) {
-    let delNode;
+    let delNode: Node<T> | undefined;
 
     if (this.head == null || this.tail == null) return false;
 

@@ -108,16 +108,13 @@ export default class LinkedList<T> {
   contains(key: T) {
     let current = this.head;
 
-    if (current == null) {
-      return false;
-    } else {
-      while (current != null) {
-        if (current.key === key) {
-          return true;
-        }
-        current = current.next;
+    while (current != null) {
+      if (current.key === key) {
+        return true;
       }
+      current = current.next;
     }
+
     return false;
   }
 
@@ -157,7 +154,7 @@ export default class LinkedList<T> {
   // 也可以使用查找元素的索引，然后根据索引删除
   removeKey(key: T) {
     let current = this.head;
-    let delNode;
+    let delNode: Node<T> | undefined;
 
     if (current == null) return false;
 

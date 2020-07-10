@@ -17,6 +17,7 @@ export default class ScoredLinkedList<T> extends LinkedList<T> {
   }
 
   // 添加元素 O(N)
+  // 不能使用 addFirst 和 addLast 来添加元素
   push(key: T) {
     if (this.isEmpty()) {
       super.addFirst(key);
@@ -26,7 +27,7 @@ export default class ScoredLinkedList<T> extends LinkedList<T> {
     }
   }
 
-  // 获取 key 合适的索引位置 O(N)
+  // 获取需要插入的值 key 所在的合适索引位置 O(N)
   private getIndex(key: T) {
     let current = this.head;
     let i = 0;
