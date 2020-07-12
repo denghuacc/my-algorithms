@@ -33,7 +33,7 @@ class ListNode {
   next: ListNode | null;
   constructor(val?: number, next?: ListNode | null) {
     this.val = val === undefined ? 0 : val;
-    this.next = next === undefined ? null: next;
+    this.next = next === undefined ? null : next;
   }
 }
 
@@ -47,7 +47,6 @@ var swapPairs = function (head: ListNode | null): ListNode | null {
   secondNode.next = firstNode;
   return secondNode;
 };
-// @lc code=end
 
 // iterative
 var swapPairs = function (head: ListNode | null): ListNode | null {
@@ -59,9 +58,9 @@ var swapPairs = function (head: ListNode | null): ListNode | null {
     const firstNode = head;
     const secondNode = head.next;
 
-    prevNode.next = secondNode;
-    firstNode.next = secondNode.next;
-    secondNode.next = firstNode;
+    prevNode.next = secondNode; // 更新交换后的头
+    firstNode.next = secondNode.next; // 交换
+    secondNode.next = firstNode; // 交换
 
     prevNode = firstNode;
     head = firstNode.next;
@@ -69,3 +68,4 @@ var swapPairs = function (head: ListNode | null): ListNode | null {
 
   return dummy.next;
 };
+// @lc code=end

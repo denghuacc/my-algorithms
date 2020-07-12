@@ -37,37 +37,38 @@ class ListNode {
 }
 
 // @lc code=start
+// iterative
 var reverseBetween = function (
   head: ListNode | null,
   m: number,
   n: number
 ): ListNode | null {
-  if (head == null) return null;
+  if (!head) return null;
   let cur = head;
-  let prev = null;
+  let pre = null;
 
   while (m > 1) {
-    prev = cur;
+    pre = cur;
     cur = cur.next!;
     m--;
     n--;
   }
 
-  let con = prev;
+  let con = pre;
   let tail = cur;
   let third = null;
   while (n > 0 && cur) {
     third = cur.next!;
-    cur.next = prev;
-    prev = cur;
+    cur.next = pre;
+    pre = cur;
     cur = third;
     n--;
   }
 
-  if (con != null) {
-    con.next = prev;
+  if (con) {
+    con.next = pre;
   } else {
-    head = prev;
+    head = pre;
   }
 
   tail.next = cur;

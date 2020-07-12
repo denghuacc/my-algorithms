@@ -52,10 +52,10 @@ var sortList = function (head: ListNode | null): ListNode | null {
     fast = fast.next.next!;
   }
 
-  let temp = slow.next;
+  let tmp = slow.next;
   slow.next = null; // 切断中点
   let left = sortList(head);
-  let right = sortList(temp);
+  let right = sortList(tmp);
   let h = new ListNode(-1);
   let ret = h;
 

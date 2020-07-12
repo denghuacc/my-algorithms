@@ -40,11 +40,12 @@ class ListNode {
 }
 
 // @lc code=start
+// two pointers
 var reorderList = function (head: ListNode | null) {
   if (!head) return;
   const list = [];
 
-  while (head != null) {
+  while (head) {
     list.push(head);
     head = head.next;
   }

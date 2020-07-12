@@ -33,7 +33,7 @@ class ListNode {
   next: ListNode | null;
   constructor(val?: number, next?: ListNode | null) {
     this.val = val === undefined ? 0 : val;
-    this.next = next === undefined ? null: next;
+    this.next = next === undefined ? null : next;
   }
 }
 
@@ -42,49 +42,25 @@ var addTwoNumbers = function (
   l1: ListNode | null,
   l2: ListNode | null
 ): ListNode | null {
-  if (l1 == null || l2 == null) return l1 || l2;
+  let pre = new ListNode(0);
+  let cur = pre;
+  let carry = 0;
 
-  var result = new ListNode(0);
-  var cur = result;
-  var p = l1;
-  var q = l2;
-  var carry = 0;
+  while (l1 || l2) {
+    let x = !l1 ? 0 : l1.val;
+    let y = !l2 ? 0 : l2.val;
+    let sum = x + y + carry;
 
-  while (p || q) {
-    var qVal;
-    var pVal;
+    carry = sum > 9 ? 1: 0;
+    sum = sum % 10;
+    cur.next = new ListNode(sum);
 
-    if (q) {
-      qVal = q.val;
-      q = q.next!;
-    } else {
-      qVal = 0;
-    }
-
-    if (p) {
-      pVal = p.val;
-      p = p.next!;
-    } else {
-      pVal = 0;
-    }
-
-    var val = qVal + pVal + carry;
-
-    if (val > 9) {
-      carry = 1;
-      val %= 10;
-    } else {
-      carry = 0;
-    }
-
-    cur.next = new ListNode(val);
     cur = cur.next;
+    if (l1) l1 = l1.next;
+    if (l2) l2 = l2.next;
   }
 
-  if (carry !== 0) {
-    cur.next = new ListNode(1);
-  }
-
-  return result?.next;
+  if (carry === 1) cur.next = new ListNode(carry);
+  return pre.next;
 };
 // @lc code=end

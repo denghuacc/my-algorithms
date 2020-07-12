@@ -67,8 +67,9 @@ class ListNode {
 }
 
 // @lc code=start
+// ! hash table Wrong Answer
 var detectCycle = function (head: ListNode | null): ListNode | null {
-  const set = new Set();
+  const set: Set<ListNode> = new Set();
   let node = head;
   while (node) {
     if (set.has(node)) return node;
@@ -78,11 +79,11 @@ var detectCycle = function (head: ListNode | null): ListNode | null {
   return null;
 };
 
-// Floyd
+// ! Floyd  Wrong Answer
 var detectCycle = function (head: ListNode | null): ListNode | null {
-  if (head == null) return null;
+  if (!head) return null;
   const intersect = getIntersect(head);
-  if (intersect == null) return null;
+  if (!intersect) return null;
 
   let ptr1 = head;
   let ptr2 = intersect;
@@ -93,7 +94,7 @@ var detectCycle = function (head: ListNode | null): ListNode | null {
 
   return ptr1;
 
-  function getIntersect(node: ListNode | null) {
+  function getIntersect(node: ListNode | null): ListNode | null {
     let tortoise = head;
     let hare = head;
 

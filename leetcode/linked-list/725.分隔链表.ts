@@ -68,7 +68,7 @@ class ListNode {
   next: ListNode | null;
   constructor(val?: number, next?: ListNode | null) {
     this.val = val === undefined ? 0 : val;
-    this.next = next === undefined ? null: next;
+    this.next = next === undefined ? null : next;
   }
 }
 
@@ -89,11 +89,11 @@ var splitListToParts = function (
   const ret: Array<ListNode | null> = [];
 
   cur = root;
-  for (let i = 0; i < k; ++i) {
+  for (let i = 0; i < k; i++) {
     let head = new ListNode(0);
     let write = head;
 
-    for (let j = 0; j < width + (i < rem ? 1 : 0); ++j) {
+    for (let j = 0; j < width + (i < rem ? 1 : 0); j++) {
       write = write.next = new ListNode(cur!.val); // 创建链表
       if (cur) cur = cur.next;
     }
@@ -120,15 +120,15 @@ var splitListToParts = function (
   const ret = [];
 
   cur = root;
-  for (let i = 0; i < k; ++i) {
+  for (let i = 0; i < k; i++) {
     let head = cur;
-    for (let j = 0; j < width + (i < rem ? 1 : 0) - 1; ++j) {
+    for (let j = 0; j < width + (i < rem ? 1 : 0) - 1; j++) {
       if (cur) cur = cur.next;
     }
     if (cur) {
-      let prev = cur;
+      let pre = cur;
       cur = cur.next;
-      prev.next = null; // 拆分链表
+      pre.next = null; // 拆分链表
     }
     ret[i] = head;
   }

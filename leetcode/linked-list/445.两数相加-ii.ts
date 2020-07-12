@@ -40,7 +40,7 @@ class ListNode {
   next: ListNode | null;
   constructor(val?: number, next?: ListNode | null) {
     this.val = val === undefined ? 0 : val;
-    this.next = next === undefined ? null: next;
+    this.next = next === undefined ? null : next;
   }
 }
 
@@ -50,8 +50,8 @@ var addTwoNumbers = function (
   l1: ListNode | null,
   l2: ListNode | null
 ): ListNode | null {
-  const s1 = [];
-  const s2 = [];
+  const s1: number[] = [];
+  const s2: number[] = [];
 
   while (l1) {
     s1.push(l1.val);
@@ -63,7 +63,7 @@ var addTwoNumbers = function (
     l2 = l2.next;
   }
 
-  let ret = null;
+  let ret: ListNode | null = null;
   let c = 0;
 
   while (s1.length || s2.length || c > 0) {

@@ -83,9 +83,10 @@ class Node {
 }
 
 // @lc code=start
+// ! hash table Compile Error
 var copyRandomList = function (head: Node | null): Node | null {
   if (!head) return null;
-  const map = new Map();
+  const map: Map<Node, Node> = new Map();
 
   let oldNode = head;
   let newNode = new Node(oldNode.val);
@@ -99,21 +100,22 @@ var copyRandomList = function (head: Node | null): Node | null {
     newNode = newNode.next!;
   }
 
-  return map.get(head);
+  return map.get(head) || null;
 
-  function getClonedNode(node: Node) {
+  function getClonedNode(node: Node | null): Node | null {
     if (node) {
       if (map.has(node)) {
-        return map.get(node);
+        return map.get(node)!;
       } else {
-        map.set(node, new Node(node.val, null, null));
-        return map.get(node);
+        map.set(node, new Node(node.val));
+        return map.get(node)!;
       }
     }
     return null;
   }
 };
 
+// ! iterative Compile Error
 var copyRandomList = function (head: Node | null): Node | null {
   if (!head) return null;
 

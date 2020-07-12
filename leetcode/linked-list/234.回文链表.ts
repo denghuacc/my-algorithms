@@ -38,11 +38,12 @@ class ListNode {
   next: ListNode | null;
   constructor(val?: number, next?: ListNode | null) {
     this.val = val === undefined ? 0 : val;
-    this.next = next === undefined ? null: next;
+    this.next = next === undefined ? null : next;
   }
 }
 
 // @lc code=start
+// two pointers
 var isPalindrome = function (head: ListNode | null): boolean {
   const arr = [];
 
@@ -64,20 +65,7 @@ var isPalindrome = function (head: ListNode | null): boolean {
   return true;
 };
 
-var isPalindrome = function (head: ListNode | null): boolean {
-  let frontPointer = head!;
-  return recursivelyCheck(head);
-
-  function recursivelyCheck(curNode: ListNode | null): boolean {
-    if (curNode) {
-      if (!recursivelyCheck(curNode.next)) return false;
-      if (curNode.val != frontPointer.val) return false;
-      frontPointer = frontPointer.next!;
-    }
-    return true;
-  }
-};
-
+// two pointers 2
 var isPalindrome = function (head: ListNode | null): boolean {
   if (!head || !head.next) return true;
   let fast = head;
@@ -105,5 +93,20 @@ var isPalindrome = function (head: ListNode | null): boolean {
   }
 
   return true;
+};
+
+// recursive
+var isPalindrome = function (head: ListNode | null): boolean {
+  let frontPointer = head!;
+  return recursivelyCheck(head);
+
+  function recursivelyCheck(curNode: ListNode | null): boolean {
+    if (curNode) {
+      if (!recursivelyCheck(curNode.next)) return false;
+      if (curNode.val != frontPointer.val) return false;
+      frontPointer = frontPointer.next!;
+    }
+    return true;
+  }
 };
 // @lc code=end

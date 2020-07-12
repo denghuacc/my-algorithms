@@ -81,30 +81,13 @@ class ListNode {
   flag: boolean;
   constructor(val?: number, next?: ListNode | null, flag?: boolean) {
     this.val = val === undefined ? 0 : val;
-    this.next = next === undefined ? null: next;
+    this.next = next === undefined ? null : next;
     this.flag = flag === undefined ? false : flag;
   }
 }
 
 // @lc code=start
-var getIntersectionNode = function (
-  headA: ListNode | null,
-  headB: ListNode | null
-): ListNode | null {
-  while (headA) {
-    headA.flag = true; // 标记
-    headA = headA.next;
-  }
-
-  while (headB) {
-    if (headB.flag) return headB;
-    headB = headB.next;
-  }
-
-  return null;
-};
-
-// tow pointers
+// ! tow pointers Wrong Answer
 var getIntersectionNode = function (
   headA: ListNode | null,
   headB: ListNode | null
@@ -114,19 +97,20 @@ var getIntersectionNode = function (
 
   while (pA || pB) {
     if (pA === pB) return pA;
-    pA = pA == null ? headB : pA.next;
-    pB = pB == null ? headA : pB.next;
+    pA = !pA ? headB : pA.next;
+    pB = !pB ? headA : pB.next;
   }
 
   return null;
 };
+// @lc code=end
 
-// hash
+// hash table
 var getIntersectionNode = function (
   headA: ListNode | null,
   headB: ListNode | null
 ): ListNode | null {
-  const set = new Set();
+  const set: Set<ListNode> = new Set();
   while (headA) {
     set.add(headA);
     headA = headA.next;
@@ -139,4 +123,3 @@ var getIntersectionNode = function (
 
   return null;
 };
-// @lc code=end

@@ -66,8 +66,9 @@ class ListNode {
 }
 
 // @lc code=start
+// ! hash table Wrong Answer
 var hasCycle = function (head: ListNode | null): boolean {
-  const set = new Set();
+  const set: Set<ListNode | null> = new Set();
   while (head) {
     if (set.has(head)) {
       return true;
@@ -79,9 +80,9 @@ var hasCycle = function (head: ListNode | null): boolean {
   return false;
 };
 
-// 快慢指针
+// ! two pointers Wrong Answer
 var hasCycle = function (head: ListNode | null): boolean {
-  if (head == null || head.next == null) return false;
+  if (!head || !head.next) return false;
   let slow = head;
   let fast = head.next;
 

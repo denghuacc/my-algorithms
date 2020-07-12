@@ -47,22 +47,22 @@ var removeElements = function (
   if (!head) return null;
 
   // 当头部节点是需要删除的节点时
-  while (head && head.val === val) {
+  if (head && head.val === val) {
     const del = head;
     head = head.next;
     del.next = null; // leetcode 可无需优化
   }
 
-  let prev = head!;
+  let pre = head!;
 
   // 非头部节点
-  while (prev.next) {
-    if (prev.next.val === val) {
-      const del = prev.next;
-      prev.next = del.next;
+  while (pre.next) {
+    if (pre.next.val === val) {
+      const del = pre.next;
+      pre.next = del.next;
       del.next = null;
     } else {
-      prev = prev.next;
+      pre = pre.next;
     }
   }
 
@@ -81,14 +81,14 @@ var removeElements = function (
     head = head.next;
   }
 
-  let prev = head!;
+  let pre = head!;
 
   // 非头部节点
-  while (prev.next) {
-    if (prev.next.val === val) {
-      prev.next = prev.next.next;
+  while (pre.next) {
+    if (pre.next.val === val) {
+      pre.next = pre.next.next;
     } else {
-      prev = prev.next;
+      pre = pre.next;
     }
   }
 
@@ -103,15 +103,15 @@ var removeElements = function (
   const dummy = new ListNode(-1);
   dummy.next = head;
 
-  let prev = dummy; // 要删除的节点的前一个节点
+  let pre = dummy; // 要删除的节点的前一个节点
 
-  while (prev.next) {
-    if (prev.next.val === val) {
-      const del = prev.next;
-      prev.next = del.next;
+  while (pre.next) {
+    if (pre.next.val === val) {
+      const del = pre.next;
+      pre.next = del.next;
       del.next = null;
     } else {
-      prev = prev.next;
+      pre = pre.next;
     }
   }
 

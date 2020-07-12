@@ -35,20 +35,21 @@ class ListNode {
   next: ListNode | null;
   constructor(val?: number, next?: ListNode | null) {
     this.val = val === undefined ? 0 : val;
-    this.next = next === undefined ? null: next;
+    this.next = next === undefined ? null : next;
   }
 }
 
 // @lc code=start
+// iterative
 var deleteDuplicates = function (head: ListNode | null): ListNode | null {
-  if (head == null) return head;
-  const dummy = new ListNode(-1);
+  if (!head) return head;
+  const dummy = new ListNode(0);
   dummy.next = head;
   let slow = dummy;
   let fast = dummy.next;
 
-  while (fast != null) {
-    while (fast.next != null && fast.val === fast.next.val) fast = fast.next;
+  while (fast) {
+    while (fast.next && fast.val === fast.next.val) fast = fast.next;
     if (slow.next === fast) slow = slow.next;
     else slow.next = fast.next;
     fast = fast.next!;
@@ -59,9 +60,9 @@ var deleteDuplicates = function (head: ListNode | null): ListNode | null {
 
 // recursive
 var deleteDuplicates = function (head: ListNode | null): ListNode | null {
-  if (head == null) return head;
-  if (head.next != null && head.val === head.next.val) {
-    while (head.next != null && head.val === head.next.val) head = head.next;
+  if (!head) return head;
+  if (head.next && head.val === head.next.val) {
+    while (head.next && head.val === head.next.val) head = head.next;
     return deleteDuplicates(head.next);
   } else {
     head.next = deleteDuplicates(head.next);

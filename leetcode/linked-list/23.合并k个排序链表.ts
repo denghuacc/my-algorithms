@@ -39,18 +39,17 @@ class ListNode {
 }
 
 // @lc code=start
-var mergeKLists = function (
-  lists: Array<ListNode | null>
-): ListNode | null {
-  const nums: number[] = [];
+// sort
+var mergeKLists = function (lists: Array<ListNode | null>): ListNode | null {
+  const nums: number[] = []; // 所有链表的值
   let dummy: ListNode;
   let point: ListNode;
   dummy = point = new ListNode(0);
 
-  for (let list of lists) {
-    while (list) {
-      nums.push(list.val);
-      list = list.next;
+  for (let node of lists) {
+    while (node) {
+      nums.push(node.val);
+      node = node.next;
     }
   }
 
@@ -64,19 +63,21 @@ var mergeKLists = function (
   return dummy.next;
 };
 
+// recursive
 var mergeKLists = function (lists: Array<ListNode | null>): ListNode | null {
   let len = lists.length;
   if (len === 0) return null;
 
   while (len > 1) {
     for (let i = 0; i < Math.floor(len / 2); i++) {
-      lists[i] = mergeTwoLists(lists[i], lists[len - 1 - i]);
+      lists[i] = mergeTwoLists(lists[i], lists[len - 1 - i]); // 两两合并
     }
     len = Math.floor((len + 1) / 2);
   }
 
   return lists[0];
 
+  // leetcode 21
   function mergeTwoLists(l1: ListNode | null, l2: ListNode | null) {
     if (!l1) return l2;
     if (!l2) return l1;

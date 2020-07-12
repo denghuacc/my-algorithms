@@ -30,7 +30,7 @@ class ListNode {
   next: ListNode | null;
   constructor(val?: number, next?: ListNode | null) {
     this.val = val === undefined ? 0 : val;
-    this.next = next === undefined ? null: next;
+    this.next = next === undefined ? null : next;
   }
 }
 
@@ -50,6 +50,7 @@ var mergeTwoLists = function (
     return l2;
   }
 };
+// @lc code=end
 
 // iterative
 var mergeTwoLists = function (
@@ -58,19 +59,18 @@ var mergeTwoLists = function (
 ): ListNode | null {
   const dummy = new ListNode(0);
 
-  let prev = dummy;
+  let pre = dummy;
   while (l1 && l2) {
     if (l1.val <= l2.val) {
-      prev.next = l1;
+      pre.next = l1;
       l1 = l1.next;
     } else {
-      prev.next = l2;
+      pre.next = l2;
       l2 = l2.next;
     }
-    prev = prev.next;
+    pre = pre.next;
   }
 
-  prev.next = l1 == null ? l2 : l1;
+  pre.next = l1 ? l1 : l2;
   return dummy.next;
 };
-// @lc code=end

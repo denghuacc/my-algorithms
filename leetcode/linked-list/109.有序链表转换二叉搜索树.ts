@@ -55,8 +55,9 @@ class TreeNode {
 }
 
 // @lc code=start
+// recursive
 var sortedListToBST = function (head: ListNode | null): TreeNode | null {
-  if (head == null) return null;
+  if (!head) return null;
   let mid = findMiddleElement(head);
   let node = new TreeNode(mid.val);
   if (head === mid) return node;
@@ -65,22 +66,22 @@ var sortedListToBST = function (head: ListNode | null): TreeNode | null {
   return node;
 
   function findMiddleElement(head: ListNode) {
-    let prev = null;
+    let pre = null;
     let slow = head;
     let fast = head;
 
     while (fast && fast.next && slow) {
-      prev = slow;
+      pre = slow;
       slow = slow.next!;
       fast = fast.next.next!;
     }
 
-    if (prev) prev.next = null;
+    if (pre) pre.next = null;
     return slow;
   }
 };
-// @lc code=end
 
+// recursive + array
 var sortedListToBST = function (head: ListNode | null): TreeNode | null {
   const arr: number[] = [];
   mapListToValues(head!, arr);
@@ -139,3 +140,4 @@ var sortedListToBST = function (head: ListNode | null): TreeNode | null {
     return node;
   }
 };
+// @lc code=end

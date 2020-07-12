@@ -40,7 +40,6 @@ class ListNode {
 }
 
 // @lc code=start
-
 var deleteDuplicates = function (head: ListNode | null): ListNode | null {
   let cur = head;
   while (cur && cur.next) {

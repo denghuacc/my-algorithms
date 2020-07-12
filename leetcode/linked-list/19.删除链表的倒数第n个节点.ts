@@ -39,7 +39,7 @@ class ListNode {
   next: ListNode | null;
   constructor(val?: number, next?: ListNode | null) {
     this.val = val === undefined ? 0 : val;
-    this.next = next === undefined ? null: next;
+    this.next = next === undefined ? null : next;
   }
 }
 
@@ -51,23 +51,26 @@ var removeNthFromEnd = function (
 ): ListNode | null {
   const dummy = new ListNode(0);
   dummy.next = head;
+
   let len = 0;
   let cur = head;
   while (cur) {
-    len++;
+    len++; // list len
     cur = cur.next;
   }
-  len -= n;
-  let prev = dummy;
-  while (len) {
+
+  len -= n; // new Len
+  let pre = dummy;
+  while (len && pre.next) {
     len--;
-    prev = prev.next!;
+    pre = pre.next;
   }
-  prev.next = prev.next!.next;
+  pre.next = pre.next!.next; // 找到节点删除
   return dummy.next;
 };
 
 // one traverse
+// tow pointer
 var removeNthFromEnd = function (
   head: ListNode | null,
   n: number
@@ -86,7 +89,7 @@ var removeNthFromEnd = function (
     second = second.next!;
   }
 
-  second.next = second.next!.next;
+  second.next = second.next!.next; // 找到节点删除
   return dummy.next;
 };
 // @lc code=end

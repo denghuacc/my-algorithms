@@ -52,7 +52,7 @@ class ListNode {
   next: ListNode | null;
   constructor(val?: number, next?: ListNode | null) {
     this.val = val === undefined ? 0 : val;
-    this.next = next === undefined ? null: next;
+    this.next = next === undefined ? null : next;
   }
 }
 
@@ -75,7 +75,6 @@ var insertionSortList = function (head: ListNode | null): ListNode | null {
 
   return dummy.next;
 };
-// @lc code=end
 
 var insertionSortList = function (head: ListNode | null): ListNode | null {
   const MIN = Number.MIN_SAFE_INTEGER;
@@ -104,3 +103,4 @@ var insertionSortList = function (head: ListNode | null): ListNode | null {
 
   return dummy.next;
 };
+// @lc code=end

@@ -32,7 +32,7 @@ class ListNode {
   next: ListNode | null;
   constructor(val?: number, next?: ListNode | null) {
     this.val = val === undefined ? 0 : val;
-    this.next = next === undefined ? null: next;
+    this.next = next === undefined ? null : next;
   }
 }
 
@@ -41,12 +41,12 @@ var partition = function partition(
   head: ListNode | null,
   x: number
 ): ListNode | null {
-  let beforeHead = new ListNode(-1);
+  let beforeHead = new ListNode(0);
   let before = beforeHead;
-  let afterHead = new ListNode(-1);
+  let afterHead = new ListNode(0);
   let after = afterHead;
 
-  while (head != null) {
+  while (head) {
     if (head.val < x) {
       before.next = head;
       before = before.next;

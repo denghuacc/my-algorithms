@@ -53,25 +53,29 @@ var rotateRight = function (head: ListNode | null, k: number): ListNode | null {
   if (!head.next) return head;
 
   let oldTail = head;
-  let n; // 链表长度
+  let n: number; // 链表长度
+
   for (n = 1; oldTail.next != null; n++) {
     oldTail = oldTail.next;
   }
+
   oldTail.next = head; // 连成环
 
   let newTail = head;
-  // 新的尾部位置 n - k % n - 1
+
+  // 新的尾部位置 n - (k % n) - 1
   for (let i = 0; i < n - (k % n) - 1; i++) {
     newTail = newTail.next!;
   }
+
   let newHead = newTail.next;
 
   newTail.next = null; // 断开环
 
   return newHead;
 };
-// @lc code=end
 
+// two pointers
 var rotateRight = function (head: ListNode | null, k: number): ListNode | null {
   if (!head || k === 0) return head;
 
@@ -106,3 +110,4 @@ var rotateRight = function (head: ListNode | null, k: number): ListNode | null {
 
   return ret;
 };
+// @lc code=end

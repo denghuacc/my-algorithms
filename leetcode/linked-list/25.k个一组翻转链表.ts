@@ -47,7 +47,7 @@ class ListNode {
   next: ListNode | null;
   constructor(val?: number, next?: ListNode | null) {
     this.val = val === undefined ? 0 : val;
-    this.next = next === undefined ? null: next;
+    this.next = next === undefined ? null : next;
   }
 }
 
@@ -58,15 +58,15 @@ var reverseKGroup = function (
   k: number
 ): ListNode | null {
   const stack: Array<ListNode | null> = [];
-  const dummy = new ListNode(-1);
+  const dummy = new ListNode(0);
   let p = dummy;
 
   while (true) {
     let count = 0;
-    let tmp = head;
-    while (tmp != null && count < k) {
-      stack.push(tmp);
-      tmp = tmp.next;
+    let cur = head;
+    while (cur && count < k) {
+      stack.push(cur);
+      cur = cur.next;
       count++;
     }
     if (count !== k) {
@@ -77,8 +77,8 @@ var reverseKGroup = function (
       p.next = stack.pop()!;
       p = p.next;
     }
-    p.next = tmp;
-    head = tmp;
+    p.next = cur;
+    head = cur;
   }
   return dummy.next;
 };
@@ -91,19 +91,19 @@ var reverseKGroup = function (
   let cur = head;
   let count = 0;
 
-  while (cur != null && count !== k) {
+  while (cur && count !== k) {
     cur = cur.next;
     count++;
   }
 
   if (count === k) {
     cur = reverseKGroup(cur, k);
-    while (count !== 0) {
+    while (count) {
       count--;
-      let tmp = head?.next;
+      let next = head?.next!;
       head!.next = cur;
       cur = head;
-      head = tmp;
+      head = next;
     }
     head = cur;
   }

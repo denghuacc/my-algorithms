@@ -1,7 +1,7 @@
 /*
  * @lc app=leetcode.cn id=876 lang=typescript
  *
- * [876] 一手顺子
+ * [876] 链表的中间节点
  *
  * https://leetcode-cn.com/problems/middle-of-the-linked-list/description/
  *
@@ -74,15 +74,15 @@ var middleNode = function (head: ListNode | null): ListNode | null {
   let cur = head;
 
   while (cur) {
-    ++n;
     cur = cur.next;
+    n++;
   }
 
   let k = 0;
   cur = head;
   while (k < Math.floor(n / 2)) {
-    ++k;
     cur = cur!.next;
+    k++;
   }
 
   return cur;
