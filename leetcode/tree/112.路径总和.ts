@@ -64,10 +64,10 @@ var hasPathSum = function (root: TreeNode | null, sum: number): boolean {
   nodeStack.push(root);
   sumStack.push(sum - root.val);
 
-  let node;
-  let currentSum;
+  let node: TreeNode;
+  let currentSum: number;
   while (nodeStack.length) {
-    node = nodeStack.pop();
+    node = nodeStack.pop()!;
     currentSum = sumStack.pop()!;
 
     if (!node?.right && !node?.left && currentSum === 0) return true;

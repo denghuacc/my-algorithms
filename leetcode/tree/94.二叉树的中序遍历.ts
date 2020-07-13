@@ -45,9 +45,9 @@ class TreeNode {
 
 // @lc code=start
 // recursive
-var inorderTraversal = function (root: TreeNode): number[] {
+var inorderTraversal = function (root: TreeNode | null): number[] {
   const ret: number[] = [];
-  inOrder(root, ret);
+  inOrder(root!, ret);
   return ret;
 
   function inOrder(node: TreeNode, arr: number[]) {
@@ -58,30 +58,29 @@ var inorderTraversal = function (root: TreeNode): number[] {
     }
   }
 };
-// @lc code=end
 
 // iterative
-var inorderTraversal = function (root: TreeNode): number[] {
-  const ret = [];
-  const stack = [];
+var inorderTraversal = function (root: TreeNode | null): number[] {
+  const ret: number[] = [];
+  const stack: TreeNode[] = [];
   let cur = root;
   while (cur || stack.length) {
     while (cur) {
       stack.push(cur);
-      cur = cur.left!;
+      cur = cur.left!; // 后进先出 -> 最小值最先出
     }
-    cur = stack.pop()!;
-    ret.push(cur.val);
-    cur = cur.right!;
+    cur = stack.pop()!; // left node or node
+    ret.push(cur.val); // val
+    cur = cur.right!; // right node
   }
   return ret;
 };
 
 // 线索二叉树
-var inorderTraversal = function (root: TreeNode): number[] {
-  const ret = [];
+var inorderTraversal = function (root: TreeNode | null): number[] {
+  const ret: number[] = [];
   let cur = root;
-  let prev;
+  let prev: TreeNode | null;
 
   while (cur) {
     if (!cur.left) {
@@ -100,3 +99,4 @@ var inorderTraversal = function (root: TreeNode): number[] {
   }
   return ret;
 };
+// @lc code=end

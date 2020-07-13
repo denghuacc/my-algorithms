@@ -51,7 +51,7 @@ class TreeNode {
 var minDepth = function (root: TreeNode | null): number {
   if (!root) return 0;
   if (!root.left && !root.right) return 1;
-  let min = Number.MAX_SAFE_INTEGER;
+  let min = Infinity;
   if (root.left) min = Math.min(minDepth(root.left), min);
   if (root.right) min = Math.min(minDepth(root.right), min);
   return min + 1;
@@ -98,5 +98,4 @@ var minDepth = function (root: TreeNode | null): number {
 
   return currentDeep;
 };
-
 // @lc code=end

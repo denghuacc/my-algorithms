@@ -59,6 +59,7 @@ class TreeNode {
 }
 
 // @lc code=start
+// recursive
 var isSymmetric = function (root: TreeNode | null): boolean {
   return isMirror(root, root);
 
@@ -72,10 +73,8 @@ var isSymmetric = function (root: TreeNode | null): boolean {
     );
   }
 };
-// @lc code=end
 
-// 迭代
-// JS 使用 LinkedListQueue 和数组都超时
+// iterative
 var isSymmetric = function (root: TreeNode | null): boolean {
   const queue: Array<TreeNode | null> = [];
   queue.push(root);
@@ -94,3 +93,4 @@ var isSymmetric = function (root: TreeNode | null): boolean {
   }
   return true;
 };
+// @lc code=end

@@ -50,6 +50,7 @@ class TreeNode {
 }
 
 // @lc code=start
+// recursive
 var levelOrderBottom = function (root: TreeNode | null): number[][] {
   const ret: number[][] = [];
   levelOrder(root, 0);
@@ -64,9 +65,10 @@ var levelOrderBottom = function (root: TreeNode | null): number[][] {
   }
 };
 
+// iterative
 var levelOrderBottom = function (root: TreeNode | null): number[][] {
   const ret: number[][] = [];
-  if (root == null) return ret;
+  if (!root) return ret;
   const queue: Array<TreeNode | null> = [];
   queue.push(root);
 

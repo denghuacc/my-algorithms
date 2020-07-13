@@ -77,6 +77,7 @@ class TreeNode {
 }
 
 // @lc code=start
+// inorder
 var recoverTree = function (root: TreeNode | null) {
   const nums: number[] = [];
   inOrder(root, nums);
@@ -146,9 +147,9 @@ var recoverTree = function (root: TreeNode | null) {
 
 // iterative
 var recoverTree = function (root: TreeNode | null) {
-  const stack = [];
-  let x = null;
-  let y = null;
+  const stack: TreeNode[] = [];
+  let x: TreeNode | null = null;
+  let y: TreeNode | null = null;
   let pred = null;
 
   while (stack.length || root) {
@@ -159,7 +160,7 @@ var recoverTree = function (root: TreeNode | null) {
     root = stack.pop()!;
     if (pred && root.val < pred.val) {
       y = root;
-      if (x == null) x = pred;
+      if (!x) x = pred;
       else break;
     }
     pred = root;

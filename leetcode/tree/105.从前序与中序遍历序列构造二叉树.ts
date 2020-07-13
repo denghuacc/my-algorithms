@@ -47,11 +47,12 @@ class TreeNode {
 }
 
 // @lc code=start
+// recursive
 var buildTree = function (
   preorder: number[],
   inorder: number[]
 ): TreeNode | null {
-  const map = new Map();
+  const map: Map<number, number> = new Map();
   let idx = 0;
   let preIdx = 0;
   for (const num of inorder) {
@@ -64,7 +65,7 @@ var buildTree = function (
     if (left === right) return null;
     const rootVal = preorder[preIdx];
     const root = new TreeNode(rootVal); // 根节点
-    const index = map.get(rootVal);
+    const index = map.get(rootVal)!;
     preIdx++;
     root.left = build(left, index);
     root.right = build(index + 1, right);

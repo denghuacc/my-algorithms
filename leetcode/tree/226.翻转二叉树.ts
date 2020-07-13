@@ -57,7 +57,6 @@ class TreeNode {
 // recursive
 var invertTree = function (root: TreeNode | null): TreeNode | null {
   if (!root) return null;
-
   let right = invertTree(root.right);
   let left = invertTree(root.left);
   root.left = right;

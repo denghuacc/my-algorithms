@@ -66,7 +66,7 @@ class TreeNode {
 }
 
 // @lc code=start
-// 自顶向下的递归
+// recursive 自顶向下
 var isBalanced = function (root: TreeNode | null): boolean {
   if (!root) return true;
   return (
@@ -82,38 +82,7 @@ var isBalanced = function (root: TreeNode | null): boolean {
   }
 };
 
-class TreeInfo {
-  height: number;
-  balanced: boolean;
-
-  constructor(height: number, balanced: boolean) {
-    this.height = height;
-    this.balanced = balanced;
-  }
-}
-
-// 自底向上的递归
-var isBalanced = function (root: TreeNode | null): boolean {
-  return isBalancedTree(root).balanced;
-
-  function isBalancedTree(root: TreeNode | null): TreeInfo {
-    if (!root) return new TreeInfo(-1, true);
-
-    const left = isBalancedTree(root.left);
-    if (!left.balanced) return new TreeInfo(-1, false);
-
-    const right = isBalancedTree(root.right);
-    if (!right.balanced) return new TreeInfo(-1, false);
-
-    if (Math.abs(left.height - right.height) < 2) {
-      return new TreeInfo(Math.max(left.height, right.height) + 1, true);
-    }
-
-    return new TreeInfo(-1, false);
-  }
-};
-
-// 自底向上的递归2
+// recursive 自底向上
 var isBalanced = function (root: TreeNode | null): boolean {
   return height(root) !== -1;
 

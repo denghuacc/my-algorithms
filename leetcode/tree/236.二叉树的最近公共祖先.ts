@@ -63,7 +63,7 @@ class TreeNode {
 }
 
 // @lc code=start
-// recursive
+// ! recursive ts lang Wrong Answer
 var lowestCommonAncestor = function (
   root: TreeNode | null,
   p: TreeNode | null,
@@ -78,20 +78,24 @@ var lowestCommonAncestor = function (
     p: TreeNode | null,
     q: TreeNode | null
   ): boolean {
-    if (root == null) return false;
-    const leftSon = dfs(root.left, p, q);
-    const rightSon = dfs(root.right, p, q);
+    if (!root) return false;
+    const isLeftSon = dfs(root.left, p, q);
+    const isRightSon = dfs(root.right, p, q);
 
     if (
-      (leftSon && rightSon) ||
-      ((root.val === p!.val || root.val === q!.val) && (leftSon || rightSon))
+      (isLeftSon && isRightSon) ||
+      ((root.val === p!.val || root.val === q!.val) &&
+        (isLeftSon || isRightSon))
     ) {
       ret = root;
     }
 
-    return leftSon || rightSon || root.val === p!.val || root.val === q!.val;
+    return (
+      isLeftSon || isRightSon || root.val === p!.val || root.val === q!.val
+    );
   }
 };
+// @lc code=end
 
 // save parent node
 var lowestCommonAncestor = function (
@@ -99,8 +103,8 @@ var lowestCommonAncestor = function (
   p: TreeNode | null,
   q: TreeNode | null
 ): TreeNode | null {
-  const map = new Map<number, TreeNode | null>();
-  const set = new Set<number>();
+  const map: Map<number, TreeNode | null> = new Map();
+  const set: Set<number> = new Set();
 
   dfs(root!);
 
@@ -128,4 +132,3 @@ var lowestCommonAncestor = function (
     }
   }
 };
-// @lc code=end

@@ -33,7 +33,7 @@
 // @lc code=start
 // dp
 var numTrees = function (n: number): number {
-  const dp = new Array<number>(n + 1).fill(0);
+  const dp: number[] = new Array(n + 1).fill(0);
   dp[0] = 1;
   dp[1] = 1;
 
@@ -45,7 +45,7 @@ var numTrees = function (n: number): number {
   return dp[n];
 };
 
-// 数学演绎法
+// math 卡塔兰数
 var numTrees = function (n: number): number {
   let c = 1;
   for (let i = 0; i < n; i++) {

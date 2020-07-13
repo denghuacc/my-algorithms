@@ -46,10 +46,10 @@ class TreeNode {
 }
 
 // @lc code=start
+// recursive
 var maxDepth = function (root: TreeNode | null): number {
-  if (root == null) {
-    return 0;
-  } else {
+  if (!root) return 0;
+  else {
     const left = maxDepth(root.left);
     const right = maxDepth(root.right);
     return Math.max(left, right) + 1;

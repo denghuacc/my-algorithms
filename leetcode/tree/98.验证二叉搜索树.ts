@@ -61,32 +61,34 @@ class TreeNode {
 }
 
 // @lc code=start
+// recursive
 var isValidBST = function (root: TreeNode | null): boolean {
-  return isValid(root, 0, 0);
+  return isValid(root, -Infinity, Infinity);
 
-  function isValid(root: TreeNode | null, lower: number, upper: number) {
-    if (root == null) return true;
+  function isValid(
+    root: TreeNode | null,
+    lower: number,
+    upper: number
+  ): boolean {
+    if (!root) return true;
 
-    const val = root.val;
+    if (root.val <= lower || root.val >= upper) return false;
 
-    if (lower != null && val <= lower) return false;
-    if (upper != null && val >= upper) return false;
-
-    if (!isValid(root.right, val, upper)) return false;
-    if (!isValid(root.left, lower, val)) return false;
-
-    return true;
+    return (
+      isValid(root.left, lower, root.val) &&
+      isValid(root.right, root.val, upper)
+    );
   }
 };
 
 // iterative
 var isValidBST = function (root: TreeNode | null): boolean {
   const stack: Array<TreeNode | null> = [];
-  const lowers: number[] = [];
-  const uppers: number[] = [];
-  let lower = Infinity;
-  let upper = Infinity;
-  let val;
+  const lowers: Array<number | null> = [];
+  const uppers: Array<number | null> = [];
+  let lower = null;
+  let upper = null;
+  let val: number;
   update(root, lower, upper);
 
   while (stack.length) {
@@ -94,17 +96,22 @@ var isValidBST = function (root: TreeNode | null): boolean {
     lower = lowers.pop()!;
     upper = uppers.pop()!;
 
-    if (root == null) continue;
+    if (!root) continue;
     val = root.val;
+    // maybe lower === 0 or upper === 0
     if (lower != null && val <= lower) return false;
     if (upper != null && val >= upper) return false;
-    update(root.right, val, upper!);
-    update(root.left, lower!, val);
+    update(root.right, val, upper);
+    update(root.left, lower, val);
   }
 
   return true;
 
-  function update(root: TreeNode | null, lower: number, upper: number) {
+  function update(
+    root: TreeNode | null,
+    lower: number | null,
+    upper: number | null
+  ) {
     stack.push(root);
     lowers.push(lower);
     uppers.push(upper);
@@ -114,7 +121,7 @@ var isValidBST = function (root: TreeNode | null): boolean {
 // inorder
 var isValidBST = function (root: TreeNode | null): boolean {
   const stack: Array<TreeNode | null> = [];
-  let inorder = -Number.MAX_SAFE_INTEGER;
+  let inorder = -Infinity;
 
   while (stack.length || root) {
     while (root) {

@@ -58,12 +58,11 @@ var postorderTraversal = function (root: TreeNode | null): number[] {
     }
   }
 };
-// @lc code=end
 
 // iterative -> 逆前序
 var postorderTraversal = function (root: TreeNode | null): number[] {
   const ret: number[] = [];
-  const stack = [];
+  const stack: TreeNode[] = [];
   if (!root) return ret;
 
   stack.push(root);
@@ -71,9 +70,9 @@ var postorderTraversal = function (root: TreeNode | null): number[] {
     const node = stack.pop();
     ret.unshift(node!.val); // unshift -> 和 preorder 相反
 
-    // 先进 left 后进 right -> 和 preorder 进栈相反
-    if (node?.left != null) stack.push(node.left);
-    if (node?.right != null) stack.push(node.right);
+    // 先 left 后 right -> 和 preorder 进栈相反
+    if (node?.left) stack.push(node.left);
+    if (node?.right) stack.push(node.right);
   }
 
   return ret;
@@ -81,8 +80,8 @@ var postorderTraversal = function (root: TreeNode | null): number[] {
 
 // iteration2
 var postorderTraversal = function (root: TreeNode | null): number[] {
-  const ret = [];
-  const stack = [];
+  const ret: number[] = [];
+  const stack: TreeNode[] = [];
   let cur = root;
   let top = null;
 
@@ -105,3 +104,4 @@ var postorderTraversal = function (root: TreeNode | null): number[] {
 
   return ret;
 };
+// @lc code=end

@@ -62,7 +62,7 @@ class TreeNode {
 }
 
 // @lc code=start
-// recursive
+// ! recursive ts lang Wrong Answer
 var lowestCommonAncestor = function (
   root: TreeNode | null,
   p: TreeNode | null,
@@ -80,6 +80,7 @@ var lowestCommonAncestor = function (
     return root;
   }
 };
+// @lc code=end
 
 // iterative
 var lowestCommonAncestor = function (
@@ -105,4 +106,3 @@ var lowestCommonAncestor = function (
 
   return null;
 };
-// @lc code=end

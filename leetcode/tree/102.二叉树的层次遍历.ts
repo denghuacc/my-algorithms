@@ -60,18 +60,17 @@ var levelOrder = function (root: TreeNode | null): number[][] {
   return levels;
 
   function order(root: TreeNode, level: number) {
-    if (levels.length == level) levels.push([]);
+    if (levels.length === level) levels.push([]);
     levels[level].push(root.val);
     if (root.left) order(root.left, level + 1);
     if (root.right) order(root.right, level + 1);
   }
 };
-// @lc code=end
 
 // iterative
 var levelOrder = function (root: TreeNode | null): number[][] {
   const levels: number[][] = [];
-  if (root == null) return [];
+  if (!root) return [];
 
   const queue: Array<TreeNode | null> = [];
   queue.push(root);
@@ -90,3 +89,4 @@ var levelOrder = function (root: TreeNode | null): number[][] {
   }
   return levels;
 };
+// @lc code=end

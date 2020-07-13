@@ -52,6 +52,7 @@ class TreeNode {
 }
 
 // @lc code=start
+// ! ts lang Wrong Answer
 var serialize = function (root: TreeNode | null): string {
   let ret = "";
   if (!root) return ret;
@@ -76,7 +77,7 @@ var deserialize = function (data: string): TreeNode | null {
   if (!data.length) return null;
 
   const nodes: string[] = data.split(",");
-  const root = new TreeNode(Number(nodes[0]));
+  const root: TreeNode = new TreeNode(Number(nodes[0]));
   nodes.shift();
 
   const queue: Array<TreeNode | null> = [root];

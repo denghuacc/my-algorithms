@@ -46,11 +46,11 @@ class TreeNode {
 }
 
 // @lc code=start
-// 中序遍历
+// inorder
 var sortedArrayToBST = function (nums: number[]): TreeNode | null {
   return toBST(0, nums.length - 1);
 
-  function toBST(left: number, right: number) {
+  function toBST(left: number, right: number): TreeNode | null {
     if (left > right) return null;
     let mid = Math.floor((left + right) / 2);
     const root = new TreeNode(nums[mid]);
@@ -59,12 +59,12 @@ var sortedArrayToBST = function (nums: number[]): TreeNode | null {
     return root;
   }
 };
-// @lc code=end
 
+// recursive
 var sortedArrayToBST = function (nums: number[]): TreeNode | null {
   return toBST(nums, 0, nums.length - 1);
 
-  function toBST(nums: number[], left: number, right: number) {
+  function toBST(nums: number[], left: number, right: number): TreeNode | null {
     if (left > right) return null;
     let mid = Math.floor((left + right + 1) / 2);
     const root = new TreeNode(nums[mid]);
@@ -73,3 +73,4 @@ var sortedArrayToBST = function (nums: number[]): TreeNode | null {
     return root;
   }
 };
+// @lc code=end

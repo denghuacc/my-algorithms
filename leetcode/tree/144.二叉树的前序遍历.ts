@@ -63,18 +63,18 @@ var preorderTraversal = function (root: TreeNode | null): number[] {
 // iterative
 var preorderTraversal = function (root: TreeNode | null): number[] {
   const ret: number[] = [];
-  const stack = [];
+  const stack: TreeNode[] = [];
   if (!root) return ret;
 
   stack.push(root);
   while (stack.length) {
     const node = stack.pop();
-    ret.push(node!.val); // top -> bottom
+    ret.push(node!.val); // top -> bottom 1 val
 
     // 先进 right 后进 left
     // 栈：后进先出 pop 时先 left 后 right
-    if (node?.right) stack.push(node.right);
-    if (node?.left) stack.push(node.left);
+    if (node?.right) stack.push(node.right); // right node -> 3 right val
+    if (node?.left) stack.push(node.left); // left node -> 2 left val
   }
 
   return ret;
@@ -82,7 +82,7 @@ var preorderTraversal = function (root: TreeNode | null): number[] {
 
 // Morris
 var preorderTraversal = function (root: TreeNode | null): number[] {
-  const ret = [];
+  const ret: number[] = [];
 
   let node = root;
   while (node) {
