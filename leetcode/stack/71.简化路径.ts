@@ -65,7 +65,7 @@
 
 // @lc code=start
 var simplifyPath = function (path: string): string {
-  const stack = [];
+  const stack: string[] = [];
   const pathArr = path.split("/");
 
   for (const item of pathArr) {

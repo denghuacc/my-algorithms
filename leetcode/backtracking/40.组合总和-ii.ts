@@ -48,11 +48,6 @@
  */
 
 // @lc code=start
-/**
- * @param {number[]} candidates
- * @param {number} target
- * @return {number[][]}
- */
 var combinationSum2 = function (
   candidates: number[],
   target: number

@@ -30,15 +30,17 @@
  */
 
 export {};
+
 // @lc code=start
+// hash table
 var singleNumber = function (nums: number[]): number[] {
-  const map = new Map();
+  const map: Map<number, number> = new Map();
 
   for (const num of nums) {
     map.set(num, (map.get(num) || 0) + 1);
   }
 
-  const ret = [];
+  const ret: number[] = [];
   let i = 0;
 
   for (const pair of map.entries()) {
@@ -50,6 +52,7 @@ var singleNumber = function (nums: number[]): number[] {
   return ret;
 };
 
+// bit manipulation
 var singleNumber = function (nums: number[]): number[] {
   let bitMask = 0;
 

@@ -40,24 +40,21 @@
  */
 
 // @lc code=start
-/**
- * @param {string} s
- * @return {number}
- */
+// hash table
 var lengthOfLongestSubstring = function (s: string): number {
   let ret = 0;
   let i = 0;
-  let tmp: string[] = [];
+  let arr: string[] = [];
 
   while (i < s.length) {
-    if (tmp.indexOf(s[i]) === -1) {
-      tmp.push(s[i]);
+    if (arr.indexOf(s[i]) === -1) {
+      arr.push(s[i]);
     } else {
-      tmp.shift();
+      arr.shift();
       continue;
     }
 
-    ret = Math.max(ret, tmp.length);
+    ret = Math.max(ret, arr.length);
     i++;
   }
 

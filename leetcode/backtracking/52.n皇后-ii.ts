@@ -52,10 +52,6 @@
  */
 
 // @lc code=start
-/**
- * @param {number} n
- * @return {number}
- */
 var totalNQueens = function (n: number): number {
   const obj: Record<string, number> = {};
   const add: number[] = [];

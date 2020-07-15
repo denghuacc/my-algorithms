@@ -34,6 +34,7 @@
  */
 
 // @lc code=start
+// array
 var findMin = function (nums: number[]): number {
   let min = nums[0];
   for (let i = 1; i < nums.length; i++) {

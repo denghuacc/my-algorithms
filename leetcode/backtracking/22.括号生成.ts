@@ -64,6 +64,7 @@ var generateParenthesis = function (n: number): string[] {
   }
 };
 
+// recursive
 var generateParenthesis = function (n: number): string[] {
   const cache: string[][] = [];
   return generate(n);

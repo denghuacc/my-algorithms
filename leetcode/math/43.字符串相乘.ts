@@ -37,13 +37,8 @@
  */
 
 // @lc code=start
-/**
- * @param {string} num1
- * @param {string} num2
- * @return {string}
- */
 var multiply = function (num1: string, num2: string): string {
-  return String(BigInt(num1) * BigInt(num2)); // use Number out of range
+  return String(BigInt(num1) * BigInt(num2)); // use Number will be out of range
 };
 
 var multiply = function (num1: string, num2: string): string {
@@ -51,7 +46,7 @@ var multiply = function (num1: string, num2: string): string {
 
   let l1 = num1.length;
   let l2 = num2.length;
-  let ret = new Array(l1 + l2).fill(0);
+  let ret: number[] = new Array(l1 + l2).fill(0);
 
   for (let i = l2 - 1; i >= 0; i--) {
     for (let j = l1 - 1; j >= 0; j--) {
@@ -70,7 +65,7 @@ var multiply = function (num1: string, num2: string): string {
 
   let l1 = num1.length;
   let l2 = num2.length;
-  let ret = new Array<number>(l1 + l2 - 1).fill(0);
+  let ret: number[] = new Array(l1 + l2 - 1).fill(0);
 
   for (let i = 0; i < l2; i++) {
     for (let j = 0; j < l1; j++) {

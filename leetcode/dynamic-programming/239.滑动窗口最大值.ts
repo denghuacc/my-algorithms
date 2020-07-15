@@ -54,12 +54,7 @@
  */
 
 // @lc code=start
-/**
- * @param {number[]} nums
- * @param {number} k
- * @return {number[]}
- * dp
- */
+// dp
 var maxSlidingWindow = function (nums: number[], k: number): number[] {
   const n = nums.length;
   if (n * k === 0) return [];

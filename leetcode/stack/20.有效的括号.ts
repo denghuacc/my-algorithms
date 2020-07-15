@@ -55,7 +55,7 @@
 
 // @lc code=start
 var isValid = function (s: string): boolean {
-  let arr = [];
+  let arr: string[] = [];
   for (let i = 0; i < s.length; i++) {
     const c = s[i];
     if (c === "(" || c === "[" || c === "{") {

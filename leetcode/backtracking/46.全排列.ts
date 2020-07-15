@@ -34,7 +34,7 @@
 // backtracking
 var permute = function (nums: number[]): number[][] {
   const ret: number[][] = [];
-  const output = nums.slice();
+  const output: number[] = nums.slice();
   const len = nums.length;
 
   backtrack(len, output, ret, 0);

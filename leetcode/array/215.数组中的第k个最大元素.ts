@@ -32,21 +32,16 @@
  *
  */
 
-// @lc code=start
-/**
- * @param {number[]} nums
- * @param {number} k
- * @return {number}
- */
 var findKthLargest = function (nums: number[], k: number): number {
   nums = nums.sort((a, b) => a - b);
   return nums[nums.length - k];
 };
 
+// @lc code=start
 // quick select
 var findKthLargest = function (nums: number[], k: number): number {
-  const size = nums.length;
-  return quickSelect(0, size - 1, size - k);
+  const n = nums.length;
+  return quickSelect(0, n - 1, n - k);
 
   function quickSelect(
     left: number,

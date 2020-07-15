@@ -46,6 +46,7 @@
  */
 
 // @lc code=start
+// backtracking
 var exist = function (board: string[][], word: string): boolean {
   let m = board.length;
   let n = board[0].length;

@@ -42,11 +42,12 @@
  */
 
 // @lc code=start
-
+// API
 var addBinary = function (a: string, b: string): string {
   return (BigInt("0b" + a) + BigInt("0b" + b)).toString(2);
 };
 
+// math
 var addBinary = function (a: string, b: string): string {
   let ret = "";
   let ca = 0;

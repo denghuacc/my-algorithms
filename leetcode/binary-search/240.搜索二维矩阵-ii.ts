@@ -41,6 +41,7 @@
  */
 
 // @lc code=start
+// brute force
 var searchMatrix = function (matrix: number[][], target: number): boolean {
   for (let i = 0; i < matrix.length; i++) {
     for (let j = 0; j < matrix[0].length; j++) {
@@ -55,7 +56,7 @@ var searchMatrix = function (matrix: number[][], target: number): boolean {
 
 // binary search
 var searchMatrix = function (matrix: number[][], target: number): boolean {
-  if (matrix == null || matrix.length === 0) return false;
+  if (matrix.length === 0) return false;
 
   const shortedDim = Math.min(matrix.length, matrix[0].length);
 
@@ -101,6 +102,7 @@ var searchMatrix = function (matrix: number[][], target: number): boolean {
   }
 };
 
+// binary search 2
 var searchMatrix = function (matrix: number[][], target: number): boolean {
   if (matrix == null || matrix.length === 0) return false;
 
@@ -135,6 +137,7 @@ var searchMatrix = function (matrix: number[][], target: number): boolean {
   }
 };
 
+// binary search 3
 var searchMatrix = function (matrix: number[][], target: number): boolean {
   let row = matrix.length - 1;
   let col = 0;

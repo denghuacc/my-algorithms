@@ -34,7 +34,8 @@ var lengthOfLastWord = function (s: string): number {
   s = s.trim();
   const arr = s.split(" ");
   if (arr.length === 0) return 0;
-  return arr.pop()!.length;
+  const last = arr.pop()!;
+  return last.length;
 };
 
 var lengthOfLastWord = function (s: string): number {

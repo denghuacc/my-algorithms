@@ -39,11 +39,7 @@
  */
 
 // @lc code=start
-/**
- * @param {string} haystack
- * @param {string} needle
- * @return {number}
- */
+// API
 var strStr = function (haystack: string, needle: string): number {
   return haystack.indexOf(needle);
 };

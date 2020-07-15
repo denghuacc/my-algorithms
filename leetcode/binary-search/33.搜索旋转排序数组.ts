@@ -35,8 +35,11 @@
  * 输出: -1
  *
  */
+
 export {};
+
 // @lc code=start
+// binary search
 var search = function (nums: number[], target: number): number {
   const len = nums.length;
   if (!len) return -1;

@@ -31,10 +31,11 @@
  */
 
 // @lc code=start
+// array sort
 var merge = function (intervals: number[][]): number[][] {
   const len = intervals.length;
   if (len === 0) return [];
-  const ret = [];
+  const ret: number[][] = [];
   intervals.sort((a, b) => a[0] - b[0]);
   ret.push(intervals[0]);
 
@@ -50,9 +51,10 @@ var merge = function (intervals: number[][]): number[][] {
   return ret;
 };
 
+// array sort
 var merge = function (intervals: number[][]): number[][] {
   intervals.sort((a, b) => a[0] - b[0]);
-  const ret = [];
+  const ret: number[][] = [];
   let idx = -1;
 
   for (const interval of intervals) {

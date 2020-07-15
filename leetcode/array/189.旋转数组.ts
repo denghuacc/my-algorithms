@@ -56,10 +56,6 @@ var rotate = function (nums: number[], k: number) {
 
     do {
       let next = (cur + k) % nums.length;
-      // let temp = nums[next]
-      // nums[next] = prev
-      // prev = temp
-      // cur = next
       [prev, nums[next], cur] = [nums[next], prev, next];
       count++;
     } while (start !== cur);

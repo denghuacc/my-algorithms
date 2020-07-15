@@ -53,7 +53,7 @@ var validateStackSequences = function (
   popped: number[]
 ): boolean {
   const n = pushed.length;
-  const stack = [];
+  const stack: number[] = [];
 
   let j = 0;
 

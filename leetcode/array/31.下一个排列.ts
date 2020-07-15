@@ -30,6 +30,7 @@
 /**
  * Do not return anything, modify nums in-place instead.
  */
+// array
 var nextPermutation = function (nums: number[]) {
   let i = nums.length - 2;
   while (i >= 0 && nums[i + 1] <= nums[i]) i--;

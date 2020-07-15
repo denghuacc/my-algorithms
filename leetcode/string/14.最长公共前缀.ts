@@ -38,12 +38,10 @@
 
 // @lc code=start
 var longestCommonPrefix = function (strs: string[]): string {
-  if (strs.length === 0 || strs == null) return "";
-  // if (strs.length === 1) return strs[0]
-
+  if (strs.length === 0) return "";
   const first = strs[0];
-  let index = 0,
-    ret = "";
+  let index = 0;
+  let ret = "";
 
   while (index < first.length) {
     let bool;

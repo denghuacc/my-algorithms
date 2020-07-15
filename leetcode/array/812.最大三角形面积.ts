@@ -1,7 +1,7 @@
 /*
  * @lc app=leetcode.cn id=812 lang=typescript
  *
- * [812] 旋转字符串
+ * [812] 最大三角形面积
  *
  * https://leetcode-cn.com/problems/largest-triangle-area/description/
  *
@@ -37,10 +37,7 @@
  */
 
 // @lc code=start
-/**
- * @param {number[][]} points
- * @return {number}
- */
+// array
 var largestTriangleArea = function (points: number[][]): number {
   let n = points.length;
   let ret = 0;

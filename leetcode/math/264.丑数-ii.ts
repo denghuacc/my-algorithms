@@ -39,7 +39,7 @@ var nthUglyNumber = function (n: number): number {
 
   function genArray(): number[] {
     const maxNth = 1690;
-    const set = new Set<number>();
+    const set: Set<number> = new Set();
     const sortList = [1];
 
     while (set.size < maxNth) {

@@ -32,12 +32,7 @@
  */
 
 // @lc code=start
-/**
- * @param {number[]} nums
- * @param {number} target
- * @return {number[]}
- * API
- */
+// API
 var searchRange = function (nums: number[], target: number): number[] {
   const ret = [-1, -1];
   const firstIndex = nums.indexOf(target);
@@ -57,8 +52,9 @@ var searchRange = function (nums: number[], target: number): number[] {
   return ret;
 };
 
+// array 线性扫描
 var searchRange = function (nums: number[], target: number): number[] {
-  const ret = [-1, -1];
+  const ret: number[] = [-1, -1];
 
   for (let i = 0; i < nums.length; i++) {
     if (nums[i] === target) {

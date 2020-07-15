@@ -48,10 +48,6 @@
  */
 
 // @lc code=start
-/**
- * @param {number} n
- * @return {string}
- */
 var countAndSay = function (n: number): string {
   let prev = "1";
   for (let i = 1; i < n; i++) {

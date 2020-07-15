@@ -103,7 +103,7 @@ var solveNQueens = function (n: number): string[][] {
 
   function backtrack(row: number) {
     if (row === n) {
-      const arr = [];
+      const arr: string[] = [];
       for (const key in obj) {
         arr.push("Q".padStart(obj[key] + 1, ".").padEnd(n, "."));
       }

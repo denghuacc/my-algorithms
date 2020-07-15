@@ -34,13 +34,8 @@
  */
 
 // @lc code=start
-/**
- * @param {number[]} nums
- * @param {number} k
- * @return {number[]}
- */
 var topKFrequent = function (nums: number[], k: number): number[] {
-  const map = new Map<number, number>();
+  const map: Map<number, number> = new Map();
 
   for (let item of nums) {
     if (map.has(item)) {

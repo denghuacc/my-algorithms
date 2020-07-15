@@ -131,6 +131,7 @@ var findErrorNums = function (nums: number[]): number[] {
   return [dup, missing];
 };
 
+// bit manipulation
 var findErrorNums = function (nums: number[]): number[] {
   let [xor, xor0, xor1] = [0, 0, 0];
 

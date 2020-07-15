@@ -69,9 +69,10 @@
  */
 
 // @lc code=start
+// math
 var romanToInt = function (s: string): number {
   let ret = 0;
-  const specMap = new Map([
+  const specMap: Map<string, number> = new Map([
     ["IV", 4],
     ["IX", 9],
     ["XL", 40],
@@ -79,7 +80,7 @@ var romanToInt = function (s: string): number {
     ["CD", 400],
     ["CM", 900],
   ]);
-  const map = new Map([
+  const map: Map<string, number> = new Map([
     ["I", 1],
     ["V", 5],
     ["X", 10],
@@ -108,10 +109,10 @@ var romanToInt = function (s: string): number {
   return ret;
 };
 
-// method2
+// math hash table
 var romanToInt = function (s: string): number {
   let ret = 0;
-  const map = new Map([
+  const map: Map<string, number> = new Map([
     ["I", 1],
     ["V", 5],
     ["X", 10],

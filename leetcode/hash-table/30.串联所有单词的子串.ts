@@ -41,11 +41,6 @@
  */
 
 // @lc code=start
-/**
- * @param {string} s
- * @param {string[]} words
- * @return {number[]}
- */
 var findSubstring = function (s: string, words: string[]): number[] {
   const ret: number[] = [];
   let wordNum = words.length;
@@ -53,7 +48,7 @@ var findSubstring = function (s: string, words: string[]): number[] {
 
   let wordLen = words[0].length;
 
-  const wordMap = new Map();
+  const wordMap: Map<string, number> = new Map();
   for (const w of words) {
     wordMap.set(w, (wordMap.get(w) || 0) + 1);
   }
@@ -65,7 +60,7 @@ var findSubstring = function (s: string, words: string[]): number[] {
       const word = s.substring(i + num * wordLen, i + (num + 1) * wordLen);
       if (wordMap.has(word)) {
         hasMap.set(word, (hasMap.get(word) || 0) + 1);
-        if (hasMap.get(word) > wordMap.get(word)) break;
+        if (hasMap.get(word) > wordMap.get(word)!) break;
       } else break;
       num++;
     }
@@ -82,7 +77,7 @@ var findSubstring = function (s: string, words: string[]): number[] {
 
   let wordLen = words[0].length;
 
-  const wordMap = new Map<string, number>();
+  const wordMap: Map<string, number> = new Map();
   for (const w of words) {
     wordMap.set(w, (wordMap.get(w) || 0) + 1);
   }

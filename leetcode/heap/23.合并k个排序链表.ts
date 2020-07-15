@@ -27,7 +27,6 @@
  *
  */
 
-// @lc code=start
 class ListNode {
   val: number;
   next: ListNode | null;
@@ -37,10 +36,7 @@ class ListNode {
   }
 }
 
-/**
- * @param {ListNode[]} lists
- * @return {ListNode}
- */
+// @lc code=start
 var mergeKLists = function (lists: Array<ListNode | null>): ListNode | null {
   const nums = [];
   let dummy: ListNode;

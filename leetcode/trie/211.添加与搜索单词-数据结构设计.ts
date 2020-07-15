@@ -40,7 +40,7 @@
 class DicNode {
   isWord: boolean;
   next: Map<string, DicNode>;
-  
+
   constructor(isWord = false) {
     this.isWord = isWord;
     this.next = new Map();

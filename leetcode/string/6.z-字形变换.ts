@@ -51,7 +51,7 @@
 var convert = function (s: string, numRows: number): string {
   if (numRows === 1) return s;
   const len = Math.min(s.length, numRows);
-  const rows = [];
+  const rows: string[] = [];
   for (let i = 0; i < len; i++) rows[i] = "";
   let loc = 0;
   let down = false;

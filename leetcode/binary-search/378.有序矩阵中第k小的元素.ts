@@ -38,11 +38,7 @@
  */
 
 // @lc code=start
-/**
- * @param {number[][]} matrix
- * @param {number} k
- * @return {number}
- */
+// API
 var kthSmallest = function (matrix: number[][], k: number): number {
   return (matrix.flat(Infinity) as number[]).sort((a, b) => a - b)[k - 1];
 };

@@ -26,7 +26,7 @@
  */
 
 // @lc code=start
-// sort
+// array sort
 var longestConsecutive = function (nums: number[]): number {
   if (nums.length === 0) return 0;
 
@@ -49,14 +49,11 @@ var longestConsecutive = function (nums: number[]): number {
   return Math.max(longest, curLongest);
 };
 
-// hash
+// hash table
 var longestConsecutive = function (nums: number[]): number {
-  const set = new Set<number>();
+  const set: Set<number> = new Set();
 
-  for (const num of nums) {
-    set.add(num);
-  }
-
+  for (const num of nums) set.add(num);
   let longest = 0;
 
   for (const num of set.values()) {
@@ -75,4 +72,3 @@ var longestConsecutive = function (nums: number[]): number {
 
   return longest;
 };
-// @lc code=end

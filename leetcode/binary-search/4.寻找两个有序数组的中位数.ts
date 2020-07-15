@@ -43,9 +43,9 @@ var findMedianSortedArrays = function (
   nums1: number[],
   nums2: number[]
 ): number {
-  let len1 = nums1.length;
-  let len2 = nums2.length;
-  let mid = (len1 + len2) >> 1;
+  const len1 = nums1.length;
+  const len2 = nums2.length;
+  const mid = (len1 + len2) >> 1;
   let i = 0;
   let j = 0;
   let cur: number;

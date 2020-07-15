@@ -51,7 +51,7 @@
 
 // @lc code=start
 var uniqueMorseRepresentations = function (words: string[]): number {
-  var dict = [
+  var dict: string[] = [
     ".-",
     "-...",
     "-.-.",

@@ -50,6 +50,7 @@ var jump = function (nums: number[]): number {
   return steps;
 };
 
+// greedy 2
 var jump = function (nums: number[]): number {
   const len = nums.length;
   let end = 0;

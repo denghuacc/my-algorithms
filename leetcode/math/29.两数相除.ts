@@ -47,6 +47,7 @@
  */
 
 // @lc code=start
+// math
 var divide = function (dividend: number, divisor: number): number {
   const MAX = 2 ** 31 - 1;
   const MIN = -(2 ** 31);

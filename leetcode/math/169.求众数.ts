@@ -33,8 +33,9 @@
  */
 
 // @lc code=start
+// brute force
 var majorityElement = function (nums: number[]): number {
-  const map = new Map();
+  const map: Map<number, number> = new Map();
 
   for (const num of nums) {
     map.set(num, (map.get(num) || 0) + 1);
@@ -48,7 +49,7 @@ var majorityElement = function (nums: number[]): number {
   return -1;
 };
 
-// sort
+// array sort
 var majorityElement = function (nums: number[]): number {
   nums = nums.sort((a, b) => a - b);
   return nums[Math.floor(nums.length / 2)];

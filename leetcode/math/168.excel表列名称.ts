@@ -49,7 +49,7 @@
 
 // @lc code=start
 var convertToTitle = function (n: number): string {
-  const set = [
+  const set: string[] = [
     "A",
     "B",
     "C",

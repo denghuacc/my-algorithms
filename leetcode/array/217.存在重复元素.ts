@@ -37,13 +37,13 @@
  */
 
 // @lc code=start
-// 语言特性
+// API
 var containsDuplicate = function (nums: number[]): boolean {
   const NoneRepeatNums = [...new Set(nums)];
   return nums.length !== NoneRepeatNums.length;
 };
 
-// 排序
+// array sort
 var containsDuplicate = function (nums: number[]): boolean {
   nums.sort((a, b) => a - b);
   for (let i = 0; i < nums.length; i++) {
@@ -52,9 +52,9 @@ var containsDuplicate = function (nums: number[]): boolean {
   return false;
 };
 
-// 集合
+// hash table
 var containsDuplicate = function (nums: number[]): boolean {
-  const set = new Set<number>();
+  const set: Set<number> = new Set();
   for (let i = 0; i < nums.length; i++) {
     const num = nums[i];
     if (set.has(num)) return true;

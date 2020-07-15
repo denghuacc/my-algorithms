@@ -33,9 +33,9 @@
  */
 
 // @lc code=start
-// set
+// hash table set
 var singleNumber = function (nums: number[]): number {
-  const set = new Set<number>();
+  const set: Set<number> = new Set();
 
   for (const num of nums) {
     if (!set.has(num)) {
@@ -47,9 +47,9 @@ var singleNumber = function (nums: number[]): number {
   return [...set][0];
 };
 
-// map
+// hash table map
 var singleNumber = function (nums: number[]): number {
-  const map = new Map();
+  const map: Map<number, number> = new Map();
 
   for (const num of nums) {
     map.set(num, (map.get(num) || 0) + 1);
@@ -63,10 +63,10 @@ var singleNumber = function (nums: number[]): number {
   return Infinity;
 };
 
-// 2∗(a+b+c)−(a+a+b+b+c)=c
+// math 2 ∗ (a+b+c) − (a+a+b+b+c) = c
 var singleNumber = function (nums: number[]): number {
   let [sumOfSet, sumOfNums] = [0, 0];
-  const set = new Set();
+  const set: Set<number> = new Set();
 
   for (const num of nums) {
     if (!set.has(num)) {
@@ -79,6 +79,7 @@ var singleNumber = function (nums: number[]): number {
   return 2 * sumOfSet - sumOfNums;
 };
 
+// bit-manipulation
 var singleNumber = function (nums: number[]): number {
   let ret = 0;
   for (const num of nums) {

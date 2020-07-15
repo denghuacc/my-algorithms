@@ -30,15 +30,11 @@
  */
 
 // @lc code=start
-/**
- * @param {string} s
- * @return {number}
- */
 var firstUniqChar = function (s: string): number {
-  const map = new Map();
+  const map: Map<string, number> = new Map();
   for (let i = 0; i < s.length; i++) {
     if (map.has(s[i])) {
-      const count = map.get(s[i]);
+      const count = map.get(s[i])!;
       map.set(s[i], count + 1);
     } else {
       map.set(s[i], 1);

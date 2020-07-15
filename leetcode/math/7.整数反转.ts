@@ -38,6 +38,7 @@
  */
 
 // @lc code=start
+// math
 var reverse = function (x: number) {
   // 数值转字符串后再翻转
   let str = new Number(x).toString().split("").reverse().join("");

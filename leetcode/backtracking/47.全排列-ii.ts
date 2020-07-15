@@ -33,7 +33,7 @@ var permuteUnique = function (nums: number[]): number[][] {
   const ret: number[][] = [];
   if (len === 0) return ret;
   nums.sort((a, b) => a - b);
-  const used = new Array(len).fill(false);
+  const used: boolean[] = new Array(len).fill(false);
   const path: number[] = [];
 
   backtrack(nums, len, 0, used, path, ret);

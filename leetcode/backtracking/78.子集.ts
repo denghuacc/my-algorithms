@@ -41,7 +41,7 @@ var subsets = function (nums: number[]): number[][] {
   ret.push([]);
 
   for (const num of nums) {
-    const set = [];
+    const set: number[][] = [];
     for (const cur of ret) {
       set.push(cur.concat(num));
     }

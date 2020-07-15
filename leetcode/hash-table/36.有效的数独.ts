@@ -75,9 +75,9 @@
 
 // @lc code=start
 var isValidSudoku = function (board: string[][]): boolean {
-  const rows = [];
-  const columns = [];
-  const boxes = [];
+  const rows: Map<string, number>[] = [];
+  const columns: Map<string, number>[] = [];
+  const boxes: Map<string, number>[] = [];
 
   for (let i = 0; i < 9; i++) {
     rows[i] = new Map();
@@ -98,9 +98,9 @@ var isValidSudoku = function (board: string[][]): boolean {
         boxes[boxIndex].set(n, (boxes[boxIndex].get(n) || 0) + 1);
 
         if (
-          rows[i].get(n) > 1 ||
-          columns[j].get(n) > 1 ||
-          boxes[boxIndex].get(n) > 1
+          rows[i].get(n)! > 1 ||
+          columns[j].get(n)! > 1 ||
+          boxes[boxIndex].get(n)! > 1
         ) {
           return false;
         }

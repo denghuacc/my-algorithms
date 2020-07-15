@@ -1,7 +1,7 @@
 /*
  * @lc app=leetcode.cn id=766 lang=typescript
  *
- * [766] 扁平化多级双向链表
+ * [766] 托普利茨矩阵
  *
  * https://leetcode-cn.com/problems/toeplitz-matrix/description/
  *
@@ -62,10 +62,11 @@
  */
 
 // @lc code=start
+// hash table 对角线
 var isToeplitzMatrix = function (matrix: number[][]): boolean {
-  const map = new Map();
-  for (let r = 0; r < matrix.length; ++r) {
-    for (let c = 0; c < matrix[0].length; ++c) {
+  const map: Map<number, number> = new Map();
+  for (let r = 0; r < matrix.length; r++) {
+    for (let c = 0; c < matrix[0].length; c++) {
       if (!map.has(r - c)) {
         map.set(r - c, matrix[r][c]);
       } else if (map.get(r - c) !== matrix[r][c]) {
@@ -76,9 +77,10 @@ var isToeplitzMatrix = function (matrix: number[][]): boolean {
   return true;
 };
 
+// array 检查左上邻居
 var isToeplitzMatrix = function (matrix: number[][]): boolean {
-  for (let r = 0; r < matrix.length; ++r) {
-    for (let c = 0; c < matrix[0].length; ++c) {
+  for (let r = 0; r < matrix.length; r++) {
+    for (let c = 0; c < matrix[0].length; c++) {
       if (r > 0 && c > 0 && matrix[r - 1][c - 1] !== matrix[r][c]) {
         return false;
       }

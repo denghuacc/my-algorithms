@@ -1,7 +1,7 @@
 /*
  * @lc app=leetcode.cn id=509 lang=typescript
  *
- * [509] Fibonacci Number
+ * [509] 斐波那契数
  *
  * https://leetcode-cn.com/problems/fibonacci-number/description/
  *
@@ -55,11 +55,7 @@
  */
 
 // @lc code=start
-/**
- * @param {number} N
- * @return {number}
- * recursive
- */
+// recursive
 var fib = function (N: number): number {
   if (N <= 1) return N;
   return fib(N - 1) + fib(N - 2);

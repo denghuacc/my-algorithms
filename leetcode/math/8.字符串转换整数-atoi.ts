@@ -76,6 +76,7 @@
  */
 
 // @lc code=start
+// math
 var myAtoi = function (str: string): number {
   str = str.trim();
   const arr = str.split(" ");

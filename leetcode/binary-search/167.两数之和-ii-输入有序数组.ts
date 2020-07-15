@@ -33,11 +33,7 @@
  */
 
 // @lc code=start
-/**
- * @param {number[]} numbers
- * @param {number} target
- * @return {number[]}
- */
+// brute force
 var twoSum = function (numbers: number[], target: number): number[] {
   for (let i = 0; i < numbers.length; i++) {
     for (let j = i + 1; j < numbers.length; j++) {
@@ -49,6 +45,7 @@ var twoSum = function (numbers: number[], target: number): number[] {
   return [-1, -1];
 };
 
+// binary search
 var twoSum = function (numbers: number[], target: number): number[] {
   let low = 0;
   let high = numbers.length - 1;

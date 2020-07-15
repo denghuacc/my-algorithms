@@ -44,6 +44,7 @@
  */
 
 // @lc code=start
+// API
 var searchInsert = function (nums: number[], target: number): number {
   const index = nums.indexOf(target);
   if (index > -1) {
@@ -55,6 +56,7 @@ var searchInsert = function (nums: number[], target: number): number {
   }
 };
 
+// array
 var searchInsert = function (nums: number[], target: number): number {
   if (nums[0] > target) return 0; // first
   for (let i = 0; i < nums.length; i++) {

@@ -36,6 +36,7 @@
  */
 
 // @lc code=start
+// API
 var mySqrt = function (x: number): number {
   return Math.floor(Math.sqrt(x));
 };

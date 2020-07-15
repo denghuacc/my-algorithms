@@ -28,15 +28,14 @@
  */
 
 // @lc code=start
+// array
 var generateMatrix = function (n: number): number[][] {
   let l = 0; // left
   let r = n - 1; // right
   let t = 0; // top
   let b = n - 1; // bottom
 
-  const ret = Array(n)
-    .fill(0)
-    .map(() => new Array(n));
+  const ret: number[][] = new Array(n).fill(0).map(() => new Array(n));
   let num = 1;
   let tar = n * n;
 

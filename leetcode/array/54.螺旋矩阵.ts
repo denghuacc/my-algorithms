@@ -40,6 +40,7 @@
  */
 
 // @lc code=start
+// array
 var spiralOrder = function (matrix: number[][]): number[] {
   const ret: number[] = [];
   if (matrix.length === 0) return ret;

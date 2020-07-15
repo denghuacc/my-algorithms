@@ -55,6 +55,7 @@
  */
 
 // @lc code=start
+// bit manipulation
 var hammingWeight = function (n: number): number {
   let bits = 0;
   let mask = 1;
@@ -68,6 +69,7 @@ var hammingWeight = function (n: number): number {
   return bits;
 };
 
+// bit manipulation
 var hammingWeight = function (n: number): number {
   let sum = 0;
   while (n !== 0) {

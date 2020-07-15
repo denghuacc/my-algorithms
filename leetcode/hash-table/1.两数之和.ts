@@ -26,7 +26,7 @@
  */
 
 // @lc code=start
-// 暴力
+// brute force
 var twoSum = function (nums: number[], target: number): number[] {
   for (let i = 0; i < nums.length - 1; i++) {
     for (let j = i + 1; j < nums.length; j++) {
@@ -38,6 +38,7 @@ var twoSum = function (nums: number[], target: number): number[] {
   return [];
 };
 
+// API
 var twoSum = function (nums: number[], target: number): number[] {
   let i = nums.length;
   while (i > 1) {
@@ -51,9 +52,9 @@ var twoSum = function (nums: number[], target: number): number[] {
   return [];
 };
 
-// 两遍哈希表
+// hash table  two traverse
 var twoSum = function (nums: number[], target: number): number[] {
-  const map = new Map();
+  const map: Map<number, number> = new Map();
 
   for (let i = 0; i < nums.length; i++) {
     map.set(nums[i], i);
@@ -62,21 +63,21 @@ var twoSum = function (nums: number[], target: number): number[] {
   for (let i = 0; i < nums.length; i++) {
     const complement = target - nums[i];
     if (map.has(complement) && map.get(complement) !== i) {
-      return [i, map.get(complement)];
+      return [i, map.get(complement)!];
     }
   }
 
   return [];
 };
 
-// 一遍哈希表
+// hash table  one traverse
 var twoSum = function (nums: number[], target: number): number[] {
-  const map = new Map();
+  const map: Map<number, number> = new Map();
 
   for (let i = 0; i < nums.length; i++) {
     const complement = target - nums[i];
     if (map.has(complement)) {
-      return [map.get(complement), i];
+      return [map.get(complement)!, i];
     }
     map.set(nums[i], i);
   }

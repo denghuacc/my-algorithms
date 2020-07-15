@@ -50,9 +50,9 @@ var missingNumber = function (nums: number[]): number {
   return -1;
 };
 
-// hash
+// hash table
 var missingNumber = function (nums: number[]): number {
-  const set = new Set();
+  const set: Set<number> = new Set();
 
   for (const num of nums) set.add(num);
 
@@ -76,7 +76,7 @@ var missingNumber = function (nums: number[]): number {
   return missing;
 };
 
-// Math 高斯求和 -> 首尾相加除以 2
+// math 高斯求和 -> 首尾相加除以 2
 var missingNumber = function (nums: number[]): number {
   let expectedNum = Math.floor((nums.length * (nums.length + 1)) / 2);
   let actualSum = 0;

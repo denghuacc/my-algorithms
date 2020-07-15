@@ -36,6 +36,7 @@
  */
 
 // @lc code=start
+// array
 /**
  * 情况一举例 45 -> 46
  * 情况二举例 49 -> 50
@@ -53,7 +54,7 @@ var plusOne = function (digits: number[]): number[] {
       return digits;
     }
   }
-  digits = [...Array(len + 1)].map((_) => 0); // 全部赋 0
+  digits = new Array(len + 1).fill(0); // 全部赋 0
   digits[0] = 1; // 最前面的 0 变为 1 才有效
   return digits;
 };

@@ -42,6 +42,7 @@
 export {};
 
 // @lc code=start
+// math
 var isPalindrome = function (x: number): boolean {
   // 数值转字符串后再翻转
   const str = new Number(x).toString().split("").reverse().join("");
