@@ -40,7 +40,65 @@
  */
 
 // @lc code=start
-// hash table
+
+// sliding window pseudo code
+// int left = 0, right = 0;
+// while (right < s.size()) {
+//     window.add(s[right]);
+//     right++;
+
+//     while (valid) {
+//         window.remove(s[left]);
+//         left++;
+//     }
+// }
+
+// sliding window
+var lengthOfLongestSubstring = function (s: string): number {
+  const n = s.length;
+  const map = new Map();
+  let left = 0;
+  let right = 0;
+  let ret = 0;
+
+  while (right < n) {
+    const c1 = s[right];
+    map.set(c1, (map.get(c1) ?? 0) + 1);
+    right++;
+    // 移动 left 缩小窗口
+    while (map.get(c1) > 1) {
+      const c2 = s[left];
+      map.set(c2, (map.get(c2) ?? 0) - 1);
+      left++;
+    }
+    ret = Math.max(ret, right - left);
+  }
+
+  return ret;
+};
+
+// sliding window 2
+var lengthOfLongestSubstring = function (s: string): number {
+  const n = s.length;
+  const set = new Set();
+  let right = -1; // 右指针未移动
+  let ret = 0;
+
+  for (let left = 0; left < n; left++) {
+    // 左指针右移 移除一个字符
+    if (left !== 0) set.delete(s[left - 1]);
+    // 右指针不断右移
+    while (right + 1 < n && !set.has(s[right + 1])) {
+      set.add(s[right + 1]);
+      ++right;
+    }
+    ret = Math.max(ret, right - left + 1);
+  }
+
+  return ret;
+};
+
+// array + API
 var lengthOfLongestSubstring = function (s: string): number {
   let ret = 0;
   let i = 0;

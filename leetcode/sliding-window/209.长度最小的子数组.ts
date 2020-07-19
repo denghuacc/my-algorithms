@@ -34,7 +34,7 @@
 var minSubArrayLen = function (s: number, nums: number[]): number {
   let n = nums.length;
   if (n === 0) return 0;
-  let ret = Number.MAX_SAFE_INTEGER;
+  let ret = Infinity;
 
   for (let i = 0; i < n; i++) {
     let sum = 0;
@@ -47,14 +47,14 @@ var minSubArrayLen = function (s: number, nums: number[]): number {
     }
   }
 
-  return ret === Number.MAX_SAFE_INTEGER ? 0 : ret;
+  return ret === Infinity ? 0 : ret;
 };
 
-// two pointers
+// sliding window
 var minSubArrayLen = function (s: number, nums: number[]): number {
   let n = nums.length;
   if (n === 0) return 0;
-  let ret = Number.MAX_SAFE_INTEGER;
+  let ret = Infinity;
 
   let start = 0;
   let end = 0;
@@ -70,6 +70,6 @@ var minSubArrayLen = function (s: number, nums: number[]): number {
     end++;
   }
 
-  return ret === Number.MAX_SAFE_INTEGER ? 0 : ret;
+  return ret === Infinity ? 0 : ret;
 };
 // @lc code=end
