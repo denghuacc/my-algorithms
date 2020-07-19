@@ -49,8 +49,8 @@ var maxCoins = function (nums: number[]): number {
   }
 
   // base case
-  const dp = Array.from(new Array(n + 2), () =>
-    new Array<number>(n + 2).fill(0)
+  const dp: number[][] = Array.from(new Array(n + 2), () =>
+    new Array(n + 2).fill(0)
   );
 
   // 从下到上
@@ -80,8 +80,8 @@ var maxCoins = function (nums: number[]): number {
     newNums[i] = nums[i - 1];
   }
 
-  const memo = Array.from(new Array(n + 2), () =>
-    new Array<number>(n + 2).fill(0)
+  const memo: number[][] = Array.from(new Array(n + 2), () =>
+    new Array(n + 2).fill(0)
   );
 
   return dp(memo, newNums, 0, n + 1);
