@@ -61,11 +61,16 @@ var findMin = function (nums: number[]): number {
   while (left < right) {
     let mid = left + Math.floor((right - left) / 2);
 
+    // 最小值在左边
     if (nums[mid] < nums[right]) {
-      right = mid; // 最小值在左边
-    } else if (nums[mid] > nums[right]) {
-      left = mid + 1; // 最小值在右边
-    } else {
+      right = mid;
+    }
+    // 最小值在右边
+    else if (nums[mid] > nums[right]) {
+      left = mid + 1;
+    }
+    // 可能存在重复元素
+    else if (nums[mid] === nums[right]) {
       right--;
     }
   }
