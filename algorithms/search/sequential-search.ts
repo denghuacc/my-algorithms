@@ -9,7 +9,7 @@ export function sequentialSearch<T>(
   array: T[],
   target: T,
   equalsFn = defaultEquals
-) {
+): number {
   // 遍历所有值，一个一个对比查找
   for (let i = 0; i < array.length; i++) {
     if (equalsFn(target, array[i])) {

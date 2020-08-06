@@ -8,13 +8,13 @@
 import { swap, defaultCompare, Compare } from "../util";
 
 export function selectionSort<T>(array: T[], compareFn = defaultCompare) {
-  let { length } = array;
-  let minIndex;
+  const len = array.length;
+  let minIndex: number;
 
-  for (let i = 0; i < length - 1; i++) {
-    minIndex = i; // 寻找最小值，初始值为 i
+  for (let i = 0; i < len - 1; i++) {
+    minIndex = i; // 寻找最小值索引，初始值为 i
 
-    for (let j = i + 1; j < length; j++) {
+    for (let j = i + 1; j < len; j++) {
       if (compareFn(array[minIndex], array[j]) === Compare.BIGGER_THAN) {
         minIndex = j; // 更新最小值索引
       }

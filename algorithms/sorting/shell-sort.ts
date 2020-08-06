@@ -38,7 +38,7 @@ export function shellSort<T>(array: T[], compareFn = defaultCompare) {
 }
 
 export function shellSort2<T>(array: T[], compareFn = defaultCompare) {
-  let len = array.length;
+  const len = array.length;
   let temp;
   let gap = 1;
 

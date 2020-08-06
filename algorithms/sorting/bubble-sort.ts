@@ -8,7 +8,7 @@
 
 import { swap, defaultCompare, Compare } from "../util";
 
-export function bubbleSort<T>(array: T[], compareFn = defaultCompare) {
+export function bubbleSort<T>(array: T[], compareFn = defaultCompare): T[] {
   const len = array.length;
   for (let i = 0; i < len; i++) {
     for (let j = 0; j < len - 1; j++) {
@@ -21,7 +21,10 @@ export function bubbleSort<T>(array: T[], compareFn = defaultCompare) {
 }
 
 // 优化：减少内循环中不必要的比较
-export function bubbleSortImproved<T>(array: T[], compareFn = defaultCompare) {
+export function bubbleSortImproved<T>(
+  array: T[],
+  compareFn = defaultCompare
+): T[] {
   const len = array.length;
   for (let i = 0; i < len; i++) {
     // 优化：j< len -1 -> j < len - 1 - i
@@ -39,7 +42,7 @@ export function bubbleSortImproved<T>(array: T[], compareFn = defaultCompare) {
 export function bubbleSortDoublePointer<T>(
   array: T[],
   compareFn = defaultCompare
-) {
+): T[] {
   let i = array.length - 1;
 
   while (i > 0) {

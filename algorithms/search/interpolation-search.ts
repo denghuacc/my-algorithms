@@ -18,10 +18,9 @@ export function interpolationSearch<T>(
   compareFn = defaultCompare,
   equalsFn = defaultEquals,
   diffFn = defaultDiff
-) {
-  const { length } = array;
+): number {
   let low = 0;
-  let high = length - 1;
+  let high = array.length - 1;
   let position = -1;
   let delta = -1;
 

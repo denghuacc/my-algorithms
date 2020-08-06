@@ -2,13 +2,13 @@
 
 import { insertionSort } from "./insertion-sort";
 
-export function bucketSort(array: number[], bucketSize = 5) {
+export function bucketSort(array: number[], bucketSize = 5): number[] {
   if (array.length < 2) return array;
   const buckets = createBuckets(array, bucketSize);
   return sortBuckets(buckets);
 }
 
-function createBuckets(array: number[], bucketSize: number) {
+function createBuckets(array: number[], bucketSize: number): number[][] {
   let minValue = array[0];
   let maxValue = array[0];
 
@@ -32,10 +32,10 @@ function createBuckets(array: number[], bucketSize: number) {
   return buckets;
 }
 
-function sortBuckets(buckets: number[][]) {
-  const sortedArray = [];
+function sortBuckets(buckets: number[][]): number[] {
+  const sortedArray: number[] = [];
   for (let i = 0; i < buckets.length; i++) {
-    if (buckets[i] != null) {
+    if (buckets[i]) {
       insertionSort(buckets[i]);
       sortedArray.push(...buckets[i]);
     }

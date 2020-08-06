@@ -5,28 +5,28 @@
 export function lcs(wordX: string, wordY: string) {
   const m = wordX.length;
   const n = wordY.length;
-  const list: number[][] = [];
+  const dp: number[][] = [];
 
   for (let i = 0; i <= m; i++) {
-    list[i] = [];
+    dp[i] = [];
     for (let j = 0; j <= n; j++) {
-      list[i][j] = 0;
+      dp[i][j] = 0;
     }
   }
 
   for (let i = 0; i <= m; i++) {
     for (let j = 0; j <= n; j++) {
       if (i === 0 || j === 0) {
-        list[i][j] = 0;
+        dp[i][j] = 0;
       } else if (wordX[i - 1] === wordY[j - 1]) {
-        list[i][j] = list[i - 1][j - 1] + 1;
+        dp[i][j] = dp[i - 1][j - 1] + 1;
       } else {
-        const a = list[i - 1][j];
-        const b = list[i][j - 1];
-        list[i][j] = a > b ? a : b; // max(a, b)
+        const a = dp[i - 1][j];
+        const b = dp[i][j - 1];
+        dp[i][j] = a > b ? a : b; // max(a, b)
       }
     }
-    // console.log(list[i].join());
+    // console.log(dp[i].join());
   }
-  return list[m][n];
+  return dp[m][n];
 }

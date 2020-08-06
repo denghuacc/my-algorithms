@@ -1,6 +1,9 @@
 import { defaultCompare, Compare } from "../util";
 
-export function findMinValue<T>(array: T[], compareFn = defaultCompare) {
+export function findMinValue<T>(
+  array: T[],
+  compareFn = defaultCompare
+): T | undefined {
   if (array && array.length > 0) {
     let min = array[0];
     for (let i = 0; i < array.length; i++) {
@@ -13,11 +16,14 @@ export function findMinValue<T>(array: T[], compareFn = defaultCompare) {
   return undefined;
 }
 
-export function findMaxValue<T>(array: T[], compareFn = defaultCompare) {
+export function findMaxValue<T>(
+  array: T[],
+  compareFn = defaultCompare
+): T | undefined {
   if (array && array.length > 0) {
     let max = array[0];
     for (let i = 0; i < array.length; i++) {
-      if (defaultCompare(max, array[i]) === Compare.LESS_THAN) {
+      if (compareFn(max, array[i]) === Compare.LESS_THAN) {
         max = array[i];
       }
     }

@@ -10,7 +10,7 @@ export enum Compare {
   BIGGER_THAN = 1,
 }
 
-export function swap<T>(array: Array<T>, a: number, b: number) {
+export function swap<T>(array: Array<T>, a: number, b: number): void {
   [array[a], array[b]] = [array[b], array[a]];
 }
 
@@ -27,12 +27,20 @@ export function defaultDiff<T>(a: T, b: T): number {
   return Number(a) - Number(b);
 }
 
-export function lesserEquals<T>(a: T, b: T, compareFn: ICompareFunction<T>) {
+export function lesserEquals<T>(
+  a: T,
+  b: T,
+  compareFn: ICompareFunction<T>
+): boolean {
   const comp = compareFn(a, b);
   return comp === Compare.LESS_THAN || comp === Compare.EQUALS;
 }
 
-export function biggerEquals<T>(a: T, b: T, compareFn: ICompareFunction<T>) {
+export function biggerEquals<T>(
+  a: T,
+  b: T,
+  compareFn: ICompareFunction<T>
+): boolean {
   const comp = compareFn(a, b);
   return comp === Compare.BIGGER_THAN || comp === Compare.EQUALS;
 }

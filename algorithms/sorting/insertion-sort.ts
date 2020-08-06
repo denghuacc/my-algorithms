@@ -7,10 +7,8 @@
 
 import { defaultCompare, Compare } from "../util";
 
-export function insertionSort<T>(array: T[], compareFn = defaultCompare) {
-  const { length } = array;
-
-  for (let i = 0; i < length; i++) {
+export function insertionSort<T>(array: T[], compareFn = defaultCompare): T[] {
+  for (let i = 0; i < array.length; i++) {
     let current = array[i]; // 保存待插入的元素
     let j = i; // 保存元素 current 应该插入的位置
 

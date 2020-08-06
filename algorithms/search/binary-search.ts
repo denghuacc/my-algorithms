@@ -17,7 +17,7 @@ export function binarySearch<T = number>(
   let mid; // 中间值索引
 
   while (low <= high) {
-    const mid = Math.floor((low + high) / 2);
+    const mid = Math.floor((low + high) / 2); // or left + Math.floor((right - left) / 2)
     const element = sortedArray[mid];
 
     if (compareFn(element, target) === Compare.LESS_THAN) {

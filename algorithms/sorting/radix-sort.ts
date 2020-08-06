@@ -23,9 +23,9 @@ function countingSortForRadix(
   significantDigit: number,
   minValue: number
 ) {
-  let bucketsIndex;
-  const buckets = [];
-  const aux = [];
+  let bucketsIndex: number;
+  const buckets: number[] = [];
+  const aux: number[] = [];
   for (let i = 0; i < radixBase; i++) {
     buckets[i] = 0;
   }

@@ -17,7 +17,7 @@ export function knapsack(
       val += values[i];
       load += weights[i];
     } else {
-      const r = (capacity - load) / weights[i];
+      const r = Math.floor((capacity - load) / weights[i]);
       val += r * values[i];
       load += weights[i];
     }

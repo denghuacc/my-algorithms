@@ -5,14 +5,14 @@
 export function lcsPrint(wordX: string, wordY: string) {
   const m = wordX.length;
   const n = wordY.length;
-  const list: number[][] = [];
+  const dp: number[][] = [];
   const solution: string[][] = [];
 
   for (let i = 0; i <= m; i++) {
-    list[i] = [];
+    dp[i] = [];
     solution[i] = [];
     for (let j = 0; j <= n; j++) {
-      list[i][j] = 0;
+      dp[i][j] = 0;
       solution[i][j] = "0";
     }
   }
@@ -20,20 +20,20 @@ export function lcsPrint(wordX: string, wordY: string) {
   for (let i = 0; i <= m; i++) {
     for (let j = 0; j <= n; j++) {
       if (i === 0 || j === 0) {
-        list[i][j] = 0;
+        dp[i][j] = 0;
       } else if (wordX[i - 1] === wordY[j - 1]) {
-        list[i][j] = list[i - 1][j - 1] + 1;
+        dp[i][j] = dp[i - 1][j - 1] + 1;
         solution[i][j] = "diagonal";
       } else {
-        const a = list[i - 1][j];
-        const b = list[i][j - 1];
-        list[i][j] = a > b ? a : b;
-        solution[i][j] = list[i][j] === list[i - 1][j] ? "top" : "left";
+        const a = dp[i - 1][j];
+        const b = dp[i][j - 1];
+        dp[i][j] = a > b ? a : b;
+        solution[i][j] = dp[i][j] === dp[i - 1][j] ? "top" : "left";
       }
     }
   }
   return printSolution(solution, wordX, m, n);
-  // return list[m][n]
+  // return dp[m][n]
 }
 
 function printSolution(

@@ -28,7 +28,7 @@ export function fibonacciIterative(n: number): number {
 // memorization
 export function fibonacciMemoization(n: number): number {
   if (n < 1) return 0;
-  const memo = [0, 1];
+  const memo: number[] = [0, 1];
   return fibonacciMemo(n);
 
   function fibonacciMemo(num: number): number {
@@ -42,7 +42,7 @@ export function fibonacciMemoization(n: number): number {
 // f(n -1) + f(n-2), n > 2;
 export function fibonacciDP(n: number): number {
   if (n < 1) return 0;
-  const dp = Array(n + 1).fill(0);
+  const dp: number[] = Array(n + 1).fill(0);
   dp[1] = dp[2] = 1;
   for (let i = 3; i <= n; i++) {
     dp[i] = dp[i - 1] + dp[i - 2];

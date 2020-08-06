@@ -14,8 +14,7 @@ import { defaultCompare, ICompareFunction, Compare } from "../util";
 
 export function mergeSort<T>(array: T[], compareFn = defaultCompare): T[] {
   if (array.length > 1) {
-    const { length } = array;
-    let mid = Math.floor(length / 2); // 中间点
+    let mid = Math.floor(array.length / 2); // 分割中间点
     let left = mergeSort(array.slice(0, mid), compareFn);
     let right = mergeSort(array.slice(mid), compareFn);
     array = merge(left, right, compareFn);
@@ -27,21 +26,41 @@ export function mergeSort<T>(array: T[], compareFn = defaultCompare): T[] {
 // 从初始的只有一个值的数组两两比较开始，归并之后的数组变成排好序的有两个值的小数组。
 // 之后继续两两比较，小数组变成较大的数组，最后成为一个新的排序好的新数组。
 function merge<T>(left: T[], right: T[], compareFn: ICompareFunction<T>): T[] {
-  const ret: T[] = []; // 新数组，用来保存归并后的值
+  let i = 0;
+  let j = 0;
+  const ret: T[] = [];
 
-  // 比较 left 和 right 两个数组值的第一个值
-  // 谁小就把谁从原来的数组中提取出来并放入到新数组中
-  while (left.length && right.length) {
-    if (compareFn(left[0], right[0]) === Compare.LESS_THAN) {
-      ret.push(left.shift()!);
-    } else {
-      ret.push(right.shift()!);
-    }
+  while (i < left.length && j < right.length) {
+    ret.push(
+      compareFn(left[i], right[j]) === Compare.LESS_THAN
+        ? left[i++]
+        : right[j++]
+    );
   }
 
-  // 当其中一个数组已经清空后，另外一个数组如果还有值
-  // 把这些值依次从数组前面取出放入到新数组的后面，这些值都是比较后剩余的较大的值
-  while (left.length) ret.push(left.shift()!);
-  while (right.length) ret.push(right.shift()!);
-  return ret;
+  // 拼接剩余的数组
+  return ret.concat(i < left.length ? left.slice(i) : right.slice(j));
 }
+
+// 归并方法2 这里使用 shift API，时间复杂度很高
+// 从初始的只有一个值的数组两两比较开始，归并之后的数组变成排好序的有两个值的小数组。
+// 之后继续两两比较，小数组变成较大的数组，最后成为一个新的排序好的新数组。
+// function merge2<T>(left: T[], right: T[], compareFn: ICompareFunction<T>): T[] {
+//   const ret: T[] = []; // 新数组，用来保存归并后的值
+
+//   // 比较 left 和 right 两个数组值的第一个值
+//   // 谁小就把谁从原来的数组中提取出来并放入到新数组中
+//   while (left.length && right.length) {
+//     if (compareFn(left[0], right[0]) === Compare.LESS_THAN) {
+//       ret.push(left.shift()!);
+//     } else {
+//       ret.push(right.shift()!);
+//     }
+//   }
+
+//   // 当其中一个数组已经清空后，另外一个数组如果还有值
+//   // 把这些值依次从数组前面取出放入到新数组的后面，这些值都是比较后剩余的较大的值
+//   while (left.length) ret.push(left.shift()!);
+//   while (right.length) ret.push(right.shift()!);
+//   return ret;
+// }
