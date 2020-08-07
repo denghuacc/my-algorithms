@@ -73,7 +73,7 @@ function palindromePairs(words: string[]): number[][] {
   function isPalindrome(str: string, left: number, right: number): boolean {
     const len = right - left + 1;
     for (let i = 0; i < Math.floor(len / 2); i++) {
-      if (str[left + 1] !== str[right - i]) {
+      if (str[left + i] !== str[right - i]) {
         return false;
       }
     }
