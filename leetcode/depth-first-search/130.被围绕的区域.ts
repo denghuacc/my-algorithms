@@ -40,18 +40,25 @@
  *
  */
 
+// 解题思路
+// 找到边缘上的`O` 把它替换成特殊的符号 `#`
+// 并且把它周围的 `O` 也替换成 `#`
+// 然后哪些没有被替换成 `#` 的 `O` 就是被围绕的，全部替换成 `X`
+// 最后把 `#` 还原成 `O`
+
 // @lc code=start
 /**
  Do not return anything, modify board in-place instead.
  */
-// dfs recursive
-function solve(board: string[][]): void {
+// dfs
+var solve = function (board: string[][]): void {
   const m = board.length;
   const n = m && board[0].length;
   if (m === 0) return;
 
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
+      // 判断是否处于边缘位置
       const isEdge = i === 0 || j === 0 || i === m - 1 || j === n - 1;
       if (isEdge && board[i][j] === "O") {
         dfs(board, i, j);
@@ -61,15 +68,14 @@ function solve(board: string[][]): void {
 
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
-      if (board[i][j] === "O") {
-        board[i][j] = "X";
-      }
-      if (board[i][j] === "#") {
-        board[i][j] = "O";
-      }
+      // 非边缘位置的 `O` 变成 `X`
+      if (board[i][j] === "O") board[i][j] = "X";
+      // 边缘位置的 `#` 还原成 `O`
+      if (board[i][j] === "#") board[i][j] = "O";
     }
   }
 
+  // 把边缘位置的 `O` 及其四周都改成 `#`
   function dfs(board: string[][], i: number, j: number) {
     if (
       i < 0 ||
@@ -88,5 +94,50 @@ function solve(board: string[][]): void {
     dfs(board, i, j - 1); // 左
     dfs(board, i, j + 1); // 右
   }
-}
+};
+
+// bfs
+var solve = function (board: string[][]): void {
+  const dx = [1, -1, 0, 0];
+  const dy = [0, 0, 1, -1];
+  const n = board.length;
+  if (n === 0) return;
+  const m = board[0].length;
+  const queue: [number, number][] = [];
+
+  // 标记边缘 `O`
+  for (let i = 0; i < n; i++) {
+    if (board[i][0] === "O") queue.push([i, 0]);
+    if (board[i][m - 1] === "O") queue.push([i, m - 1]);
+  }
+
+  for (let i = 1; i < m - 1; i++) {
+    if (board[0][i] === "O") queue.push([0, i]);
+    if (board[n - 1][i] === "O") queue.push([n - 1, i]);
+  }
+
+  while (queue.length) {
+    const [x, y] = queue.shift()!;
+    board[x][y] = "#";
+
+    for (let i = 0; i < dx.length; i++) {
+      const mx = x + dx[i];
+      const my = y + dy[i];
+      if (mx < 0 || my < 0 || mx >= n || my >= m || board[mx][my] !== "O") {
+        continue;
+      }
+      queue.push([mx, my]);
+    }
+  }
+
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < m; j++) {
+      if (board[i][j] === "#") {
+        board[i][j] = "O";
+      } else if (board[i][j] === "O") {
+        board[i][j] = "X";
+      }
+    }
+  }
+};
 // @lc code=end
