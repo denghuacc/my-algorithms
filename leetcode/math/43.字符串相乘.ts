@@ -41,6 +41,7 @@ var multiply = function (num1: string, num2: string): string {
   return String(BigInt(num1) * BigInt(num2)); // use Number will be out of range
 };
 
+// math addition
 var multiply = function (num1: string, num2: string): string {
   if (num1 === "0" || num2 === "0") return "0";
 
@@ -60,6 +61,7 @@ var multiply = function (num1: string, num2: string): string {
   return ret.join("");
 };
 
+// math multiplication
 var multiply = function (num1: string, num2: string): string {
   if (num1 === "0" || num2 === "0") return "0";
 
@@ -79,7 +81,7 @@ var multiply = function (num1: string, num2: string): string {
 
   while (len--) {
     num += ret[len];
-    str = (num % 10) + str;
+    str = String(num % 10) + str; // 拼接字符串
     num = (num / 10) | 0; // 进位
   }
 
