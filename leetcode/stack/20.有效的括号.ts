@@ -54,18 +54,20 @@
  */
 
 // @lc code=start
+// stack
 var isValid = function (s: string): boolean {
-  let arr: string[] = [];
+  let stack: string[] = [];
+
   for (let i = 0; i < s.length; i++) {
     const c = s[i];
     if (c === "(" || c === "[" || c === "{") {
-      arr.push(c);
+      stack.push(c);
     } else {
-      if (arr.length === 0) {
+      if (stack.length === 0) {
         return false;
       }
 
-      const popC = arr.pop();
+      const popC = stack.pop();
 
       if (c === ")" && popC !== "(") {
         return false;
@@ -81,6 +83,6 @@ var isValid = function (s: string): boolean {
     }
   }
 
-  return arr.length === 0;
+  return stack.length === 0;
 };
 // @lc code=end
