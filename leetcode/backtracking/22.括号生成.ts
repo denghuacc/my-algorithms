@@ -53,10 +53,10 @@ var generateParenthesis = function (n: number): string[] {
     if (open < max) {
       cur += "(";
       backtrack(ret, cur, open + 1, close, max);
-      cur = cur.substring(0, cur.length - 1);
+      cur = cur.substring(0, cur.length - 1); // pop last string
     }
 
-    if (close < open) {
+    if (open > close) {
       cur += ")";
       backtrack(ret, cur, open, close + 1, max);
       cur = cur.substring(0, cur.length - 1);
@@ -76,7 +76,7 @@ var generateParenthesis = function (n: number): string[] {
     if (n === 0) {
       ret.push("");
     } else {
-      for (let i = 0; i < n; ++i) {
+      for (let i = 0; i < n; i++) {
         for (const left of generate(i)) {
           for (const right of generate(n - 1 - i)) {
             ret.push("(" + left + ")" + right);
