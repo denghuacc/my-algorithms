@@ -70,29 +70,35 @@ class TreeNode {
 var isBalanced = function (root: TreeNode | null): boolean {
   if (!root) return true;
   return (
-    Math.abs(height(root.left) - height(root.right)) < 2 &&
+    Math.abs(height(root.left) - height(root.right)) <= 1 &&
     isBalanced(root.left) &&
     isBalanced(root.right)
   );
 
   // 节点的高度
   function height(root: TreeNode | null): number {
-    if (!root) return -1;
+    if (!root) return 0;
     return 1 + Math.max(height(root.left), height(root.right));
   }
 };
 
 // recursive 自底向上
 var isBalanced = function (root: TreeNode | null): boolean {
-  return height(root) !== -1;
+  return height(root) >= 0;
 
   function height(root: TreeNode | null): number {
     if (!root) return 0;
-    const left = height(root.left);
-    if (left === -1) return -1;
-    const right = height(root.right);
-    if (right === -1) return -1;
-    return Math.abs(left - right) < 2 ? Math.max(left, right) + 1 : -1;
+    const leftHeight = height(root.left);
+    const rightHight = height(root.right);
+    if (
+      leftHeight === -1 ||
+      rightHight === -1 ||
+      Math.abs(leftHeight - rightHight) > 1
+    ) {
+      return -1;
+    } else {
+      return Math.max(leftHeight, rightHight) + 1;
+    }
   }
 };
 // @lc code=end
