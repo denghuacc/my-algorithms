@@ -48,7 +48,7 @@ var maxCoins = function (nums: number[]): number {
     newNums[i] = nums[i - 1];
   }
 
-  // base case
+  // dp[i][j] -> nums[i:j] 区间获得硬币的最大数量
   const dp: number[][] = Array.from(new Array(n + 2), () =>
     new Array(n + 2).fill(0)
   );
@@ -70,7 +70,7 @@ var maxCoins = function (nums: number[]): number {
   return dp[0][n + 1];
 };
 
-// dp2 自顶向下 递归
+// dp2 自顶向下
 var maxCoins = function (nums: number[]): number {
   const n = nums.length;
 
@@ -84,9 +84,9 @@ var maxCoins = function (nums: number[]): number {
     new Array(n + 2).fill(0)
   );
 
-  return dp(memo, newNums, 0, n + 1);
+  return dpf(memo, newNums, 0, n + 1);
 
-  function dp(memo: number[][], nums: number[], left: number, right: number) {
+  function dpf(memo: number[][], nums: number[], left: number, right: number) {
     if (left + 1 === right) return 0;
     if (memo[left][right] > 0) return memo[left][right];
     let ret = 0;
@@ -94,8 +94,8 @@ var maxCoins = function (nums: number[]): number {
       ret = Math.max(
         ret,
         nums[left] * nums[i] * nums[right] +
-          dp(memo, nums, left, i) +
-          dp(memo, nums, i, right)
+          dpf(memo, nums, left, i) +
+          dpf(memo, nums, i, right)
       );
     }
     memo[left][right] = ret;

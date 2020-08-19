@@ -32,7 +32,7 @@
  */
 
 // @lc code=start
-// 暴力超时
+// brute force timeout
 var longestValidParentheses = function (s: string): number {
   let maxLen = 0;
 
@@ -66,6 +66,8 @@ var longestValidParentheses = function (s: string): number {
 // dp
 var longestValidParentheses = function (s: string): number {
   let maxLen = 0;
+
+  // dp[i] -> 字符串中以下标为 i 字符结尾的最长有效括号的长度
   const dp: number[] = new Array(s.length).fill(0);
 
   for (let i = 1; i < s.length; i++) {

@@ -55,10 +55,14 @@ var stoneGame = function (piles: number[]): boolean {
   return true;
 };
 
-// dp -> dp[i][j] Alex 可以获得的最大分数
+// dp
 var stoneGame = function (piles: number[]): boolean {
   const n = piles.length;
-  const dp = Array.from(new Array(n + 2), () => new Array(n + 2).fill(0));
+
+  // dp[i][j] -> piles[i+1: j] Alex 可以获得的最大分数
+  const dp: number[][] = Array.from(new Array(n + 2), () =>
+    new Array(n + 2).fill(0)
+  );
 
   for (let size = 1; size <= n; size++) {
     for (let i = 0; i + size <= n; i++) {
@@ -85,10 +89,14 @@ var stoneGame = function (piles: number[]): boolean {
   return dp[1][n] > 0;
 };
 
-// dp -> dp[i][j] 先手和后手的差
+// dp2 先手和后手的差
 var stoneGame = function (piles: number[]): boolean {
   const n = piles.length;
-  const dp = Array.from(new Array(n + 2), () => new Array(n + 2).fill(0));
+
+  // dp[i][j] -> piles[i: j] Alex 可以获得的最大分数
+  const dp: number[][] = Array.from(new Array(n + 2), () =>
+    new Array(n + 2).fill(0)
+  );
 
   for (let size = 1; size <= n; size++) {
     for (let i = 0; i + size <= n; i++) {

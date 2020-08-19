@@ -64,7 +64,7 @@ class TreeNode {
 // @lc code=start
 // dp timeout
 var rob = function (root: TreeNode | null): number {
-  const memo = new Map<TreeNode, number>();
+  const memo: Map<TreeNode, number> = new Map();
   if (!root) return 0;
   if (memo.has(root)) return memo.get(root)!;
   const doIt =
@@ -81,13 +81,13 @@ var rob = function (root: TreeNode | null): number {
 
 // dp2
 var rob = function (root: TreeNode | null): number {
-  const ret = dp(root!);
+  const ret = dpf(root!);
   return Math.max(ret[0], ret[1]);
 
-  function dp(root: TreeNode | null): [number, number] {
+  function dpf(root: TreeNode | null): [number, number] {
     if (!root) return [0, 0];
-    let left = dp(root.left);
-    let right = dp(root.right);
+    let left = dpf(root.left);
+    let right = dpf(root.right);
     const doIt = root.val + left[0] + right[0];
     const notDoIt = Math.max(left[0], left[1]) + Math.max(right[0], right[1]);
     return [notDoIt, doIt];

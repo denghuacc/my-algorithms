@@ -57,15 +57,15 @@
 // @lc code=start
 var longestPalindromeSubseq = function (s: string): number {
   const n = s.length;
-  const dp = Array.from(new Array(n), () => new Array<number>(n).fill(0));
+  const dp: number[][] = Array.from(new Array(n), () => new Array(n).fill(0));
 
-  // base case 左下斜线为 1
+  // 左下斜线为 1
   for (let i = 0; i < n; i++) {
     dp[i][i] = 1;
   }
 
   // 遍历斜线右边的
-  // 从下到上
+  // 从下到上遍历
   for (let i = n - 1; i >= 0; i--) {
     // 从左到右
     for (let j = i + 1; j < n; j++) {

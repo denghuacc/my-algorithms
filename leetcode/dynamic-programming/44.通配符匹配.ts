@@ -79,11 +79,12 @@ var isMatch = function (s: string, p: string): boolean {
   let sLen = s.length;
   let pLen = p.length;
 
-  const dp = Array.from(new Array(sLen + 1), () =>
-    new Array<boolean>(pLen + 1).fill(false)
+  // dp[i][j] -> 字符串 s 的前 i 个字符和模式 p 的前 j 个字符是否能匹配
+  const dp: boolean[][] = Array.from(new Array(sLen + 1), () =>
+    new Array(pLen + 1).fill(false)
   );
-  dp[0][0] = true;
 
+  dp[0][0] = true;
   for (let i = 1; i <= pLen; i++) {
     if (p[i - 1] === "*") dp[0][i] = true;
     else break;

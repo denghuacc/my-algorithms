@@ -37,17 +37,17 @@
  */
 
 // @lc code=start
-// 没有 memo 超时
+// dp 自上而下 没有 memo 超时
 var coinChange = function (coins: number[], amount: number): number {
-  return dp(amount);
+  return dpf(amount);
 
-  function dp(n: number): number {
+  function dpf(n: number): number {
     if (n < 0) return -1;
     if (n === 0) return 0;
     let ret = Infinity;
 
     for (const coin of coins) {
-      let sub = dp(n - coin);
+      let sub = dpf(n - coin);
       if (sub === -1) continue;
       ret = Math.min(ret, 1 + sub);
     }
@@ -56,12 +56,12 @@ var coinChange = function (coins: number[], amount: number): number {
   }
 };
 
-// memo
+// dp 自顶而下 memo
 var coinChange = function (coins: number[], amount: number): number {
   const memo: number[] = [];
-  return dp(amount);
+  return dpf(amount);
 
-  function dp(n: number): number {
+  function dpf(n: number): number {
     if (memo[n]) return memo[n];
 
     if (n < 0) return -1;
@@ -69,7 +69,7 @@ var coinChange = function (coins: number[], amount: number): number {
     let ret = Infinity;
 
     for (const coin of coins) {
-      let sub = dp(n - coin);
+      let sub = dpf(n - coin);
       if (sub === -1) continue;
       ret = Math.min(ret, 1 + sub);
     }
@@ -78,8 +78,9 @@ var coinChange = function (coins: number[], amount: number): number {
   }
 };
 
+// dp 自底而上
 var coinChange = function (coins: number[], amount: number): number {
-  const dp = new Array<number>(amount + 1).fill(amount + 1);
+  const dp: number[] = new Array(amount + 1).fill(amount + 1);
   dp[0] = 0;
 
   for (let i = 0; i < dp.length; i++) {

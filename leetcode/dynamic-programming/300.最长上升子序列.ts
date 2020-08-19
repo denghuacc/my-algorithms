@@ -37,7 +37,8 @@
 var lengthOfLIS = function (nums: number[]): number {
   if (nums.length === 0) return 0;
 
-  const dp = new Array<number>(nums.length);
+  // dp[i] -> 数组前 i 个元素组成的数组的最长上升子序列的长度
+  const dp: number[] = new Array(nums.length);
   dp[0] = 1;
   let len = 1;
 
@@ -57,7 +58,9 @@ var lengthOfLIS = function (nums: number[]): number {
 
 // dp2
 var lengthOfLIS = function (nums: number[]): number {
-  const dp = Array<number>(nums.length).fill(1); // base case
+
+  // dp[i] -> 数组前 i 个元素组成的数组的最长上升子序列的长度
+  const dp: number[] = Array(nums.length).fill(1); // base case
 
   for (let i = 0; i < nums.length; i++) {
     for (let j = 0; j < i; j++) {

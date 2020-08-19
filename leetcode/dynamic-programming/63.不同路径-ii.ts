@@ -44,23 +44,24 @@
  */
 
 // @lc code=start
+// dp
 var uniquePathsWithObstacles = function (obstacleGrid: number[][]): number {
   const n = obstacleGrid.length;
   const m = obstacleGrid[0].length;
-  const dp = Array(n)
-    .fill(0)
-    .map(() => Array<number>(m).fill(0));
+
+  // dp[i][j] -> 从坐标 (0, 0) 到坐标 (i, j) 的路径总数
+  const dp: number[][] = Array.from(new Array(n), () => new Array(m).fill(0));
   dp[0][0] = obstacleGrid[0][0] === 0 ? 1 : 0;
   if (dp[0][0] === 0) return 0;
 
-  // 第一行
+  // the first row
   for (let i = 1; i < m; i++) {
     if (obstacleGrid[0][i] !== 1) {
       dp[0][i] = dp[0][i - 1];
     }
   }
 
-  // 第一列
+  // the first column
   for (let i = 1; i < n; i++) {
     if (obstacleGrid[i][0] !== 1) {
       dp[i][0] = dp[i - 1][0];
@@ -78,23 +79,24 @@ var uniquePathsWithObstacles = function (obstacleGrid: number[][]): number {
   return dp[n - 1][m - 1];
 };
 
+// dp2
 var uniquePathsWithObstacles = function (obstacleGrid: number[][]): number {
   const n = obstacleGrid.length;
   const m = obstacleGrid[0].length;
-  const ret = Array<number>(m).fill(0);
+  const dp: number[] = new Array(m).fill(0);
 
-  ret[0] = 1;
+  dp[0] = 1;
 
   for (let i = 0; i < n; i++) {
     for (let j = 0; j < m; j++) {
       if (obstacleGrid[i][j] === 1) {
-        ret[j] = 0;
+        dp[j] = 0;
       } else if (j > 0) {
-        ret[j] += ret[j - 1];
+        dp[j] += dp[j - 1];
       }
     }
   }
 
-  return ret[m - 1];
+  return dp[m - 1];
 };
 // @lc code=end

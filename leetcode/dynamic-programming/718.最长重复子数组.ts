@@ -40,8 +40,8 @@
 var findLength = function (A: number[], B: number[]): number {
   const n = A.length;
   const m = B.length;
-  const dp = Array.from(new Array(n + 1), () =>
-    new Array<number>(m + 1).fill(0)
+  const dp: number[][] = Array.from(new Array(n + 1), () =>
+    new Array(m + 1).fill(0)
   );
   let ret = 0;
 

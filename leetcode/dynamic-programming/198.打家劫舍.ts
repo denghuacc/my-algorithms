@@ -52,7 +52,7 @@ export {};
 // dp 自顶向下 timeout
 var rob = function (nums: number[]): number {
   const n = nums.length;
-  const memo = new Array(n).fill(-1);
+  const memo: number[] = new Array(n).fill(-1);
   return dp(nums, 0);
 
   function dp(nums: number[], start: number): number {
@@ -70,7 +70,7 @@ var rob = function (nums: number[]): number {
 // dp 自底向上
 var rob = function (nums: number[]): number {
   const n = nums.length;
-  const dp = new Array(n + 2).fill(0);
+  const dp: number[] = new Array(n + 2).fill(0);
 
   for (let i = n - 1; i >= 0; i--) {
     dp[i] = Math.max(dp[i + 1], nums[i] + dp[i + 2]);

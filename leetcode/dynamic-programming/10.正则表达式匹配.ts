@@ -98,9 +98,12 @@ var isMatch = function (s: string, p: string): boolean {
 var isMatch = function (s: string, p: string): boolean {
   let n = s.length;
   let m = p.length;
-  let dp = Array.from(new Array(n + 1), () =>
-    new Array<boolean>(m + 1).fill(false)
+
+  // dp[i][j] -> s 的前 i 个字符和 p 的前 j 个字符是否匹配
+  let dp: boolean[][] = Array.from(new Array(n + 1), () =>
+    new Array(m + 1).fill(false)
   );
+
   dp[0][0] = true;
   for (let i = 0; i <= m; i++) {
     if (p[i] == "*" && dp[0][i - 1]) {

@@ -46,7 +46,7 @@
 var splitArray = function (nums: number[], m: number): number {
   const n = nums.length;
 
-  // dp[i][j] 数组的前 i 个数分割为 j 段所能得到的最大连续子数组和的最小值
+  // dp[i][j] -> nums 的前 i 个数分割为 j 段所能得到的最大连续子数组和的最小值
   const dp: number[][] = Array.from(new Array(n + 1), () =>
     new Array(m + 1).fill(Infinity)
   );

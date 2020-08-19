@@ -57,11 +57,8 @@ var minDistance = function (word1: string, word2: string): number {
 
   if (n * m === 0) return n + m;
 
-  const dp = Array(n + 1)
-    .fill(0)
-    .map(() => Array<number>(m + 1).fill(0));
+  const dp: number[][] = Array.from(new Array(n + 1), () => Array<number>(m + 1).fill(0))
 
-  // 边界状态
   for (let i = 0; i < n + 1; i++) {
     dp[i][0] = i;
   }
@@ -70,7 +67,6 @@ var minDistance = function (word1: string, word2: string): number {
     dp[0][j] = j;
   }
 
-  // 所有 dp
   for (let i = 1; i < n + 1; i++) {
     for (let j = 1; j < m + 1; j++) {
       let left = dp[i - 1][j] + 1;

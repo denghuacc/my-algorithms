@@ -60,13 +60,15 @@
  */
 
 // @lc code=start
+// dp
 var change = function (amount: number, coins: number[]): number {
   const n = coins.length;
-  const dp = Array.from(new Array(n + 1), () =>
-    new Array<number>(amount + 1).fill(0)
+
+  // dp[i][j] ->
+  const dp: number[][] = Array.from(new Array(n + 1), () =>
+    new Array(amount + 1).fill(0)
   );
 
-  // base case
   for (let i = 0; i <= n; i++) {
     dp[i][0] = 1;
   }
@@ -87,8 +89,10 @@ var change = function (amount: number, coins: number[]): number {
 // dp2
 var change = function (amount: number, coins: number[]): number {
   const n = coins.length;
-  const dp = new Array<number>(amount + 1).fill(0);
-  dp[0] = 1; // base case
+
+  // dp[i] -> amount 为 i 时的组合数
+  const dp: number[] = new Array(amount + 1).fill(0);
+  dp[0] = 1;
 
   for (let i = 0; i < n; i++) {
     for (let j = 1; j <= amount; j++) {
@@ -97,6 +101,21 @@ var change = function (amount: number, coins: number[]): number {
       }
     }
   }
+  return dp[amount];
+};
+
+// dp3
+var change = function (amount: number, coins: number[]): number {
+  // dp[i] -> amount 为 i 时的组合数
+  const dp: number[] = new Array(amount + 1).fill(0);
+  dp[0] = 1;
+
+  for (const coin of coins) {
+    for (let i = coin; i < amount + 1; i++) {
+      dp[i] += dp[i - coin];
+    }
+  }
+
   return dp[amount];
 };
 // @lc code=end

@@ -44,7 +44,7 @@
 var minimumTotal = function (triangle: number[][]): number {
   const n = triangle.length;
 
-  // dp[i][j] 三角形顶部走到位置 (i,j) 的最小路径和
+  // dp[i][j] -> 三角形顶部走到位置 (i,j) 的最小路径和
   const dp: number[][] = Array.from(new Array(n), () => new Array(n).fill(0));
   dp[0][0] = triangle[0][0];
 

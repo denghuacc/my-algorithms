@@ -46,7 +46,9 @@ export {};
 var maxProfit = function (prices: number[]): number {
   const n = prices.length;
   if (n === 0) return 0;
-  const dp = Array.from(new Array(n), () => new Array<number>(2).fill(0));
+
+  // dp[i][j] -> i 股票交易天数 j 股票允许的交易最大数
+  const dp: number[][] = Array.from(new Array(n), () => new Array(2).fill(0));
 
   for (let i = 0; i < n; i++) {
     if (i - 1 === -1) {

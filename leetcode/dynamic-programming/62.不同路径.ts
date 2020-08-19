@@ -55,7 +55,8 @@
 // @lc code=start
 // dp
 var uniquePaths = function (m: number, n: number): number {
-  const dp = new Array(m).fill(0).map(() => new Array<number>(n).fill(0));
+  // dp[i][j] -> 到达 i,j 位置的最多路径
+  const dp: number[][] = new Array(m).fill(0).map(() => new Array(n).fill(0));
   for (let i = 0; i < n; i++) dp[0][i] = 1;
   for (let i = 0; i < m; i++) dp[i][0] = 1;
   for (let i = 1; i < m; i++) {
@@ -68,8 +69,8 @@ var uniquePaths = function (m: number, n: number): number {
 
 // optimize1
 var uniquePaths = function (m: number, n: number): number {
-  let pre = new Array<number>(n).fill(1);
-  let cur = new Array<number>(n).fill(1);
+  let pre: number[] = new Array(n).fill(1);
+  let cur: number[] = new Array(n).fill(1);
 
   for (let i = 1; i < m; i++) {
     for (let j = 1; j < n; j++) {
@@ -82,7 +83,7 @@ var uniquePaths = function (m: number, n: number): number {
 
 // optimize2
 var uniquePaths = function (m: number, n: number): number {
-  const cur = new Array<number>(n).fill(1);
+  const cur: number[] = new Array(n).fill(1);
   for (let i = 1; i < m; i++) {
     for (let j = 1; j < n; j++) {
       cur[j] += cur[j - 1];

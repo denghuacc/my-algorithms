@@ -48,8 +48,8 @@ export {};
 // dp
 function maxProfit(prices: number[], fee: number): number {
   const n = prices.length;
-  let dpI0 = 0;
-  let dpI1 = -Infinity;
+  let dpI0 = 0; // dp[i+0]
+  let dpI1 = -Infinity; // dp[i+1]
 
   for (let i = 0; i < n; i++) {
     let tmp = dpI0;

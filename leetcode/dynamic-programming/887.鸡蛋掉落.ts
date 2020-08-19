@@ -67,11 +67,10 @@
 // @lc code=start
 // dp timeout
 var superEggDrop = function (K: number, N: number): number {
-  const cache = new Map<number, number>();
-  return dp(K, N);
+  const cache: Map<number, number> = new Map();
+  return dpf(K, N);
 
-  function dp(K: number, N: number): number {
-    // base case
+  function dpf(K: number, N: number): number {
     if (K === 1) return N;
     if (N === 0) return 0;
 
@@ -81,7 +80,7 @@ var superEggDrop = function (K: number, N: number): number {
 
     let ret = Infinity;
     for (let i = 1; i < N + 1; i++) {
-      ret = Math.min(ret, Math.max(dp(K, N - i), dp(K - 1, i - 1)) + 1);
+      ret = Math.min(ret, Math.max(dpf(K, N - i), dpf(K - 1, i - 1)) + 1);
     }
 
     cache.set(key, ret);
@@ -91,8 +90,8 @@ var superEggDrop = function (K: number, N: number): number {
 
 // dp + binary search
 var superEggDrop = function (K: number, N: number): number {
-  const dp = Array.from(new Array(K + 1), () =>
-    new Array<number>(N + 1).fill(-1)
+  const dp: number[][] = Array.from(new Array(K + 1), () =>
+    new Array(N + 1).fill(-1)
   );
   return dpf(K, N);
 
@@ -127,8 +126,8 @@ var superEggDrop = function (K: number, N: number): number {
 
 // new dp two-dimension
 var superEggDrop = function (K: number, N: number): number {
-  const dp = Array.from(new Array(K + 1), () =>
-    new Array<number>(N + 1).fill(0)
+  const dp: number[][] = Array.from(new Array(K + 1), () =>
+    new Array(N + 1).fill(0)
   );
   let m = 0;
 
@@ -144,7 +143,7 @@ var superEggDrop = function (K: number, N: number): number {
 
 // new dp one-dimension
 var superEggDrop = function (K: number, N: number): number {
-  const dp = new Array<number>(K + 1).fill(0);
+  const dp: number[] = new Array(K + 1).fill(0);
   let m = 0;
 
   while (dp[K] < N) {

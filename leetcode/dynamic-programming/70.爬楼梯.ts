@@ -40,7 +40,7 @@
  */
 
 // @lc code=start
-// 斐波那契数列 -> 动态规划
+// 斐波那契数列 -> dp
 var climbStairs = function (n: number): number {
   const dp: number[] = [];
   dp[0] = 1;

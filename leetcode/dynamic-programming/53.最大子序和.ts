@@ -31,7 +31,8 @@
 // @lc code=start
 // dp
 var maxSubArray = function (nums: number[]): number {
-  const dp = new Array<number>(nums.length);
+  // dp[i] -> 第 i 个数结尾的连续子数组的最大和
+  const dp: number[] = new Array(nums.length);
   let ret = (dp[0] = nums[0]);
   for (let i = 1; i < nums.length; i++) {
     dp[i] = nums[i];
@@ -55,9 +56,9 @@ var maxSubArray = function (nums: number[]): number {
 
 // dp
 var maxSubArray = function (nums: number[]): number {
-  let n = nums.length;
+  const n = nums.length;
   if (n === 0) return 0;
-  const dp = new Array<number>(n);
+  const dp: number[] = new Array(n);
   dp[0] = nums[0];
 
   for (let i = 1; i < n; i++) {
