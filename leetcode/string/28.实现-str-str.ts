@@ -39,8 +39,42 @@
  */
 
 // @lc code=start
-// API
-var strStr = function (haystack: string, needle: string): number {
-  return haystack.indexOf(needle);
+// enumerate
+var strStr = function (haystack: string, needle: string) {
+  const n1 = haystack.length;
+  const n2 = needle.length;
+
+  for (let i = 0; i < n1 - n2 + 1; i++) {
+    if (haystack.slice(i, i + n2) === needle) {
+      return i;
+    }
+  }
+
+  return -1;
 };
 // @lc code=end
+
+// two pointers
+var strStr = function (haystack: string, needle: string) {
+  const n1 = haystack.length;
+  const n2 = needle.length;
+  if (n2 === 0) return 0;
+
+  let p1 = 0;
+  while (p1 < n1 - n2 + 1) {
+    while (p1 < n1 - n2 + 1 && haystack[p1] !== needle[0]) {
+      p1++;
+    }
+    let curLength = 0;
+    let p2 = 0;
+    while (p2 < n2 && p1 < n1 && haystack[p1] === needle[p2]) {
+      p1++;
+      p2++;
+      curLength++;
+    }
+    if (curLength === n2) return p1 - n2;
+    p1 = p1 - curLength + 1;
+  }
+
+  return -1;
+};
