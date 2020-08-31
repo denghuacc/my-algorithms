@@ -99,7 +99,7 @@ var recoverTree = function (root: TreeNode | null) {
     for (let i = 0; i < len - 1; ++i) {
       if (nums[i + 1] < nums[i]) {
         y = nums[i + 1];
-        if (x == -1) x = nums[i];
+        if (x === -1) x = nums[i];
         else break;
       }
     }
@@ -109,7 +109,7 @@ var recoverTree = function (root: TreeNode | null) {
 
   function recover(root: TreeNode | null, count: number, x: number, y: number) {
     if (root) {
-      if (root.val == x || root.val == y) {
+      if (root.val === x || root.val === y) {
         root.val = root.val === x ? y : x;
         if (--count === 0) return;
       }
