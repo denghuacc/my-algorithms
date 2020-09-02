@@ -33,7 +33,7 @@
  */
 
 // @lc code=start
-// array
+// array sort
 var insert = function (
   intervals: number[][],
   newInterval: number[]
@@ -57,7 +57,7 @@ var insert = function (
   return ret;
 };
 
-// array
+// array sort
 var insert = function (
   intervals: number[][],
   newInterval: number[]
