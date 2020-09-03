@@ -53,44 +53,46 @@
  */
 
 // @lc code=start
-// backtrack1
+// ❌20200903 -> leetcode.cn 提交和测试，无论代码是什么都报编译错误
+// backtrack 
 var solveNQueens = function (n: number): string[][] {
   const ret: string[][] = [];
   backtrack(n, [], ret);
   return ret;
 
-  function backtrack(n: number, tmp: number[], ret: string[][]) {
-    if (tmp.length === n) {
+  function backtrack(n: number, subset: number[], ret: string[][]) {
+    if (subset.length === n) {
       ret.push(
-        tmp.map((i) => {
-          let arr = Array(n).fill(".");
-          arr.splice(i, 1, "Q");
-          return arr.join("");
+        subset.map((i) => {
+          let strArr: string[] = new Array(n).fill(".");
+          strArr.splice(i, 1, "Q"); // ! strArr 的 i 位置替换为 `Q`
+          return strArr.join("");
         })
       );
       return;
     }
 
     for (let i = 0; i < n; i++) {
-      if (isValid(tmp, i)) {
-        tmp.push(i);
-        backtrack(n, tmp, ret);
-        tmp.pop();
+      if (isValid(subset, i)) {
+        subset.push(i);
+        backtrack(n, subset, ret);
+        subset.pop();
       }
     }
   }
 
-  function isValid(arr: number[], idx: number) {
+  function isValid(arr: number[], x: number): boolean {
     const len = arr.length;
     for (let i = 0; i < len; i++) {
       const item = arr[i];
-      if (item === idx || i - item === len - idx || i + item === len + idx) {
+      if (item === x || i - item === len - x || i + item === len + x) {
         return false;
       }
     }
     return true;
   }
 };
+// @lc code=end
 
 // backtrack2
 var solveNQueens = function (n: number): string[][] {
@@ -132,4 +134,3 @@ var solveNQueens = function (n: number): string[][] {
     }
   }
 };
-// @lc code=end
