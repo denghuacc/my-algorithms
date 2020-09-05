@@ -53,8 +53,7 @@
  */
 
 // @lc code=start
-// ❌20200903 -> leetcode.cn 提交和测试，无论代码是什么都报编译错误
-// backtrack 
+// backtrack
 var solveNQueens = function (n: number): string[][] {
   const ret: string[][] = [];
   backtrack(n, [], ret);
@@ -92,7 +91,6 @@ var solveNQueens = function (n: number): string[][] {
     return true;
   }
 };
-// @lc code=end
 
 // backtrack2
 var solveNQueens = function (n: number): string[][] {
@@ -134,3 +132,4 @@ var solveNQueens = function (n: number): string[][] {
     }
   }
 };
+// @lc code=end

@@ -79,16 +79,16 @@ var binaryTreePaths = function (root: TreeNode | null): string[] {
     const path = pathQueue.shift()!;
 
     if (!node.left && !node.right) {
-      paths.push(path); 
+      paths.push(path);
     } else {
       if (node.left) {
         nodeQueue.push(node.left);
-        pathQueue.push(path + '->'+ String(node.left.val))
+        pathQueue.push(path + "->" + String(node.left.val));
       }
 
       if (node.right) {
         nodeQueue.push(node.right);
-        pathQueue.push(path + '->'+ String(node.right.val))
+        pathQueue.push(path + "->" + String(node.right.val));
       }
     }
   }
