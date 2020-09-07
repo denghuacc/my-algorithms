@@ -34,27 +34,15 @@
  */
 
 // @lc code=start
+// hash table
 var topKFrequent = function (nums: number[], k: number): number[] {
   const map: Map<number, number> = new Map();
-
-  for (let item of nums) {
-    if (map.has(item)) {
-      const count = map.get(item)!;
-      map.set(item, count + 1);
-    } else {
-      map.set(item, 1);
-    }
+  for (const num of nums) {
+    map.set(num, (map.get(num) ?? 0) + 1);
   }
-
-  // 降序排序
   const sortMap = new Map([...map].sort((a, b) => b[1] - a[1]));
-
-  // 以 key 值组成的数组
   let keyArr = Array.from(sortMap.keys());
-
-  // 切片
   const ret = keyArr.slice(0, k);
-
   return ret;
 };
 // @lc code=end
