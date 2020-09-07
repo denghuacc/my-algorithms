@@ -5,17 +5,12 @@
 export function lcsPrint(wordX: string, wordY: string) {
   const m = wordX.length;
   const n = wordY.length;
-  const dp: number[][] = [];
-  const solution: string[][] = [];
-
-  for (let i = 0; i <= m; i++) {
-    dp[i] = [];
-    solution[i] = [];
-    for (let j = 0; j <= n; j++) {
-      dp[i][j] = 0;
-      solution[i][j] = "0";
-    }
-  }
+  const dp: number[][] = Array.from(new Array(m + 1), () =>
+    new Array(n + 1).fill(0)
+  );
+  const solution: string[][] = Array.from(new Array(m + 1), () =>
+    new Array(n + 1).fill("0")
+  );
 
   for (let i = 0; i <= m; i++) {
     for (let j = 0; j <= n; j++) {
@@ -25,15 +20,13 @@ export function lcsPrint(wordX: string, wordY: string) {
         dp[i][j] = dp[i - 1][j - 1] + 1;
         solution[i][j] = "diagonal";
       } else {
-        const a = dp[i - 1][j];
-        const b = dp[i][j - 1];
-        dp[i][j] = a > b ? a : b;
+        dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
         solution[i][j] = dp[i][j] === dp[i - 1][j] ? "top" : "left";
       }
     }
   }
-  return printSolution(solution, wordX, m, n);
-  // return dp[m][n]
+  // return printSolution(solution, wordX, m, n);
+  return dp[m][n]
 }
 
 function printSolution(

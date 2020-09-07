@@ -6,23 +6,24 @@
 export function knapsack(
   capacity: number,
   weights: number[],
-  values: number[],
-  n: number
+  values: number[]
 ) {
-  const dp: number[][] = [];
+  const n = values.length;
 
-  for (let i = 0; i <= n; i++) {
-    dp[i] = [];
-  }
+  // dp[i][j] -> 容量为 j 时获取 values 中的 i 的最大值
+  const dp: number[][] = Array.from(new Array(n + 1), () =>
+    new Array(capacity + 1).fill(0)
+  );
 
   for (let i = 0; i <= n; i++) {
     for (let j = 0; j <= capacity; j++) {
       if (i === 0 || j === 0) {
         dp[i][j] = 0;
       } else if (weights[i - 1] <= j) {
-        const a = values[i - 1] + dp[i - 1][j - weights[i - 1]];
-        const b = dp[i - 1][j];
-        dp[i][j] = a > b ? a : b;
+        dp[i][j] = Math.max(
+          values[i - 1] + dp[i - 1][j - weights[i - 1]],
+          dp[i - 1][j]
+        );
       } else {
         dp[i][j] = dp[i - 1][j];
       }

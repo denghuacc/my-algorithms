@@ -5,8 +5,7 @@ describe("KnapSack Dynamic Programming", () => {
     const values = [3, 4, 5];
     const weights = [2, 3, 4];
     const capacity = 5;
-    const n = values.length;
 
-    expect(knapsack(capacity, weights, values, n)).toBe(7);
+    expect(knapsack(capacity, weights, values)).toBe(7);
   });
 });

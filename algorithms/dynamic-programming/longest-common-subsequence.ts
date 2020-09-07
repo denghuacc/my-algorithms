@@ -5,14 +5,9 @@
 export function lcs(wordX: string, wordY: string) {
   const m = wordX.length;
   const n = wordY.length;
-  const dp: number[][] = [];
-
-  for (let i = 0; i <= m; i++) {
-    dp[i] = [];
-    for (let j = 0; j <= n; j++) {
-      dp[i][j] = 0;
-    }
-  }
+  const dp: number[][] = Array.from(new Array(m + 1), () =>
+    new Array(n + 1).fill(0)
+  );
 
   for (let i = 0; i <= m; i++) {
     for (let j = 0; j <= n; j++) {
@@ -21,9 +16,7 @@ export function lcs(wordX: string, wordY: string) {
       } else if (wordX[i - 1] === wordY[j - 1]) {
         dp[i][j] = dp[i - 1][j - 1] + 1;
       } else {
-        const a = dp[i - 1][j];
-        const b = dp[i][j - 1];
-        dp[i][j] = a > b ? a : b; // max(a, b)
+        dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
       }
     }
     // console.log(dp[i].join());

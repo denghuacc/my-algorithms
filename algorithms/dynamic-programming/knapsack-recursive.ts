@@ -20,6 +20,6 @@ export function knapsackRecursive(
       values[n - 1] +
       knapsackRecursive(capacity - weights[n - 1], weights, values, n - 1);
     const b: number = knapsackRecursive(capacity, weights, values, n - 1);
-    return a > b ? a : b;
+    return Math.max(a, b);
   }
 }
