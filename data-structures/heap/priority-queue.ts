@@ -11,33 +11,34 @@ export default class PriorityQueue<T> {
     this.maxHeap = new MaxHeap();
   }
 
-  size() {
-    return this.maxHeap.size();
+  get size(): number {
+    return this.maxHeap.size;
   }
 
-  isEmpty() {
+  isEmpty(): boolean {
     return this.maxHeap.isEmpty();
   }
 
-  enqueue(val: T) {
+  // 入列
+  enqueue(val: T): void {
     this.maxHeap.add(val);
   }
 
   // 出列 -> 最大值出列
-  dequeue() {
+  dequeue(): T | undefined {
     return this.maxHeap.extractMax();
   }
 
   // 队列最前面的一直都是最大值
-  peek() {
+  peek(): T | undefined {
     return this.maxHeap.findMax();
   }
 
-  clear() {
+  clear(): void {
     this.maxHeap = new MaxHeap();
   }
 
-  print() {
+  toString(): string {
     if (this.isEmpty()) return "";
     let str = "PriorityQueue: front [ ";
     str += this.maxHeap.data.join(", ");

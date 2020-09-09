@@ -12,12 +12,12 @@ describe("BST", () => {
   });
 
   test("size", () => {
-    expect(bst.size()).toBe(5);
+    expect(bst.size).toBe(5);
     bst.add(17);
-    expect(bst.size()).toBe(6);
+    expect(bst.size).toBe(6);
     bst.remove(45);
     bst.remove(16);
-    expect(bst.size()).toBe(4);
+    expect(bst.size).toBe(4);
   });
 
   test("isEmpty", () => {

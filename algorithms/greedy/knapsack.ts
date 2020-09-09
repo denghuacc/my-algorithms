@@ -7,7 +7,7 @@ export function knapsack(
   capacity: number,
   weights: number[],
   values: number[]
-) {
+): number {
   const n = values.length;
   let load = 0;
   let val = 0;

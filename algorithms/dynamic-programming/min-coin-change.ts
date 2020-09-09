@@ -3,7 +3,7 @@
 // 以及可用的硬币面额 d1…dn 及其数量，找到所需的最少的硬币个数。
 
 // recursive
-export function minCoinChange(coins: number[], amount: number) {
+export function minCoinChange(coins: number[], amount: number): number[] {
   const cache: number[][] = [];
   return makeChange(amount);
 

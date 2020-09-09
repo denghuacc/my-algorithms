@@ -7,7 +7,7 @@
 
 import { swap, defaultCompare, Compare } from "../util";
 
-export function selectionSort<T>(array: T[], compareFn = defaultCompare) {
+export function selectionSort<T>(array: T[], compareFn = defaultCompare): T[] {
   const len = array.length;
   let minIndex: number;
 

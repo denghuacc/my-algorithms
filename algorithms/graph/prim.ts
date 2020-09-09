@@ -1,6 +1,6 @@
 const INF = Number.MAX_SAFE_INTEGER;
 
-export function prim(graph: number[][]) {
+export function prim(graph: number[][]): number[] {
   const parent: number[] = [];
   const key: number[] = [];
   const visited: boolean[] = [];
@@ -29,7 +29,7 @@ export function prim(graph: number[][]) {
   return parent;
 }
 
-function minKey(graph: number[][], key: number[], visited: boolean[]) {
+function minKey(graph: number[][], key: number[], visited: boolean[]): number {
   // Initialize min value
   let min = INF;
   let minIndex = 0;

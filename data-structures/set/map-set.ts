@@ -12,12 +12,12 @@ export default class MapSet<T> {
   }
 
   // 获取集合的元素数量 O(1)
-  get size() {
+  get size(): number {
     return this.map.size;
   }
 
   // 添加元素 O(N)
-  add(val: T) {
+  add(val: T): this {
     if (!this.has(val)) {
       this.map.set(val, val);
     }
@@ -25,7 +25,7 @@ export default class MapSet<T> {
   }
 
   //  删除元素 O(N)
-  delete(val: T) {
+  delete(val: T): boolean {
     if (this.has(val)) {
       this.map.delete(val);
       return true;
@@ -34,12 +34,12 @@ export default class MapSet<T> {
   }
 
   //  查询元素 O(N)
-  has(val: T) {
+  has(val: T): boolean {
     return this.map.has(val);
   }
 
   // 清除元素 O(1)
-  clear() {
+  clear(): void {
     this.map.clear();
   }
 }

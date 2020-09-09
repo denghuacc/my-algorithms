@@ -12,12 +12,12 @@ describe("RedBlackTree", () => {
   });
 
   test("size", () => {
-    expect(rbt.size()).toBe(5);
+    expect(rbt.size).toBe(5);
     rbt.add(17, "17");
-    expect(rbt.size()).toBe(6);
+    expect(rbt.size).toBe(6);
     rbt.remove(45);
     rbt.remove(16);
-    expect(rbt.size()).toBe(4);
+    expect(rbt.size).toBe(4);
   });
 
   test("isEmpty", () => {

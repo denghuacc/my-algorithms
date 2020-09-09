@@ -10,7 +10,7 @@ export function binarySearch<T = number>(
   array: T[],
   target: T,
   compareFn = defaultCompare
-) {
+): number {
   const sortedArray = quickSort(array); // 排序
   let low = 0; // 最小值索引
   let high = array.length - 1; // 最大值索引

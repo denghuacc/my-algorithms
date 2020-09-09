@@ -1,4 +1,4 @@
-import BST from "../binary-search-tree-map";
+import BST from "../../binary-search-tree/binary-search-tree-map";
 import AVLTree from "../../avl-tree/avl-tree";
 import RBTree from "../red-black-tree";
 
@@ -41,5 +41,5 @@ testTree("BST", bst, testData);
 testTree("AVLTree", avl, testData);
 testTree("RBTree", rbt, testData);
 
-// 3. 红黑树牺牲了平衡性（2logn 的高度）
+// 3. 红黑树牺牲了平衡性（2logN 的高度）
 // 统计性能更优 （综合增删改查所有的操作）

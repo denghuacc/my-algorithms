@@ -15,7 +15,7 @@ export default class ObjectDeque<T> {
   }
 
   // 队首入列 O(N)
-  addFront(element: T) {
+  addFront(element: T): void {
     if (this.isEmpty()) {
       this.addBack(element);
     } else if (this.lowestCount > 0) {
@@ -31,13 +31,13 @@ export default class ObjectDeque<T> {
   }
 
   // 队尾入列 O(1)
-  addBack(element: T) {
+  addBack(element: T): void {
     this.items[this.count] = element;
     this.count++;
   }
 
   // 队首出列 O(1)
-  removeFront() {
+  removeFront(): T | undefined {
     if (this.isEmpty()) {
       return undefined;
     }
@@ -48,7 +48,7 @@ export default class ObjectDeque<T> {
   }
 
   // 队尾出列 O(1)
-  removeBack() {
+  removeBack(): T | undefined {
     if (this.isEmpty()) {
       return undefined;
     }
@@ -59,7 +59,7 @@ export default class ObjectDeque<T> {
   }
 
   // 获取队列的第一个元素 O(1)
-  peekFront() {
+  peekFront(): T | undefined {
     if (this.isEmpty()) {
       return undefined;
     }
@@ -67,7 +67,7 @@ export default class ObjectDeque<T> {
   }
 
   // 获取队列的最后一个元素 O(1)
-  peekBack() {
+  peekBack(): T | undefined {
     if (this.isEmpty()) {
       return undefined;
     }
@@ -75,23 +75,23 @@ export default class ObjectDeque<T> {
   }
 
   // 返回队列的元素的数量 O(1)
-  size() {
+  size(): number {
     return this.count - this.lowestCount;
   }
 
   // 查询队列是否为空 O(1)
-  isEmpty() {
+  isEmpty(): boolean {
     return this.size() === 0;
   }
 
   // 清空队列 O(1)
-  clear() {
+  clear(): void {
     this.items = {};
     this.count = 0;
     this.lowestCount = 0;
   }
 
-  toString() {
+  toString(): string {
     if (this.isEmpty()) return "";
     let objString = `Deque { ${this.items[this.lowestCount]}`;
     for (let i = this.lowestCount + 1; i < this.count; i++) {

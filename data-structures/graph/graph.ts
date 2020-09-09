@@ -9,7 +9,7 @@ export default class Graph {
   constructor(private isDirected = false) {}
 
   // 添加顶点
-  addVertex(v: string | number) {
+  addVertex(v: string | number): void {
     if (!this.vertices.includes(v)) {
       this.vertices.push(v);
       this.adjList.set(v, []);
@@ -17,7 +17,7 @@ export default class Graph {
   }
 
   // 添加边
-  addEdge(a: string | number, b: string | number) {
+  addEdge(a: string | number, b: string | number): void {
     if (!this.adjList.get(a)) {
       this.addVertex(a);
     }
@@ -30,15 +30,17 @@ export default class Graph {
     }
   }
 
-  getVertices() {
+  // 获取点的集合
+  getVertices(): (string | number)[] {
     return this.vertices;
   }
 
-  getAdjList() {
+  // 获取邻接表： 点 -> 和该点连接的点的集合
+  getAdjList(): Map<string | number, (string | number)[]> {
     return this.adjList;
   }
 
-  toString() {
+  toString(): string {
     let s = "";
     for (let i = 0; i < this.vertices.length; i++) {
       s += this.vertices[i] + " -> ";

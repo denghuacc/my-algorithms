@@ -8,11 +8,11 @@ describe("HashTableSeparateChaining", () => {
 
   test("starts empty", () => {
     const hashTable = new HashTableSeparateChaining<number, number>();
-    expect(hashTable.size()).toBe(0);
+    expect(hashTable.size).toBe(0);
     expect(hashTable.isEmpty()).toBe(true);
   });
 
-  test("generates hashcode", () => {
+  test("generates hashCode", () => {
     // numbers
     let hashTable: any = new HashTableSeparateChaining<number, number>();
     expect(hashTable.hashCode(1)).toBe(1);
@@ -81,12 +81,12 @@ describe("HashTableSeparateChaining", () => {
     for (let i = min; i <= max; i++) {
       expect(hashTable.put(i, i)).toBe(true);
     }
-    expect(hashTable.size()).toBe(size);
+    expect(hashTable.size).toBe(size);
 
     const table = hashTable.getTable();
     for (let i = min; i <= max; i++) {
       const linkedList = table[i];
-      expect(linkedList.size()).toBe(1);
+      expect(linkedList.size).toBe(1);
       const valuePair = linkedList.head;
       expect(valuePair!.key.key).toBe(i);
       expect(valuePair!.key.val).toBe(i);
@@ -104,25 +104,25 @@ describe("HashTableSeparateChaining", () => {
     const table = hashTable.getTable();
 
     let linkedList = table[12];
-    expect(linkedList.size()).toBe(1);
+    expect(linkedList.size).toBe(1);
     let valuePair = linkedList.head;
     expect(valuePair!.key.key).toBe("1");
     expect(valuePair!.key.val).toBe(1);
 
     linkedList = table[23];
-    expect(linkedList.size()).toBe(1);
+    expect(linkedList.size).toBe(1);
     valuePair = linkedList.head;
     expect(valuePair!.key.key).toBe("10");
     expect(valuePair!.key.val).toBe(10);
 
     linkedList = table[34];
-    expect(linkedList.size()).toBe(1);
+    expect(linkedList.size).toBe(1);
     valuePair = linkedList.head;
     expect(valuePair!.key.key).toBe("100");
     expect(valuePair!.key.val).toBe(100);
 
     linkedList = table[8];
-    expect(linkedList.size()).toBe(1);
+    expect(linkedList.size).toBe(1);
     valuePair = linkedList.head;
     expect(valuePair!.key.key).toBe("1000");
     expect(valuePair!.key.val).toBe(1000);
@@ -140,31 +140,31 @@ describe("HashTableSeparateChaining", () => {
     const table = hashTable.getTable();
 
     let linkedList = table[1];
-    expect(linkedList.size()).toBe(1);
+    expect(linkedList.size).toBe(1);
     let valuePair = linkedList.head;
     expect(valuePair!.key.key).toBe(myObjList[0]);
     expect(valuePair!.key.val).toBe(myObjList[0]);
 
     linkedList = table[3];
-    expect(linkedList.size()).toBe(1);
+    expect(linkedList.size).toBe(1);
     valuePair = linkedList.head;
     expect(valuePair!.key.key).toBe(myObjList[1]);
     expect(valuePair!.key.val).toBe(myObjList[1]);
 
     linkedList = table[5];
-    expect(linkedList.size()).toBe(1);
+    expect(linkedList.size).toBe(1);
     valuePair = linkedList.head;
     expect(valuePair!.key.key).toBe(myObjList[2]);
     expect(valuePair!.key.val).toBe(myObjList[2]);
 
     linkedList = table[7];
-    expect(linkedList.size()).toBe(1);
+    expect(linkedList.size).toBe(1);
     valuePair = linkedList.head;
     expect(valuePair!.key.key).toBe(myObjList[3]);
     expect(valuePair!.key.val).toBe(myObjList[3]);
 
     linkedList = table[9];
-    expect(linkedList.size()).toBe(1);
+    expect(linkedList.size).toBe(1);
     valuePair = linkedList.head;
     expect(valuePair!.key.key).toBe(myObjList[4]);
     expect(valuePair!.key.val).toBe(myObjList[4]);
@@ -179,22 +179,22 @@ describe("HashTableSeparateChaining", () => {
     for (let i = min; i <= max; i++) {
       expect(hashTable.put(i, i)).toBe(true);
     }
-    expect(hashTable.size()).toBe(size);
+    expect(hashTable.size).toBe(size);
 
     for (let i = min; i <= max; i++) {
       expect(hashTable.put(i, i + 10)).toBe(true);
     }
-    expect(hashTable.size()).toBe(size * 2);
+    expect(hashTable.size).toBe(size * 2);
 
     for (let i = min; i <= max; i++) {
       expect(hashTable.put(i, i + 100)).toBe(true);
     }
-    expect(hashTable.size()).toBe(size * 3);
+    expect(hashTable.size).toBe(size * 3);
 
     const table = hashTable.getTable();
     for (let i = min; i <= max; i++) {
       const linkedList = table[i];
-      expect(linkedList.size()).toBe(3);
+      expect(linkedList.size).toBe(3);
 
       let valuePair = linkedList.head;
       expect(valuePair!.key.key).toBe(i);
@@ -219,7 +219,7 @@ describe("HashTableSeparateChaining", () => {
     for (let i = min; i <= max; i++) {
       expect(hashTable.put(i, i)).toBe(true);
     }
-    expect(hashTable.size()).toBe(size);
+    expect(hashTable.size).toBe(size);
 
     for (let i = min; i <= max; i++) {
       expect(hashTable.remove(i)).toBe(true);
@@ -239,14 +239,14 @@ describe("HashTableSeparateChaining", () => {
     expect(hashTable.put(A, `${A}@email.com`)).toBe(true);
     expect(hashTable.put(B, `${B}@email.com`)).toBe(true);
     expect(hashTable.put(C, `${C}@email.com`)).toBe(true);
-    expect(hashTable.size()).toBe(3);
+    expect(hashTable.size).toBe(3);
 
     const expectedHash = 5;
     expect(hashTable.hashCode(A)).toBe(expectedHash);
     expect(hashTable.hashCode(B)).toBe(expectedHash);
     expect(hashTable.hashCode(C)).toBe(expectedHash);
 
-    expect(hashTable.getTable()[expectedHash].size()).toBe(3);
+    expect(hashTable.getTable()[expectedHash].size).toBe(3);
 
     return hashTable;
   }

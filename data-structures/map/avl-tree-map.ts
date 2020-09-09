@@ -12,12 +12,12 @@ export default class AVLMap<K, V> {
   }
 
   // 查询元素数量 O(1)
-  get size() {
-    return this.avl.size();
+  get size(): number {
+    return this.avl.size;
   }
 
   // 设置值 O(logN)
-  set(key: K, val: V) {
+  set(key: K, val: V): this {
     if (!this.has(key)) {
       this.avl.add(key, val);
     }
@@ -26,24 +26,24 @@ export default class AVLMap<K, V> {
   }
 
   // 获取值 O(logN)
-  get(key: K) {
+  get(key: K): V | undefined {
     const val = this.avl.get(key);
     return val == null ? undefined : val;
   }
 
   // 查询值 O(logN)
-  has(key: K) {
+  has(key: K): boolean {
     return this.avl.contains(key);
   }
 
   // 删除值 O(logN)
-  delete(key: K) {
+  delete(key: K): boolean {
     const val = this.avl.remove(key);
     return val == null ? false : true;
   }
 
   // 删除值 O(logN)
-  clear() {
+  clear(): void {
     this.avl = new AVLTree();
   }
 }

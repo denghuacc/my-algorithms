@@ -9,20 +9,20 @@ import { Node } from "../models/tree-models";
  */
 export default class BST<T> {
   root: Node<T> | undefined;
-  count: number = 0;
+  protected count: number = 0;
 
   constructor() {}
 
-  size() {
+  get size(): number {
     return this.count;
   }
 
-  isEmpty() {
-    return this.size() === 0;
+  isEmpty(): boolean {
+    return this.size === 0;
   }
 
   // 向二分搜索树中添加值 O(logN)
-  add(key: T) {
+  add(key: T): void {
     this.root = this.addNode(this.root!, key);
   }
 
@@ -42,7 +42,7 @@ export default class BST<T> {
   }
 
   // 看二分搜索树中是否包含值 O(logN)
-  contains(key: T) {
+  contains(key: T): boolean {
     return this.containsNode(this.root!, key);
   }
 
@@ -59,11 +59,11 @@ export default class BST<T> {
   }
 
   // 二分搜索树的前序递归遍历-> 深度优先搜索 DFS
-  preOrder(arr: T[] = []) {
+  preOrder(arr: T[] = []): void {
     this.preOrderTree(this.root!, arr);
   }
 
-  private preOrderTree(root: Node<T>, arr: T[] = []) {
+  private preOrderTree(root: Node<T>, arr: T[] = []): void {
     if (root != null) {
       arr.push(root.key);
       this.preOrderTree(root.left!, arr);
@@ -72,7 +72,7 @@ export default class BST<T> {
   }
 
   // 二分搜索树的前序迭代遍历
-  preOrderIterative(arr: T[] = []) {
+  preOrderIterative(arr: T[] = []): void {
     if (this.root != null) {
       const stack: Node<T>[] = [];
       stack.push(this.root);
@@ -89,11 +89,11 @@ export default class BST<T> {
   }
 
   // 二分搜索树的中序递归遍历 -> 数值升序排列
-  inOrder(arr: T[] = []) {
+  inOrder(arr: T[] = []): void {
     this.inOrderTree(this.root!, arr);
   }
 
-  private inOrderTree(root: Node<T>, arr: T[] = []) {
+  private inOrderTree(root: Node<T>, arr: T[] = []): void {
     if (root != null) {
       this.inOrderTree(root.left!, arr);
       arr.push(root.key);
@@ -102,7 +102,7 @@ export default class BST<T> {
   }
 
   // 二分搜索树的中序迭代遍历
-  inOrderIterative(arr: T[] = []) {
+  inOrderIterative(arr: T[] = []): void {
     if (this.root != null) {
       const stack: Node<T>[] = [];
       let curNode = this.root;
@@ -120,11 +120,11 @@ export default class BST<T> {
   }
 
   // 二分搜索树的后序递归遍历
-  postOrder(arr: T[] = []) {
+  postOrder(arr: T[] = []): void {
     this.postOrderTree(this.root!, arr);
   }
 
-  private postOrderTree(root: Node<T>, arr: T[] = []) {
+  private postOrderTree(root: Node<T>, arr: T[] = []): void {
     if (root != null) {
       this.postOrderTree(root.left!, arr);
       this.postOrderTree(root.right!, arr);
@@ -133,7 +133,7 @@ export default class BST<T> {
   }
 
   // 二分搜索树的后序迭代遍历 -> 逆前序迭代遍历
-  postOrderIterative(arr: T[] = []) {
+  postOrderIterative(arr: T[] = []): void {
     if (this.root != null) {
       const stack: Node<T>[] = [];
       stack.push(this.root);
@@ -150,7 +150,7 @@ export default class BST<T> {
   }
 
   // 二分搜索树的层序遍历 -> 广度优先搜索 BFS
-  levelOrder(arr: T[] = []) {
+  levelOrder(arr: T[] = []): void {
     if (this.root != null) {
       const queue: Node<T>[] = [];
       queue.push(this.root);
@@ -171,7 +171,7 @@ export default class BST<T> {
   }
 
   // 寻找二分搜索树的最小元素
-  min() {
+  min(): T | undefined {
     if (this.root == null) return undefined;
     return this.minNode(this.root).key;
   }
@@ -182,7 +182,7 @@ export default class BST<T> {
   }
 
   // 寻找二分搜索树的最大元素
-  max() {
+  max(): T | undefined {
     if (this.root == null) return undefined;
     return this.maxNode(this.root).key;
   }
@@ -193,13 +193,13 @@ export default class BST<T> {
   }
 
   // 从二分搜索树中删除最小值所在节点, 返回最小值
-  removeMin() {
+  removeMin(): T | undefined {
     const ret = this.min();
     this.root = this.removeMinNode(this.root!);
     return ret != null ? ret : undefined;
   }
 
-  private removeMinNode(root: Node<T>) {
+  private removeMinNode(root: Node<T>): Node<T> | undefined {
     if (root.left == null) {
       const rightNode = root.right;
       root.right = undefined;
@@ -212,13 +212,13 @@ export default class BST<T> {
   }
 
   // 从二分搜索树中删除最大值所在节点
-  removeMax() {
+  removeMax(): T | undefined {
     const ret = this.max();
     this.root = this.removeMaxNode(this.root!);
     return ret;
   }
 
-  private removeMaxNode(root: Node<T>) {
+  private removeMaxNode(root: Node<T>): Node<T> | undefined {
     if (root.right == null) {
       const leftNode = root.left;
       root.left = undefined;
@@ -231,11 +231,11 @@ export default class BST<T> {
   }
 
   // 从二分搜索树中删除值为 key 的节点
-  remove(key: T) {
+  remove(key: T): void {
     this.root = this.removeNode(this.root!, key);
   }
 
-  protected removeNode(root: Node<T>, key: T) {
+  protected removeNode(root: Node<T>, key: T): Node<T> | undefined {
     if (root == null) return undefined;
 
     if (key < root.key) {
@@ -244,9 +244,7 @@ export default class BST<T> {
     } else if (key > root.key) {
       root.right = this.removeNode(root.right!, key);
       return root;
-    } else {
-      // key === root.key
-
+    } else if (key === root.key) {
       // 待删除节点左子树为空的情况
       if (root.left == null) {
         const rightNode = root.right;

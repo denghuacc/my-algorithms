@@ -8,15 +8,12 @@ import LinkedList from "./linked-list";
  * 注意 while 遍历时设置边界条件，避免死循环
  */
 export default class CircularLinkedList<T> extends LinkedList<T> {
-  head: Node<T> | undefined;
-  protected count: number = 0;
-
   constructor() {
     super();
   }
 
   // 在链表的 index 位置添加值 O(N)
-  protected add(index: number, key: T) {
+  protected add(index: number, key: T): boolean {
     if (index >= 0 && index <= this.count) {
       const node = new Node(key);
 
@@ -26,7 +23,7 @@ export default class CircularLinkedList<T> extends LinkedList<T> {
           node.next = this.head;
         } else {
           node.next = this.head;
-          const lastNode = this.get(this.size() - 1)!;
+          const lastNode = this.get(this.size - 1)!;
           this.head = node;
           lastNode.next = this.head;
         }
@@ -44,7 +41,7 @@ export default class CircularLinkedList<T> extends LinkedList<T> {
   }
 
   // 设置链表第 index 个位置的值 O(N)
-  set(index: number, key: T) {
+  set(index: number, key: T): boolean {
     if (index >= 0 && index < this.count) {
       const node = this.get(index);
       if (node != null) {
@@ -56,7 +53,7 @@ export default class CircularLinkedList<T> extends LinkedList<T> {
   }
 
   // 查找链表中是否有某个值 O(N)
-  contains(key: T) {
+  contains(key: T): boolean {
     let current = this.head;
 
     while (current != null && current.next != null) {
@@ -71,16 +68,16 @@ export default class CircularLinkedList<T> extends LinkedList<T> {
   }
 
   // 删除链表第 index 个位置的值，返回删除的元素 O(N)
-  protected remove(index: number) {
+  protected remove(index: number): T | undefined {
     if (index >= 0 && index < this.count) {
       let current = this.head;
 
       if (index === 0) {
-        if (this.size() === 1) {
+        if (this.size === 1) {
           this.head = undefined;
         } else {
           const delNode = this.head;
-          current = this.get(this.size() - 1)!; // last node
+          current = this.get(this.size - 1)!; // last node
           this.head = this.head?.next;
           current.next = this.head; // update new head
           current = delNode;
@@ -99,7 +96,7 @@ export default class CircularLinkedList<T> extends LinkedList<T> {
   }
 
   // 从链表中删除某个元素 key 只删除前面的第一个值 O(N)
-  removeKey(key: T) {
+  removeKey(key: T): boolean {
     let delNode: Node<T> | undefined;
 
     if (this.head == null) {
@@ -107,7 +104,7 @@ export default class CircularLinkedList<T> extends LinkedList<T> {
     } else {
       if (this.head.key === key) {
         delNode = this.head;
-        const lastNode = this.get(this.size() - 1)!;
+        const lastNode = this.get(this.size - 1)!;
         this.head = delNode.next;
         lastNode.next = this.head; // update last node
       } else {
@@ -133,7 +130,7 @@ export default class CircularLinkedList<T> extends LinkedList<T> {
     }
   }
 
-  toString() {
+  toString(): string {
     if (this.isEmpty()) return "";
 
     let current = this.head;

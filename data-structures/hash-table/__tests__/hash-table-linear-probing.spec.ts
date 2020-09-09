@@ -8,11 +8,11 @@ describe("HashTableLinearProbing", () => {
 
   test("starts empty", () => {
     const hashTable = new HashTableLinearProbing<number, number>();
-    expect(hashTable.size()).toBe(0);
+    expect(hashTable.size).toBe(0);
     expect(hashTable.isEmpty()).toBe(true);
   });
 
-  test("generates hashcode", () => {
+  test("generates hashCode", () => {
     // numbers
     let hashTable: any = new HashTableLinearProbing<number, number>();
     expect(hashTable.hashCode(1)).toBe(1);
@@ -81,7 +81,7 @@ describe("HashTableLinearProbing", () => {
     for (let i = min; i <= max; i++) {
       expect(hashTable.put(i, i)).toBe(true);
     }
-    expect(hashTable.size()).toBe(size);
+    expect(hashTable.size).toBe(size);
 
     const table = hashTable.getTable();
     for (let i = min; i <= max; i++) {
@@ -146,14 +146,14 @@ describe("HashTableLinearProbing", () => {
     expect(hashTable.put(A, `${A}@email.com`)).toBe(true);
     expect(hashTable.put(B, `${B}@email.com`)).toBe(true);
     expect(hashTable.put(C, `${C}@email.com`)).toBe(true);
-    expect(hashTable.size()).toBe(3);
+    expect(hashTable.size).toBe(3);
 
     const expectedHash = 5;
     expect(hashTable.hashCode(A)).toBe(expectedHash);
     expect(hashTable.hashCode(B)).toBe(expectedHash);
     expect(hashTable.hashCode(C)).toBe(expectedHash);
 
-    expect(hashTable.size()).toBe(3);
+    expect(hashTable.size).toBe(3);
 
     return hashTable;
   }
@@ -167,17 +167,17 @@ describe("HashTableLinearProbing", () => {
     for (let i = min; i <= max; i++) {
       expect(hashTable.put(i, i)).toBe(true);
     }
-    expect(hashTable.size()).toBe(size);
+    expect(hashTable.size).toBe(size);
 
     for (let i = min; i <= max; i++) {
       expect(hashTable.put(i, i + 10)).toBe(true);
     }
-    expect(hashTable.size()).toBe(size * 2);
+    expect(hashTable.size).toBe(size * 2);
 
     for (let i = min; i <= max; i++) {
       expect(hashTable.put(i, i + 100)).toBe(true);
     }
-    expect(hashTable.size()).toBe(size * 3);
+    expect(hashTable.size).toBe(size * 3);
 
     const table = hashTable.getTable();
     for (let i = min; i <= max; i++) {
@@ -203,7 +203,7 @@ describe("HashTableLinearProbing", () => {
     for (let i = min; i <= max; i++) {
       expect(hashTable.put(i, i)).toBe(true);
     }
-    expect(hashTable.size()).toBe(size);
+    expect(hashTable.size).toBe(size);
 
     for (let i = min; i <= max; i++) {
       expect(hashTable.remove(i)).toBe(true);
@@ -270,7 +270,7 @@ describe("HashTableLinearProbing", () => {
     expect(hashTable.hashCode("-")).toBe(8);
     expect(hashTable.hashCode("0")).toBe(11);
 
-    expect(hashTable.size()).toBe(8);
+    expect(hashTable.size).toBe(8);
 
     const table = hashTable.getTable();
     expect(table[4].key).toBe(")");

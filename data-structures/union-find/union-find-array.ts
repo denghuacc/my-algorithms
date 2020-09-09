@@ -13,13 +13,13 @@ export default class UnionFindArray {
     }
   }
 
-  size() {
+  get size(): number {
     return this.id.length;
   }
 
   // 查找元素 p 所对应的集合编号 O(1)
-  private find(p: number) {
-    if (p >= 0 && p < this.size()) {
+  private find(p: number): number | undefined {
+    if (p >= 0 && p < this.size) {
       return this.id[p];
     }
   }
@@ -30,13 +30,13 @@ export default class UnionFindArray {
   }
 
   // 合并元素 p 和元素 q 所属的集合 O(N)
-  unionElements(p: number, q: number) {
+  unionElements(p: number, q: number): void {
     const pId = this.find(p);
     const qId = this.find(q);
 
     if (pId === qId) return;
 
-    for (let i = 0; i < this.size(); i++) {
+    for (let i = 0; i < this.size; i++) {
       if (this.id[i] === pId) {
         this.id[i] = qId!;
       }

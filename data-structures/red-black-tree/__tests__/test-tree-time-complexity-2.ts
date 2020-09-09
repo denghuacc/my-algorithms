@@ -1,4 +1,4 @@
-import BST from "../binary-search-tree-map";
+import BST from "../../binary-search-tree/binary-search-tree-map";
 import AVLTree from "../../avl-tree/avl-tree";
 import RBTree from "../red-black-tree";
 

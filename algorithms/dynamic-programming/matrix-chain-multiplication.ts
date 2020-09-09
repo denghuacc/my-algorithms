@@ -2,7 +2,7 @@
 // 矩阵链相乘是另一个可以用动态规划解决的著名问题。
 // 这个问题是要找出一组矩阵相乘的最佳方式（顺序）
 
-export function matrixChainMultiplication(p: number[]) {
+export function matrixChainMultiplication(p: number[]): number {
   const n = p.length;
 
   const m: number[][] = [];
@@ -38,7 +38,7 @@ export function matrixChainMultiplication(p: number[]) {
   return m[1][n - 1];
 }
 
-function printOptimalParenthesis(s: number[][], i: number, j: number) {
+function printOptimalParenthesis(s: number[][], i: number, j: number): void {
   if (i === j) {
     console.log("A[" + i + "]");
   } else {

@@ -19,13 +19,13 @@ export default class UnionFindTreeRankRecursive {
     }
   }
 
-  size() {
+  get size(): number {
     return this.parent.length;
   }
 
   // 查找元素 p 所对应的集合编号 O(1)
-  private find(p: number) {
-    if (p >= 0 && p < this.size()) {
+  private find(p: number): number | undefined {
+    if (p >= 0 && p < this.size) {
       if (p !== this.parent[p]) {
         this.parent[p] = this.find(this.parent[p])!; // 递归
       }
@@ -39,7 +39,7 @@ export default class UnionFindTreeRankRecursive {
   }
 
   // 合并元素 p 和元素 q 所属的集合 O(N)
-  unionElements(p: number, q: number) {
+  unionElements(p: number, q: number): void {
     const pRoot = this.find(p)!;
     const qRoot = this.find(q)!;
 

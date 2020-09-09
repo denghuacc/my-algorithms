@@ -8,14 +8,13 @@ import LinkedList from "./linked-list";
 export default class DoublyLinkedList<T> extends LinkedList<T> {
   head: Node<T> | undefined;
   tail: Node<T> | undefined; // 表尾
-  protected count: number = 0;
 
   constructor() {
     super();
   }
 
   // 在链表的 index 位置添加值 O(N)
-  protected add(index: number, key: T) {
+  protected add(index: number, key: T): boolean {
     if (index >= 0 && index <= this.count) {
       const node = new Node(key);
       let current = this.head;
@@ -52,7 +51,7 @@ export default class DoublyLinkedList<T> extends LinkedList<T> {
   }
 
   // 删除链表第 index 个位置的值，返回删除的元素 O(N)
-  protected remove(index: number) {
+  protected remove(index: number): T | undefined {
     if (index >= 0 && index < this.count) {
       if (this.head == null || this.tail == null) return undefined;
 
@@ -83,7 +82,7 @@ export default class DoublyLinkedList<T> extends LinkedList<T> {
   }
 
   // 从链表中删除某个元素 key 只删除前面的第一个值 O(N)
-  removeKey(key: T) {
+  removeKey(key: T): boolean {
     let delNode: Node<T> | undefined;
 
     if (this.head == null || this.tail == null) return false;
@@ -127,7 +126,7 @@ export default class DoublyLinkedList<T> extends LinkedList<T> {
     }
   }
 
-  toString() {
+  toString(): string {
     if (this.head == null || this.tail == null) return "";
 
     let current = this.head;

@@ -7,7 +7,7 @@ export function knapsack(
   capacity: number,
   weights: number[],
   values: number[]
-) {
+): number {
   const n = values.length;
 
   // dp[i][j] -> 容量为 j 时获取 values 中的 i 的最大值
@@ -34,7 +34,7 @@ export function knapsack(
   return dp[n][capacity];
 }
 
-function findValues(n: number, capacity: number, dp: number[][]) {
+function findValues(n: number, capacity: number, dp: number[][]): void {
   console.log("解决方案包含以下物品：");
   let i = n;
   let j = capacity;

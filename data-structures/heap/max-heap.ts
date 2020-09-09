@@ -23,7 +23,7 @@ export default class MaxHeap<T> {
 
         // 从最后一个非叶子节点开始下沉，直到第一个元素
         // 因为减少了叶子节点的下沉，比起在空堆中一个一个添加元素效率更高
-        for (let i = this.parent(this.size() - 1); i >= 0; i--) {
+        for (let i = this.parent(this.size - 1); i >= 0; i--) {
           this.siftDown(i);
         }
       }
@@ -31,17 +31,17 @@ export default class MaxHeap<T> {
   }
 
   // 获取堆中的元素数量
-  size() {
+  get size(): number {
     return this.data.length;
   }
 
   // 判断堆是否为空
-  isEmpty() {
+  isEmpty(): boolean {
     return this.data.length === 0;
   }
 
   // 获取元素的父亲节点的索引
-  private parent(index: number) {
+  private parent(index: number): number {
     if (index !== 0) {
       return Math.floor((index - 1) / 2);
     } else {
@@ -50,39 +50,39 @@ export default class MaxHeap<T> {
   }
 
   // 获取左孩子节点的索引
-  private leftChild(index: number) {
+  private leftChild(index: number): number {
     return index * 2 + 1;
   }
 
   // 获取右孩子节点的索引
-  private rightChild(index: number) {
+  private rightChild(index: number): number {
     return index * 2 + 2;
   }
 
   // 添加元素
-  add(val: T) {
+  add(val: T): void {
     this.data.push(val);
-    this.siftUp(this.size() - 1);
+    this.siftUp(this.size - 1);
   }
 
   // 查找最大元素
-  findMax() {
+  findMax(): T | undefined {
     if (!this.isEmpty()) {
       return this.data[0];
     }
   }
 
   // 取出最大元素
-  extractMax() {
+  extractMax(): T | undefined {
     const ret = this.findMax(); // 先存储返回值（第一个元素）
-    swap(this.data, 0, this.size() - 1); // 第一个元素和最后一个元素交换位置
+    swap(this.data, 0, this.size - 1); // 第一个元素和最后一个元素交换位置
     this.data.pop(); // 删除最后一个元素（即原来的第一个元素）
     this.siftDown(0); // 现在的第一个元素下浮
     return ret;
   }
 
   // 取出堆中的最大值，并且替换成 val
-  replace(val: T) {
+  replace(val: T): T | undefined {
     const ret = this.findMax();
     this.data[0] = val;
     this.siftDown(0);
@@ -90,7 +90,7 @@ export default class MaxHeap<T> {
   }
 
   // 元素上浮
-  private siftUp(index: number) {
+  private siftUp(index: number): void {
     // 父节点比子节点小时，交换节点位置
     while (index > 0 && this.data[this.parent(index)] < this.data[index]) {
       swap(this.data, index, this.parent(index));
@@ -99,9 +99,9 @@ export default class MaxHeap<T> {
   }
 
   // 元素下沉
-  private siftDown(index: number) {
+  private siftDown(index: number): void {
     // 当存在左子节点时
-    while (this.leftChild(index) < this.size()) {
+    while (this.leftChild(index) < this.size) {
       let maxIndex = this.leftChild(index);
 
       // 如果存在右子节点且比左子节点的值更大时，最大的子节点索引赋值为右子节点

@@ -6,19 +6,24 @@ import { KVNode as Node } from "../models/tree-models";
  */
 export default class BSTMap<K, V> {
   root: Node<K, V> | undefined;
-  size: number = 0;
+  private count: number = 0;
 
   constructor() {}
 
+  // 查询元素数量 O(1)
+  get size(): number {
+    return this.count;
+  }
+
   // 设置值 O(logN)
-  set(key: K, val: V) {
+  set(key: K, val: V): this {
     this.root = this.setNode(this.root!, key, val);
     return this;
   }
 
   private setNode(root: Node<K, V>, key: K, val: V): Node<K, V> {
     if (root == null) {
-      this.size++;
+      this.count++;
       return new Node(key, val);
     }
 
@@ -34,24 +39,24 @@ export default class BSTMap<K, V> {
   }
 
   // 获取值 O(logN)
-  get(key: K) {
+  get(key: K): V | undefined {
     const node = this.getNode(this.root!, key);
     return node?.val;
   }
 
   // 查询值 O(logN)
-  has(key: K) {
+  has(key: K): boolean {
     return this.getNode(this.root!, key) != null;
   }
 
   // 清空值 O(1)
-  clear() {
+  clear(): void {
     this.root = undefined;
-    this.size = 0;
+    this.count = 0;
   }
 
   // 删除值 O(logN)
-  delete(key: K) {
+  delete(key: K): boolean {
     const node = this.getNode(this.root!, key);
 
     if (node != null) {
@@ -62,7 +67,7 @@ export default class BSTMap<K, V> {
     return false;
   }
 
-  private deleteNode(root: Node<K, V>, key: K) {
+  private deleteNode(root: Node<K, V>, key: K): Node<K, V> | undefined {
     if (root == null) return undefined;
 
     if (key < root.key) {
@@ -75,14 +80,14 @@ export default class BSTMap<K, V> {
       if (root.left == null) {
         const rightNode = root.right;
         root.right = undefined;
-        this.size--;
+        this.count--;
         return rightNode;
       }
 
       if (root.right == null) {
         const leftNode = root.left;
         root.left = undefined;
-        this.size--;
+        this.count--;
         return leftNode;
       }
 
@@ -100,11 +105,11 @@ export default class BSTMap<K, V> {
     return this.minimum(root.left);
   }
 
-  private deleteMin(root: Node<K, V>) {
+  private deleteMin(root: Node<K, V>): Node<K, V> | undefined {
     if (root.left == null) {
       const rightNode = root.right;
       root.right = undefined;
-      this.size--;
+      this.count--;
       return rightNode;
     }
 

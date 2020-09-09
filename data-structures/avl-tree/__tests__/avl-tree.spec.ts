@@ -12,12 +12,12 @@ describe("AVLTree", () => {
   });
 
   test("size", () => {
-    expect(avl.size()).toBe(5);
+    expect(avl.size).toBe(5);
     avl.add(17, "17");
-    expect(avl.size()).toBe(6);
+    expect(avl.size).toBe(6);
     avl.remove(45);
     avl.remove(16);
-    expect(avl.size()).toBe(4);
+    expect(avl.size).toBe(4);
   });
 
   test("isEmpty", () => {

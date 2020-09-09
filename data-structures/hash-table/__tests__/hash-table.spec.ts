@@ -4,7 +4,7 @@ import { MyObj } from "../../util";
 describe("HashTable", () => {
   test("starts empty", () => {
     const hashTable = new HashTable<number, number>();
-    expect(hashTable.size()).toBe(0);
+    expect(hashTable.size).toBe(0);
     expect(hashTable.isEmpty()).toBe(true);
   });
 
@@ -77,7 +77,7 @@ describe("HashTable", () => {
     for (let i = min; i <= max; i++) {
       expect(hashTable.put(i, i)).toBe(true);
     }
-    expect(hashTable.size()).toBe(size);
+    expect(hashTable.size).toBe(size);
 
     const table = hashTable.getTable();
     for (let i = min; i <= max; i++) {
@@ -142,7 +142,7 @@ describe("HashTable", () => {
     for (let i = 0; i < 5; i++) {
       expect(hashTable.put(1, i)).toBe(true);
     }
-    expect(hashTable.size()).toBe(1);
+    expect(hashTable.size).toBe(1);
   });
 
   test("removes elements", () => {
@@ -154,7 +154,7 @@ describe("HashTable", () => {
     for (let i = min; i <= max; i++) {
       expect(hashTable.put(i, i)).toBe(true);
     }
-    expect(hashTable.size()).toBe(size);
+    expect(hashTable.size).toBe(size);
 
     for (let i = min; i <= max; i++) {
       expect(hashTable.remove(i)).toBe(true);

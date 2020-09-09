@@ -6,16 +6,20 @@ import { KVNode as Node } from "../models/linked-list-models";
  */
 export default class LinkedListMap<K, V> {
   head: Node<K, V> | undefined;
-  size: number = 0;
+  private count: number = 0;
 
   constructor() {}
 
+  get size() {
+    return this.count;
+  }
+
   // 设置值 O(N)
-  set(key: K, val: V) {
+  set(key: K, val: V): this {
     if (!this.has(key)) {
       const newNode = new Node(key, val, this.head);
       this.head = newNode;
-      this.size++;
+      this.count++;
     } else {
       const node = this.getNode(key);
       node!.val = val;
@@ -24,18 +28,18 @@ export default class LinkedListMap<K, V> {
   }
 
   // 获取值 O(N)
-  get(key: K) {
+  get(key: K): V | undefined {
     const node = this.getNode(key);
     return node?.val;
   }
 
   // 查询值 O(N)
-  has(key: K) {
+  has(key: K): boolean {
     return this.getNode(key) != null;
   }
 
   // 删除值 O(N)
-  delete(key: K) {
+  delete(key: K): boolean {
     let current = this.head;
     let delNode;
 
@@ -44,7 +48,7 @@ export default class LinkedListMap<K, V> {
     if (current.key === key) {
       delNode = current;
       this.head = delNode.next;
-      this.size--;
+      this.count--;
       return true;
     } else {
       while (current.next != null) {
@@ -52,7 +56,7 @@ export default class LinkedListMap<K, V> {
           delNode = current.next;
           const previous = current;
           previous.next = current.next.next;
-          this.size--;
+          this.count--;
           return true;
         }
         current = current.next;
@@ -62,13 +66,13 @@ export default class LinkedListMap<K, V> {
   }
 
   // 清空值 O(1)
-  clear() {
+  clear(): void {
     this.head = undefined;
-    this.size = 0;
+    this.count = 0;
   }
 
   // 通过 key 获取对应的节点
-  private getNode(key: K) {
+  private getNode(key: K): Node<K, V> | undefined {
     let current = this.head;
     while (current != null) {
       if (current.key === key) {

@@ -5,12 +5,14 @@
 
 const UNASSIGNED = 0;
 
-export function sudokuSolver(grid: number[][]) {
+export function sudokuSolver(
+  grid: number[][]
+): number[][] | "NO SOLUTION EXISTS!" {
   if (solveSudoku(grid) === true) return grid;
   else return "NO SOLUTION EXISTS!";
 }
 
-function solveSudoku(grid: number[][]) {
+function solveSudoku(grid: number[][]): boolean {
   let row = 0;
   let col = 0;
   let checkBlankSpaces = false; // ! 检查是否有空白，即值为 0
@@ -39,7 +41,12 @@ function solveSudoku(grid: number[][]) {
 }
 
 // ! 检查 grid[row][col] 位置 num 是否合适 -> 即其它位置原先不存在该数字
-function isSafe(grid: number[][], row: number, col: number, num: number) {
+function isSafe(
+  grid: number[][],
+  row: number,
+  col: number,
+  num: number
+): boolean {
   return (
     !usedInRow(grid, row, num) &&
     !usedInCol(grid, col, num) &&
@@ -48,7 +55,7 @@ function isSafe(grid: number[][], row: number, col: number, num: number) {
 }
 
 // ! 检查数字是否在行中存在
-function usedInRow(grid: number[][], row: number, num: number) {
+function usedInRow(grid: number[][], row: number, num: number): boolean {
   for (let col = 0; col < grid.length; col++) {
     if (grid[row][col] === num) return true;
   }
@@ -56,7 +63,7 @@ function usedInRow(grid: number[][], row: number, num: number) {
 }
 
 // ! 检查数字是否在列中存在
-function usedInCol(grid: number[][], col: number, num: number) {
+function usedInCol(grid: number[][], col: number, num: number): boolean {
   for (let row = 0; row < grid.length; row++) {
     if (grid[row][col] === num) return true;
   }
@@ -69,7 +76,7 @@ function usedInBox(
   boxStartRow: number,
   boxStartCol: number,
   num: number
-) {
+): boolean {
   for (let row = 0; row < 3; row++) {
     for (let col = 0; col < 3; col++) {
       if (grid[row + boxStartRow][col + boxStartCol] === num) {

@@ -1,6 +1,6 @@
 const INF = Number.MAX_SAFE_INTEGER;
 
-export function kruskal(graph: number[][]) {
+export function kruskal(graph: number[][]): number[] {
   const length = graph.length;
   const parent: number[] = [];
   let ne: number = 0;

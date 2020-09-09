@@ -12,13 +12,13 @@ export default class ObjectStack<T> {
   }
 
   // 入栈 O(1)
-  push(element: T) {
+  push(element: T): void {
     this.items[this.count] = element;
     this.count++;
   }
 
   // 出栈，返回出栈的元素 O(1)
-  pop() {
+  pop(): T | undefined {
     if (this.isEmpty()) {
       return undefined;
     }
@@ -29,7 +29,7 @@ export default class ObjectStack<T> {
   }
 
   // 获取栈顶元素 O(1)
-  peek() {
+  peek(): T | undefined {
     if (this.isEmpty()) {
       return undefined;
     }
@@ -37,22 +37,22 @@ export default class ObjectStack<T> {
   }
 
   // 获取栈里的元素的数量 O(1)
-  size() {
+  size(): number {
     return this.count;
   }
 
   // 检查栈是否为空 O(1)
-  isEmpty() {
+  isEmpty(): boolean {
     return this.size() === 0;
   }
 
   // 清空栈 O(1)
-  clear() {
+  clear(): void {
     this.items = {};
     this.count = 0;
   }
 
-  toString() {
+  toString(): string {
     if (this.isEmpty()) {
       return "";
     }

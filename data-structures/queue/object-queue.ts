@@ -14,13 +14,13 @@ export default class ObjectQueue<T> {
   }
 
   // 入列 O(1)
-  enqueue(element: T) {
+  enqueue(element: T): void {
     this.items[this.count] = element;
     this.count++;
   }
 
   // 出列 O(N)
-  dequeue() {
+  dequeue(): T | undefined {
     if (this.isEmpty()) {
       return undefined;
     }
@@ -31,7 +31,7 @@ export default class ObjectQueue<T> {
   }
 
   // 获取队列的第一个元素 O(1)
-  peek() {
+  peek(): T | undefined {
     if (this.isEmpty()) {
       return undefined;
     }
@@ -39,23 +39,23 @@ export default class ObjectQueue<T> {
   }
 
   // 返回队列的元素的数量 O(1)
-  size() {
+  size(): number {
     return this.count - this.lowestCount;
   }
 
   // 查询队列是否为空 O(1)
-  isEmpty() {
+  isEmpty(): boolean {
     return this.size() === 0;
   }
 
   // 清空队列 O(1)
-  clear() {
+  clear(): void {
     this.items = {};
     this.count = 0;
     this.lowestCount = 0;
   }
 
-  toString() {
+  toString(): string {
     if (this.isEmpty()) return "";
     let objString = `Queue { ${this.items[this.lowestCount]}`;
     for (let i = this.lowestCount + 1; i < this.count; i++) {

@@ -1,6 +1,6 @@
 const INF = Number.MAX_SAFE_INTEGER;
 
-export function dijkstra(graph: number[][], src: number) {
+export function dijkstra(graph: number[][], src: number): number[] {
   const dist: number[] = [];
   const visited: boolean[] = [];
   const length = graph.length;

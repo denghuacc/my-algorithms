@@ -12,12 +12,12 @@ export default class LinkedListSet<T> {
   }
 
   // 获取集合的元素个数 O(1)
-  get size() {
-    return this.list.size();
+  get size(): number {
+    return this.list.size;
   }
 
   // 添加元素 O(N)
-  add(val: T) {
+  add(val: T): this {
     if (!this.has(val)) {
       this.list.addFirst(val); // O(1)
     }
@@ -25,16 +25,16 @@ export default class LinkedListSet<T> {
   }
 
   // 查询元素是否存在 O(N)
-  has(val: T) {
+  has(val: T): boolean {
     return this.list.contains(val);
   }
 
   // 删除元素 O(N)
-  delete(val: T) {
+  delete(val: T): boolean {
     return this.list.removeKey(val);
   }
 
-  clear() {
+  clear(): void {
     this.list = new LinkedList();
   }
 }

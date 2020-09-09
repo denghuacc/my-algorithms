@@ -14,12 +14,12 @@ export default class HashTableLinearProbingLazy<K, V> {
 
   constructor() {}
 
-  hashCode(key: K) {
+  hashCode(key: K): number {
     return this.loseloseHashCode(key);
   }
 
   // 散列方法
-  private loseloseHashCode(key: K) {
+  private loseloseHashCode(key: K): number {
     if (typeof key === "number") return key;
     const tableKey = defaultToString(key);
     let hash = 0;
@@ -30,7 +30,7 @@ export default class HashTableLinearProbingLazy<K, V> {
   }
 
   // 增加值
-  put(key: K, val: V) {
+  put(key: K, val: V): boolean {
     if (key != null && val != null) {
       const position = this.hashCode(key);
 
@@ -52,7 +52,7 @@ export default class HashTableLinearProbingLazy<K, V> {
   }
 
   // 获取值
-  get(key: K) {
+  get(key: K): V | undefined {
     const position = this.hashCode(key);
 
     if (this.table[position] != null) {
@@ -81,7 +81,7 @@ export default class HashTableLinearProbingLazy<K, V> {
   }
 
   // 移除值
-  remove(key: K) {
+  remove(key: K): boolean {
     const position = this.hashCode(key);
 
     if (this.table[position] != null) {
@@ -108,11 +108,11 @@ export default class HashTableLinearProbingLazy<K, V> {
     return false;
   }
 
-  getTable() {
+  getTable(): Table<K, V> {
     return this.table;
   }
 
-  size() {
+  get size(): number {
     let count = 0;
     Object.values(this.table).forEach((valuePair) => {
       count += valuePair.isDeleted === true ? 0 : 1;
@@ -120,15 +120,15 @@ export default class HashTableLinearProbingLazy<K, V> {
     return count;
   }
 
-  isEmpty() {
-    return this.size() === 0;
+  isEmpty(): boolean {
+    return this.size === 0;
   }
 
-  clear() {
+  clear(): void {
     this.table = {};
   }
 
-  toString() {
+  toString(): string {
     if (this.isEmpty()) return "";
     const keys = Object.keys(this.table);
     let objString = `{${keys[0]} => ${this.table[keys[0]].toString()}}`;

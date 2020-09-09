@@ -4,7 +4,7 @@
 // 比起动态规划算法而言，贪心算法更简单、更快。然而，如我们所见，它并不总是得到最优答案。
 // 但是综合来看，它相对执行时间来说，输出了一个可以接受的解。
 
-export function minCoinChange(coins: number[], amount: number) {
+export function minCoinChange(coins: number[], amount: number): number[] {
   const change: number[] = [];
   let total = 0;
   for (let i = coins.length; i >= 0; i--) {

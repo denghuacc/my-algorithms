@@ -20,7 +20,7 @@ function testMaxHeap(testData: Array<number>, isHeapify: boolean) {
   }
 
   for (let i = 1; i < n; i++) {
-    if (arr[i - 1] < arr[i]) {
+    if (arr[i - 1]! < arr[i]!) {
       throw new Error("error");
     }
   }

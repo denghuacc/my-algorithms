@@ -12,12 +12,12 @@ export default class Trie<K, V> {
     this.count = 0;
   }
 
-  size() {
+  get size(): number {
     return this.count;
   }
 
   // 添加单词
-  add(word: string) {
+  add(word: string): void {
     let cur = this.root;
 
     for (let i = 0; i < word.length; i++) {
@@ -35,7 +35,7 @@ export default class Trie<K, V> {
   }
 
   // 查询单词
-  contains(word: string) {
+  contains(word: string): boolean {
     let cur = this.root;
 
     for (let i = 0; i < word.length; i++) {
@@ -47,7 +47,7 @@ export default class Trie<K, V> {
   }
 
   // 是否是前缀
-  isPrefix(word: string) {
+  isPrefix(word: string): boolean {
     let cur = this.root;
     for (let i = 0; i < word.length; i++) {
       const c = word[i];

@@ -8,7 +8,7 @@
 
 import { defaultCompare, Compare } from "../util";
 
-export function shellSort<T>(array: T[], compareFn = defaultCompare) {
+export function shellSort<T>(array: T[], compareFn = defaultCompare): T[] {
   let increment = array.length / 2;
 
   while (increment > 0) {
@@ -37,7 +37,7 @@ export function shellSort<T>(array: T[], compareFn = defaultCompare) {
   return array;
 }
 
-export function shellSort2<T>(array: T[], compareFn = defaultCompare) {
+export function shellSort2<T>(array: T[], compareFn = defaultCompare): T[] {
   const len = array.length;
   let temp;
   let gap = 1;

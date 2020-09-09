@@ -4,7 +4,7 @@
 // 矩阵就是迷宫，“老鼠”的目标是从位置[0][0]开始并移动到[n-1][n-1]（终点）。
 // 老鼠可以在垂直或水平方向上任何未被阻挡的位置间移动。
 
-export function ratInAMaze(maze: number[][]) {
+export function ratInAMaze(maze: number[][]): number[][] | "NO PATH FOUND" {
   const n = maze.length;
   const m = maze[0].length;
   const solution: number[][] = Array.from(new Array(n), () =>
@@ -20,7 +20,7 @@ function findPath(
   x: number,
   y: number,
   solution: number[][]
-) {
+): boolean {
   const n = maze.length;
   const m = maze[0].length;
 
@@ -41,7 +41,7 @@ function findPath(
 }
 
 // ! 块为 1 时空闲（安全）
-function isSafe(maze: number[][], x: number, y: number) {
+function isSafe(maze: number[][], x: number, y: number): boolean {
   const n = maze.length;
   const m = maze[0].length;
   if (x >= 0 && y >= 0 && x < n && y < m && maze[x][y] !== 0) {

@@ -1,4 +1,3 @@
-import { Node } from "../models/linked-list-models";
 import LinkedList from "./linked-list";
 
 /**
@@ -9,16 +8,13 @@ import LinkedList from "./linked-list";
  * 也不能使用 set 方法修改元素的值，因为会把排序弄乱
  */
 export default class ScoredLinkedList<T> extends LinkedList<T> {
-  head: Node<T> | undefined;
-  protected count: number = 0;
-
   constructor() {
     super();
   }
 
   // 添加元素 O(N)
   // 不能使用 addFirst 和 addLast 来添加元素
-  push(key: T) {
+  push(key: T): void {
     if (this.isEmpty()) {
       super.addFirst(key);
     } else {
@@ -28,10 +24,10 @@ export default class ScoredLinkedList<T> extends LinkedList<T> {
   }
 
   // 获取需要插入的值 key 所在的合适索引位置 O(N)
-  private getIndex(key: T) {
+  private getIndex(key: T): number {
     let current = this.head;
     let i = 0;
-    for (; i < this.size() && current != null; i++) {
+    for (; i < this.size && current != null; i++) {
       if (key < current.key) {
         return i;
       }
@@ -40,7 +36,7 @@ export default class ScoredLinkedList<T> extends LinkedList<T> {
     return i;
   }
 
-  toString() {
+  toString(): string {
     if (this.isEmpty()) return "";
 
     let current = this.head;

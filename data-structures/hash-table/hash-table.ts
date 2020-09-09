@@ -14,12 +14,12 @@ export default class HashTable<K, V> {
 
   constructor() {}
 
-  hashCode(key: K) {
+  hashCode(key: K): number {
     return this.loseloseHashCode(key);
   }
 
   // 散列方法一
-  private loseloseHashCode(key: K) {
+  private loseloseHashCode(key: K): number {
     if (typeof key === "number") return key;
     const tableKey = defaultToString(key);
     let hash = 0;
@@ -30,17 +30,17 @@ export default class HashTable<K, V> {
   }
 
   // 散列方法二  更好的散列生成函数
-  // private djb2HashCode(key: K) {
-  //   const tableKey = defaultToString(key)
-  //   let hash = 5381 // 社区建议使用这个数值
+  // private djb2HashCode(key: K): number {
+  //   const tableKey = defaultToString(key);
+  //   let hash = 5381; // 社区建议使用这个数值
   //   for (let i = 0; i < tableKey.length; i++) {
-  //     hash += hash * 33 + tableKey.charCodeAt(i)
+  //     hash += hash * 33 + tableKey.charCodeAt(i);
   //   }
-  //   return hash % 1013 // 取余，取质数 1013 即散列表数量若为 1000 左右时比较合适（稍大）
+  //   return hash % 1013; // 取余，取质数 1013 即散列表数量若为 1000 左右时比较合适（稍大）
   // }
 
   // 增加值
-  put(key: K, val: V) {
+  put(key: K, val: V): boolean {
     if (key != null && val != null) {
       const position = this.hashCode(key);
       this.table[position] = new ValuePair(key, val);
@@ -50,14 +50,14 @@ export default class HashTable<K, V> {
   }
 
   // 获取值
-  get(key: K) {
+  get(key: K): V | undefined {
     const position = this.hashCode(key);
     const valuePair = this.table[position];
     return valuePair == null ? undefined : valuePair.val;
   }
 
   // 移除值
-  remove(key: K) {
+  remove(key: K): boolean {
     const position = this.hashCode(key);
     const valuePair = this.table[position];
     if (valuePair != null) {
@@ -67,23 +67,23 @@ export default class HashTable<K, V> {
     return false;
   }
 
-  getTable() {
+  getTable(): Table<K, V> {
     return this.table;
   }
 
-  size() {
+  get size(): number {
     return Object.keys(this.table).length;
   }
 
-  isEmpty() {
-    return this.size() === 0;
+  isEmpty(): boolean {
+    return this.size === 0;
   }
 
-  clear() {
+  clear(): void {
     this.table = {};
   }
 
-  toString() {
+  toString(): string {
     if (this.isEmpty()) return "";
     const keys = Object.keys(this.table);
     let objString = `{${keys[0]} => ${this.table[keys[0]].toString()}}`;

@@ -1,6 +1,6 @@
 // 使用递归实现数组求和
 
-export function sum(array: number[]) {
+export function sum(array: number[]): number {
   return _sum(array, 0);
 
   function _sum(array: number[], index: number): number {
@@ -10,7 +10,7 @@ export function sum(array: number[]) {
 }
 
 // with memo
-export function sumMemo(array: number[]) {
+export function sumMemo(array: number[]): number {
   const memo: number[] = [];
   return _sum(array, 0);
 

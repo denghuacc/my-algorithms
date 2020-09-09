@@ -12,30 +12,30 @@ export default class BSTSet<T> {
   }
 
   // 获取集合的元素数量 O(1)
-  get size() {
-    return this.bst.size();
+  get size(): number {
+    return this.bst.size;
   }
 
   // 添加元素 O(logN)
-  add(val: T) {
+  add(val: T): this {
     this.bst.add(val);
     return this;
   }
 
   // 删除元素 O(logN)
-  delete(val: T) {
+  delete(val: T): boolean {
     if (!this.has(val)) return false;
     this.bst.remove(val);
     return true;
   }
 
   // 查询元素是否存在 O(logN)
-  has(val: T) {
+  has(val: T): boolean {
     return this.bst.contains(val);
   }
 
   // 清除元素 O(1)
-  clear() {
+  clear(): void {
     this.bst = new BST();
   }
 }

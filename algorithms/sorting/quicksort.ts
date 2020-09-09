@@ -11,7 +11,7 @@
 
 import { swap, defaultCompare, ICompareFunction, Compare } from "../util";
 
-export function quickSort<T>(array: T[], compareFn = defaultCompare) {
+export function quickSort<T>(array: T[], compareFn = defaultCompare): T[] {
   return quick(array, 0, array.length - 1, compareFn);
 }
 
@@ -20,7 +20,7 @@ function quick<T>(
   left: number,
   right: number,
   compareFn: ICompareFunction<T>
-) {
+): T[] {
   let index: number;
   if (array.length > 1) {
     index = partition(array, left, right, compareFn);
@@ -36,7 +36,7 @@ function partition<T>(
   left: number,
   right: number,
   compareFn: ICompareFunction<T>
-) {
+): number {
   let pivot = array[Math.floor((left + right) / 2)];
   let i = left;
   let j = right;

@@ -17,7 +17,7 @@ export default class LinkedListQueue<T> {
   }
 
   // 入列 O(1)
-  enqueue(key: T) {
+  enqueue(key: T): void {
     if (this.tail == undefined) {
       this.tail = new Node(key);
       this.head = this.tail;
@@ -29,7 +29,7 @@ export default class LinkedListQueue<T> {
   }
 
   // 出列 O(1)
-  dequeue() {
+  dequeue(): T | undefined {
     if (this.head == null) {
       return undefined;
     }
@@ -46,28 +46,28 @@ export default class LinkedListQueue<T> {
   }
 
   // 获取队列的第一个元素 O(1)
-  peek() {
+  peek(): T | undefined {
     return this.head?.key;
   }
 
   // 获取队列的元素数量 O(1)
-  size() {
+  size(): number {
     return this.count;
   }
 
   // 查询队列是否为空 O(1)
-  isEmpty() {
+  isEmpty(): boolean {
     return this.size() === 0;
   }
 
   // 清空队列 O(1)
-  clear() {
+  clear(): void {
     this.head = undefined; // 表头
     this.tail = undefined; // 表尾
     this.count = 0;
   }
 
-  toString() {
+  toString(): string {
     if (this.head == null) return "";
     let cur = this.head,
       str = "Queue: head { ";

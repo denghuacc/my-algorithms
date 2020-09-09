@@ -1,4 +1,4 @@
-export function floydWarshall(graph: number[][]) {
+export function floydWarshall(graph: number[][]): number[][] {
   const dist: number[][] = [];
   const length = graph.length;
 

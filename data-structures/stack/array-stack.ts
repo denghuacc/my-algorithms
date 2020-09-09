@@ -12,37 +12,37 @@ export default class ArrayStack<T> {
   }
 
   // 入栈 O(1)
-  push(element: T) {
+  push(element: T): void {
     this.items.push(element);
   }
 
   // 出栈，返回出栈的元素 O(1)
-  pop() {
+  pop(): T | undefined {
     return this.items.pop();
   }
 
   // 获取栈顶元素 O(1)
-  peek() {
+  peek(): T | undefined {
     return this.items[this.items.length - 1];
   }
 
   // 获取栈里的元素的数量 O(1)
-  size() {
+  size(): number {
     return this.items.length;
   }
 
   // 检查栈是否为空 O(1)
-  isEmpty() {
+  isEmpty(): boolean {
     return this.items.length === 0;
   }
 
   // 清空栈 O(1)
-  clear() {
+  clear(): void {
     this.items = [];
   }
 
   // 打印栈
-  toString() {
+  toString(): string {
     return this.items.toString();
   }
 }

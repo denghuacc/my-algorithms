@@ -13,16 +13,16 @@ import { KVNode as Node, Color } from "../models/tree-models";
  */
 export default class RedBlackTree<K, V> {
   root: Node<K, V> | undefined;
-  count: number = 0;
+  protected count: number = 0;
 
   constructor() {}
 
-  size() {
+  get size(): number {
     return this.count;
   }
 
-  isEmpty() {
-    return this.size() === 0;
+  isEmpty(): boolean {
+    return this.size === 0;
   }
 
   private isRed(root: Node<K, V>): boolean {
@@ -31,11 +31,11 @@ export default class RedBlackTree<K, V> {
   }
 
   // 二叉树的前序遍历
-  preOrder(arr: Array<K> = []) {
+  preOrder(arr: Array<K> = []): void {
     this.preOrderTree(this.root!, arr);
   }
 
-  private preOrderTree(root: Node<K, V>, arr: Array<K>) {
+  private preOrderTree(root: Node<K, V>, arr: Array<K>): void {
     if (root == null) return;
 
     arr.push(root.key);
@@ -44,11 +44,11 @@ export default class RedBlackTree<K, V> {
   }
 
   // 二叉树的中序遍历
-  inOrder(arr: Array<K> = []) {
+  inOrder(arr: Array<K> = []): void {
     this.inOrderTree(this.root!, arr);
   }
 
-  private inOrderTree(root: Node<K, V>, arr: Array<K>) {
+  private inOrderTree(root: Node<K, V>, arr: Array<K>): void {
     if (root == null) return;
 
     this.inOrderTree(root.left!, arr);
@@ -57,11 +57,11 @@ export default class RedBlackTree<K, V> {
   }
 
   // 二叉树的后序遍历
-  postOrder(arr: Array<K>) {
+  postOrder(arr: Array<K>): void {
     this.postOrderTree(this.root!, arr);
   }
 
-  private postOrderTree(root: Node<K, V>, arr: Array<K>) {
+  private postOrderTree(root: Node<K, V>, arr: Array<K>): void {
     if (root == null) return;
 
     this.postOrderTree(root.left!, arr);
@@ -70,7 +70,7 @@ export default class RedBlackTree<K, V> {
   }
 
   // 树的层序遍历，需要借助队列 Queue 实现 -> 广度优先搜索 BFS
-  levelOrder(arr: Array<K> = []) {
+  levelOrder(arr: Array<K> = []): void {
     if (this.root == null) return;
 
     const queue = [];
@@ -96,7 +96,7 @@ export default class RedBlackTree<K, V> {
   //     / \              /   \
   //    T2 T3            T1   T2
   // 左旋转
-  private leftRotate(root: Node<K, V>) {
+  private leftRotate(root: Node<K, V>): Node<K, V> | undefined {
     const x = root.right;
 
     // 左旋转
@@ -116,7 +116,7 @@ export default class RedBlackTree<K, V> {
   //  / \                       /  \
   // y  T1                     T1  T2
   // 右旋转
-  private rightRotate(root: Node<K, V>) {
+  private rightRotate(root: Node<K, V>): Node<K, V> | undefined {
     const x = root.left;
 
     // 右旋转
@@ -131,21 +131,21 @@ export default class RedBlackTree<K, V> {
   }
 
   // 颜色翻转
-  private flipColors(root: Node<K, V>) {
+  private flipColors(root: Node<K, V>): void {
     root.color = Color.RED;
     root.left!.color = Color.BLACK;
     root.right!.color = Color.BLACK;
   }
 
   // 向红黑树中添加新的元素(key, val)
-  add(key: K, val: V) {
+  add(key: K, val: V): void {
     this.root = this.addNode(this.root!, key, val);
     this.root!.color = Color.BLACK; // 最终根节点为黑色节点
   }
 
   // 向以 root 为根的红黑树中插入元素 (key, val)，递归算法
   // 返回插入新节点后红黑树的根
-  private addNode(root: Node<K, V>, key: K, val: V) {
+  private addNode(root: Node<K, V>, key: K, val: V): Node<K, V> {
     if (root == null) {
       this.count++;
       return new Node(key, val);
@@ -193,16 +193,16 @@ export default class RedBlackTree<K, V> {
     }
   }
 
-  contains(key: K) {
+  contains(key: K): boolean {
     return this.getNode(this.root!, key) != null;
   }
 
-  get(key: K) {
+  get(key: K): V | undefined {
     const root = this.getNode(this.root!, key);
     return root == null ? undefined : root.val;
   }
 
-  set(key: K, newVal: V) {
+  set(key: K, newVal: V): void {
     const root = this.getNode(this.root!, key);
 
     if (root == null) {
@@ -213,7 +213,7 @@ export default class RedBlackTree<K, V> {
   }
 
   // 寻找二分搜索树的最小元素
-  minimum() {
+  minimum(): K | undefined {
     if (this.count === 0) return;
     return this.minimumNode(this.root!).key;
   }
@@ -224,7 +224,7 @@ export default class RedBlackTree<K, V> {
   }
 
   // 寻找二分搜索树的最大元素
-  maximum() {
+  maximum(): K | undefined {
     if (this.count === 0) return;
     return this.maximumNode(this.root!).key;
   }
@@ -235,13 +235,13 @@ export default class RedBlackTree<K, V> {
   }
 
   // 从树中删除最小值所在节点, 返回最小值
-  removeMin() {
+  removeMin(): K | undefined {
     const ret = this.minimum();
     this.root = this.removeMinNode(this.root!);
     return ret;
   }
 
-  private removeMinNode(root: Node<K, V>) {
+  private removeMinNode(root: Node<K, V>): Node<K, V> | undefined {
     if (root.left == null) {
       const rightNode = root.right;
       root.right = undefined;
@@ -254,13 +254,13 @@ export default class RedBlackTree<K, V> {
   }
 
   // 从二分搜索树中删除最大值所在节点
-  removeMax() {
+  removeMax(): K | undefined {
     const ret = this.maximum();
     this.root = this.removeMaxNode(this.root!);
     return ret;
   }
 
-  private removeMaxNode(root: Node<K, V>) {
+  private removeMaxNode(root: Node<K, V>): Node<K, V> | undefined {
     if (root.right == null) {
       const leftNode = root.left;
       root.left = undefined;
@@ -273,7 +273,7 @@ export default class RedBlackTree<K, V> {
   }
 
   // 从红黑树中删除键为 key 的节点
-  remove(key: K) {
+  remove(key: K): V | undefined {
     const root = this.getNode(this.root!, key);
 
     if (root != null) {
@@ -284,7 +284,7 @@ export default class RedBlackTree<K, V> {
     return undefined;
   }
 
-  private removeNode(root: Node<K, V>, key: K) {
+  private removeNode(root: Node<K, V>, key: K): Node<K, V> | undefined {
     if (root == null) {
       return undefined;
     }
@@ -327,7 +327,7 @@ export default class RedBlackTree<K, V> {
   }
 
   // 判断该二叉树是否是一棵二分搜索树
-  isBST() {
+  isBST(): boolean {
     let arr: Array<K> = [];
     this.inOrderTree(this.root!, arr);
     for (let i = 1; i < arr.length; i++) {

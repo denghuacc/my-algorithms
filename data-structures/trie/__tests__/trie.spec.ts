@@ -8,35 +8,35 @@ describe("Trie", () => {
   });
 
   test("size", () => {
-    expect(trie.size()).toBe(0);
+    expect(trie.size).toBe(0);
     trie.add("cat");
-    expect(trie.size()).toBe(1);
+    expect(trie.size).toBe(1);
     trie.add("dog");
-    expect(trie.size()).toBe(2);
+    expect(trie.size).toBe(2);
     trie.add("deer");
-    expect(trie.size()).toBe(3);
+    expect(trie.size).toBe(3);
     trie.add("dog");
-    expect(trie.size()).toBe(3);
+    expect(trie.size).toBe(3);
     trie.add("do");
-    expect(trie.size()).toBe(4);
+    expect(trie.size).toBe(4);
   });
 
   test("add", () => {
-    expect(trie.size()).toBe(0);
+    expect(trie.size).toBe(0);
     expect(trie.contains("cat")).toBe(false);
     trie.add("cat");
-    expect(trie.size()).toBe(1);
+    expect(trie.size).toBe(1);
     expect(trie.contains("cat")).toBe(true);
     trie.add("dog");
-    expect(trie.size()).toBe(2);
+    expect(trie.size).toBe(2);
     expect(trie.contains("dog")).toBe(true);
   });
 
   test("contains", () => {
-    expect(trie.size()).toBe(0);
+    expect(trie.size).toBe(0);
     expect(trie.contains("cat")).toBe(false);
     trie.add("cat");
-    expect(trie.size()).toBe(1);
+    expect(trie.size).toBe(1);
     expect(trie.contains("cat")).toBe(true);
   });
 

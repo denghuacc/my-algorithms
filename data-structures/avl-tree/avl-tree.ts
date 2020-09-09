@@ -8,20 +8,20 @@ import { KVNode as Node } from "../models/tree-models";
  */
 export default class AVLTree<K, V> {
   root: Node<K, V> | undefined;
-  count: number = 0;
+  protected count: number = 0;
 
   constructor() {}
 
-  size() {
+  get size(): number {
     return this.count;
   }
 
-  isEmpty() {
-    return this.size() === 0;
+  isEmpty(): boolean {
+    return this.size === 0;
   }
 
   // 判断该二叉树是否是一棵二分搜索树
-  isBST() {
+  isBST(): boolean {
     let arr: Array<K> = [];
     this.inOrderTree(this.root!, arr);
     for (let i = 1; i < arr.length; i++) {
@@ -33,11 +33,11 @@ export default class AVLTree<K, V> {
   }
 
   // 二叉树的前序遍历
-  preOrder(arr: Array<K> = []) {
+  preOrder(arr: Array<K> = []): void {
     this.preOrderTree(this.root!, arr);
   }
 
-  private preOrderTree(root: Node<K, V>, arr: Array<K>) {
+  private preOrderTree(root: Node<K, V>, arr: Array<K>): void {
     if (root == null) return;
 
     arr.push(root.key);
@@ -46,11 +46,11 @@ export default class AVLTree<K, V> {
   }
 
   // 二叉树的中序遍历
-  inOrder(arr: Array<K> = []) {
+  inOrder(arr: Array<K> = []): void {
     this.inOrderTree(this.root!, arr);
   }
 
-  private inOrderTree(root: Node<K, V>, arr: Array<K>) {
+  private inOrderTree(root: Node<K, V>, arr: Array<K>): void {
     if (root == null) return;
 
     this.inOrderTree(root.left!, arr);
@@ -59,11 +59,11 @@ export default class AVLTree<K, V> {
   }
 
   // 二叉树的后序遍历
-  postOrder(arr: Array<K> = []) {
+  postOrder(arr: Array<K> = []): void {
     this.postOrderTree(this.root!, arr);
   }
 
-  private postOrderTree(root: Node<K, V>, arr: Array<K>) {
+  private postOrderTree(root: Node<K, V>, arr: Array<K>): void {
     if (root == null) return;
 
     this.postOrderTree(root.left!, arr);
@@ -72,7 +72,7 @@ export default class AVLTree<K, V> {
   }
 
   // 树的层序遍历，需要借助队列 Queue 实现 -> 广度优先搜索 BFS
-  levelOrder(arr: Array<K> = []) {
+  levelOrder(arr: Array<K> = []): void {
     if (this.root == null) return;
 
     const queue: Array<Node<K, V>> = [];
@@ -93,7 +93,7 @@ export default class AVLTree<K, V> {
   }
 
   // 判断该二叉树是否是一棵平衡二叉树
-  isBalanced() {
+  isBalanced(): boolean {
     return this.isBalancedTree(this.root!);
   }
 
@@ -118,8 +118,8 @@ export default class AVLTree<K, V> {
     return root.height!;
   }
 
-  // 获取节点 root 的平衡因子 左子树高度减去右子树高度的值
-  private getBalancedFactor(root: Node<K, V>) {
+  // 获取节点 root 的平衡因子 左右子树高度差
+  private getBalancedFactor(root: Node<K, V>): number {
     if (root == null) {
       return 0;
     }
@@ -134,7 +134,7 @@ export default class AVLTree<K, V> {
   //    z   T3                       T1  T2 T3 T4
   //   / \
   // T1   T2
-  private rightRotate(y: Node<K, V>) {
+  private rightRotate(y: Node<K, V>): Node<K, V> | undefined {
     const x = y.left;
     const T3 = x!.right;
 
@@ -158,7 +158,7 @@ export default class AVLTree<K, V> {
   //   T2  z                     T1 T2 T3 T4
   //      / \
   //     T3 T4
-  private leftRotate(y: Node<K, V>) {
+  private leftRotate(y: Node<K, V>): Node<K, V> | undefined {
     const x = y.right;
     const T2 = x!.left;
 
@@ -175,11 +175,11 @@ export default class AVLTree<K, V> {
   }
 
   // 向 AVL 树中添加新的元素 (key, val)
-  add(key: K, val: V) {
+  add(key: K, val: V): void {
     this.root = this.addNode(this.root!, key, val);
   }
 
-  addNode(root: Node<K, V>, key: K, val: V) {
+  addNode(root: Node<K, V>, key: K, val: V): Node<K, V> | undefined {
     if (root == null) {
       this.count++;
       return new Node(key, val);
@@ -258,16 +258,16 @@ export default class AVLTree<K, V> {
     }
   }
 
-  contains(key: K) {
+  contains(key: K): boolean {
     return this.getNode(this.root!, key) != null;
   }
 
-  get(key: K) {
+  get(key: K): V | undefined {
     const root = this.getNode(this.root!, key);
     return root == null ? undefined : root.val;
   }
 
-  set(key: K, newVal: V) {
+  set(key: K, newVal: V): void {
     const root = this.getNode(this.root!, key);
 
     if (root == null) {
@@ -278,7 +278,7 @@ export default class AVLTree<K, V> {
   }
 
   // 寻找二分搜索树的最小元素
-  min() {
+  min(): K | undefined {
     if (this.count === 0) return;
     return this.minNode(this.root!).key;
   }
@@ -289,7 +289,7 @@ export default class AVLTree<K, V> {
   }
 
   // 寻找二分搜索树的最大元素
-  max() {
+  max(): K | undefined {
     if (this.count === 0) return;
     return this.maxNode(this.root!).key;
   }
@@ -300,13 +300,13 @@ export default class AVLTree<K, V> {
   }
 
   // 从树中删除最小值所在节点, 返回最小值
-  removeMin() {
+  removeMin(): K | undefined {
     const ret = this.min();
     this.root = this.removeMinNode(this.root!);
     return ret;
   }
 
-  private removeMinNode(root: Node<K, V>) {
+  private removeMinNode(root: Node<K, V>): Node<K, V> | undefined {
     if (root.left == null) {
       const rightNode = root.right;
       root.right = undefined;
@@ -319,13 +319,13 @@ export default class AVLTree<K, V> {
   }
 
   // 从二分搜索树中删除最大值所在节点
-  removeMax() {
+  removeMax(): K | undefined {
     const ret = this.max();
     this.root = this.removeMaxNode(this.root!);
     return ret;
   }
 
-  private removeMaxNode(root: Node<K, V>) {
+  private removeMaxNode(root: Node<K, V>): Node<K, V> | undefined {
     if (root.right == null) {
       const leftNode = root.left;
       root.left = undefined;
@@ -338,7 +338,7 @@ export default class AVLTree<K, V> {
   }
 
   // 从 AVL 树中删除键为 key 的节点
-  remove(key: K) {
+  remove(key: K): V | undefined {
     const root = this.getNode(this.root!, key);
 
     if (root != null) {
@@ -349,7 +349,7 @@ export default class AVLTree<K, V> {
     return undefined;
   }
 
-  private removeNode(root: Node<K, V>, key: K) {
+  private removeNode(root: Node<K, V>, key: K): Node<K, V> | undefined {
     if (root == null) return undefined;
 
     let retNode; // 创建一个返回的节点

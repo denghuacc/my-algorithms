@@ -13,36 +13,36 @@ export default class ArrayQueue<T> {
   }
 
   // 入列 O(1)
-  enqueue(element: T) {
+  enqueue(element: T): void {
     this.items.push(element);
   }
 
   // 出列 O(N)
-  dequeue() {
+  dequeue(): T | undefined {
     return this.items.shift();
   }
 
   // 获取队列的第一个元素 O(1)
-  peek() {
+  peek(): T | undefined {
     return this.items[0];
   }
 
   // 返回队列的元素的数量 O(1)
-  size() {
+  size(): number {
     return this.items.length;
   }
 
   // 查询队列是否为空 O(1)
-  isEmpty() {
+  isEmpty(): boolean {
     return this.items.length === 0;
   }
 
   // 清空队列 O(1)
-  clear() {
+  clear(): void {
     this.items = [];
   }
 
-  toString() {
+  toString(): string {
     return this.items.toString();
   }
 }

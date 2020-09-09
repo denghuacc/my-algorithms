@@ -15,17 +15,17 @@ export default class LinkedList<T> {
   constructor() {}
 
   // 获取链表中值的数量 O(1)
-  size() {
+  get size(): number {
     return this.count;
   }
 
   // 返回链表是否为空 O(1)
-  isEmpty() {
-    return this.size() === 0;
+  isEmpty(): boolean {
+    return this.size === 0;
   }
 
   // 在链表的 index 位置添加值 O(N)
-  protected add(index: number, key: T) {
+  protected add(index: number, key: T): boolean {
     if (index >= 0 && index <= this.count) {
       const node = new Node(key);
 
@@ -47,13 +47,13 @@ export default class LinkedList<T> {
   }
 
   // 在表头添加值 O(1)
-  addFirst(key: T) {
-    this.add(0, key);
+  addFirst(key: T): boolean {
+    return this.add(0, key);
   }
 
   // 在表尾添加值 O(N)
-  addLast(key: T) {
-    this.add(this.count, key);
+  addLast(key: T): boolean {
+    return this.add(this.count, key);
   }
 
   // 获取链表第 index 个位置的节点 O(N)
@@ -69,17 +69,17 @@ export default class LinkedList<T> {
   }
 
   // 获取链表的第一个值 O(1)
-  getFirst() {
+  getFirst(): T | undefined {
     return this.get(0)?.key;
   }
 
   // 获取链表的最后一个值 O(N)
-  getLast() {
+  getLast(): T | undefined {
     return this.get(this.count - 1)?.key;
   }
 
   // 设置链表第 index 个位置的值 O(N)
-  set(index: number, key: T) {
+  set(index: number, key: T): boolean {
     if (index >= 0 && index < this.count) {
       const node = this.get(index);
       if (node != null) {
@@ -91,10 +91,10 @@ export default class LinkedList<T> {
   }
 
   // 查找元素 key 的索引 O(N)
-  indexOf(key: T) {
+  indexOf(key: T): number {
     let current = this.head;
 
-    for (let i = 0; i < this.size() && current != null; i++) {
+    for (let i = 0; i < this.size && current != null; i++) {
       if (current.key === key) {
         return i;
       }
@@ -105,7 +105,7 @@ export default class LinkedList<T> {
   }
 
   // 查找链表中是否有某个值 O(N)
-  contains(key: T) {
+  contains(key: T): boolean {
     let current = this.head;
 
     while (current != null) {
@@ -119,7 +119,7 @@ export default class LinkedList<T> {
   }
 
   // 删除链表第 index 个位置的值，返回删除的元素 O(N)
-  protected remove(index: number) {
+  protected remove(index: number): T | undefined {
     if (index >= 0 && index < this.count) {
       let current = this.head;
 
@@ -141,18 +141,18 @@ export default class LinkedList<T> {
   }
 
   // 删除链表的第一个值 O(1)
-  removeFirst() {
+  removeFirst(): T | undefined {
     return this.remove(0);
   }
 
   // 删除链表的最后一个值 O(N)
-  removeLast() {
+  removeLast(): T | undefined {
     return this.remove(this.count - 1);
   }
 
   // 从链表中删除某个元素 key 只删除前面的第一个值 O(N)
   // 也可以使用查找元素的索引，然后根据索引删除
-  removeKey(key: T) {
+  removeKey(key: T): boolean {
     let current = this.head;
     let delNode: Node<T> | undefined;
 
@@ -182,12 +182,12 @@ export default class LinkedList<T> {
   }
 
   // 清空链表 O(1)
-  clear() {
+  clear(): void {
     this.head = undefined;
     this.count = 0;
   }
 
-  toString() {
+  toString(): string {
     if (this.isEmpty()) return "";
 
     let current = this.head;

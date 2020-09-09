@@ -6,32 +6,32 @@ import { KVNode as Node } from "../models/tree-models";
  */
 export default class BSTMap<K, V> {
   root: Node<K, V> | undefined;
-  size: number = 0;
+  protected count: number = 0;
 
   constructor() {}
 
-  getSize() {
-    return this.size;
+  get size(): number {
+    return this.count;
   }
 
-  isEmpty() {
-    return this.size === 0;
+  isEmpty(): boolean {
+    return this.count === 0;
   }
 
-  add(key: K, val: V) {
-    this.root = this._add(this.root!, key, val);
+  add(key: K, val: V): void {
+    this.root = this.addNode(this.root!, key, val);
   }
 
-  _add(root: Node<K, V>, key: K, val: V) {
+  private addNode(root: Node<K, V>, key: K, val: V): Node<K, V> {
     if (root == null) {
-      this.size++;
+      this.count++;
       return new Node(key, val);
     }
 
     if (key < root.key) {
-      root.left = this._add(root.left!, key, val);
+      root.left = this.addNode(root.left!, key, val);
     } else if (key > root.key) {
-      root.right = this._add(root.right!, key, val);
+      root.right = this.addNode(root.right!, key, val);
     } else {
       root.val = val;
     }
@@ -39,29 +39,29 @@ export default class BSTMap<K, V> {
     return root;
   }
 
-  _getNode(root: Node<K, V>, key: K): Node<K, V> | undefined {
+  private getNode(root: Node<K, V>, key: K): Node<K, V> | undefined {
     if (root == null) return undefined;
 
     if (key === root.key) {
       return root;
     } else if (key < root.key) {
-      return this._getNode(root.left!, key);
+      return this.getNode(root.left!, key);
     } else {
-      return this._getNode(root.right!, key);
+      return this.getNode(root.right!, key);
     }
   }
 
-  contains(key: K) {
-    return this._getNode(this.root!, key) != null;
+  contains(key: K): boolean {
+    return this.getNode(this.root!, key) != null;
   }
 
-  get(key: K) {
-    const root = this._getNode(this.root!, key);
+  get(key: K): V | undefined {
+    const root = this.getNode(this.root!, key);
     return root == null ? undefined : root.val;
   }
 
-  set(key: K, newVal: V) {
-    const root = this._getNode(this.root!, key);
+  set(key: K, newVal: V): void {
+    const root = this.getNode(this.root!, key);
 
     if (root == null) {
       throw new Error(key + " doesn't exist!");
@@ -70,63 +70,63 @@ export default class BSTMap<K, V> {
     root.val = newVal;
   }
 
-  _minimum(root: Node<K, V>): Node<K, V> {
+  private minNode(root: Node<K, V>): Node<K, V> {
     if (root.left == null) {
       return root;
     }
 
-    return this._minimum(root.left);
+    return this.minNode(root.left);
   }
 
-  _removeMin(root: Node<K, V>) {
+  removeMin(root: Node<K, V>) {
     if (root.left == null) {
       const rightNode = root.right;
       root.right = undefined;
-      this.size--;
+      this.count--;
       return rightNode;
     }
 
-    root.left = this._removeMin(root.left);
+    root.left = this.removeMin(root.left);
     return root;
   }
 
-  remove(key: K) {
-    const root = this._getNode(this.root!, key);
+  remove(key: K): V | undefined {
+    const root = this.getNode(this.root!, key);
 
     if (root != null) {
-      this.root = this._remove(this.root!, key);
+      this.root = this.removeNode(this.root!, key);
       return root.val;
     }
 
     return undefined;
   }
 
-  _remove(root: Node<K, V>, key: K) {
+  private removeNode(root: Node<K, V>, key: K): Node<K, V> | undefined {
     if (root == null) return undefined;
 
     if (key < root.key) {
-      root.left = this._remove(root.left!, key);
+      root.left = this.removeNode(root.left!, key);
       return root;
     } else if (key > root.key) {
-      root.right = this._remove(root.right!, key);
+      root.right = this.removeNode(root.right!, key);
       return root;
     } else {
       if (root.left == null) {
         const rightNode = root.right;
         root.right = undefined;
-        this.size--;
+        this.count--;
         return rightNode;
       }
 
       if (root.right == null) {
         const leftNode = root.left;
         root.left = undefined;
-        this.size--;
+        this.count--;
         return leftNode;
       }
 
-      const successor = this._minimum(root.right);
-      successor.right = this._removeMin(root.right);
+      const successor = this.minNode(root.right);
+      successor.right = this.removeMin(root.right);
       successor.left = root.left;
 
       root.left = root.right = undefined;

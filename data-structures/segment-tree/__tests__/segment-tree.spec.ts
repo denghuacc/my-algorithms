@@ -10,7 +10,7 @@ describe("SegmentTree", () => {
   });
 
   test("size", () => {
-    expect(segmentTree.size()).toBe(8);
+    expect(segmentTree.size).toBe(8);
   });
 
   test("get", () => {

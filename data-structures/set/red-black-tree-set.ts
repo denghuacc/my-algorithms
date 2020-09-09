@@ -12,29 +12,29 @@ export default class RedBlackTreeSet<T> {
   }
 
   // 获取集合的元素个数 O(1)
-  get size() {
-    return this.rbt.size();
+  get size(): number {
+    return this.rbt.size;
   }
 
   // 添加元素 O(logN)
-  add(val: T) {
+  add(val: T): this {
     this.rbt.add(val, val);
     return this;
   }
 
   // 删除元素 O(logN)
-  delete(val: T) {
+  delete(val: T): boolean {
     if (!this.has(val)) return false;
     this.rbt.remove(val);
     return true;
   }
 
   // 查询元素是否存在 O(logN)
-  has(val: T) {
+  has(val: T): boolean {
     return this.rbt.contains(val);
   }
 
-  clear() {
+  clear(): void {
     this.rbt = new RedBlackTree();
   }
 }

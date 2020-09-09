@@ -26,7 +26,7 @@ export function heapSort<T>(array: T[], compareFn = defaultCompare): T[] {
   return array; // 直到数组长度 === 1时，返回原数组
 }
 
-function buildHeap<T>(array: T[], compareFn: ICompareFunction<T>) {
+function buildHeap<T>(array: T[], compareFn: ICompareFunction<T>): void {
   for (let i = Math.floor(array.length / 2); i >= 0; i--) {
     heapify(array, array.length, i, compareFn);
   }
@@ -37,7 +37,7 @@ function heapify<T>(
   size: number,
   i: number,
   compareFn: ICompareFunction<T>
-) {
+): void {
   let left = i * 2 + 1; // 左子节点
   let right = i * 2 + 2; // 右子节点
   let largest = i; // 节点

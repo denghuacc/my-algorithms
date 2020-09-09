@@ -10,51 +10,51 @@ export default class ArrayDeque<T> {
   }
 
   // 队首入列 O(N)
-  addFront(element: T) {
+  addFront(element: T): void {
     this.items.unshift(element);
   }
 
   // 队尾入列 O(1)
-  addBack(element: T) {
+  addBack(element: T): void {
     this.items.push(element);
   }
 
   // 队首出列 O(N)
-  removeFront() {
+  removeFront(): T | undefined {
     return this.items.shift();
   }
 
   // 队尾出列 O(1)
-  removeBack() {
+  removeBack(): T | undefined {
     return this.items.pop();
   }
 
   // 获取队列的第一个元素 O(1)
-  peekFront() {
+  peekFront(): T | undefined {
     return this.items[0];
   }
 
   // 获取队列的最后一个元素 O(1)
-  peekBack() {
+  peekBack(): T | undefined {
     return this.items[this.items.length - 1];
   }
 
   // 返回队列的元素的数量 O(1)
-  size() {
+  size(): number {
     return this.items.length;
   }
 
   // 查询队列是否为空 O(1)
-  isEmpty() {
+  isEmpty(): boolean {
     return this.items.length === 0;
   }
 
   // 清空队列 O(1)
-  clear() {
+  clear(): void {
     this.items = [];
   }
 
-  toString() {
+  toString(): string {
     return this.items.toString();
   }
 }

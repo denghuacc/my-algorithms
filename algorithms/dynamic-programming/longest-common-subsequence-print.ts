@@ -2,7 +2,7 @@
 // 最长子序列是指，在两个字符串序列中以相同顺序出现，
 // 但不要求连续（非字符串子串）的字符串序列。
 
-export function lcsPrint(wordX: string, wordY: string) {
+export function lcsPrint(wordX: string, wordY: string): string {
   const m = wordX.length;
   const n = wordY.length;
   const dp: number[][] = Array.from(new Array(m + 1), () =>
@@ -25,8 +25,8 @@ export function lcsPrint(wordX: string, wordY: string) {
       }
     }
   }
-  // return printSolution(solution, wordX, m, n);
-  return dp[m][n]
+  return printSolution(solution, wordX, m, n);
+  // return dp[m][n] // number
 }
 
 function printSolution(
@@ -34,7 +34,7 @@ function printSolution(
   wordX: string,
   m: number,
   n: number
-) {
+): string {
   let a = m;
   let b = n;
   let x = solution[a][b];

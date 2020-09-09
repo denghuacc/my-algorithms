@@ -7,19 +7,21 @@ enum Colors {
   BLACK = 2,
 }
 
-const initializeColor = (vertices: (string | number)[]) => {
+function initializeColor(
+  vertices: (string | number)[]
+): Record<number | string, Colors> {
   const color: Record<string | number, Colors> = {};
   for (let i = 0; i < vertices.length; i++) {
     color[vertices[i]] = Colors.WHITE;
   }
   return color;
-};
+}
 
-export const breadthFirstSearch = (
+export function breadthFirstSearch(
   graph: Graph,
   startVertex: string | number,
   callback: Function
-) => {
+): void {
   const vertices = graph.getVertices();
   const adjList = graph.getAdjList();
   const color = initializeColor(vertices);
@@ -44,10 +46,15 @@ export const breadthFirstSearch = (
     color[u] = Colors.BLACK;
     if (callback) callback(u);
   }
-};
+}
+
+interface ReturnObj {
+  distances: Record<string | number, number>;
+  predecessors: Record<string | number, string | number | null>;
+}
 
 // 改进的 bfs
-export const bfs = (graph: Graph, startVertex: string | number) => {
+export function bfs(graph: Graph, startVertex: string | number): ReturnObj {
   const vertices = graph.getVertices();
   const adjList = graph.getAdjList();
   const color = initializeColor(vertices);
@@ -85,4 +92,4 @@ export const bfs = (graph: Graph, startVertex: string | number) => {
     distances,
     predecessors,
   };
-};
+}

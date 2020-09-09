@@ -6,7 +6,7 @@ import UnionFindTreeRankIterative from "../union-find-tree-rank-iterative";
 import UnionFindTreeRankRecursive from "../union-find-tree-rank-recursive";
 
 function testUF(name: string, uf: any, n: number) {
-  const size = uf.size();
+  const size = uf.size;
 
   const label = name;
 

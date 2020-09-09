@@ -14,12 +14,12 @@ export default class HashTableLinearProbing<K, V> {
 
   constructor() {}
 
-  hashCode(key: K) {
+  hashCode(key: K): number {
     return this.loseloseHashCode(key);
   }
 
   // 散列方法
-  private loseloseHashCode(key: K) {
+  private loseloseHashCode(key: K): number {
     if (typeof key === "number") return key;
     const tableKey = defaultToString(key);
     let hash = 0;
@@ -30,7 +30,7 @@ export default class HashTableLinearProbing<K, V> {
   }
 
   // 增加值
-  put(key: K, val: V) {
+  put(key: K, val: V): boolean {
     if (key != null && val != null) {
       const position = this.hashCode(key);
 
@@ -49,7 +49,7 @@ export default class HashTableLinearProbing<K, V> {
   }
 
   // 获取值
-  get(key: K) {
+  get(key: K): V | undefined {
     const position = this.hashCode(key);
 
     if (this.table[position] != null) {
@@ -68,7 +68,7 @@ export default class HashTableLinearProbing<K, V> {
   }
 
   // 移除值
-  remove(key: K) {
+  remove(key: K): boolean {
     const position = this.hashCode(key);
 
     if (this.table[position] != null) {
@@ -91,7 +91,7 @@ export default class HashTableLinearProbing<K, V> {
   }
 
   // 重置删除后的哈希，删除其它相同哈希的值，防止哈希冲突
-  private verifyRemoveSideEffect(key: K, removedPosition: number) {
+  private verifyRemoveSideEffect(key: K, removedPosition: number): void {
     const hash = this.hashCode(key);
     let index = removedPosition + 1;
     while (this.table[index] != null) {
@@ -105,23 +105,23 @@ export default class HashTableLinearProbing<K, V> {
     }
   }
 
-  getTable() {
+  getTable(): Table<K, V> {
     return this.table;
   }
 
-  size() {
+  get size(): number {
     return Object.keys(this.table).length;
   }
 
-  isEmpty() {
-    return this.size() === 0;
+  isEmpty(): boolean {
+    return this.size === 0;
   }
 
-  clear() {
+  clear(): void {
     this.table = {};
   }
 
-  toString() {
+  toString(): string {
     if (this.isEmpty()) return "";
     const keys = Object.keys(this.table);
     let objString = `{${keys[0]} => ${this.table[keys[0]].toString()}}`;

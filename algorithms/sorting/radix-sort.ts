@@ -2,7 +2,7 @@
 
 import { findMinValue, findMaxValue } from "../search/min-max-search";
 
-export function radixSort(array: number[], radixBase = 10) {
+export function radixSort(array: number[], radixBase = 10): number[] {
   if (array.length < 2) return array;
   const minValue = findMinValue(array)!;
   const maxValue = findMaxValue(array)!;
@@ -22,7 +22,7 @@ function countingSortForRadix(
   radixBase: number,
   significantDigit: number,
   minValue: number
-) {
+): number[] {
   let bucketsIndex: number;
   const buckets: number[] = [];
   const aux: number[] = [];

@@ -10,20 +10,20 @@ export default class ArraySet<T> {
   }
 
   // 获取集合的元素数量 O(1)
-  get size() {
+  get size(): number {
     return this.array.length;
   }
 
   // 添加元素 O(N)
-  add(val: T) {
+  add(val: T): this {
     if (!this.has(val)) {
       this.array.push(val);
     }
     return this;
   }
 
-  // 删除元素 O(n^2)
-  delete(val: T) {
+  // 删除元素 O(N^2)
+  delete(val: T): boolean {
     const index = this.array.indexOf(val);
     if (index > -1) {
       this.array.splice(index, 1);
@@ -34,12 +34,12 @@ export default class ArraySet<T> {
   }
 
   // 查询元素是否存在 O(N)
-  has(val: T) {
+  has(val: T): boolean {
     return this.array.includes(val);
   }
 
   // 清除元素 O(1)
-  clear() {
+  clear(): void {
     this.array.length = 0;
   }
 }

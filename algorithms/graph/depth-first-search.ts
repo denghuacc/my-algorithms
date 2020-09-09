@@ -6,7 +6,7 @@ enum Colors {
   BLACK = 2,
 }
 
-export function depthFirstSearch(graph: Graph, callback: Function) {
+export function depthFirstSearch(graph: Graph, callback: Function): void {
   const vertices = graph.getVertices();
   const adjList = graph.getAdjList();
   const color = initializeColor(vertices);
@@ -18,7 +18,9 @@ export function depthFirstSearch(graph: Graph, callback: Function) {
   }
 }
 
-function initializeColor(vertices: (string | number)[]) {
+function initializeColor(
+  vertices: (string | number)[]
+): Record<string | number, Colors> {
   const color: Record<string | number, Colors> = {};
   for (let i = 0; i < vertices.length; i++) {
     color[vertices[i]] = Colors.WHITE;
@@ -31,7 +33,7 @@ function depthFirstSearchVisit(
   color: Record<string | number, Colors>,
   adjList: Map<string | number, (string | number)[]>,
   callback: Function
-) {
+): void {
   color[u] = Colors.GREY;
   if (callback) callback(u);
 
@@ -44,8 +46,14 @@ function depthFirstSearchVisit(
   }
 }
 
+interface ReturnObj {
+  discovery: Record<string | number, number>;
+  finished: Record<string | number, number>;
+  predecessors: Record<string | number, string | number | null>;
+}
+
 // 改进的 dfs
-export function dfs(graph: Graph) {
+export function dfs(graph: Graph): ReturnObj {
   const vertices = graph.getVertices();
   const adjList = graph.getAdjList();
   const color = initializeColor(vertices);
@@ -81,7 +89,7 @@ function dfsVisit(
   p: Record<string | number, string | number | null>,
   time: { count: number },
   adjList: Map<string | number, (string | number)[]>
-) {
+): void {
   color[u] = Colors.GREY;
   d[u] = ++time.count;
   const neighbors = adjList.get(u)!;
