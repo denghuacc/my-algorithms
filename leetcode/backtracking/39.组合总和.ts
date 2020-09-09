@@ -54,28 +54,54 @@ var combinationSum = function (
 ): number[][] {
   const ret: number[][] = [];
   const len = candidates.length;
-  candidates.sort((a, b) => a - b);
-  backtrack(candidates, len, target, 0, [], ret);
+  candidates.sort((a, b) => a - b); // 排序是剪枝的前提
+  dfs(candidates, len, target, 0, [], ret);
   return ret;
 
-  function backtrack(
+  function dfs(
     candidates: number[],
     len: number,
     residue: number,
     begin: number,
-    path: number[],
+    subset: number[],
     ret: number[][]
   ) {
+    // 由于进入更深层的时候，小于 0 的部分被剪枝，因此递归终止条件值只判断等于 0 的情况
     if (residue === 0) {
-      ret.push(path.slice());
+      ret.push(subset.slice());
       return;
     }
 
     for (let i = begin; i < len; i++) {
-      if (residue - candidates[i] < 0) break;
-      path.push(candidates[i]);
-      backtrack(candidates, len, residue - candidates[i], i, path, ret);
-      path.pop();
+      if (residue - candidates[i] < 0) break; // 剪枝
+      subset.push(candidates[i]);
+      dfs(candidates, len, residue - candidates[i], i, subset, ret);
+      subset.pop();
+    }
+  }
+};
+
+// backtracking2
+var combinationSum = function (
+  candidates: number[],
+  target: number
+): number[][] {
+  const ret: number[][] = [];
+  dfs(target, [], 0);
+  return ret;
+
+  function dfs(target: number, subset: number[], idx: number) {
+    if (idx === candidates.length) return;
+    if (target === 0) {
+      ret.push(subset);
+      return;
+    }
+    // 直接跳过
+    dfs(target, subset, idx + 1);
+
+    // 选择当前数
+    if (target - candidates[idx] >= 0) {
+      dfs(target - candidates[idx], [...subset, candidates[idx]], idx);
     }
   }
 };
