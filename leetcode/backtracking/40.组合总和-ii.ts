@@ -48,6 +48,7 @@
  */
 
 // @lc code=start
+// backtracking
 var combinationSum2 = function (
   candidates: number[],
   target: number
@@ -56,19 +57,19 @@ var combinationSum2 = function (
   const len = candidates.length;
   if (len === 0) return ret;
   candidates.sort((a, b) => a - b);
-  backtrack(candidates, len, 0, target, [], ret);
+  dfs(candidates, len, 0, target, [], ret);
   return ret;
 
-  function backtrack(
+  function dfs(
     candidates: number[],
     len: number,
     begin: number,
     residue: number,
-    path: number[],
+    subset: number[],
     ret: number[][]
   ) {
     if (residue === 0) {
-      ret.push(path.slice());
+      ret.push(subset.slice());
       return;
     }
 
@@ -77,9 +78,51 @@ var combinationSum2 = function (
       if (i > begin && candidates[i] === candidates[i - 1]) {
         continue;
       }
-      path.push(candidates[i]);
-      backtrack(candidates, len, i + 1, residue - candidates[i], path, ret);
-      path.pop();
+      subset.push(candidates[i]);
+      dfs(candidates, len, i + 1, residue - candidates[i], subset, ret);
+      subset.pop();
+    }
+  }
+};
+
+// recursive
+var combinationSum2 = function (
+  candidates: number[],
+  target: number
+): number[][] {
+  const ret: number[][] = [];
+  const freq: [number, number][] = []; // [数字，出现频率][]
+  const subset: number[] = [];
+  candidates.sort((a, b) => a - b);
+
+  for (const num of candidates) {
+    const size = freq.length;
+    if (freq.length === 0 || num !== freq[size - 1][0]) {
+      freq.push([num, 1]);
+    } else {
+      ++freq[size - 1][1];
+    }
+  }
+
+  dfs(0, target);
+  return ret;
+
+  function dfs(pos: number, rest: number) {
+    if (rest === 0) {
+      ret.push(subset.slice());
+      return;
+    } 
+    if (pos === freq.length || rest < freq[pos][0]) return;
+
+    dfs(pos + 1, rest);
+
+    const most = Math.min(Math.floor(rest / freq[pos][0]), freq[pos][1]);
+    for (let i = 1; i <= most; i++) {
+      subset.push(freq[pos][0]);
+      dfs(pos + 1, rest - i * freq[pos][0]);
+    }
+    for (let i = 1; i <= most; i++) {
+      subset.pop();
     }
   }
 };
