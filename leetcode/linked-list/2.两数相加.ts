@@ -37,22 +37,26 @@ class ListNode {
   }
 }
 
+// 解题思路
+// 模拟竖式加法，从链表头部开始加起
+// 注意进位
+
 // @lc code=start
 var addTwoNumbers = function (
   l1: ListNode | null,
   l2: ListNode | null
 ): ListNode | null {
-  let pre = new ListNode(0);
-  let cur = pre;
+  let dummy = new ListNode(0); // 占位节点
+  let cur = dummy;
   let carry = 0;
 
   while (l1 || l2) {
     let x = !l1 ? 0 : l1.val;
     let y = !l2 ? 0 : l2.val;
-    let sum = x + y + carry;
+    let sum = x + y + carry; // 相加
 
-    carry = sum > 9 ? 1: 0;
-    sum = sum % 10;
+    carry = sum > 9 ? 1 : 0; // 是否进位
+    sum = sum % 10; // 相加后的值取一位数
     cur.next = new ListNode(sum);
 
     cur = cur.next;
@@ -60,7 +64,7 @@ var addTwoNumbers = function (
     if (l2) l2 = l2.next;
   }
 
-  if (carry === 1) cur.next = new ListNode(carry);
-  return pre.next;
+  if (carry === 1) cur.next = new ListNode(carry); // 再进一位
+  return dummy.next; // 只截取占位节点后面的链表
 };
 // @lc code=end

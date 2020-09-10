@@ -43,6 +43,11 @@ class ListNode {
   }
 }
 
+// 解题思路
+// 1. 先求出链表长度 len，
+// 2. 然后通过 len - n 找到删除节点的索引
+// 3. 最后删除节点
+
 // @lc code=start
 // two traverse
 var removeNthFromEnd = function (
@@ -70,7 +75,7 @@ var removeNthFromEnd = function (
 };
 
 // one traverse
-// tow pointer
+// two pointer
 var removeNthFromEnd = function (
   head: ListNode | null,
   n: number
@@ -93,3 +98,8 @@ var removeNthFromEnd = function (
   return dummy.next;
 };
 // @lc code=end
+
+// 解题思路 双指针
+// 1. 两个指针，一个指针先走 n + 1 步
+// 2. 然后两个指针同时走，当第一个指针走到底时，第二个指针刚好指向要删除的节点
+// 3. 最后删除节点
