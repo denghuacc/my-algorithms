@@ -35,10 +35,10 @@
 // backtracking
 var generateParenthesis = function (n: number): string[] {
   const ret: string[] = [];
-  backtrack(ret, "", 0, 0, n);
+  dfs(ret, "", 0, 0, n);
   return ret;
 
-  function backtrack(
+  function dfs(
     ret: string[],
     cur: string,
     open: number,
@@ -52,14 +52,14 @@ var generateParenthesis = function (n: number): string[] {
 
     if (open < max) {
       cur += "(";
-      backtrack(ret, cur, open + 1, close, max);
-      cur = cur.substring(0, cur.length - 1); // pop last string
+      dfs(ret, cur, open + 1, close, max);
+      cur = cur.slice(0, -1); // remove last char
     }
 
     if (open > close) {
       cur += ")";
-      backtrack(ret, cur, open, close + 1, max);
-      cur = cur.substring(0, cur.length - 1);
+      dfs(ret, cur, open, close + 1, max);
+      cur = cur.slice(0, -1);
     }
   }
 };

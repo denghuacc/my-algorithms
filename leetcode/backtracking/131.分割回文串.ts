@@ -35,10 +35,10 @@ var partition = function (s: string): string[][] {
   const ret: string[][] = [];
   if (n === 0) return ret;
   const stack: string[] = [];
-  backtrack(s, 0, n, stack, ret);
+  dfs(s, 0, n, stack, ret);
   return ret;
 
-  function backtrack(
+  function dfs(
     s: string,
     start: number,
     end: number,
@@ -53,7 +53,7 @@ var partition = function (s: string): string[][] {
     for (let i = start; i < n; i++) {
       if (!checkPalindrome(s, start, i)) continue;
       path.push(s.substring(start, i + 1));
-      backtrack(s, i + 1, end, path, ret);
+      dfs(s, i + 1, end, path, ret);
       path.pop();
     }
   }
@@ -91,10 +91,10 @@ var partition = function (s: string): string[][] {
     }
   }
 
-  backtrack(s, 0, n, dp, stack, ret);
+  dfs(s, 0, n, dp, stack, ret);
   return ret;
 
-  function backtrack(
+  function dfs(
     s: string,
     start: number,
     end: number,
@@ -110,7 +110,7 @@ var partition = function (s: string): string[][] {
     for (let i = start; i < n; i++) {
       if (!dp[start][i]) continue;
       path.push(s.substring(start, i + 1));
-      backtrack(s, i + 1, end, dp, path, ret);
+      dfs(s, i + 1, end, dp, path, ret);
       path.pop();
     }
   }

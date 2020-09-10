@@ -36,10 +36,10 @@ var permuteUnique = function (nums: number[]): number[][] {
   const used: boolean[] = new Array(len).fill(false);
   const path: number[] = [];
 
-  backtrack(nums, len, 0, used, path, ret);
+  dfs(nums, len, 0, used, path, ret);
   return ret;
 
-  function backtrack(
+  function dfs(
     nums: number[],
     len: number,
     depth: number,
@@ -57,7 +57,7 @@ var permuteUnique = function (nums: number[]): number[][] {
       if (i > 0 && nums[i] === nums[i - 1] && !used[i - 1]) continue;
       path.push(nums[i]);
       used[i] = true;
-      backtrack(nums, len, depth + 1, used, path, ret);
+      dfs(nums, len, depth + 1, used, path, ret);
       used[i] = false;
       path.pop();
     }

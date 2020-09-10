@@ -46,19 +46,20 @@ var letterCombinations = function (digits: string): string[] {
 
   const ret: string[] = [];
 
-  if (digits.length !== 0) backtrack("", digits);
+  if (digits.length !== 0) dfs("", digits);
   return ret;
 
-  function backtrack(combination: string, next: string) {
+  function dfs(combination: string, next: string) {
     if (next.length === 0) {
       ret.push(combination);
-    } else {
-      const digit = next.substring(0, 1);
-      const letters = map.get(digit)!;
-      for (let i = 0; i < letters.length; i++) {
-        const letter = map.get(digit)!.substring(i, i + 1);
-        backtrack(combination + letter, next.substring(1));
-      }
+      return;
+    }
+
+    const digit = next.substring(0, 1);
+    const letters = map.get(digit)!;
+    for (let i = 0; i < letters.length; i++) {
+      const letter = letters.substring(i, i + 1);
+      dfs(combination + letter, next.substring(1));
     }
   }
 };

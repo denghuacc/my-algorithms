@@ -37,10 +37,10 @@ var permute = function (nums: number[]): number[][] {
   const output: number[] = nums.slice();
   const len = nums.length;
 
-  backtrack(len, output, ret, 0);
+  dfs(len, output, ret, 0);
   return ret;
 
-  function backtrack(
+  function dfs(
     len: number,
     output: number[],
     ret: number[][],
@@ -50,7 +50,7 @@ var permute = function (nums: number[]): number[][] {
 
     for (let i = first; i < len; i++) {
       swap(output, first, i);
-      backtrack(len, output, ret, first + 1);
+      dfs(len, output, ret, first + 1);
       swap(output, first, i);
     }
   }

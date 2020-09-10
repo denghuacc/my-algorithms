@@ -33,10 +33,10 @@ function restoreIpAddresses(s: string): string[] {
   const segments: number[] = new Array(SEG_COUNT);
   const ret: string[] = [];
 
-  backtrack(s, 0, 0);
+  dfs(s, 0, 0);
   return ret;
 
-  function backtrack(s: string, segId: number, segStart: number) {
+  function dfs(s: string, segId: number, segStart: number) {
     // 找到四段 IP 并且遍历完字符串，那么就是一种答案
     if (segId === SEG_COUNT) {
       if (segStart === s.length) {
@@ -51,7 +51,7 @@ function restoreIpAddresses(s: string): string[] {
     // 如果当前数字为 0，那么这一段 IP 地址只能为 0
     if (s[segStart] === "0") {
       segments[segId] = 0;
-      backtrack(s, segId + 1, segStart + 1);
+      dfs(s, segId + 1, segStart + 1);
     }
 
     // 一般情况，枚举每一种可能性并递归
@@ -60,7 +60,7 @@ function restoreIpAddresses(s: string): string[] {
       addr = addr * 10 + parseInt(s[i]);
       if (addr > 0 && addr <= 255) {
         segments[segId] = addr;
-        backtrack(s, segId + 1, i + 1);
+        dfs(s, segId + 1, i + 1);
       } else {
         break;
       }

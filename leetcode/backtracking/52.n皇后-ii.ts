@@ -52,15 +52,16 @@
  */
 
 // @lc code=start
+// backtracking
 var totalNQueens = function (n: number): number {
   const obj: Record<string, number> = {};
   const add: number[] = [];
   const sub: number[] = [];
   let ret = 0;
-  backtrack(0);
+  dfs(0);
   return ret;
 
-  function backtrack(row: number) {
+  function dfs(row: number) {
     if (row === n) {
       ret++;
       return;
@@ -79,7 +80,7 @@ var totalNQueens = function (n: number): number {
       add.push(row + i);
       sub.push(row - i);
 
-      backtrack(row + 1);
+      dfs(row + 1);
 
       obj[row] = -1;
       add.pop();

@@ -54,10 +54,10 @@
 var getPermutation = function (n: number, k: number): string {
   const ret: string[] = [];
   const used: Record<string, boolean> = {};
-  backtrack("");
+  dfs("");
   return ret[k - 1];
 
-  function backtrack(str: string) {
+  function dfs(str: string) {
     if (str.length === n) {
       ret.push(str);
       return;
@@ -69,7 +69,7 @@ var getPermutation = function (n: number, k: number): string {
       str += String(i);
       used[i] = true;
 
-      backtrack(str);
+      dfs(str);
 
       str = str.substr(0, str.length - 1);
       used[i] = false;

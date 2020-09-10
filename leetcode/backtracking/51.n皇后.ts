@@ -53,18 +53,18 @@
  */
 
 // @lc code=start
-// backtrack
+// backtracking
 var solveNQueens = function (n: number): string[][] {
   const ret: string[][] = [];
-  backtrack(n, [], ret);
+  dfs(n, [], ret);
   return ret;
 
-  function backtrack(n: number, subset: number[], ret: string[][]) {
+  function dfs(n: number, subset: number[], ret: string[][]) {
     if (subset.length === n) {
       ret.push(
         subset.map((i) => {
           let strArr: string[] = new Array(n).fill(".");
-          strArr.splice(i, 1, "Q"); // ! strArr 的 i 位置替换为 `Q`
+          strArr.splice(i, 1, "Q"); // strArr 的 i 位置替换为 `Q`
           return strArr.join("");
         })
       );
@@ -74,7 +74,7 @@ var solveNQueens = function (n: number): string[][] {
     for (let i = 0; i < n; i++) {
       if (isValid(subset, i)) {
         subset.push(i);
-        backtrack(n, subset, ret);
+        dfs(n, subset, ret);
         subset.pop();
       }
     }
@@ -92,16 +92,16 @@ var solveNQueens = function (n: number): string[][] {
   }
 };
 
-// backtrack2
+// backtracking2
 var solveNQueens = function (n: number): string[][] {
   const obj: Record<string, number> = {};
   const add: number[] = [];
   const sub: number[] = [];
   const ret: string[][] = [];
-  backtrack(0);
+  dfs(0);
   return ret;
 
-  function backtrack(row: number) {
+  function dfs(row: number) {
     if (row === n) {
       const arr: string[] = [];
       for (const key in obj) {
@@ -124,7 +124,7 @@ var solveNQueens = function (n: number): string[][] {
       add.push(row + i);
       sub.push(row - i);
 
-      backtrack(row + 1);
+      dfs(row + 1);
 
       obj[row] = -1;
       add.pop();

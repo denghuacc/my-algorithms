@@ -73,7 +73,7 @@ function solveSudoku(board: string[][]): void {
     }
   }
 
-  backtrack(0, 0);
+  dfs(0, 0);
 
   function placeNumber(d: number, row: number, col: number) {
     const idx = Math.floor(row / n) * n + Math.floor(col / n);
@@ -83,7 +83,7 @@ function solveSudoku(board: string[][]): void {
     board[row][col] = String(d);
   }
 
-  function backtrack(row: number, col: number) {
+  function dfs(row: number, col: number) {
     if (board[row][col] === ".") {
       for (let d = 1; d < 10; d++) {
         if (couldPlace(d, row, col)) {
@@ -106,8 +106,8 @@ function solveSudoku(board: string[][]): void {
     if (col === N - 1 && row === N - 1) {
       sudokuSolved = true;
     } else {
-      if (col === N - 1) backtrack(row + 1, 0);
-      else backtrack(row, col + 1);
+      if (col === N - 1) dfs(row + 1, 0);
+      else dfs(row, col + 1);
     }
   }
 

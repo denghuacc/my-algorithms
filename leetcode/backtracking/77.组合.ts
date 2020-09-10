@@ -34,10 +34,10 @@
 // backtracking
 var combine = function (n: number, k: number): number[][] {
   const ret: number[][] = [];
-  backtrack(1, []);
+  dfs(1, []);
   return ret;
 
-  function backtrack(cur: number, subset: number[]) {
+  function dfs(cur: number, subset: number[]) {
     if (subset.length === k) {
       ret.push(subset.slice());
       return;
@@ -45,7 +45,7 @@ var combine = function (n: number, k: number): number[][] {
 
     for (let i = cur; i < n + 1; i++) {
       subset.push(i);
-      backtrack(i + 1, subset);
+      dfs(i + 1, subset);
       subset.pop();
     }
   }

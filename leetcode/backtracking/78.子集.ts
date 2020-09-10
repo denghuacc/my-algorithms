@@ -59,17 +59,17 @@ var subsets = function (nums: number[]): number[][] {
   const ret: number[][] = [];
   let k: number;
   for (k = 0; k < n + 1; k++) {
-    backtrack(0, [], nums);
+    dfs(0, [], nums);
   }
   return ret;
 
-  function backtrack(first: number, cur: number[], nums: number[]) {
+  function dfs(first: number, cur: number[], nums: number[]) {
     if (cur.length === k) {
       ret.push(cur.slice());
     }
     for (let i = first; i < n; i++) {
       cur.push(nums[i]);
-      backtrack(i + 1, cur, nums);
+      dfs(i + 1, cur, nums);
       cur.pop();
     }
   }
