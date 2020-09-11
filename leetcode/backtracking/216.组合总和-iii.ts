@@ -40,31 +40,31 @@
 // backtracking
 var combinationSum3 = function (k: number, n: number): number[][] {
   const ret: number[][] = [];
-  const path: number[] = [];
-  dfs(k, n, 1, path, ret);
+  const subset: number[] = [];
+  dfs(k, n, 1, subset, ret);
   return ret;
 
   function dfs(
     k: number,
     residue: number,
     start: number,
-    path: number[],
+    subset: number[],
     ret: number[][]
   ) {
     if (residue < 0) return;
 
     if (k === 0) {
       if (residue === 0) {
-        ret.push(path.slice());
+        ret.push(subset.slice());
         return;
       }
       return;
     }
 
     for (let i = start; i <= 9; i++) {
-      path.push(i);
-      dfs(k - 1, residue - i, i + 1, path, ret);
-      path.pop();
+      subset.push(i);
+      dfs(k - 1, residue - i, i + 1, subset, ret);
+      subset.pop();
     }
   }
 };
@@ -77,15 +77,15 @@ var combinationSum3 = function (k: number, n: number): number[][] {
   if (k <= 0 || n <= 0 || k >= n) return ret;
   if (n > ((19 - k) * k) / 2) return ret;
 
-  const path: number[] = [];
-  dfs(k, n, 1, path, ret);
+  const subset: number[] = [];
+  dfs(k, n, 1, subset, ret);
   return ret;
 
   function dfs(
     k: number,
     residue: number,
     start: number,
-    path: number[],
+    subset: number[],
     ret: number[][]
   ) {
     // if (residue < 0) return;
@@ -93,7 +93,7 @@ var combinationSum3 = function (k: number, n: number): number[][] {
 
     if (k === 0) {
       if (residue === 0) {
-        ret.push(path.slice());
+        ret.push(subset.slice());
         return;
       }
       return;
@@ -103,10 +103,67 @@ var combinationSum3 = function (k: number, n: number): number[][] {
     for (let i = start; i <= 10 - k; i++) {
       if (residue - i < 0) break; // 剪枝
 
-      path.push(i);
-      dfs(k - 1, residue - i, i + 1, path, ret);
-      path.pop();
+      subset.push(i);
+      dfs(k - 1, residue - i, i + 1, subset, ret);
+      subset.pop();
     }
+  }
+};
+
+// bit manipulation enumeration
+var combinationSum3 = function (k: number, n: number): number[][] {
+  const ret: number[][] = [];
+  let subset: number[] = [];
+
+  for (let i = 0; i < 1 << 9; i++) {
+    if (check(i, k, n)) {
+      ret.push(subset);
+    }
+  }
+
+  return ret;
+
+  function check(mask: number, k: number, n: number): boolean {
+    subset = [];
+    for (let i = 0; i < 9; i++) {
+      if ((1 << i) & mask) {
+        subset.push(i + 1);
+      }
+    }
+    return (
+      subset.length === k && subset.reduce((acc, val) => acc + val, 0) === n
+    );
+  }
+};
+
+// combination enumeration
+var combinationSum3 = function (k: number, n: number): number[][] {
+  const ret: number[][] = [];
+  let subset: number[] = [];
+  dfs(1, 9, k, n, ret);
+  return ret;
+
+  function dfs(
+    cur: number,
+    len: number,
+    k: number,
+    n: number,
+    ret: number[][]
+  ): void {
+    if (subset.length + (len - cur + 1) < k || subset.length > k) {
+      return;
+    }
+    if (
+      subset.length === k &&
+      subset.reduce((acc, val) => acc + val, 0) === n
+    ) {
+      ret.push(subset.slice());
+      return;
+    }
+    subset.push(cur);
+    dfs(cur + 1, len, k, n, ret);
+    subset.pop();
+    dfs(cur + 1, len, k, n, ret);
   }
 };
 // @lc code=end
