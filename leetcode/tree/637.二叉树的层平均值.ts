@@ -77,13 +77,9 @@ var averageOfLevels = function (root: TreeNode | null): number[] {
 
   // 求数组的平均值
   function getAverageOfArray(arr: number[]): number {
-    let total = 0;
-    let len = arr.length;
-    for (const num of arr) total += num;
-    return total / len;
+    return arr.reduce((acc, val) => acc + val, 0) / arr.length;
   }
 };
-// @lc code=end
 
 // iterative bfs
 var averageOfLevels = function (root: TreeNode | null): number[] {
@@ -95,17 +91,17 @@ var averageOfLevels = function (root: TreeNode | null): number[] {
   while (queue.length) {
     const size = queue.length;
     let sum = 0;
-    let count = 0;
+    // let count = 0; // 层级节点数 或者可以直接使用 size
 
     // 一次性全部取出每层的所有节点
     for (let i = 0; i < size; i++) {
       const node = queue.shift()!;
       sum += node.val;
-      count += 1;
+      // count += 1;
       if (node.left) queue.push(node.left);
       if (node.right) queue.push(node.right);
     }
-    ret.push(sum / count);
+    ret.push(sum / size);
   }
 
   return ret;
@@ -137,3 +133,4 @@ var averageOfLevels = function (root: TreeNode | null): number[] {
     dfs(node.right, i + 1);
   }
 };
+// @lc code=end
