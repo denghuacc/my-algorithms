@@ -11,7 +11,7 @@
  * Dislikes: 0
  * Total Accepted:    54.5K
  * Total Submissions: 131.9K
- * Testcase Example:  '[["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]]\n"ABCCED"'
+ * Testcase Example:  '[["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]]\m"ABCCED"'
  *
  * 给定一个二维网格和一个单词，找出该单词是否存在于网格中。
  *
@@ -48,23 +48,22 @@
 // @lc code=start
 // backtracking
 var exist = function (board: string[][], word: string): boolean {
-  let m = board.length;
-  let n = board[0].length;
-  if (m === 0) return false;
-  // const marked = new Array(m).fill(new Array(n).fill(false))
-  const marked = new Array(m)
-    .fill(0)
-    .map(() => new Array<boolean>(n).fill(false));
+  let n = board.length;
+  if (n === 0) return false;
+  let m = board[0].length;
+  const marked: boolean[][] = Array.from(new Array(n), () =>
+    new Array(m).fill(false)
+  );
 
   let direction = [
-    [-1, 0],
-    [0, -1],
-    [0, 1],
-    [1, 0],
+    [0, -1], // 上
+    [0, 1], // 下
+    [-1, 0], // 左
+    [1, 0], // 右
   ];
 
-  for (let i = 0; i < m; i++) {
-    for (let j = 0; j < n; j++) {
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < m; j++) {
       if (board[i][j] === word[0]) {
         if (dfs(i, j, 0)) {
           return true;
@@ -82,7 +81,7 @@ var exist = function (board: string[][], word: string): boolean {
 
     if (board[i][j] === word[start]) {
       marked[i][j] = true;
-      for (let k = 0; k < 4; k++) {
+      for (let k = 0; k < direction.length; k++) {
         let newX = i + direction[k][0];
         let newY = j + direction[k][1];
         if (inArea(newX, newY) && !marked[newX][newY]) {
@@ -97,7 +96,7 @@ var exist = function (board: string[][], word: string): boolean {
   }
 
   function inArea(x: number, y: number) {
-    return x >= 0 && x < m && y >= 0 && y < n;
+    return x >= 0 && x < n && y >= 0 && y < m;
   }
 };
 // @lc code=end
