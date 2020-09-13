@@ -14,10 +14,9 @@ export function binarySearch<T = number>(
   const sortedArray = quickSort(array); // 排序
   let low = 0; // 最小值索引
   let high = array.length - 1; // 最大值索引
-  let mid; // 中间值索引
 
   while (low <= high) {
-    const mid = Math.floor((low + high) / 2); // or left + Math.floor((right - left) / 2)
+    const mid = Math.floor((low + high) / 2); // or low + Math.floor((high - low) / 2)
     const element = sortedArray[mid];
 
     if (compareFn(element, target) === Compare.LESS_THAN) {
