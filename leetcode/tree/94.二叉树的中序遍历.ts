@@ -59,7 +59,7 @@ var inorderTraversal = function (root: TreeNode | null): number[] {
   }
 };
 
-// iterative
+// iterative + stack
 var inorderTraversal = function (root: TreeNode | null): number[] {
   const ret: number[] = [];
   const stack: TreeNode[] = [];
@@ -76,27 +76,31 @@ var inorderTraversal = function (root: TreeNode | null): number[] {
   return ret;
 };
 
-// 线索二叉树
+// morris 线索二叉树
 var inorderTraversal = function (root: TreeNode | null): number[] {
   const ret: number[] = [];
   let cur = root;
-  let prev: TreeNode | null;
+  let prev: TreeNode | null = null;
 
   while (cur) {
+    // 如果没有左孩子，则直接访问右孩子
     if (!cur.left) {
       ret.push(cur.val);
       cur = cur.right!;
     } else {
+      // prev 节点就是当前 root 节点向左走一步，然后一直向右走至无法走为止
       prev = cur.left;
       while (prev.right) {
         prev = prev.right;
       }
+
       prev.right = cur;
-      let temp = cur;
+      let tmp = cur;
       cur = cur.left;
-      temp.left = null;
+      tmp.left = null;
     }
   }
+
   return ret;
 };
 // @lc code=end
