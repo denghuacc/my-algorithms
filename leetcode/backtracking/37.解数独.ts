@@ -49,10 +49,11 @@
  */
 // backtracking
 function solveSudoku(board: string[][]): void {
-  let n = 3;
-  let N = n * n;
-  let sudokuSolved = false;
+  const n = 3;
+  const N = n * n;
+  let sudokuSolved = false; // 是否完成
 
+  // 记录表 -> 类型[索引][数字] 值大于零表示该索引位置已放置该数字
   const rows: number[][] = Array.from(new Array(N), () =>
     new Array(N + 1).fill(0)
   );
@@ -67,14 +68,15 @@ function solveSudoku(board: string[][]): void {
     for (let j = 0; j < N; j++) {
       const num = board[i][j];
       if (num !== ".") {
-        const d = Number(num);
-        placeNumber(d, i, j);
+        const digit = Number(num);
+        placeNumber(digit, i, j);
       }
     }
   }
 
   dfs(0, 0);
 
+  // 放置并记录数字
   function placeNumber(d: number, row: number, col: number) {
     const idx = Math.floor(row / n) * n + Math.floor(col / n);
     rows[row][d]++;
@@ -89,7 +91,7 @@ function solveSudoku(board: string[][]): void {
         if (couldPlace(d, row, col)) {
           placeNumber(d, row, col);
           placeNextNumber(row, col);
-          if (!sudokuSolved) removeNumber(d, row, col);
+          if (!sudokuSolved) removeNumber(d, row, col); // 回退删除已放置的数字
         }
       }
     } else {
@@ -97,20 +99,26 @@ function solveSudoku(board: string[][]): void {
     }
   }
 
+  // 是否可以放置数字
   function couldPlace(d: number, row: number, col: number): boolean {
     const idx = Math.floor(row / n) * n + Math.floor(col / n);
     return rows[row][d] + columns[col][d] + boxes[idx][d] === 0;
   }
 
+  // 放置下一个数字
   function placeNextNumber(row: number, col: number) {
     if (col === N - 1 && row === N - 1) {
       sudokuSolved = true;
     } else {
-      if (col === N - 1) dfs(row + 1, 0);
-      else dfs(row, col + 1);
+      if (col === N - 1) {
+        dfs(row + 1, 0);
+      } else {
+        dfs(row, col + 1);
+      }
     }
   }
 
+  // 删除并记录数字
   function removeNumber(d: number, row: number, col: number) {
     const idx = Math.floor(row / n) * n + Math.floor(col / n);
     rows[row][d]--;
