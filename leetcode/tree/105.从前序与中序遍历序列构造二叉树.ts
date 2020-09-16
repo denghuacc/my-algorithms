@@ -47,29 +47,59 @@ class TreeNode {
 }
 
 // @lc code=start
-// recursive
+// recursive 👌
 var buildTree = function (
   preorder: number[],
   inorder: number[]
 ): TreeNode | null {
   const map: Map<number, number> = new Map();
-  let idx = 0;
-  let preIdx = 0;
-  for (const num of inorder) {
-    map.set(num, idx++);
+  let preIdx = 0; // 前序指针
+  // 中序索引映射 val -> index
+  for (let i = 0; i < inorder.length; i++) {
+    map.set(inorder[i], i);
   }
 
   return build(0, inorder.length);
 
   function build(left: number, right: number): TreeNode | null {
     if (left === right) return null;
-    const rootVal = preorder[preIdx];
-    const root = new TreeNode(rootVal); // 根节点
-    const index = map.get(rootVal)!;
-    preIdx++;
-    root.left = build(left, index);
-    root.right = build(index + 1, right);
+    const rootVal = preorder[preIdx]; // 根节点的值
+    const root = new TreeNode(rootVal); // 创建根节点
+    const index = map.get(rootVal)!; // 根节点在中序的索引值
+    preIdx++; // 递增，下一个是左子树
+    root.left = build(left, index); // 根据中序遍历创建左子树
+    root.right = build(index + 1, right); // 根据中序遍历创建右子树
     return root;
   }
+};
+
+// iterative 😥
+var buildTree = function (
+  preorder: number[],
+  inorder: number[]
+): TreeNode | null {
+  if (!preorder.length || !inorder.length) return null;
+  const root = new TreeNode(preorder[0]);
+  const stack: TreeNode[] = [];
+  stack.push(root);
+  let inIdx = 0; // 中序指针
+
+  for (let i = 1; i < preorder.length; i++) {
+    let preorderVal = preorder[i];
+    let node = stack[stack.length - 1];
+    if (node.val !== inorder[inIdx]) {
+      node.left = new TreeNode(preorderVal); // 创建左子树
+      stack.push(node.left);
+    } else {
+      while (stack.length && stack[stack.length - 1].val === inorder[inIdx]) {
+        node = stack.pop()!; // 回溯，知道找到父节点 node 为止
+        inIdx++;
+      }
+      node.right = new TreeNode(preorderVal); // 创建右子树
+      stack.push(node.right);
+    }
+  }
+
+  return root;
 };
 // @lc code=end
