@@ -35,34 +35,29 @@
 // backtracking
 var generateParenthesis = function (n: number): string[] {
   const ret: string[] = [];
-  dfs(ret, "", 0, 0, n);
+  dfs("", 0, 0);
   return ret;
 
-  function dfs(
-    ret: string[],
-    cur: string,
-    open: number,
-    close: number,
-    max: number
-  ) {
-    if (cur.length === max * 2) {
-      ret.push(cur);
+  function dfs(subset: string, open: number, close: number) {
+    if (subset.length === n * 2) {
+      ret.push(subset);
       return;
     }
 
-    if (open < max) {
-      cur += "(";
-      dfs(ret, cur, open + 1, close, max);
-      cur = cur.slice(0, -1); // remove last char
+    if (open < n) {
+      subset += "(";
+      dfs(subset, open + 1, close);
+      subset = subset.slice(0, -1); // remove last char
     }
 
     if (open > close) {
-      cur += ")";
-      dfs(ret, cur, open, close + 1, max);
-      cur = cur.slice(0, -1);
+      subset += ")";
+      dfs(subset, open, close + 1);
+      subset = subset.slice(0, -1);
     }
   }
 };
+// @lc code=end
 
 // recursive
 var generateParenthesis = function (n: number): string[] {
@@ -89,4 +84,3 @@ var generateParenthesis = function (n: number): string[] {
     return ret;
   }
 };
-// @lc code=end

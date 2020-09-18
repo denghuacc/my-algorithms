@@ -56,10 +56,11 @@
 // backtracking
 var solveNQueens = function (n: number): string[][] {
   const ret: string[][] = [];
-  dfs(n, [], ret);
+  if (n === 0) return ret;
+  dfs([]);
   return ret;
 
-  function dfs(n: number, subset: number[], ret: string[][]) {
+  function dfs(subset: number[]) {
     if (subset.length === n) {
       ret.push(
         subset.map((i) => {
@@ -74,7 +75,7 @@ var solveNQueens = function (n: number): string[][] {
     for (let i = 0; i < n; i++) {
       if (isValid(subset, i)) {
         subset.push(i);
-        dfs(n, subset, ret);
+        dfs(subset);
         subset.pop();
       }
     }
@@ -91,6 +92,7 @@ var solveNQueens = function (n: number): string[][] {
     return true;
   }
 };
+// @lc code=end
 
 // backtracking2
 var solveNQueens = function (n: number): string[][] {
@@ -132,4 +134,3 @@ var solveNQueens = function (n: number): string[][] {
     }
   }
 };
-// @lc code=end

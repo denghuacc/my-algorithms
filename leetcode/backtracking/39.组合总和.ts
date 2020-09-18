@@ -53,33 +53,27 @@ var combinationSum = function (
   target: number
 ): number[][] {
   const ret: number[][] = [];
-  const len = candidates.length;
+  if (candidates.length === 0) return ret;
   candidates.sort((a, b) => a - b); // 排序是剪枝的前提
-  dfs(candidates, len, target, 0, [], ret);
+  dfs([], target, 0);
   return ret;
 
-  function dfs(
-    candidates: number[],
-    len: number,
-    residue: number,
-    begin: number,
-    subset: number[],
-    ret: number[][]
-  ) {
+  function dfs(subset: number[], residue: number, idx: number) {
     // 由于进入更深层的时候，小于 0 的部分被剪枝，因此递归终止条件值只判断等于 0 的情况
     if (residue === 0) {
       ret.push(subset.slice());
       return;
     }
 
-    for (let i = begin; i < len; i++) {
+    for (let i = idx; i < candidates.length; i++) {
       if (residue - candidates[i] < 0) break; // 剪枝
       subset.push(candidates[i]);
-      dfs(candidates, len, residue - candidates[i], i, subset, ret);
+      dfs(subset, residue - candidates[i], i);
       subset.pop();
     }
   }
 };
+// @lc code=end
 
 // backtracking2
 var combinationSum = function (
@@ -87,6 +81,7 @@ var combinationSum = function (
   target: number
 ): number[][] {
   const ret: number[][] = [];
+  if (candidates.length === 0) return ret;
   dfs(target, [], 0);
   return ret;
 
@@ -105,4 +100,3 @@ var combinationSum = function (
     }
   }
 };
-// @lc code=end

@@ -54,36 +54,29 @@ var combinationSum2 = function (
   target: number
 ): number[][] {
   const ret: number[][] = [];
-  const len = candidates.length;
-  if (len === 0) return ret;
-  candidates.sort((a, b) => a - b);
-  dfs(candidates, len, 0, target, [], ret);
+  if (candidates.length === 0) return ret;
+  candidates.sort((a, b) => a - b); // sort
+  dfs([], target, 0);
   return ret;
 
-  function dfs(
-    candidates: number[],
-    len: number,
-    begin: number,
-    residue: number,
-    subset: number[],
-    ret: number[][]
-  ) {
+  function dfs(subset: number[], residue: number, idx: number) {
     if (residue === 0) {
       ret.push(subset.slice());
       return;
     }
 
-    for (let i = begin; i < len; i++) {
+    for (let i = idx; i < candidates.length; i++) {
       if (residue - candidates[i] < 0) break;
-      if (i > begin && candidates[i] === candidates[i - 1]) {
+      if (i > idx && candidates[i] === candidates[i - 1]) {
         continue;
       }
       subset.push(candidates[i]);
-      dfs(candidates, len, i + 1, residue - candidates[i], subset, ret);
+      dfs(subset, residue - candidates[i], i + 1);
       subset.pop();
     }
   }
 };
+// @lc code=end
 
 // recursive
 var combinationSum2 = function (
@@ -91,6 +84,7 @@ var combinationSum2 = function (
   target: number
 ): number[][] {
   const ret: number[][] = [];
+  if (candidates.length === 0) return ret;
   const freq: [number, number][] = []; // [数字，出现频率][]
   const subset: number[] = [];
   candidates.sort((a, b) => a - b);
@@ -111,7 +105,7 @@ var combinationSum2 = function (
     if (rest === 0) {
       ret.push(subset.slice());
       return;
-    } 
+    }
     if (pos === freq.length || rest < freq[pos][0]) return;
 
     dfs(pos + 1, rest);
@@ -126,4 +120,3 @@ var combinationSum2 = function (
     }
   }
 };
-// @lc code=end

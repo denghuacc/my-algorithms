@@ -34,24 +34,19 @@
 // backtracking
 var permute = function (nums: number[]): number[][] {
   const ret: number[][] = [];
-  const output: number[] = nums.slice();
+  const subset: number[] = nums.slice();
   const len = nums.length;
 
-  dfs(len, output, ret, 0);
+  dfs(subset, 0);
   return ret;
 
-  function dfs(
-    len: number,
-    output: number[],
-    ret: number[][],
-    first: number
-  ) {
-    if (first === len) ret.push(output.slice());
+  function dfs(subset: number[], idx: number) {
+    if (idx === len) ret.push(subset.slice());
 
-    for (let i = first; i < len; i++) {
-      swap(output, first, i);
-      dfs(len, output, ret, first + 1);
-      swap(output, first, i);
+    for (let i = idx; i < len; i++) {
+      swap(subset, idx, i);
+      dfs(subset, idx + 1);
+      swap(subset, idx, i); // 回退
     }
   }
 

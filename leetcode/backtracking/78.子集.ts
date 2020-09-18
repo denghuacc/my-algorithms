@@ -42,11 +42,11 @@ var subsets = function (nums: number[]): number[][] {
 
   for (const num of nums) {
     const set: number[][] = [];
-    for (const cur of ret) {
-      set.push(cur.concat(num));
+    for (const subset of ret) {
+      set.push(subset.concat(num));
     }
-    for (const cur of set) {
-      ret.push(cur);
+    for (const subset of set) {
+      ret.push(subset);
     }
   }
 
@@ -59,18 +59,18 @@ var subsets = function (nums: number[]): number[][] {
   const ret: number[][] = [];
   let k: number;
   for (k = 0; k < n + 1; k++) {
-    dfs(0, [], nums);
+    dfs([], 0);
   }
   return ret;
 
-  function dfs(first: number, cur: number[], nums: number[]) {
-    if (cur.length === k) {
-      ret.push(cur.slice());
+  function dfs(subset: number[], idx: number) {
+    if (subset.length === k) {
+      ret.push(subset.slice());
     }
-    for (let i = first; i < n; i++) {
-      cur.push(nums[i]);
-      dfs(i + 1, cur, nums);
-      cur.pop();
+    for (let i = idx; i < n; i++) {
+      subset.push(nums[i]);
+      dfs(subset, i + 1);
+      subset.pop();
     }
   }
 };

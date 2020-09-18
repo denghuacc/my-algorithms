@@ -71,7 +71,7 @@ var getPermutation = function (n: number, k: number): string {
 
       dfs(str);
 
-      str = str.substr(0, str.length - 1);
+      str = str.slice(0, -1);
       used[i] = false;
     }
   }

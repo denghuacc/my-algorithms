@@ -34,10 +34,10 @@
 // backtracking
 var combine = function (n: number, k: number): number[][] {
   const ret: number[][] = [];
-  dfs(1, []);
+  dfs([], 1);
   return ret;
 
-  function dfs(cur: number, subset: number[]) {
+  function dfs(subset: number[], cur: number) {
     if (subset.length === k) {
       ret.push(subset.slice());
       return;
@@ -45,7 +45,7 @@ var combine = function (n: number, k: number): number[][] {
 
     for (let i = cur; i < n + 1; i++) {
       subset.push(i);
-      dfs(i + 1, subset);
+      dfs(subset, i + 1);
       subset.pop();
     }
   }
@@ -54,10 +54,10 @@ var combine = function (n: number, k: number): number[][] {
 // backtracking2
 var combine = function (n: number, k: number): number[][] {
   const ret: number[][] = [];
-  dfs(1, n, k, []);
+  dfs([], 1);
   return ret;
 
-  function dfs(cur: number, n: number, k: number, subset: number[]) {
+  function dfs(subset: number[], cur: number) {
     // 剪枝：subset 长度加上区间 [cur, n] 的长度小于 k
     // 不可能构造出长度为 k 的 subset
     if (subset.length + (n - cur + 1) < k) return;
@@ -68,8 +68,8 @@ var combine = function (n: number, k: number): number[][] {
       return;
     }
 
-    dfs(cur + 1, n, k, [...subset, cur]); // 考虑选择当前位置
-    dfs(cur + 1, n, k, subset); // 考虑不选择当前位置
+    dfs([...subset, cur], cur + 1); // 考虑选择当前位置
+    dfs(subset, cur + 1); // 考虑不选择当前位置
   }
 };
 

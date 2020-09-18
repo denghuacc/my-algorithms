@@ -74,7 +74,7 @@ var exist = function (board: string[][], word: string): boolean {
 
   return false;
 
-  function dfs(i: number, j: number, start: number) {
+  function dfs(i: number, j: number, start: number): boolean {
     if (start === word.length - 1) {
       return board[i][j] === word[start];
     }

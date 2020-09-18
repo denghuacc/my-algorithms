@@ -38,10 +38,10 @@ function findSubsequences(nums: number[]): number[][] {
   const ret: number[][] = [];
   const subset: number[] = [];
 
-  dfs(nums, 0, -Infinity);
+  dfs(0, -Infinity);
   return ret;
 
-  function dfs(nums: number[], cur: number, last: number) {
+  function dfs(cur: number, last: number) {
     if (cur === nums.length) {
       if (subset.length >= 2) {
         ret.push(subset.slice());
@@ -51,12 +51,12 @@ function findSubsequences(nums: number[]): number[][] {
 
     if (nums[cur] >= last) {
       subset.push(nums[cur]);
-      dfs(nums, cur + 1, nums[cur]);
+      dfs(cur + 1, nums[cur]);
       subset.pop();
     }
 
     if (nums[cur] !== last) {
-      dfs(nums, cur + 1, last);
+      dfs(cur + 1, last);
     }
   }
 }

@@ -37,21 +37,15 @@
 function subsetsWithDup(nums: number[]): number[][] {
   nums.sort((a, b) => a - b);
   const ret: number[][] = [[]];
-  dfs(nums, 0, nums.length, [], ret);
+  dfs([], 0);
   return ret;
 
-  function dfs(
-    nums: number[],
-    start: number,
-    end: number,
-    subset: number[],
-    ret: number[][]
-  ) {
-    for (let i = start; i < end; i++) {
-      if (i > start && nums[i] === nums[i - 1]) continue;
+  function dfs(subset: number[], idx: number) {
+    for (let i = idx; i < nums.length; i++) {
+      if (i > idx && nums[i] === nums[i - 1]) continue;
       subset.push(nums[i]);
       ret.push(subset.slice());
-      dfs(nums, i + 1, end, subset, ret);
+      dfs(subset, i + 1);
       subset.pop();
     }
   }

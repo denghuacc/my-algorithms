@@ -40,17 +40,10 @@
 // backtracking
 var combinationSum3 = function (k: number, n: number): number[][] {
   const ret: number[][] = [];
-  const subset: number[] = [];
-  dfs(k, n, 1, subset, ret);
+  dfs([], n, 1, k);
   return ret;
 
-  function dfs(
-    k: number,
-    residue: number,
-    start: number,
-    subset: number[],
-    ret: number[][]
-  ) {
+  function dfs(subset: number[], residue: number, idx: number, k: number) {
     if (residue < 0) return;
 
     if (k === 0) {
@@ -61,13 +54,14 @@ var combinationSum3 = function (k: number, n: number): number[][] {
       return;
     }
 
-    for (let i = start; i <= 9; i++) {
+    for (let i = idx; i <= 9; i++) {
       subset.push(i);
-      dfs(k - 1, residue - i, i + 1, subset, ret);
+      dfs(subset, residue - i, i + 1, k - 1);
       subset.pop();
     }
   }
 };
+// @lc code=end
 
 // backtracking + optimize
 var combinationSum3 = function (k: number, n: number): number[][] {
@@ -77,17 +71,10 @@ var combinationSum3 = function (k: number, n: number): number[][] {
   if (k <= 0 || n <= 0 || k >= n) return ret;
   if (n > ((19 - k) * k) / 2) return ret;
 
-  const subset: number[] = [];
-  dfs(k, n, 1, subset, ret);
+  dfs([], k, n, 1);
   return ret;
 
-  function dfs(
-    k: number,
-    residue: number,
-    start: number,
-    subset: number[],
-    ret: number[][]
-  ) {
+  function dfs(subset: number[], k: number, residue: number, start: number) {
     // if (residue < 0) return;
     if (10 - start < k) return;
 
@@ -104,7 +91,7 @@ var combinationSum3 = function (k: number, n: number): number[][] {
       if (residue - i < 0) break; // 剪枝
 
       subset.push(i);
-      dfs(k - 1, residue - i, i + 1, subset, ret);
+      dfs(subset, k - 1, residue - i, i + 1);
       subset.pop();
     }
   }
@@ -140,16 +127,10 @@ var combinationSum3 = function (k: number, n: number): number[][] {
 var combinationSum3 = function (k: number, n: number): number[][] {
   const ret: number[][] = [];
   let subset: number[] = [];
-  dfs(1, 9, k, n, ret);
+  dfs(1, 9);
   return ret;
 
-  function dfs(
-    cur: number,
-    len: number,
-    k: number,
-    n: number,
-    ret: number[][]
-  ): void {
+  function dfs(cur: number, len: number): void {
     if (subset.length + (len - cur + 1) < k || subset.length > k) {
       return;
     }
@@ -161,9 +142,8 @@ var combinationSum3 = function (k: number, n: number): number[][] {
       return;
     }
     subset.push(cur);
-    dfs(cur + 1, len, k, n, ret);
+    dfs(cur + 1, len);
     subset.pop();
-    dfs(cur + 1, len, k, n, ret);
+    dfs(cur + 1, len);
   }
 };
-// @lc code=end

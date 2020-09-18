@@ -33,6 +33,9 @@
 // @lc code=start
 // backtracking
 var letterCombinations = function (digits: string): string[] {
+  const n = digits.length;
+  const ret: string[] = [];
+  if (!n) return ret;
   const map = new Map([
     ["2", "abc"],
     ["3", "def"],
@@ -44,22 +47,54 @@ var letterCombinations = function (digits: string): string[] {
     ["9", "wxyz"],
   ]);
 
+  dfs("", 0);
+  return ret;
+
+  function dfs(subset: string, idx: number) {
+    if (idx === digits.length) {
+      ret.push(subset);
+      return;
+    }
+
+    const digit = digits[idx];
+    const letters = map.get(digit)!;
+    for (let i = 0; i < letters.length; i++) {
+      subset += letters[i];
+      dfs(subset, idx + 1);
+      subset = subset.slice(0, -1);
+    }
+  }
+};
+
+// backtracking2
+var letterCombinations = function (digits: string): string[] {
   const ret: string[] = [];
+  if (!digits.length) return ret;
+  const map = new Map([
+    ["2", "abc"],
+    ["3", "def"],
+    ["4", "ghi"],
+    ["5", "jkl"],
+    ["6", "mno"],
+    ["7", "pqrs"],
+    ["8", "tuv"],
+    ["9", "wxyz"],
+  ]);
 
   if (digits.length !== 0) dfs("", digits);
   return ret;
 
-  function dfs(combination: string, next: string) {
-    if (next.length === 0) {
-      ret.push(combination);
+  function dfs(subset: string, digits: string) {
+    if (digits.length === 0) {
+      ret.push(subset);
       return;
     }
 
-    const digit = next.substring(0, 1);
+    const digit = digits.substring(0, 1);
     const letters = map.get(digit)!;
     for (let i = 0; i < letters.length; i++) {
       const letter = letters.substring(i, i + 1);
-      dfs(combination + letter, next.substring(1));
+      dfs(subset + letter, digits.substring(1));
     }
   }
 };

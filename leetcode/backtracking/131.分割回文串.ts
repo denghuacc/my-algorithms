@@ -28,33 +28,26 @@
  *
  */
 
-// @lc code=start
+// @lc code=idx
 // backtracking
 var partition = function (s: string): string[][] {
   const n = s.length;
   const ret: string[][] = [];
   if (n === 0) return ret;
-  const stack: string[] = [];
-  dfs(s, 0, n, stack, ret);
+  dfs([], 0);
   return ret;
 
-  function dfs(
-    s: string,
-    start: number,
-    end: number,
-    path: string[],
-    ret: string[][]
-  ) {
-    if (start === end) {
-      ret.push(path.slice());
+  function dfs(subset: string[], idx: number) {
+    if (idx === n) {
+      ret.push(subset.slice());
       return;
     }
 
-    for (let i = start; i < n; i++) {
-      if (!checkPalindrome(s, start, i)) continue;
-      path.push(s.substring(start, i + 1));
-      dfs(s, i + 1, end, path, ret);
-      path.pop();
+    for (let i = idx; i < n; i++) {
+      if (!checkPalindrome(s, idx, i)) continue;
+      subset.push(s.slice(idx, i + 1));
+      dfs(subset, i + 1);
+      subset.pop();
     }
   }
 
@@ -73,7 +66,6 @@ var partition = function (s: string): string[][] {
   const n = s.length;
   const ret: string[][] = [];
   if (n === 0) return ret;
-  const stack: string[] = [];
 
   // dp[i][j] -> s[i]~[j] 是否是回文
   const dp: boolean[][] = Array.from(new Array(n), () =>
@@ -91,27 +83,20 @@ var partition = function (s: string): string[][] {
     }
   }
 
-  dfs(s, 0, n, dp, stack, ret);
+  dfs([], 0);
   return ret;
 
-  function dfs(
-    s: string,
-    start: number,
-    end: number,
-    dp: boolean[][],
-    path: string[],
-    ret: string[][]
-  ) {
-    if (start === end) {
-      ret.push(path.slice());
+  function dfs(subset: string[], idx: number) {
+    if (idx === n) {
+      ret.push(subset.slice());
       return;
     }
 
-    for (let i = start; i < n; i++) {
-      if (!dp[start][i]) continue;
-      path.push(s.substring(start, i + 1));
-      dfs(s, i + 1, end, dp, path, ret);
-      path.pop();
+    for (let i = idx; i < n; i++) {
+      if (!dp[idx][i]) continue;
+      subset.push(s.slice(idx, i + 1));
+      dfs(subset, i + 1);
+      subset.pop();
     }
   }
 };
