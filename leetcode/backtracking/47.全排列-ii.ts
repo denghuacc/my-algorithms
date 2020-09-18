@@ -28,38 +28,35 @@
  */
 
 // @lc code=start
+// backtracking
 var permuteUnique = function (nums: number[]): number[][] {
-  const len = nums.length;
   const ret: number[][] = [];
-  if (len === 0) return ret;
-  nums.sort((a, b) => a - b);
-  const used: boolean[] = new Array(len).fill(false);
-  const path: number[] = [];
+  const n = nums.length;
+  if (n === 0) return ret;
+  nums.sort((a, b) => a - b); // sort
+  const used: boolean[] = new Array(n).fill(false); // 记录是否使用过
+  const subset: number[] = [];
 
-  dfs(nums, len, 0, used, path, ret);
+  dfs(subset, 0);
   return ret;
 
-  function dfs(
-    nums: number[],
-    len: number,
-    depth: number,
-    used: boolean[],
-    path: number[],
-    ret: number[][]
-  ) {
-    if (depth === len) {
-      ret.push(path.slice());
+  function dfs(subset: number[], idx: number) {
+    if (idx === n) {
+      ret.push(subset.slice());
       return;
     }
 
-    for (let i = 0; i < len; ++i) {
-      if (used[i]) continue;
+    for (let i = 0; i < n; i++) {
+      if (used[i]) continue; // 去重
       if (i > 0 && nums[i] === nums[i - 1] && !used[i - 1]) continue;
-      path.push(nums[i]);
+
+      subset.push(nums[i]);
       used[i] = true;
-      dfs(nums, len, depth + 1, used, path, ret);
+
+      dfs(subset, idx + 1);
+
       used[i] = false;
-      path.pop();
+      subset.pop();
     }
   }
 };
