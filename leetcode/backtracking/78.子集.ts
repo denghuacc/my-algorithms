@@ -35,7 +35,48 @@
  */
 
 // @lc code=start
-// recursive
+// backtracking
+var subsets = function (nums: number[]): number[][] {
+  const ret: number[][] = [];
+  const n = nums.length;
+  let k: number;
+  for (k = 0; k <= n; k++) {
+    dfs([], 0);
+  }
+  return ret;
+
+  function dfs(subset: number[], idx: number) {
+    if (subset.length === k) {
+      ret.push(subset.slice());
+    }
+    for (let i = idx; i < n; i++) {
+      subset.push(nums[i]);
+      dfs(subset, i + 1);
+      subset.pop();
+    }
+  }
+};
+
+// backtracking 2
+var subsets = function (nums: number[]): number[][] {
+  const ret: number[][] = [];
+  const n = nums.length;
+  dfs([], 0);
+  return ret;
+
+  function dfs(subset: number[], idx: number) {
+    if (idx === n) {
+      ret.push(subset.slice());
+      return;
+    }
+    subset.push(nums[idx]); // select cur idx
+    dfs(subset, idx + 1);
+    subset.pop();
+    dfs(subset, idx + 1); // not select cur idx
+  }
+};
+
+// iterative
 var subsets = function (nums: number[]): number[][] {
   const ret: number[][] = [];
   ret.push([]);
@@ -53,25 +94,21 @@ var subsets = function (nums: number[]): number[][] {
   return ret;
 };
 
-// backtracking
+// iterative 2
 var subsets = function (nums: number[]): number[][] {
-  const n = nums.length;
   const ret: number[][] = [];
-  let k: number;
-  for (k = 0; k < n + 1; k++) {
-    dfs([], 0);
-  }
-  return ret;
+  const n = nums.length;
 
-  function dfs(subset: number[], idx: number) {
-    if (subset.length === k) {
-      ret.push(subset.slice());
+  for (let mast = 0; mast < 1 << n; mast++) {
+    const subset: number[] = [];
+    for (let i = 0; i < n; i++) {
+      if (mast & (1 << i)) {
+        subset.push(nums[i]);
+      }
     }
-    for (let i = idx; i < n; i++) {
-      subset.push(nums[i]);
-      dfs(subset, i + 1);
-      subset.pop();
-    }
+    ret.push(subset);
   }
+
+  return ret;
 };
 // @lc code=end
