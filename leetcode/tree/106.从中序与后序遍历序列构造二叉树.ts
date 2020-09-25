@@ -54,8 +54,8 @@ var buildTree = function (
   postorder: number[]
 ): TreeNode | null {
   const map: Map<number, number> = new Map();
-  let postIdx = postorder.length - 1; // 后序指针
-  // 中序索引映射 val -> index
+  let postIdx = postorder.length - 1; // postorder pointer
+  // create a map: val -> inorderIndex
   for (let i = 0; i < inorder.length; i++) {
     map.set(inorder[i], i);
   }
@@ -64,13 +64,46 @@ var buildTree = function (
 
   function build(left: number, right: number): TreeNode | null {
     if (left === right) return null;
-    const rootVal = postorder[postIdx]; // 根节点的值
-    const root = new TreeNode(rootVal); // 创建根节点
-    const index = map.get(rootVal)!; // 根节点在中序的索引值
-    postIdx--; // 递减，下一个是右子树
-    root.right = build(index + 1, right); // 根据中序遍历创建右子树
-    root.left = build(left, index); // 根据中序遍历创建左子树
+    const rootVal = postorder[postIdx];
+    const root = new TreeNode(rootVal);
+    const index = map.get(rootVal)!; // get index of root value in the Map
+    postIdx--; // the next postInorder value is right child
+    root.right = build(index + 1, right);
+    root.left = build(left, index);
     return root;
   }
+};
+
+// iterative 😥
+var buildTree = function (
+  inorder: number[],
+  postorder: number[]
+): TreeNode | null {
+  if (!postorder.length || !inorder.length) return null;
+  const root = new TreeNode(postorder[postorder.length - 1]);
+  const stack: TreeNode[] = [];
+  stack.push(root);
+  let inorderIdx = inorder.length - 1; // inorder pointer from max index
+
+  for (let i = postorder.length - 2; i >= 0; i--) {
+    let postorderVal = postorder[i];
+    let node = stack[stack.length - 1];
+    if (node.val !== inorder[inorderIdx]) {
+      node.right = new TreeNode(postorderVal); // create right child
+      stack.push(node.right);
+    } else {
+      while (
+        stack.length &&
+        stack[stack.length - 1].val === inorder[inorderIdx]
+      ) {
+        node = stack.pop()!; // backtrack until find parent node
+        inorderIdx--;
+      }
+      node.left = new TreeNode(postorderVal); // create left child
+      stack.push(node.left);
+    }
+  }
+
+  return root;
 };
 // @lc code=end
