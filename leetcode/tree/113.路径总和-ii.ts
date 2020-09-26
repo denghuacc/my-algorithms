@@ -56,46 +56,37 @@ class TreeNode {
 // recursive
 var pathSum = function (root: TreeNode | null, sum: number): number[][] {
   const ret: number[][] = [];
-  _path(root, sum, ret, []);
+  dfs(root, sum, []);
   return ret;
 
-  function _path(
-    root: TreeNode | null,
-    sum: number,
-    ret: number[][],
-    path: number[]
-  ) {
+  function dfs(root: TreeNode | null, sum: number, subset: number[]): void {
     if (!root) return;
-    path = [...path, root.val];
+    subset = subset.concat(root.val);
     if (!root.left && !root.right && root.val === sum) {
-      ret.push(path);
+      ret.push(subset.slice());
       return;
     }
-    _path(root.left, sum - root.val, ret, path);
-    _path(root.right, sum - root.val, ret, path);
+    dfs(root.left, sum - root.val, subset);
+    dfs(root.right, sum - root.val, subset);
   }
 };
 
 // iterative
 var pathSum = function (root: TreeNode | null, sum: number): number[][] {
-  if (!root) return [];
-  const stack: Array<[TreeNode | null, number, number[]]> = [
-    [root, sum, [root.val]],
-  ];
-  const ret = [];
+  const ret: number[][] = [];
+  if (!root) return ret;
+  const stack: [TreeNode, number, number[]][] = [];
+  stack.push([root, sum, [root.val]]);
 
   while (stack.length) {
-    const [node, num, path] = stack.pop()!;
-    if (!node?.left && !node?.right && node?.val === num) {
-      ret.push(path);
-    }
+    const [node, num, subset] = stack.pop()!;
+    if (!node.left && !node.right && node.val === num) ret.push(subset.slice());
 
-    if (node?.right) {
-      stack.push([node.right, num - node.val, [...path, node.right.val]]);
+    if (node.right) {
+      stack.push([node.right, num - node.val, subset.concat(node.right.val)]);
     }
-
-    if (node?.left) {
-      stack.push([node.left, num - node.val, [...path, node.left.val]]);
+    if (node.left) {
+      stack.push([node.left, num - node.val, subset.concat(node.left.val)]);
     }
   }
 
