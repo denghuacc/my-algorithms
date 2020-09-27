@@ -1,5 +1,5 @@
 /*
- * @lc app=leetcode.cn id=235 lang=typescript
+ * @lc app=leetcode.cn id=235 lang=javascript
  *
  * [235] 二叉搜索树的最近公共祖先
  *
@@ -48,48 +48,45 @@
  *
  */
 
-export {};
-
-class TreeNode {
-  val: number;
-  left: TreeNode | null;
-  right: TreeNode | null;
-  constructor(val?: number, left?: TreeNode | null, right?: TreeNode | null) {
-    this.val = val === undefined ? 0 : val;
-    this.left = left === undefined ? null : left;
-    this.right = right === undefined ? null : right;
-  }
-}
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
 
 // @lc code=start
-// ! recursive ts lang Wrong Answer
-var lowestCommonAncestor = function (
-  root: TreeNode | null,
-  p: TreeNode | null,
-  q: TreeNode | null
-): TreeNode | null {
-  const parentVal = root!.val;
-  const pVal = p!.val;
-  const qVal = q!.val;
+/**
+ * @param {TreeNode} root
+ * @param {TreeNode} p
+ * @param {TreeNode} q
+ * @return {TreeNode}
+ */
+// recursive
+var lowestCommonAncestor = function (root, p, q) {
+  const parentVal = root.val;
+  const pVal = p.val;
+  const qVal = q.val;
 
+  // continue search right child
   if (pVal > parentVal && qVal > parentVal) {
-    return lowestCommonAncestor(root!.right, p, q);
-  } else if (pVal < parentVal && qVal < parentVal) {
-    return lowestCommonAncestor(root!.left, p, q);
-  } else {
+    return lowestCommonAncestor(root.right, p, q);
+  }
+  // continue search left child
+  else if (pVal < parentVal && qVal < parentVal) {
+    return lowestCommonAncestor(root.left, p, q);
+  }
+  // or return root node
+  else {
     return root;
   }
 };
-// @lc code=end
 
 // iterative
-var lowestCommonAncestor = function (
-  root: TreeNode | null,
-  p: TreeNode | null,
-  q: TreeNode | null
-): TreeNode | null {
-  const pVal = p!.val;
-  const qVal = q!.val;
+var lowestCommonAncestor = function (root, p, q) {
+  const pVal = p.val;
+  const qVal = q.val;
   let node = root;
 
   while (node) {
@@ -106,3 +103,4 @@ var lowestCommonAncestor = function (
 
   return null;
 };
+// @lc code=end
