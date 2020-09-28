@@ -48,8 +48,6 @@
  * 
  */
 
-import { threadId } from "worker_threads";
-
 export {};
 
 // @lc code=start
