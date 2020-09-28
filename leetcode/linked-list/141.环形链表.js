@@ -1,5 +1,5 @@
 /*
- * @lc app=leetcode.cn id=141 lang=typescript
+ * @lc app=leetcode.cn id=141 lang=javascript
  *
  * [141] 环形链表
  *
@@ -54,21 +54,22 @@
  *
  */
 
-export {};
-
-class ListNode {
-  val: number;
-  next: ListNode | null;
-  constructor(val?: number, next?: ListNode | null) {
-    this.val = val === undefined ? 0 : val;
-    this.next = next === undefined ? null : next;
-  }
-}
-
 // @lc code=start
-// ! hash table Wrong Answer
-var hasCycle = function (head: ListNode | null): boolean {
-  const set: Set<ListNode | null> = new Set();
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+
+/**
+ * @param {ListNode} head
+ * @return {boolean}
+ */
+// hash table
+var hasCycle = function (head) {
+  const set = new Set();
   while (head) {
     if (set.has(head)) {
       return true;
@@ -80,16 +81,16 @@ var hasCycle = function (head: ListNode | null): boolean {
   return false;
 };
 
-// ! two pointers Wrong Answer
-var hasCycle = function (head: ListNode | null): boolean {
+// two pointers
+var hasCycle = function (head) {
   if (!head || !head.next) return false;
   let slow = head;
   let fast = head.next;
 
   while (slow !== fast) {
     if (!fast || !fast.next) return false;
-    slow = slow.next!;
-    fast = fast.next.next!;
+    slow = slow.next;
+    fast = fast.next.next;
   }
 
   return true;

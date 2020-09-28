@@ -1,5 +1,5 @@
 /*
- * @lc app=leetcode.cn id=297 lang=typescript
+ * @lc app=leetcode.cn id=297 lang=javascript
  *
  * [297] 二叉树的序列化与反序列化
  *
@@ -38,28 +38,28 @@
  *
  */
 
-export {};
-
-class TreeNode {
-  val: number;
-  left: TreeNode | null;
-  right: TreeNode | null;
-  constructor(val?: number, left?: TreeNode | null, right?: TreeNode | null) {
-    this.val = val === undefined ? 0 : val;
-    this.left = left === undefined ? null : left;
-    this.right = right === undefined ? null : right;
-  }
-}
-
 // @lc code=start
-// ! ts lang Wrong Answer
-var serialize = function (root: TreeNode | null): string {
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+
+/**
+ * Encodes a tree to a single string.
+ *
+ * @param {TreeNode} root
+ * @return {string}
+ */
+var serialize = function (root) {
   let ret = "";
   if (!root) return ret;
 
-  const queue: Array<TreeNode | null> = [root];
+  const queue = [root];
   while (queue.length) {
-    const front = queue.shift()!;
+    const front = queue.shift();
     if (front) {
       ret += `${front.val},`;
       queue.push(front.left);
@@ -69,29 +69,35 @@ var serialize = function (root: TreeNode | null): string {
     }
   }
 
-  ret = ret.substring(0, ret.length - 1); // 去最后一个逗号
+  ret = ret.substring(0, ret.length - 1); // remove trailing comma
   return ret;
 };
 
-var deserialize = function (data: string): TreeNode | null {
+/**
+ * Decodes your encoded data to tree.
+ *
+ * @param {string} data
+ * @return {TreeNode}
+ */
+var deserialize = function (data) {
   if (!data.length) return null;
 
-  const nodes: string[] = data.split(",");
-  const root: TreeNode = new TreeNode(Number(nodes[0]));
+  const nodes = data.split(",");
+  const root = new TreeNode(Number(nodes[0]));
   nodes.shift();
 
-  const queue: Array<TreeNode | null> = [root];
+  const queue = [root];
   while (queue.length) {
     const node = queue.shift();
-    const leftVal = nodes.shift()!;
+    const leftVal = nodes.shift();
     if (leftVal !== "null") {
-      node!.left = new TreeNode(Number(leftVal));
-      queue.push(node!.left);
+      node.left = new TreeNode(Number(leftVal));
+      queue.push(node.left);
     }
     const rightVal = nodes.shift();
     if (rightVal !== "null") {
-      node!.right = new TreeNode(Number(rightVal));
-      queue.push(node!.right);
+      node.right = new TreeNode(Number(rightVal));
+      queue.push(node.right);
     }
   }
 

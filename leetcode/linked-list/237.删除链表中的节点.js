@@ -1,5 +1,5 @@
 /*
- * @lc app=leetcode.cn id=237 lang=typescript
+ * @lc app=leetcode.cn id=237 lang=javascript
  *
  * [237] 删除链表中的节点
  *
@@ -48,21 +48,20 @@
  *
  */
 
-export {};
-
-class ListNode {
-  val: number;
-  next: ListNode | null;
-  constructor(val?: number, next?: ListNode | null) {
-    this.val = val === undefined ? 0 : val;
-    this.next = next === undefined ? null: next;
-  }
-}
-
-// @lc code=start 
-// ! Wrong Answer
-var deleteNode = function (node: ListNode) {
-  node.val = node.next!.val;
-  node.next = node.next!.next;
+// @lc code=start
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} node
+ * @return {void} Do not return anything, modify node in-place instead.
+ */
+var deleteNode = function (node) {
+  node.val = node.next.val; // replace value with next node's value
+  node.next = node.next.next; // replace next
 };
 // @lc code=end

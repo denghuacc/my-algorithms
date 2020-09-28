@@ -1,5 +1,5 @@
 /*
- * @lc app=leetcode.cn id=236 lang=typescript
+ * @lc app=leetcode.cn id=236 lang=javascript
  *
  * [236] 二叉树的最近公共祖先
  *
@@ -49,79 +49,64 @@
  *
  */
 
-export {};
-
-class TreeNode {
-  val: number;
-  left: TreeNode | null;
-  right: TreeNode | null;
-  constructor(val?: number, left?: TreeNode | null, right?: TreeNode | null) {
-    this.val = val === undefined ? 0 : val;
-    this.left = left === undefined ? null : left;
-    this.right = right === undefined ? null : right;
-  }
-}
-
 // @lc code=start
-// ! recursive ts lang Wrong Answer
-var lowestCommonAncestor = function (
-  root: TreeNode | null,
-  p: TreeNode | null,
-  q: TreeNode | null
-): TreeNode | null {
-  let ret!: TreeNode | null;
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {TreeNode} p
+ * @param {TreeNode} q
+ * @return {TreeNode}
+ */
+// recursive
+var lowestCommonAncestor = function (root, p, q) {
+  let ret;
   dfs(root, p, q);
   return ret;
 
-  function dfs(
-    root: TreeNode | null,
-    p: TreeNode | null,
-    q: TreeNode | null
-  ): boolean {
+  function dfs(root, p, q) {
     if (!root) return false;
     const isLeftSon = dfs(root.left, p, q);
     const isRightSon = dfs(root.right, p, q);
 
     if (
       (isLeftSon && isRightSon) ||
-      ((root.val === p!.val || root.val === q!.val) &&
-        (isLeftSon || isRightSon))
+      ((root.val === p.val || root.val === q.val) && (isLeftSon || isRightSon))
     ) {
       ret = root;
     }
 
-    return (
-      isLeftSon || isRightSon || root.val === p!.val || root.val === q!.val
-    );
+    return isLeftSon || isRightSon || root.val === p.val || root.val === q.val;
   }
 };
 // @lc code=end
 
 // save parent node
-var lowestCommonAncestor = function (
-  root: TreeNode | null,
-  p: TreeNode | null,
-  q: TreeNode | null
-): TreeNode | null {
-  const map: Map<number, TreeNode | null> = new Map();
-  const set: Set<number> = new Set();
+var lowestCommonAncestor = function (root, p, q) {
+  const map = new Map();
+  const set = new Set();
 
-  dfs(root!);
+  dfs(root);
 
   while (p) {
     set.add(p.val);
-    p = map.get(p.val)!;
+    p = map.get(p.val);
   }
   while (q) {
     if (set.has(q.val)) {
       return q;
     }
-    q = map.get(q.val)!;
+    q = map.get(q.val);
   }
 
   return null;
 
-  function dfs(root: TreeNode) {
+  function dfs(root) {
     if (root.left) {
       map.set(root.left.val, root);
       dfs(root.left);

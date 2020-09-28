@@ -1,5 +1,5 @@
 /*
- * @lc app=leetcode.cn id=160 lang=typescript
+ * @lc app=leetcode.cn id=160 lang=javascript
  *
  * [160] 相交链表
  *
@@ -73,25 +73,22 @@
  *
  */
 
-export {};
-
-class ListNode {
-  val: number;
-  next: ListNode | null;
-  flag: boolean;
-  constructor(val?: number, next?: ListNode | null, flag?: boolean) {
-    this.val = val === undefined ? 0 : val;
-    this.next = next === undefined ? null : next;
-    this.flag = flag === undefined ? false : flag;
-  }
-}
-
 // @lc code=start
-// ! tow pointers Wrong Answer
-var getIntersectionNode = function (
-  headA: ListNode | null,
-  headB: ListNode | null
-): ListNode | null {
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+
+/**
+ * @param {ListNode} headA
+ * @param {ListNode} headB
+ * @return {ListNode}
+ */
+// tow pointers
+var getIntersectionNode = function (headA, headB) {
   let pA = headA;
   let pB = headB;
 
@@ -103,14 +100,10 @@ var getIntersectionNode = function (
 
   return null;
 };
-// @lc code=end
 
 // hash table
-var getIntersectionNode = function (
-  headA: ListNode | null,
-  headB: ListNode | null
-): ListNode | null {
-  const set: Set<ListNode> = new Set();
+var getIntersectionNode = function (headA, headB) {
+  const set = new Set();
   while (headA) {
     set.add(headA);
     headA = headA.next;
@@ -123,3 +116,4 @@ var getIntersectionNode = function (
 
   return null;
 };
+// @lc code=end

@@ -1,5 +1,5 @@
 /*
- * @lc app=leetcode.cn id=138 lang=typescript
+ * @lc app=leetcode.cn id=138 lang=javascript
  *
  * [138] 复制带随机指针的链表
  *
@@ -69,54 +69,55 @@
  *
  */
 
-export {};
-
-class Node {
-  val: number;
-  next: Node | null;
-  random: Node | null;
-  constructor(val?: number, next?: Node | null, random?: Node | null) {
-    this.val = val === undefined ? 0 : val;
-    this.next = next === undefined ? null : next;
-    this.random = random === undefined ? null : random;
-  }
-}
-
 // @lc code=start
-// ! hash table Compile Error
-var copyRandomList = function (head: Node | null): Node | null {
+/**
+ * // Definition for a Node.
+ * function Node(val, next, random) {
+ *    this.val = val;
+ *    this.next = next;
+ *    this.random = random;
+ * };
+ */
+
+/**
+ * @param {Node} head
+ * @return {Node}
+ */
+// hash table
+var copyRandomList = function (head) {
   if (!head) return null;
-  const map: Map<Node, Node> = new Map();
+  const map = new Map();
 
   let oldNode = head;
   let newNode = new Node(oldNode.val);
   map.set(oldNode, newNode);
 
   while (oldNode) {
-    newNode.random = getClonedNode(oldNode.random!);
-    newNode.next = getClonedNode(oldNode.next!);
+    newNode.random = getClonedNode(oldNode.random);
+    newNode.next = getClonedNode(oldNode.next);
 
-    oldNode = oldNode.next!;
-    newNode = newNode.next!;
+    oldNode = oldNode.next;
+    newNode = newNode.next;
   }
 
   return map.get(head) || null;
 
-  function getClonedNode(node: Node | null): Node | null {
+  function getClonedNode(node) {
     if (node) {
       if (map.has(node)) {
-        return map.get(node)!;
+        return map.get(node);
       } else {
         map.set(node, new Node(node.val));
-        return map.get(node)!;
+        return map.get(node);
       }
     }
     return null;
   }
 };
+// @lc code=end
 
-// ! iterative Compile Error
-var copyRandomList = function (head: Node | null): Node | null {
+// iterative
+var copyRandomList = function (head) {
   if (!head) return null;
 
   let ptr = head;
@@ -124,26 +125,25 @@ var copyRandomList = function (head: Node | null): Node | null {
     let newNode = new Node(ptr.val);
     newNode.next = ptr.next;
     ptr.next = newNode;
-    ptr = newNode.next!;
+    ptr = newNode.next;
   }
 
   ptr = head;
 
   while (ptr) {
-    ptr.next!.random = ptr.random ? ptr.random.next : null;
-    ptr = ptr.next!.next!;
+    ptr.next.random = ptr.random ? ptr.random.next : null;
+    ptr = ptr.next.next;
   }
 
   let ptrOldList = head;
-  let ptrNewList = head.next!;
+  let ptrNewList = head.next;
   let OldHead = head.next;
   while (ptrOldList) {
-    ptrOldList.next = ptrOldList.next!.next;
+    ptrOldList.next = ptrOldList.next.next;
     ptrNewList.next = ptrNewList.next ? ptrNewList.next.next : null;
-    ptrOldList = ptrOldList.next!;
-    ptrNewList = ptrNewList.next!;
+    ptrOldList = ptrOldList.next;
+    ptrNewList = ptrNewList.next;
   }
 
   return OldHead;
 };
-// @lc code=end

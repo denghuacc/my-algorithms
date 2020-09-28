@@ -1,5 +1,5 @@
 /*
- * @lc app=leetcode.cn id=142 lang=typescript
+ * @lc app=leetcode.cn id=142 lang=javascript
  *
  * [142] 环形链表 II
  *
@@ -55,21 +55,22 @@
  *
  */
 
-export {};
-
-class ListNode {
-  val: number;
-  next: ListNode | null;
-  constructor(val?: number, next?: ListNode | null) {
-    this.val = val === undefined ? 0 : val;
-    this.next = next === undefined ? null : next;
-  }
-}
-
 // @lc code=start
-// ! hash table Wrong Answer
-var detectCycle = function (head: ListNode | null): ListNode | null {
-  const set: Set<ListNode> = new Set();
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+// hash table
+var detectCycle = function (head) {
+  const set = new Set();
   let node = head;
   while (node) {
     if (set.has(node)) return node;
@@ -79,8 +80,8 @@ var detectCycle = function (head: ListNode | null): ListNode | null {
   return null;
 };
 
-// ! Floyd  Wrong Answer
-var detectCycle = function (head: ListNode | null): ListNode | null {
+// Floyd Algorithms
+var detectCycle = function (head) {
   if (!head) return null;
   const intersect = getIntersect(head);
   if (!intersect) return null;
@@ -88,18 +89,18 @@ var detectCycle = function (head: ListNode | null): ListNode | null {
   let ptr1 = head;
   let ptr2 = intersect;
   while (ptr1 !== ptr2) {
-    ptr1 = ptr1.next!;
-    ptr2 = ptr2.next!;
+    ptr1 = ptr1.next;
+    ptr2 = ptr2.next;
   }
 
   return ptr1;
 
-  function getIntersect(node: ListNode | null): ListNode | null {
+  function getIntersect(node) {
     let tortoise = head;
     let hare = head;
 
     while (hare && hare.next) {
-      tortoise = tortoise!.next;
+      tortoise = tortoise.next;
       hare = hare.next.next;
       if (tortoise === hare) return tortoise;
     }
