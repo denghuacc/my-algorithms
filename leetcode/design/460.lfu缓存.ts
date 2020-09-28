@@ -51,104 +51,50 @@
 export {};
 
 // @lc code=start
-class Node {
-  freq = 1;
-  prev!: Node;
-  next!: Node;
-  constructor(public key: number, public value: number) {}
-}
-
-class DoublyLinkedList {
-  head: Node;
-  tail: Node;
-
-  constructor() {
-    this.head = new Node(Infinity, Infinity);
-    this.tail = new Node(Infinity, Infinity);
-    this.head.next = this.tail;
-    this.tail.prev = this.head;
-  }
-
-  removeNode(node: Node) {
-    node.prev && (node.prev.next = node.next);
-    node.next && (node.next.prev = node.prev);
-  }
-
-  addNode(node: Node) {
-    node.next = this.head.next;
-    this.head.next.prev = node;
-    this.head.next = node;
-    node.prev = this.head;
-  }
-}
-
-// ! two map O(1) wrong
+// two map
 class LFUCache {
-  capacity: number;
-  cache: Map<number, Node>;
-  freqMap: Map<number, DoublyLinkedList>;
-  min: number;
   size: number;
-
+  values: Map<number, number>;
+  times: Map<number, number>;
   constructor(capacity: number) {
-    this.capacity = capacity;
-    this.cache = new Map();
-    this.freqMap = new Map();
-    this.min = 0;
-    this.size = 0;
+    this.size = capacity;
+    this.values = new Map();
+    this.times = new Map();
   }
 
   get(key: number): number {
-    const node = this.cache.get(key);
-    if (!node) return -1;
-    this.freqInc(node);
-    return node.value;
+    if (this.values.has(key)) {
+      let val = this.values.get(key)!;
+      let time = this.times.get(key) || 0;
+      this.values.delete(key);
+      this.times.delete(key);
+      this.values.set(key, val);
+      this.times.set(key, time + 1);
+      return val;
+    }
+
+    return -1;
   }
 
   put(key: number, value: number): void {
-    if (this.capacity === 0) return;
-    const node = this.cache.get(key);
-    if (node) {
-      node.value = value;
-      this.freqInc(node);
-    } else {
-      if (this.size === this.capacity) {
-        const minFreqLinkedList = this.freqMap.get(this.min)!;
-        this.cache.delete(minFreqLinkedList.tail.prev.key);
-        minFreqLinkedList.removeNode(minFreqLinkedList.tail.prev);
-        this.size--;
+    let time = 1;
+    let min = Math.min(...this.times.values());
+    if (this.values.has(key)) {
+      time = (this.times.get(key) ?? 0) + 1;
+      this.values.delete(key);
+      this.values.delete(key);
+    }
+    this.values.set(key, value);
+    this.times.set(key, time);
+    if (this.size < this.values.size) {
+      let keys = this.values.keys();
+      let delKey = keys.next().value;
+      while (delKey && this.times.get(delKey) !== min) {
+        delKey = keys.next().value;
       }
-      const newNode = new Node(key, value);
-      this.cache.set(key, newNode);
-      let linkedList = this.freqMap.get(1)!;
-      if (!linkedList) {
-        const newLinkedList = new DoublyLinkedList();
-        this.freqMap.set(1, newLinkedList);
-      }
-      linkedList && linkedList.addNode(newNode);
-      this.size++;
-      this.min = 1;
+      this.values.delete(delKey);
+      this.times.delete(delKey);
     }
-  }
-
-  private freqInc(node: Node) {
-    const freq = node.freq;
-    let linkedList = this.freqMap.get(freq)!;
-    linkedList.removeNode(node);
-    if (
-      freq === this.min &&
-      this.size === 0 &&
-      linkedList.head.next === linkedList.tail
-    ) {
-      this.min = freq + 1;
-    }
-    node.freq += 1;
-    linkedList = this.freqMap.get(freq + 1)!;
-    if (!linkedList) {
-      linkedList = new DoublyLinkedList();
-      this.freqMap.set(freq + 1, linkedList);
-    }
-    linkedList.addNode(node);
   }
 }
 
