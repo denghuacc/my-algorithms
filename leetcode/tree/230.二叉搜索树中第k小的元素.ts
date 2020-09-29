@@ -123,7 +123,6 @@ var kthSmallest = function (root: TreeNode | null, k: number): number {
       cur = cur.left;
     }
     cur = stack.pop()!;
-    // 直接在这里获取第 k 个最小值
     if (--k === 0) {
       ret = cur.val;
     }

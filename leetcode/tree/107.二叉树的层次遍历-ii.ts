@@ -74,16 +74,16 @@ var levelOrderBottom = function (root: TreeNode | null): number[][] {
 
   while (queue.length) {
     const size = queue.length;
-    const levels: number[] = [];
+    const level: number[] = [];
 
-    // 一次性取出每层的所有节点
+    // only handle all nodes before size index
     for (let i = 0; i < size; i++) {
       const node = queue.shift()!;
-      levels.push(node.val);
+      level.push(node.val);
       if (node.left) queue.push(node.left);
       if (node.right) queue.push(node.right);
     }
-    ret.unshift(levels);
+    ret.unshift(level);
   }
 
   return ret;

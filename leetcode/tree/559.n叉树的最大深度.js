@@ -96,7 +96,7 @@ var maxDepth = function (root) {
       }
       size--;
     }
-    max++; // 每次循环深度 + 1
+    max++; // max depth add 1 per loop
   }
 
   return max;

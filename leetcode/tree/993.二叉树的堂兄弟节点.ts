@@ -77,8 +77,8 @@ var isCousins = function (
   x: number,
   y: number
 ): boolean {
-  const depth: Map<number, number> = new Map(); // 深度映射
-  const parent: Map<number, TreeNode | null> = new Map(); // 父节点映射
+  const depth: Map<number, number> = new Map();
+  const parent: Map<number, TreeNode | null> = new Map();
   dfs(root, null);
   return depth.get(x) === depth.get(y) && parent.get(x) !== parent.get(y);
 

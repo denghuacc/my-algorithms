@@ -92,19 +92,19 @@ var minDepth = function (root: TreeNode | null): number {
 
 // BFS iterative
 var minDepth = function (root: TreeNode | null): number {
-  const stack: [TreeNode | null, number][] = [];
+  const queue: [TreeNode | null, number][] = [];
   if (!root) return 0;
-  else stack.push([root, 1]);
+  else queue.push([root, 1]);
 
   let currentDeep = 0;
-  while (stack.length) {
-    const currentPair = stack.shift()!; // shift
+  while (queue.length) {
+    const currentPair = queue.shift()!;
     const root = currentPair[0]!;
     currentDeep = currentPair[1];
 
     if (!root.left && !root.right) break;
-    if (root.left) stack.push([root.left, currentDeep + 1]);
-    if (root.right) stack.push([root.right, currentDeep + 1]);
+    if (root.left) queue.push([root.left, currentDeep + 1]);
+    if (root.right) queue.push([root.right, currentDeep + 1]);
   }
 
   return currentDeep;

@@ -55,7 +55,7 @@ class TreeNode {
 // recursive
 var levelOrder = function (root: TreeNode | null): number[][] {
   const levels: number[][] = [];
-  if (!root) return [];
+  if (!root) return levels;
   order(root, 0);
   return levels;
 
@@ -70,20 +70,20 @@ var levelOrder = function (root: TreeNode | null): number[][] {
 // iterative
 var levelOrder = function (root: TreeNode | null): number[][] {
   const levels: number[][] = [];
-  if (!root) return [];
+  if (!root) return levels;
 
   const queue: Array<TreeNode | null> = [];
   queue.push(root);
   let level = 0;
   while (queue.length) {
     levels.push([]);
-    const levelLength = queue.length;
+    const size = queue.length;
 
-    for (let i = 0; i < levelLength; ++i) {
-      const root = queue.shift()!;
-      levels[level].push(root.val);
-      if (root.left) queue.push(root.left);
-      if (root.right) queue.push(root.right);
+    for (let i = 0; i < size; i++) {
+      const node = queue.shift()!;
+      levels[level].push(node.val);
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
     }
     level++;
   }

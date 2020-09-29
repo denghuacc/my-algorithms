@@ -78,26 +78,26 @@ var isSameTree = function (p: TreeNode | null, q: TreeNode | null): boolean {
   if (!p && !q) return true;
   if (!check(p, q)) return false;
 
-  const depP: Array<TreeNode | null> = [];
-  const depQ: Array<TreeNode | null> = [];
-  depP.push(p);
-  depQ.push(q);
+  const queueP: Array<TreeNode | null> = [];
+  const queueQ: Array<TreeNode | null> = [];
+  queueP.push(p);
+  queueQ.push(q);
 
-  while (depP.length) {
-    p = depP.shift()!;
-    q = depQ.shift()!;
+  while (queueP.length) {
+    p = queueP.shift()!;
+    q = queueQ.shift()!;
     if (!check(p, q)) return false;
     if (p) {
       if (!check(p.left, q.left)) return false;
       if (p.left) {
-        depP.push(p.left);
-        depQ.push(q.left);
+        queueP.push(p.left);
+        queueQ.push(q.left);
       }
 
       if (!check(p.right, q.right)) return false;
       if (p.right) {
-        depP.push(p.right);
-        depQ.push(q.right);
+        queueP.push(p.right);
+        queueQ.push(q.right);
       }
     }
   }

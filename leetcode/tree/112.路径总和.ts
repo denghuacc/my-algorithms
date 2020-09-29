@@ -59,25 +59,52 @@ var hasPathSum = function (root: TreeNode | null, sum: number): boolean {
 var hasPathSum = function (root: TreeNode | null, sum: number): boolean {
   if (!root) return false;
 
-  const nodeStack: Array<TreeNode | null> = [];
+  const nodeStack: TreeNode[] = [];
   const sumStack: number[] = [];
   nodeStack.push(root);
   sumStack.push(sum - root.val);
 
-  let node: TreeNode;
-  let currentSum: number;
   while (nodeStack.length) {
-    node = nodeStack.pop()!;
-    currentSum = sumStack.pop()!;
+    const node = nodeStack.pop()!;
+    const currentSum = sumStack.pop()!;
 
-    if (!node?.right && !node?.left && currentSum === 0) return true;
-    if (node?.right) {
+    if (!node.right && !node.left && currentSum === 0) return true;
+
+    if (node.right) {
       nodeStack.push(node.right);
       sumStack.push(currentSum - node.right.val);
     }
-    if (node?.left) {
+    if (node.left) {
       nodeStack.push(node.left);
       sumStack.push(currentSum - node.left.val);
+    }
+  }
+
+  return false;
+};
+
+// iterative + queue -> queue is inefficient
+var hasPathSum = function (root: TreeNode | null, sum: number): boolean {
+  if (!root) return false;
+
+  const nodeQueue: TreeNode[] = [];
+  const sumQueue: number[] = [];
+  nodeQueue.push(root);
+  sumQueue.push(sum - root.val);
+
+  while (nodeQueue.length) {
+    const node = nodeQueue.shift()!;
+    const currentSum = sumQueue.shift()!;
+
+    if (!node.right && !node.left && currentSum === 0) return true;
+
+    if (node.left) {
+      nodeQueue.push(node.left);
+      sumQueue.push(currentSum - node.left.val);
+    }
+    if (node.right) {
+      nodeQueue.push(node.right);
+      sumQueue.push(currentSum - node.right.val);
     }
   }
 

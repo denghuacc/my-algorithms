@@ -66,7 +66,7 @@ var averageOfLevels = function (root: TreeNode | null): number[] {
 
   return ret;
 
-  // 层序遍历获取每层的值
+  // level traverse
   function levelOrder(node: TreeNode | null, level: number) {
     if (!node) return;
     tmp[level] ? tmp[level].push(node.val) : (tmp[level] = [node.val]);
@@ -75,7 +75,7 @@ var averageOfLevels = function (root: TreeNode | null): number[] {
     levelOrder(node.right, level);
   }
 
-  // 求数组的平均值
+  // calc average
   function getAverageOfArray(arr: number[]): number {
     return arr.reduce((acc, val) => acc + val, 0) / arr.length;
   }
@@ -91,13 +91,10 @@ var averageOfLevels = function (root: TreeNode | null): number[] {
   while (queue.length) {
     const size = queue.length;
     let sum = 0;
-    // let count = 0; // 层级节点数 或者可以直接使用 size
 
-    // 一次性全部取出每层的所有节点
     for (let i = 0; i < size; i++) {
       const node = queue.shift()!;
       sum += node.val;
-      // count += 1;
       if (node.left) queue.push(node.left);
       if (node.right) queue.push(node.right);
     }
@@ -109,7 +106,7 @@ var averageOfLevels = function (root: TreeNode | null): number[] {
 
 // dfs2
 var averageOfLevels = function (root: TreeNode | null): number[] {
-  // Map<树的层级数，[每层的值的个数，每层的值的和]>
+  // Map<level，[the count of level，the sum of level]>
   const map: Map<number, [number, number]> = new Map();
   const ret: number[] = [];
   dfs(root, 0);

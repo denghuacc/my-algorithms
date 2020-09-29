@@ -66,7 +66,7 @@ class TreeNode {
 }
 
 // @lc code=start
-// recursive 自顶向下
+// recursive top-down
 var isBalanced = function (root: TreeNode | null): boolean {
   if (!root) return true;
   return (
@@ -75,14 +75,14 @@ var isBalanced = function (root: TreeNode | null): boolean {
     isBalanced(root.right)
   );
 
-  // 节点的高度
+  // the height of node
   function height(root: TreeNode | null): number {
     if (!root) return 0;
     return 1 + Math.max(height(root.left), height(root.right));
   }
 };
 
-// recursive 自底向上
+// recursive bottom-up
 var isBalanced = function (root: TreeNode | null): boolean {
   return height(root) >= 0;
 

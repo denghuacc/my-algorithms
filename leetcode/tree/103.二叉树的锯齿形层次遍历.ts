@@ -41,17 +41,17 @@ class TreeNode {
 }
 
 // @lc code=start
-// dfs -> 正常层级遍历 + 特定层数反转
+// dfs
 var zigzagLevelOrder = function (root: TreeNode | null): number[][] {
   if (!root) return [];
   const levels: number[][] = [];
   levelOrder(root, 0);
   for (let i = 0; i < levels.length; i++) {
-    if (i % 2 !== 0) levels[i].reverse(); // 反转
+    if (i % 2 !== 0) levels[i].reverse(); // reverse
   }
   return levels;
 
-  // 正常层级遍历
+  // level order
   function levelOrder(node: TreeNode, level: number) {
     if (levels.length === level) levels.push([]);
     levels[level].push(node.val);
@@ -71,7 +71,7 @@ var zigzagLevelOrder = function (root: TreeNode | null): number[][] {
     levels.push([]);
     const levelLength = queue.length;
 
-    for (let i = 0; i < levelLength; ++i) {
+    for (let i = 0; i < levelLength; i++) {
       const node = queue.shift()!;
       levels[level].push(node.val);
       if (node.left) queue.push(node.left);
@@ -81,7 +81,7 @@ var zigzagLevelOrder = function (root: TreeNode | null): number[][] {
   }
 
   for (let i = 0; i < levels.length; i++) {
-    if (i % 2 !== 0) levels[i].reverse(); // 反转
+    if (i % 2 !== 0) levels[i].reverse(); // reverse
   }
   return levels;
 };
@@ -118,9 +118,9 @@ var zigzagLevelOrder = function (root: TreeNode | null): number[][] {
   const levels: number[][] = [];
   const queue: (TreeNode | null)[] = [];
   queue.push(root);
-  queue.push(null); // 层级分隔符
+  queue.push(null); // separator
   let subset: number[] = [];
-  let isOrderLeft = true; // 是否是正常排序，从左到右
+  let isOrderLeft = true; // from left to right
 
   while (queue.length) {
     const node = queue.shift();
@@ -137,9 +137,9 @@ var zigzagLevelOrder = function (root: TreeNode | null): number[][] {
       levels.push(subset);
       subset = [];
       if (queue.length) {
-        queue.push(null); // 添加分隔符
+        queue.push(null); // add separator
       }
-      isOrderLeft = !isOrderLeft; // 切换排序
+      isOrderLeft = !isOrderLeft; // toggle
     }
   }
 

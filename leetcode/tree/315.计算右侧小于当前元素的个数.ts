@@ -43,7 +43,7 @@ class TNode {
     this.val = val;
     this.left = null;
     this.right = null;
-    this.count = 0; // 左子树节点数量
+    this.count = 0; // the count of left child
   }
 }
 
@@ -63,13 +63,11 @@ var countSmaller = function (nums: number[]): number[] {
     retIndx: number
   ): TNode | null {
     if (!root) root = new TNode(val);
-    //  小于当前节点值则放入左子树
     else if (val <= root.val) {
-      root.count += 1; // root 的左侧节点数量值 +1
+      root.count += 1;
       root.left = insertNode(root.left, val, ret, retIndx);
     } else if (val > root.val) {
-      // 大于当前节点值则放入右子树
-      ret[retIndx] += root.count + 1; // 计算题目所求的结果
+      ret[retIndx] += root.count + 1;
       root.right = insertNode(root.right, val, ret, retIndx);
     }
 

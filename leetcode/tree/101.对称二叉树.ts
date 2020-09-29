@@ -81,7 +81,7 @@ var isSymmetric = function (root: TreeNode | null): boolean {
   queue.push(root);
 
   while (queue.length) {
-    const t1 = queue.shift()!;
+    const t1 = queue.shift();
     const t2 = queue.shift();
     if (!t1 && !t2) continue;
     if (!t1 || !t2) return false;
@@ -90,6 +90,27 @@ var isSymmetric = function (root: TreeNode | null): boolean {
     queue.push(t2.right);
     queue.push(t1.right);
     queue.push(t2.left);
+  }
+  return true;
+};
+
+// iterative 2
+var isSymmetric = function (root: TreeNode | null): boolean {
+  const queue1: Array<TreeNode | null> = [];
+  const queue2: Array<TreeNode | null> = [];
+  queue1.push(root);
+  queue2.push(root);
+
+  while (queue1.length || queue2.length) {
+    const t1 = queue1.shift();
+    const t2 = queue2.shift();
+    if (!t1 && !t2) continue;
+    if (!t1 || !t2) return false;
+    if (t1.val != t2.val) return false;
+    queue1.push(t1.left);
+    queue1.push(t1.right);
+    queue2.push(t2.right);
+    queue2.push(t2.left);
   }
   return true;
 };

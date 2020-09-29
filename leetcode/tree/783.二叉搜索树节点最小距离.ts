@@ -62,50 +62,48 @@ class TreeNode {
 
 // @lc code=start
 // the same as leetcode 530
-// recursive + inOrder
+// recursive + inorder
 var minDiffInBST = function (root: TreeNode | null): number {
   const arr: number[] = [];
-  inOrder(root);
+  inorder(root);
   let min = Infinity;
+
+  // compare after inorder
   for (let i = 1; i < arr.length; i++) {
     const diff = arr[i] - arr[i - 1];
     min = Math.min(min, diff);
   }
   return min;
 
-  // BST 中序遍历是升序排序，不用再排序
-  // 后续只要比较相邻的元素的差值就可以得出最小差值
-  function inOrder(node: TreeNode | null) {
+  function inorder(node: TreeNode | null) {
     if (node) {
-      if (node.left) inOrder(node.left);
+      if (node.left) inorder(node.left);
       arr.push(node.val);
-      if (node.right) inOrder(node.right);
+      if (node.right) inorder(node.right);
     }
   }
 };
 
-// recursive + inOrder 2
+// recursive + inorder 2
 var minDiffInBST = function (root: TreeNode | null): number {
   let prev: number | null = null;
   let min = Infinity;
-  inOrder(root);
+  inorder(root);
   return min;
 
-  // BST 中序遍历是升序排序，不用再排序
-  // 在中序遍历时进行比较
-  function inOrder(node: TreeNode | null) {
+  function inorder(node: TreeNode | null) {
     if (node) {
-      if (node.left) inOrder(node.left);
+      if (node.left) inorder(node.left);
       if (prev !== null) {
-        min = Math.min(min, node.val - prev);
+        min = Math.min(min, node.val - prev); // compare after inorder
       }
       prev = node.val;
-      if (node.right) inOrder(node.right);
+      if (node.right) inorder(node.right);
     }
   }
 };
 
-// iterative + inOrder
+// iterative + inorder
 var minDiffInBST = function (root: TreeNode | null): number {
   const arr: number[] = [];
   const stack: TreeNode[] = [];
@@ -122,6 +120,7 @@ var minDiffInBST = function (root: TreeNode | null): number {
   }
 
   let min = Infinity;
+  // compare after inorder
   for (let i = 1; i < arr.length; i++) {
     const diff = arr[i] - arr[i - 1];
     min = Math.min(min, diff);
@@ -129,7 +128,7 @@ var minDiffInBST = function (root: TreeNode | null): number {
   return min;
 };
 
-// iterative + inOrder 2
+// iterative + inorder 2
 var minDiffInBST = function (root: TreeNode | null): number {
   let prev: number | null = null;
   const stack: TreeNode[] = [];
@@ -143,7 +142,7 @@ var minDiffInBST = function (root: TreeNode | null): number {
     }
     cur = stack.pop()!;
     if (prev !== null) {
-      min = Math.min(min, cur.val - prev);
+      min = Math.min(min, cur.val - prev); // compare in inorder
     }
     prev = cur.val;
     cur = cur.right;

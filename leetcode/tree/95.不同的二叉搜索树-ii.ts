@@ -58,7 +58,7 @@ var generateTrees = function (n: number): Array<TreeNode | null> {
   return generate(1, n);
 
   function generate(start: number, end: number): Array<TreeNode | null> {
-    const allTrees: Array<TreeNode | null> = [];
+    const allTrees: (TreeNode | null)[] = [];
 
     if (start > end) {
       allTrees.push(null);

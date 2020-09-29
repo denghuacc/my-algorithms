@@ -90,7 +90,7 @@ var pathSum = function (root: TreeNode | null, sum: number): number {
     ret +=
       calcPathSum(node.left, sum, subset) +
       calcPathSum(node.right, sum, subset);
-    map.set(subset, map.get(subset)! - 1); // back
+    map.set(subset, map.get(subset)! - 1); // rollback
     return ret;
   }
 };

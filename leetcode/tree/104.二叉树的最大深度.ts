@@ -82,7 +82,7 @@ var maxDepth = function (root: TreeNode | null): number {
       if (node.right) queue.push(node.right);
       size--;
     }
-    max++; // 每次循环深度 + 1
+    max++; // depth add 1 per loop
   }
 
   return max;

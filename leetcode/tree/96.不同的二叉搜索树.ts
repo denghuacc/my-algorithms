@@ -33,9 +33,14 @@
 // @lc code=start
 // dp
 var numTrees = function (n: number): number {
+  // dp[i] -> the count of binary search tree that store value 1...i
   const dp: number[] = new Array(n + 1).fill(0);
   dp[0] = 1;
   dp[1] = 1;
+
+  // [0 ... i-1]   i    [i+1 ... n]
+  // left child parent right child
+  // G(n) = G(i -1) * G(n - i)
 
   for (let i = 2; i <= n; i++) {
     for (let j = 1; j <= i; j++) {

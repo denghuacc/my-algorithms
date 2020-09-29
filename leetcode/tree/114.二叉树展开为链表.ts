@@ -120,7 +120,7 @@ var flatten = function (root: TreeNode | null): void {
   }
 };
 
-// 寻找前驱节点
+// search predecessor
 var flatten = function (root: TreeNode | null): void {
   let cur = root;
   while (cur) {

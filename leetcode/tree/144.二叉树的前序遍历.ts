@@ -48,14 +48,14 @@ class TreeNode {
 // recursive
 var preorderTraversal = function (root: TreeNode | null): number[] {
   const ret: number[] = [];
-  preorder(root, ret);
+  preorder(root);
   return ret;
 
-  function preorder(node: TreeNode | null, arr: number[]) {
+  function preorder(node: TreeNode | null) {
     if (node) {
       ret.push(node.val);
-      preorder(node.left, arr);
-      preorder(node.right, arr);
+      preorder(node.left);
+      preorder(node.right);
     }
   }
 };
@@ -63,24 +63,23 @@ var preorderTraversal = function (root: TreeNode | null): number[] {
 // iterative
 var preorderTraversal = function (root: TreeNode | null): number[] {
   const ret: number[] = [];
-  const stack: TreeNode[] = [];
   if (!root) return ret;
-
+  const stack: TreeNode[] = [];
   stack.push(root);
-  while (stack.length) {
-    const node = stack.pop();
-    ret.push(node!.val); // top -> bottom 1 val
 
-    // 先进 right 后进 left
-    // 栈：后进先出 pop 时先 left 后 right
-    if (node?.right) stack.push(node.right); // right node -> 3 right val
-    if (node?.left) stack.push(node.left); // left node -> 2 left val
+  while (stack.length) {
+    const node = stack.pop()!;
+    ret.push(node.val);
+
+    // first right last left
+    if (node.right) stack.push(node.right);
+    if (node.left) stack.push(node.left);
   }
 
   return ret;
 };
 
-// Morris
+// morris
 var preorderTraversal = function (root: TreeNode | null): number[] {
   const ret: number[] = [];
 

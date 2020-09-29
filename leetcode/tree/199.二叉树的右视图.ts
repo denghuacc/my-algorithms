@@ -79,7 +79,7 @@ var rightSideView = function (root: TreeNode | null): number[] {
     }
 
     // prioritize process right child
-    // and the next loop can get its val
+    // and the next loop can get its value (the right side value)
     if (node.right) dfs(node.right, depth + 1);
     if (node.left) dfs(node.left, depth + 1);
   }

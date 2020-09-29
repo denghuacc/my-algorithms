@@ -53,8 +53,8 @@ var buildTree = function (
   inorder: number[]
 ): TreeNode | null {
   const map: Map<number, number> = new Map();
-  let preIdx = 0; // 前序指针
-  // 中序索引映射 val -> index
+  let preIdx = 0; // preorder pointer
+  // create a map: val -> inorderIndex
   for (let i = 0; i < inorder.length; i++) {
     map.set(inorder[i], i);
   }
@@ -63,12 +63,12 @@ var buildTree = function (
 
   function build(left: number, right: number): TreeNode | null {
     if (left === right) return null;
-    const rootVal = preorder[preIdx]; // 根节点的值
-    const root = new TreeNode(rootVal); // 创建根节点
-    const index = map.get(rootVal)!; // 根节点在中序的索引值
-    preIdx++; // 递增，下一个是左子树
-    root.left = build(left, index); // 根据中序遍历创建左子树
-    root.right = build(index + 1, right); // 根据中序遍历创建右子树
+    const rootVal = preorder[preIdx]; 
+    const root = new TreeNode(rootVal); 
+    const index = map.get(rootVal)!; // get index of root value in the Map
+    preIdx++; // the next postInorder value is left child
+    root.left = build(left, index);
+    root.right = build(index + 1, right);
     return root;
   }
 };
@@ -82,20 +82,23 @@ var buildTree = function (
   const root = new TreeNode(preorder[0]);
   const stack: TreeNode[] = [];
   stack.push(root);
-  let inIdx = 0; // 中序指针
+  let inorderIdx = 0; // inorder pointer from zero
 
   for (let i = 1; i < preorder.length; i++) {
     let preorderVal = preorder[i];
     let node = stack[stack.length - 1];
-    if (node.val !== inorder[inIdx]) {
-      node.left = new TreeNode(preorderVal); // 创建左子树
+    if (node.val !== inorder[inorderIdx]) {
+      node.left = new TreeNode(preorderVal); // create left child
       stack.push(node.left);
     } else {
-      while (stack.length && stack[stack.length - 1].val === inorder[inIdx]) {
-        node = stack.pop()!; // 回溯，知道找到父节点 node 为止
-        inIdx++;
+      while (
+        stack.length &&
+        stack[stack.length - 1].val === inorder[inorderIdx]
+      ) {
+        node = stack.pop()!; // backtrack until find parent node
+        inorderIdx++;
       }
-      node.right = new TreeNode(preorderVal); // 创建右子树
+      node.right = new TreeNode(preorderVal); // create right child
       stack.push(node.right);
     }
   }

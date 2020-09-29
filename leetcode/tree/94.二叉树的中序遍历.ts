@@ -47,19 +47,20 @@ class TreeNode {
 // recursive
 var inorderTraversal = function (root: TreeNode | null): number[] {
   const ret: number[] = [];
-  inOrder(root!, ret);
+  inorder(root);
   return ret;
 
-  function inOrder(node: TreeNode, arr: number[]) {
+  function inorder(node: TreeNode | null) {
     if (node) {
-      if (node.left) inOrder(node.left, arr);
+      inorder(node.left);
       ret.push(node.val);
-      if (node.right) inOrder(node.right, arr);
+      inorder(node.right);
     }
   }
 };
+// @lc code=end
 
-// iterative + stack
+// iterative
 var inorderTraversal = function (root: TreeNode | null): number[] {
   const ret: number[] = [];
   const stack: TreeNode[] = [];
@@ -67,28 +68,26 @@ var inorderTraversal = function (root: TreeNode | null): number[] {
   while (cur || stack.length) {
     while (cur) {
       stack.push(cur);
-      cur = cur.left!; // 后进先出 -> 最小值最先出
+      cur = cur.left!; // LIFO -> the smallest value first out
     }
-    cur = stack.pop()!; // left node or node
-    ret.push(cur.val); // val
+    cur = stack.pop()!; // left node
+    ret.push(cur.val); // add up node value
     cur = cur.right!; // right node
   }
   return ret;
 };
 
-// morris 线索二叉树
+// morris
 var inorderTraversal = function (root: TreeNode | null): number[] {
   const ret: number[] = [];
   let cur = root;
   let prev: TreeNode | null = null;
 
   while (cur) {
-    // 如果没有左孩子，则直接访问右孩子
     if (!cur.left) {
       ret.push(cur.val);
       cur = cur.right!;
     } else {
-      // prev 节点就是当前 root 节点向左走一步，然后一直向右走至无法走为止
       prev = cur.left;
       while (prev.right) {
         prev = prev.right;
@@ -103,4 +102,17 @@ var inorderTraversal = function (root: TreeNode | null): number[] {
 
   return ret;
 };
-// @lc code=end
+
+// morris - Threaded Binary Tree
+
+// If current does not have left child
+
+// a. Add current’s value
+
+// b. Go to the right, i.e., current = current.right
+
+// Else
+
+// a. In current's left subtree, make current the right child of the rightmost node
+
+// b. Go to this left child, i.e., current = current.left
