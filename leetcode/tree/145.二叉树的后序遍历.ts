@@ -47,61 +47,60 @@ class TreeNode {
 // recursive
 var postorderTraversal = function (root: TreeNode | null): number[] {
   const ret: number[] = [];
-  postorder(root, ret);
+  postorder(root);
   return ret;
 
-  function postorder(node: TreeNode | null, arr: number[]) {
+  function postorder(node: TreeNode | null): void {
     if (node) {
-      postorder(node.left, arr);
-      postorder(node.right, arr);
+      postorder(node.left);
+      postorder(node.right);
       ret.push(node.val);
     }
   }
 };
 
-// iterative -> 逆前序
+// iterative -> inverse preorder
 var postorderTraversal = function (root: TreeNode | null): number[] {
   const ret: number[] = [];
-  const stack: TreeNode[] = [];
   if (!root) return ret;
+  const stack: TreeNode[] = [];
 
   stack.push(root);
   while (stack.length) {
-    const node = stack.pop();
-    ret.unshift(node!.val); // unshift -> 和 preorder 相反
+    const node = stack.pop()!;
+    ret.unshift(node!.val); // unshift -> opposite to preorder
 
-    // 先 left 后 right -> 和 preorder 进栈相反
-    if (node?.left) stack.push(node.left);
-    if (node?.right) stack.push(node.right);
-  }
-
-  return ret;
-};
-
-// iteration2
-var postorderTraversal = function (root: TreeNode | null): number[] {
-  const ret: number[] = [];
-  const stack: TreeNode[] = [];
-  let cur = root;
-  let top = null;
-
-  while (cur || stack.length) {
-    while (cur) {
-      stack.push(cur);
-      cur = cur.left;
-    }
-    cur = stack[stack.length - 1];
-
-    if (!cur.right || cur.right == top) {
-      ret.push(cur.val);
-      stack.pop();
-      top = cur;
-      cur = null;
-    } else {
-      cur = cur.right;
-    }
+    // first left last right -> opposite to preorder
+    if (node.left) stack.push(node.left);
+    if (node.right) stack.push(node.right);
   }
 
   return ret;
 };
 // @lc code=end
+
+// iteration2
+var postorderTraversal = function (root: TreeNode | null): number[] {
+  const ret: number[] = [];
+  if (!root) return ret;
+  const stack: TreeNode[] = [];
+  let prev: TreeNode | null = root;
+
+  while (root || stack.length) {
+    while (root) {
+      stack.push(root);
+      root = root.left;
+    }
+    root = stack.pop()!; // the node of minimal value (left bottom)
+    if (!root.right || root.right === prev) {
+      ret.push(root.val);
+      prev = root;
+      root = null;
+    } else {
+      stack.push(root);
+      root = root.right;
+    }
+  }
+
+  return ret;
+};
