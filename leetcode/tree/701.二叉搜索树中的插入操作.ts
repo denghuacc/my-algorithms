@@ -89,25 +89,27 @@ var insertIntoBST = function (
   root: TreeNode | null,
   val: number
 ): TreeNode | null {
+  if (!root) return new TreeNode(val);
+
   let node = root;
   while (node) {
-    if (val > node.val) {
-      if (!node.right) {
-        node.right = new TreeNode(val);
-        return root;
-      } else {
-        node = node.right;
-      }
-    } else if (val < node.val) {
+    if (val < node.val) {
       if (!node.left) {
         node.left = new TreeNode(val);
-        return root;
+        break;
       } else {
         node = node.left;
+      }
+    } else if (val > node.val) {
+      if (!node.right) {
+        node.right = new TreeNode(val);
+        break;
+      } else {
+        node = node.right;
       }
     }
   }
 
-  return new TreeNode(val);
+  return root;
 };
 // @lc code=end
