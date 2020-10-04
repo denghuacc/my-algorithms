@@ -46,17 +46,17 @@ var addTwoNumbers = function (
   l1: ListNode | null,
   l2: ListNode | null
 ): ListNode | null {
-  let dummy = new ListNode(0); // 占位节点
+  let dummy = new ListNode(0); // before the result
   let cur = dummy;
   let carry = 0;
 
   while (l1 || l2) {
     let x = !l1 ? 0 : l1.val;
     let y = !l2 ? 0 : l2.val;
-    let sum = x + y + carry; // 相加
+    let sum = x + y + carry;
 
-    carry = sum > 9 ? 1 : 0; // 是否进位
-    sum = sum % 10; // 相加后的值取一位数
+    carry = sum > 9 ? 1 : 0;
+    sum = sum % 10;
     cur.next = new ListNode(sum);
 
     cur = cur.next;
@@ -64,7 +64,7 @@ var addTwoNumbers = function (
     if (l2) l2 = l2.next;
   }
 
-  if (carry === 1) cur.next = new ListNode(carry); // 再进一位
-  return dummy.next; // 只截取占位节点后面的链表
+  if (carry === 1) cur.next = new ListNode(carry);
+  return dummy.next;
 };
 // @lc code=end
