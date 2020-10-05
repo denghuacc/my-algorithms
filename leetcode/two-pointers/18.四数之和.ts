@@ -35,8 +35,9 @@
  */
 
 // @lc code=start
+// two pointers
 var fourSum = function (nums: number[], target: number): number[][] {
-  nums.sort((a, b) => a - b);
+  nums.sort((a, b) => a - b); // sort
   const ret: number[][] = [];
   if (nums.length < 4) return ret;
 
@@ -63,7 +64,7 @@ var fourSum = function (nums: number[], target: number): number[][] {
           ret.push([nums[a], nums[b], nums[c], nums[d]]);
 
           while (c < d && nums[c + 1] === nums[c]) c++;
-          while (c < d && nums[c - 1] === nums[d]) d--;
+          while (c < d && nums[d - 1] === nums[d]) d--;
           c++;
           d--;
         }
