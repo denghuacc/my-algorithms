@@ -47,21 +47,77 @@ var sortColors = function (nums: number[]) {
 
   let tmp: number;
   while (cur <= p2) {
-    // 遇到 0 时，交换 cur 的值到左边
+    // put it on left side of cur
     if (nums[cur] === 0) {
       tmp = nums[p0];
       nums[p0++] = nums[cur];
       nums[cur++] = tmp;
     }
-    // 遇到 2 时，交换 cur 的值到右边
+    // put it on right side of cur
     else if (nums[cur] === 2) {
       tmp = nums[cur];
       nums[cur] = nums[p2];
       nums[p2--] = tmp;
     }
-    // 遇到 1 时，不交换
+    // no move
     else {
       cur++;
+    }
+  }
+};
+
+// one pointer
+var sortColors = function (nums: number[]) {
+  let n = nums.length;
+  let p = 0;
+
+  for (let i = 0; i < n; i++) {
+    if (nums[i] === 0) {
+      [nums[i], nums[p]] = [nums[p], nums[i]];
+      p++;
+    }
+  }
+
+  for (let i = p; i < n; i++) {
+    if (nums[i] === 1) {
+      [nums[i], nums[p]] = [nums[p], nums[i]];
+      p++;
+    }
+  }
+};
+
+// array
+var sortColors = function (nums: number[]) {
+  let red = 0;
+  let white = 0;
+  let blue = 0;
+
+  // collect color
+  for (const num of nums) {
+    switch (num) {
+      case 0:
+        red++;
+        break;
+      case 1:
+        white++;
+        break;
+      case 2:
+        blue++;
+        break;
+    }
+  }
+
+  // sort nums via color
+  for (let i = 0; i < nums.length; i++) {
+    if (red) {
+      nums[i] = 0;
+      red--;
+    } else if (white) {
+      nums[i] = 1;
+      white--;
+    } else if (blue) {
+      nums[i] = 2;
+      blue--;
     }
   }
 };
