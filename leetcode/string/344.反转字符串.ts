@@ -35,13 +35,13 @@
  */
 
 // @lc code=start
-// string two pointers
+// two pointers
 var reverseString = function (s: string[]): void {
   let start = 0;
   let end = s.length - 1;
 
   while (start < end) {
-    [s[start], s[end]] = [s[end], s[start]];
+    [s[start], s[end]] = [s[end], s[start]]; // swap
     start++;
     end--;
   }
@@ -49,12 +49,12 @@ var reverseString = function (s: string[]): void {
 
 // recursive
 var reverseString = function (s: string[]): void {
-  helper(s, 0, s.length - 1);
+  reverse(s, 0, s.length - 1);
 
-  function helper(s: string[], left: number, right: number) {
+  function reverse(s: string[], left: number, right: number) {
     if (left < right) {
-      [s[left], s[right]] = [s[right], s[left]];
-      helper(s, left + 1, right - 1);
+      [s[left], s[right]] = [s[right], s[left]]; // swap
+      reverse(s, left + 1, right - 1);
     }
   }
 };
