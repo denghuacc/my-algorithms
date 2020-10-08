@@ -70,7 +70,7 @@ var removeNthFromEnd = function (
     len--;
     pre = pre.next;
   }
-  pre.next = pre.next!.next; // 找到节点删除
+  pre.next = pre.next!.next; // remove the targeted node
   return dummy.next;
 };
 
@@ -94,7 +94,7 @@ var removeNthFromEnd = function (
     second = second.next!;
   }
 
-  second.next = second.next!.next; // 找到节点删除
+  second.next = second.next!.next; // remove the targeted node
   return dummy.next;
 };
 // @lc code=end

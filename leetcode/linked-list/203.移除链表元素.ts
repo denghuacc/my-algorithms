@@ -46,16 +46,16 @@ var removeElements = function (
 ): ListNode | null {
   if (!head) return null;
 
-  // 当头部节点是需要删除的节点时
+  // remove head
   if (head && head.val === val) {
     const del = head;
     head = head.next;
-    del.next = null; // leetcode 可无需优化
+    // del.next = null; // leetcode not need optimize
   }
 
   let pre = head!;
 
-  // 非头部节点
+  // not remove head
   while (pre.next) {
     if (pre.next.val === val) {
       const del = pre.next;
@@ -69,21 +69,21 @@ var removeElements = function (
   return head;
 };
 
-// method2 -> 优化 method1
+// method2 -> optimize method1
 var removeElements = function (
   head: ListNode | null,
   val: number
 ): ListNode | null {
   if (!head) return null;
 
-  // 当头部节点是需要删除的节点时
+  // remove head
   while (head && head.val === val) {
     head = head.next;
   }
 
   let pre = head!;
 
-  // 非头部节点
+  // not remove head
   while (pre.next) {
     if (pre.next.val === val) {
       pre.next = pre.next.next;
@@ -95,7 +95,7 @@ var removeElements = function (
   return head;
 };
 
-// method3 使用虚拟头节点
+// method3 -> use dummy head
 var removeElements = function (
   head: ListNode | null,
   val: number
@@ -103,7 +103,7 @@ var removeElements = function (
   const dummy = new ListNode(-1);
   dummy.next = head;
 
-  let pre = dummy; // 要删除的节点的前一个节点
+  let pre = dummy;
 
   while (pre.next) {
     if (pre.next.val === val) {
@@ -118,7 +118,7 @@ var removeElements = function (
   return dummy.next;
 };
 
-// method4 -> 递归
+// method4 -> recursive
 var removeElements = function (
   head: ListNode | null,
   val: number
@@ -135,7 +135,7 @@ var removeElements = function (
   }
 };
 
-// method5 -> 优化 method4
+// method5 -> optimize method4
 var removeElements = function (
   head: ListNode | null,
   val: number

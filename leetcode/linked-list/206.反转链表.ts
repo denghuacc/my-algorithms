@@ -39,12 +39,12 @@ class ListNode {
 // @lc code=start
 // iterative
 var reverseList = function (head: ListNode | null): ListNode | null {
-  let pre = null; // 缓存前一个节点
+  let pre = null; // store prev node
   let cur = head;
 
   while (cur) {
-    const nextTemp = cur.next; // 缓存下一个节点
-    cur.next = pre; // 指向前一个节点
+    const nextTemp = cur.next; // store next node
+    cur.next = pre; // point to prev node
     pre = cur;
     cur = nextTemp;
   }

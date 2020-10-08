@@ -53,24 +53,24 @@ var rotateRight = function (head: ListNode | null, k: number): ListNode | null {
   if (!head.next) return head;
 
   let oldTail = head;
-  let n: number; // 链表长度
+  let n: number;
 
   for (n = 1; oldTail.next != null; n++) {
     oldTail = oldTail.next;
   }
 
-  oldTail.next = head; // 连成环
+  oldTail.next = head; // link to head
 
   let newTail = head;
 
-  // 新的尾部位置 n - (k % n) - 1
+  // new tail: n - (k % n) - 1
   for (let i = 0; i < n - (k % n) - 1; i++) {
     newTail = newTail.next!;
   }
 
   let newHead = newTail.next;
 
-  newTail.next = null; // 断开环
+  newTail.next = null; // break
 
   return newHead;
 };
@@ -80,21 +80,19 @@ var rotateRight = function (head: ListNode | null, k: number): ListNode | null {
   if (!head || k === 0) return head;
 
   let tmp: ListNode = head;
-  let size = 0;
+  let n = 0;
 
-  // 求链表长度
   while (tmp) {
     tmp = tmp.next!;
-    size++;
+    n++;
   }
 
-  k = k % size;
+  k = k % n;
   if (k === 0) return head;
 
-  let node = head; // 保存原来的头节点
+  let node = head;
   tmp = head;
 
-  // 快慢指针
   while (k > 0) {
     k--;
     tmp = tmp.next!;
@@ -104,9 +102,9 @@ var rotateRight = function (head: ListNode | null, k: number): ListNode | null {
     tmp = tmp.next;
   }
 
-  const ret = head!.next; // 新的头节点
-  head!.next = null; // 断开连接
-  tmp.next = node; // 拼接原来的头节点
+  const ret = head!.next; // new head
+  head!.next = null; // break
+  tmp.next = node; // link to old head
 
   return ret;
 };

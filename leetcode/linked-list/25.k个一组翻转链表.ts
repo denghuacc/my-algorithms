@@ -57,7 +57,7 @@ var reverseKGroup = function (
   head: ListNode | null,
   k: number
 ): ListNode | null {
-  const stack: Array<ListNode | null> = [];
+  const stack: ListNode[] = [];
   const dummy = new ListNode(0);
   let p = dummy;
 

@@ -58,8 +58,8 @@ var partition = function partition(
     head = head.next;
   }
 
-  after.next = null; // 最后节点
-  before.next = afterHead.next; // 连接链表
+  after.next = null;
+  before.next = afterHead.next; // link
 
   return beforeHead.next;
 };

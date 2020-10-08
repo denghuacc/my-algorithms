@@ -43,7 +43,7 @@ class ListNode {
 // two pointers
 var reorderList = function (head: ListNode | null) {
   if (!head) return;
-  const list = [];
+  const list: ListNode[] = [];
 
   while (head) {
     list.push(head);

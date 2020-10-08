@@ -41,7 +41,7 @@ class ListNode {
 // @lc code=start
 // sort
 var mergeKLists = function (lists: Array<ListNode | null>): ListNode | null {
-  const nums: number[] = []; // 所有链表的值
+  const nums: number[] = []; // the values of linked list
   let dummy: ListNode;
   let point: ListNode;
   dummy = point = new ListNode(0);
@@ -53,7 +53,7 @@ var mergeKLists = function (lists: Array<ListNode | null>): ListNode | null {
     }
   }
 
-  nums.sort((a, b) => a - b); // 排序
+  nums.sort((a, b) => a - b); // sort
 
   for (const num of nums) {
     point.next = new ListNode(num);
@@ -70,7 +70,7 @@ var mergeKLists = function (lists: Array<ListNode | null>): ListNode | null {
 
   while (len > 1) {
     for (let i = 0; i < Math.floor(len / 2); i++) {
-      lists[i] = mergeTwoLists(lists[i], lists[len - 1 - i]); // 两两合并
+      lists[i] = mergeTwoLists(lists[i], lists[len - 1 - i]); // merge two linked list
     }
     len = Math.floor((len + 1) / 2);
   }

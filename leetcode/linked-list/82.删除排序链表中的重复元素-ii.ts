@@ -40,18 +40,23 @@ class ListNode {
 }
 
 // @lc code=start
-// iterative
+// two pointers
 var deleteDuplicates = function (head: ListNode | null): ListNode | null {
-  if (!head) return head;
+  if (!head) return null;
   const dummy = new ListNode(0);
   dummy.next = head;
   let slow = dummy;
   let fast = dummy.next;
 
   while (fast) {
-    while (fast.next && fast.val === fast.next.val) fast = fast.next;
-    if (slow.next === fast) slow = slow.next;
-    else slow.next = fast.next;
+    while (fast.next && fast.val === fast.next.val) {
+      fast = fast.next;
+    }
+    if (slow.next === fast) {
+      slow = slow.next;
+    } else {
+      slow.next = fast.next;
+    }
     fast = fast.next!;
   }
 
@@ -60,9 +65,11 @@ var deleteDuplicates = function (head: ListNode | null): ListNode | null {
 
 // recursive
 var deleteDuplicates = function (head: ListNode | null): ListNode | null {
-  if (!head) return head;
+  if (!head) return null;
   if (head.next && head.val === head.next.val) {
-    while (head.next && head.val === head.next.val) head = head.next;
+    while (head.next && head.val === head.next.val) {
+      head = head.next;
+    }
     return deleteDuplicates(head.next);
   } else {
     head.next = deleteDuplicates(head.next);

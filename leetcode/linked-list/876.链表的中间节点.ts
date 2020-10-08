@@ -59,7 +59,7 @@ class ListNode {
 
 // @lc code=start
 var middleNode = function (head: ListNode | null): ListNode | null {
-  const node = new Array<ListNode>(100);
+  const node: ListNode[] = new Array(100);
   let n = 0;
   while (head) {
     node[n++] = head;

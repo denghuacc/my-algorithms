@@ -53,13 +53,12 @@ var sortList = function (head: ListNode | null): ListNode | null {
   }
 
   let tmp = slow.next;
-  slow.next = null; // 切断中点
+  slow.next = null; // break
   let left = sortList(head);
   let right = sortList(tmp);
   let h = new ListNode(-1);
   let ret = h;
 
-  // 分组排序
   while (left && right) {
     if (left.val < right.val) {
       h.next = left;
