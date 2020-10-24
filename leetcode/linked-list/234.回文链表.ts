@@ -45,7 +45,7 @@ class ListNode {
 // @lc code=start
 // two pointers
 var isPalindrome = function (head: ListNode | null): boolean {
-  const arr = [];
+  const arr: number[] = [];
 
   let cur = head;
   while (cur) {
@@ -77,7 +77,8 @@ var isPalindrome = function (head: ListNode | null): boolean {
     fast = fast.next.next!;
   }
 
-  // 将 slow 之后链表进行断开且反转
+  // now the slow node is the middle node
+  // reverse the next half of node
   while (slow) {
     let p = slow.next!;
     slow.next = pre;
@@ -85,7 +86,7 @@ var isPalindrome = function (head: ListNode | null): boolean {
     slow = p;
   }
 
-  // 前后链表进行比较
+  // compare with prev and next half of middle linked list
   while (head && pre) {
     if (head.val !== pre.val) return false;
     head = head.next;
@@ -103,7 +104,7 @@ var isPalindrome = function (head: ListNode | null): boolean {
   function recursivelyCheck(curNode: ListNode | null): boolean {
     if (curNode) {
       if (!recursivelyCheck(curNode.next)) return false;
-      if (curNode.val != frontPointer.val) return false;
+      if (curNode.val !== frontPointer.val) return false;
       frontPointer = frontPointer.next!;
     }
     return true;

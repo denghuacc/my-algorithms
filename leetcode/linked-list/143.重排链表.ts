@@ -43,7 +43,7 @@ class ListNode {
 // two pointers
 var reorderList = function (head: ListNode | null) {
   if (!head) return;
-  const list: ListNode[] = [];
+  const list: ListNode[] = []; // linear list
 
   while (head) {
     list.push(head);
@@ -53,7 +53,7 @@ var reorderList = function (head: ListNode | null) {
   let i = 0;
   let j = list.length - 1;
 
-  // 依次头尾排列列表
+  // refactor linked list
   while (i < j) {
     list[i].next = list[j];
     i++;
@@ -63,5 +63,52 @@ var reorderList = function (head: ListNode | null) {
   }
 
   list[i].next = null;
+};
+
+var reorderList = function (head: ListNode | null) {
+  if (!head) return;
+  const mid = middleNode(head); // middle node
+  const l1 = head;
+  let l2 = mid.next;
+  mid.next = null;
+  l2 = reverseList(l2); // reverse l2
+  mergeList(l1, l2); // merge l1 l2
+
+  function middleNode(head: ListNode): ListNode {
+    let slow = head;
+    let fast = head;
+    while (fast.next && fast.next.next) {
+      slow = slow.next!;
+      fast = fast.next.next;
+    }
+    return slow;
+  }
+
+  function reverseList(head: ListNode | null): ListNode | null {
+    let prev: ListNode | null = null;
+    let cur = head;
+    while (cur) {
+      let nextTmp = cur.next!;
+      cur.next = prev;
+      prev = cur;
+      cur = nextTmp;
+    }
+    return prev;
+  }
+
+  function mergeList(l1: ListNode | null, l2: ListNode | null) {
+    let tmpL1: ListNode | null;
+    let tmpL2: ListNode | null;
+    while (l1 && l2) {
+      tmpL1 = l1.next;
+      tmpL2 = l2.next;
+
+      l1.next = l2;
+      l1 = tmpL1;
+
+      l2.next = l1;
+      l2 = tmpL2;
+    }
+  }
 };
 // @lc code=end
