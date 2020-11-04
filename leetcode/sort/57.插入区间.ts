@@ -39,40 +39,40 @@ var insert = function (
   newInterval: number[]
 ): number[][] {
   intervals.push(newInterval);
-  const len = intervals.length;
-  if (len === 0) return [];
+  const n = intervals.length;
+  if (n === 0) return [];
   const ret: number[][] = [];
-  intervals.sort((a, b) => a[0] - b[0]);
+  intervals.sort((a, b) => a[0] - b[0]); // sort
   ret.push(intervals[0]);
 
-  for (let i = 1; i < len; i++) {
+  for (let i = 1; i < n; i++) {
     if (intervals[i][0] > ret[ret.length - 1][1]) {
-      ret.push(intervals[i]);
+      ret.push(intervals[i]); // concat interval
     } else {
       if (intervals[i][1] > ret[ret.length - 1][1]) {
-        ret[ret.length - 1][1] = intervals[i][1];
+        ret[ret.length - 1][1] = intervals[i][1]; // merge interval
       }
     }
   }
   return ret;
 };
 
-// array sort
+// array sort 2
 var insert = function (
   intervals: number[][],
   newInterval: number[]
 ): number[][] {
   intervals.push(newInterval);
-  intervals.sort((a, b) => a[0] - b[0]);
+  intervals.sort((a, b) => a[0] - b[0]); // sort
   const ret: number[][] = [];
   let idx = -1;
 
   for (const interval of intervals) {
     if (idx === -1 || interval[0] > ret[idx][1]) {
-      ret.push(interval);
+      ret.push(interval); // concat interval
       idx++;
     } else {
-      ret[idx][1] = Math.max(ret[idx][1], interval[1]);
+      ret[idx][1] = Math.max(ret[idx][1], interval[1]); // merge interval
     }
   }
 
