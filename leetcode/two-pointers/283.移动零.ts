@@ -37,6 +37,8 @@
 var moveZeroes = function (nums: number[]): void {
   let point = 0;
   for (let i = 0; i < nums.length; i++) {
+    // move nonzero number forward
+    // [nonzero point zero]
     if (nums[i] !== 0) {
       [nums[i], nums[point]] = [nums[point], nums[i]];
       point++;
@@ -44,14 +46,18 @@ var moveZeroes = function (nums: number[]): void {
   }
 };
 
-// two pointers
+// two pointers 2
 var moveZeroes = function (nums: number[]): void {
   let point = 0;
+  // move nonzero number forward
+  // [nonzero point oldNumber]
   for (let i = 0; i < nums.length; i++) {
     if (nums[i] !== 0) {
       nums[point++] = nums[i];
     }
   }
+
+  // [nonzero point zero]
   for (let i = point; i < nums.length; i++) {
     nums[i] = 0;
   }
