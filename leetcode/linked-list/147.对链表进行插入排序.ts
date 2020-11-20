@@ -76,9 +76,9 @@ var insertionSortList = function (head: ListNode | null): ListNode | null {
   return dummy.next;
 };
 
+// use tail pointer
 var insertionSortList = function (head: ListNode | null): ListNode | null {
-  const MIN = Number.MIN_SAFE_INTEGER;
-  let dummy = new ListNode(MIN);
+  let dummy = new ListNode(0);
   let pre = dummy;
   let tail = dummy;
   let cur = head;
