@@ -104,8 +104,8 @@ var countNodes = function (root: TreeNode | null): number {
 // binary search 2
 var countNodes = function (root: TreeNode | null): number {
   if (!root) return 0;
-  const leftDepth = getDepth(root.left!);
-  const rightDepth = getDepth(root.right!);
+  const leftDepth = getDepth(root.left);
+  const rightDepth = getDepth(root.right);
 
   if (leftDepth === rightDepth) {
     return Math.pow(2, leftDepth) + countNodes(root.right);
@@ -113,11 +113,11 @@ var countNodes = function (root: TreeNode | null): number {
     return Math.pow(2, rightDepth) + countNodes(root.left);
   }
 
-  function getDepth(node: TreeNode) {
+  function getDepth(node: TreeNode | null) {
     let depth = 0;
     while (node) {
       depth += 1;
-      node = node.left!;
+      node = node.left;
     }
     return depth;
   }
