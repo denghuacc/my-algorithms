@@ -54,7 +54,7 @@ var searchRange = function (nums: number[], target: number): number[] {
 
 // array 线性扫描
 var searchRange = function (nums: number[], target: number): number[] {
-  const ret: number[] = [-1, -1];
+  const ret = [-1, -1];
 
   for (let i = 0; i < nums.length; i++) {
     if (nums[i] === target) {
@@ -77,34 +77,36 @@ var searchRange = function (nums: number[], target: number): number[] {
 
 // binary search
 var searchRange = function (nums: number[], target: number): number[] {
-  const ret = [-1, -1];
-  let leftIdx = extremeInsertionIndex(nums, target, true);
-  if (leftIdx === nums.length || nums[leftIdx] !== target) {
-    return ret;
-  }
-  ret[0] = leftIdx;
-  ret[1] = extremeInsertionIndex(nums, target, false) - 1;
+  let ret = [-1, -1];
+  let leftIdx = binarySearch(nums, target, true);
+  let rightIdx = binarySearch(nums, target, false) - 1;
 
+  if (
+    leftIdx <= rightIdx &&
+    rightIdx < nums.length &&
+    nums[leftIdx] === target &&
+    nums[rightIdx] === target
+  ) {
+    ret = [leftIdx, rightIdx];
+  }
   return ret;
 
-  function extremeInsertionIndex(
-    nums: number[],
-    target: number,
-    left: boolean
-  ) {
-    let idx = 0;
-    let len = nums.length;
+  function binarySearch(nums: number[], target: number, isLow: boolean) {
+    let left = 0;
+    let right = nums.length - 1;
+    let ret = nums.length;
 
-    while (idx < len) {
-      const mid = Math.floor((idx + len) / 2);
-      if (nums[mid] > target || (left && target === nums[mid])) {
-        len = mid;
+    while (left <= right) {
+      const mid = Math.floor((left + right) / 2);
+      if (nums[mid] > target || (isLow && nums[mid] >= target)) {
+        right = mid - 1;
+        ret = mid;
       } else {
-        idx = mid + 1;
+        left = mid + 1;
       }
     }
 
-    return idx;
+    return ret;
   }
 };
 // @lc code=end
