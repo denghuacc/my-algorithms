@@ -47,7 +47,7 @@
  */
 
 // @lc code=start
-// sliding window
+// two pointers
 var characterReplacement = function (s: string, k: number): number {
   const map: Map<string, number> = new Map();
   let left = 0;
