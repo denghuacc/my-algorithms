@@ -11,6 +11,11 @@ export default class ObjectStack<T> {
     this.count = 0;
   }
 
+  // 获取栈里的元素的数量 O(1)
+  get size(): number {
+    return this.count;
+  }
+
   // 入栈 O(1)
   push(element: T): void {
     this.items[this.count] = element;
@@ -36,14 +41,9 @@ export default class ObjectStack<T> {
     return this.items[this.count - 1];
   }
 
-  // 获取栈里的元素的数量 O(1)
-  size(): number {
-    return this.count;
-  }
-
   // 检查栈是否为空 O(1)
   isEmpty(): boolean {
-    return this.size() === 0;
+    return this.size === 0;
   }
 
   // 清空栈 O(1)

@@ -5,10 +5,15 @@
  * 新添加的或待删除的元素都保存在栈的同一端，称作栈顶，另一端就叫栈底。
  */
 export default class ArrayStack<T> {
-  items: Array<T>;
+  items: T[];
 
   constructor() {
     this.items = [];
+  }
+
+  // 获取栈里的元素的数量 O(1)
+  get size(): number {
+    return this.items.length;
   }
 
   // 入栈 O(1)
@@ -26,14 +31,9 @@ export default class ArrayStack<T> {
     return this.items[this.items.length - 1];
   }
 
-  // 获取栈里的元素的数量 O(1)
-  size(): number {
-    return this.items.length;
-  }
-
   // 检查栈是否为空 O(1)
   isEmpty(): boolean {
-    return this.items.length === 0;
+    return this.size === 0;
   }
 
   // 清空栈 O(1)

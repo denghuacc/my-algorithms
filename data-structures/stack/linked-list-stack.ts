@@ -11,6 +11,11 @@ export default class LinkedListStack<T> {
     this.list = new LinkedList();
   }
 
+  // 获取栈的元素的数量 O(1)
+  get size(): number {
+    return this.list.size;
+  }
+
   // 入栈 O(1)
   push(element: T): void {
     this.list.addFirst(element);
@@ -24,11 +29,6 @@ export default class LinkedListStack<T> {
   // 获取栈顶的元素 O(1)
   peek(): T | undefined {
     return this.list.getFirst();
-  }
-
-  // 获取栈的元素的数量 O(1)
-  size(): number {
-    return this.list.size;
   }
 
   // 查询栈是否为空 O(1)

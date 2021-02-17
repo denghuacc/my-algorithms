@@ -1,7 +1,7 @@
 /**
  * @name MapSet 集合
  * @description 使用对象实现 ES6 集合
- * 因为对象的 key 值只支持字符串和 symbol，其它类型的值都会先转换成字符串，有时可能会出错
+ * 因为对象的 key 值只支持字符串和 symbol，其它类型的值都会先转换成字符串，所以可能会出错
  */
 export default class MapSet<T> {
   items: any;

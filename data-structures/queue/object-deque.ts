@@ -14,6 +14,11 @@ export default class ObjectDeque<T> {
     this.lowestCount = 0;
   }
 
+  // 返回队列的元素的数量 O(1)
+  get size(): number {
+    return this.count - this.lowestCount;
+  }
+
   // 队首入列 O(N)
   addFront(element: T): void {
     if (this.isEmpty()) {
@@ -74,14 +79,9 @@ export default class ObjectDeque<T> {
     return this.items[this.count - 1];
   }
 
-  // 返回队列的元素的数量 O(1)
-  size(): number {
-    return this.count - this.lowestCount;
-  }
-
   // 查询队列是否为空 O(1)
   isEmpty(): boolean {
-    return this.size() === 0;
+    return this.size === 0;
   }
 
   // 清空队列 O(1)

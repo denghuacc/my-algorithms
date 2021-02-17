@@ -16,6 +16,11 @@ export default class LinkedListQueue<T> {
     this.count = 0;
   }
 
+  // 获取队列的元素数量 O(1)
+  get size(): number {
+    return this.count;
+  }
+
   // 入列 O(1)
   enqueue(key: T): void {
     if (this.tail == undefined) {
@@ -50,14 +55,9 @@ export default class LinkedListQueue<T> {
     return this.head?.key;
   }
 
-  // 获取队列的元素数量 O(1)
-  size(): number {
-    return this.count;
-  }
-
   // 查询队列是否为空 O(1)
   isEmpty(): boolean {
-    return this.size() === 0;
+    return this.size === 0;
   }
 
   // 清空队列 O(1)

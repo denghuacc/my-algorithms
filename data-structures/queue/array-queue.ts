@@ -6,10 +6,15 @@
  * 在现实中，最常见的队列例子就是排队。
  */
 export default class ArrayQueue<T> {
-  items: Array<T>;
+  items: T[];
 
   constructor() {
     this.items = [];
+  }
+
+  // 返回队列的元素的数量 O(1)
+  get size(): number {
+    return this.items.length;
   }
 
   // 入列 O(1)
@@ -27,14 +32,9 @@ export default class ArrayQueue<T> {
     return this.items[0];
   }
 
-  // 返回队列的元素的数量 O(1)
-  size(): number {
-    return this.items.length;
-  }
-
   // 查询队列是否为空 O(1)
   isEmpty(): boolean {
-    return this.items.length === 0;
+    return this.size === 0;
   }
 
   // 清空队列 O(1)

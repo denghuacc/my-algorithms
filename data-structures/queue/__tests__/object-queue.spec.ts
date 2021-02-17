@@ -43,17 +43,17 @@ describe("ObjectQueue", () => {
   });
 
   test("size", () => {
-    expect(queue.size()).toBe(0);
+    expect(queue.size).toBe(0);
     queue.enqueue(1);
-    expect(queue.size()).toBe(1);
+    expect(queue.size).toBe(1);
     queue.enqueue(2);
-    expect(queue.size()).toBe(2);
+    expect(queue.size).toBe(2);
     queue.enqueue(3);
-    expect(queue.size()).toBe(3);
+    expect(queue.size).toBe(3);
     queue.dequeue();
-    expect(queue.size()).toBe(2);
+    expect(queue.size).toBe(2);
     queue.clear();
-    expect(queue.size()).toBe(0);
+    expect(queue.size).toBe(0);
   });
 
   test("isEmpty", () => {
@@ -61,7 +61,7 @@ describe("ObjectQueue", () => {
     queue.enqueue(1);
     expect(queue.isEmpty()).toBe(false);
     queue.enqueue(2);
-    expect(queue.size()).toBe(2);
+    expect(queue.size).toBe(2);
     queue.enqueue(3);
     expect(queue.isEmpty()).toBe(false);
     queue.enqueue(2);
@@ -73,10 +73,10 @@ describe("ObjectQueue", () => {
   test("clear", () => {
     queue.enqueue(1);
     queue.enqueue(2);
-    expect(queue.size()).toBe(2);
+    expect(queue.size).toBe(2);
     expect(queue.isEmpty()).toBe(false);
     queue.clear();
-    expect(queue.size()).toBe(0);
+    expect(queue.size).toBe(0);
     expect(queue.isEmpty()).toBe(true);
   });
 });

@@ -1,12 +1,17 @@
 /**
  * @name ArrayDeque 双端队列
- * @description  使用数组实现双端队列
+ * @description  使用数组实现双端队列，JavaScript 的数组天生就是一个双端队列
  */
 export default class ArrayDeque<T> {
-  items: Array<T>;
+  items: T[];
 
   constructor() {
     this.items = [];
+  }
+
+  // 返回队列的元素的数量 O(1)
+  get size(): number {
+    return this.items.length;
   }
 
   // 队首入列 O(N)
@@ -39,14 +44,9 @@ export default class ArrayDeque<T> {
     return this.items[this.items.length - 1];
   }
 
-  // 返回队列的元素的数量 O(1)
-  size(): number {
-    return this.items.length;
-  }
-
   // 查询队列是否为空 O(1)
   isEmpty(): boolean {
-    return this.items.length === 0;
+    return this.size === 0;
   }
 
   // 清空队列 O(1)

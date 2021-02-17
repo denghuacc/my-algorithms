@@ -78,17 +78,17 @@ describe("ArrayQueue", () => {
   });
 
   test("size", () => {
-    expect(deque.size()).toBe(0);
+    expect(deque.size).toBe(0);
     deque.addBack(1);
-    expect(deque.size()).toBe(1);
+    expect(deque.size).toBe(1);
     deque.addBack(2);
-    expect(deque.size()).toBe(2);
+    expect(deque.size).toBe(2);
     deque.addBack(3);
-    expect(deque.size()).toBe(3);
+    expect(deque.size).toBe(3);
     deque.removeFront();
-    expect(deque.size()).toBe(2);
+    expect(deque.size).toBe(2);
     deque.clear();
-    expect(deque.size()).toBe(0);
+    expect(deque.size).toBe(0);
   });
 
   test("isEmpty", () => {
@@ -96,7 +96,7 @@ describe("ArrayQueue", () => {
     deque.addBack(1);
     expect(deque.isEmpty()).toBe(false);
     deque.addBack(2);
-    expect(deque.size()).toBe(2);
+    expect(deque.size).toBe(2);
     deque.addBack(3);
     expect(deque.isEmpty()).toBe(false);
     deque.addBack(2);
@@ -108,10 +108,10 @@ describe("ArrayQueue", () => {
   test("clear", () => {
     deque.addBack(1);
     deque.addBack(2);
-    expect(deque.size()).toBe(2);
+    expect(deque.size).toBe(2);
     expect(deque.isEmpty()).toBe(false);
     deque.clear();
-    expect(deque.size()).toBe(0);
+    expect(deque.size).toBe(0);
     expect(deque.isEmpty()).toBe(true);
   });
 });

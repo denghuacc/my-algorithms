@@ -47,17 +47,17 @@ describe("LinkedListStack", () => {
   });
 
   test("size", () => {
-    expect(stack.size()).toBe(0);
+    expect(stack.size).toBe(0);
     stack.push(1);
-    expect(stack.size()).toBe(1);
+    expect(stack.size).toBe(1);
     stack.push(2);
-    expect(stack.size()).toBe(2);
+    expect(stack.size).toBe(2);
     stack.push(3);
-    expect(stack.size()).toBe(3);
+    expect(stack.size).toBe(3);
     stack.pop();
-    expect(stack.size()).toBe(2);
+    expect(stack.size).toBe(2);
     stack.clear();
-    expect(stack.size()).toBe(0);
+    expect(stack.size).toBe(0);
   });
 
   test("isEmpty", () => {
@@ -77,10 +77,10 @@ describe("LinkedListStack", () => {
   test("clear", () => {
     stack.push(1);
     stack.push(2);
-    expect(stack.size()).toBe(2);
+    expect(stack.size).toBe(2);
     expect(stack.isEmpty()).toBe(false);
     stack.clear();
-    expect(stack.size()).toBe(0);
+    expect(stack.size).toBe(0);
     expect(stack.isEmpty()).toBe(true);
   });
 });

@@ -13,6 +13,11 @@ export default class ObjectQueue<T> {
     this.lowestCount = 0;
   }
 
+  // 返回队列的元素的数量 O(1)
+  get size(): number {
+    return this.count - this.lowestCount;
+  }
+
   // 入列 O(1)
   enqueue(element: T): void {
     this.items[this.count] = element;
@@ -38,14 +43,9 @@ export default class ObjectQueue<T> {
     return this.items[this.lowestCount];
   }
 
-  // 返回队列的元素的数量 O(1)
-  size(): number {
-    return this.count - this.lowestCount;
-  }
-
   // 查询队列是否为空 O(1)
   isEmpty(): boolean {
-    return this.size() === 0;
+    return this.size === 0;
   }
 
   // 清空队列 O(1)
