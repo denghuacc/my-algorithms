@@ -15,7 +15,7 @@ export function sudokuSolver(
 function solveSudoku(grid: number[][]): boolean {
   let row = 0;
   let col = 0;
-  let checkBlankSpaces = false; // ! 检查是否有空白，即值为 0
+  let checkBlankSpaces = false; // 检查是否有空白，即值为 0
 
   for (row = 0; row < grid.length; row++) {
     for (col = 0; col < grid[row].length; col++) {
@@ -27,20 +27,20 @@ function solveSudoku(grid: number[][]): boolean {
     if (checkBlankSpaces === true) break;
   }
 
-  if (checkBlankSpaces === false) return true; // ! 没有空白， 直接返回 true
+  if (checkBlankSpaces === false) return true; // 没有空白， 直接返回 true
 
   for (let num = 1; num <= 9; num++) {
     if (isSafe(grid, row, col, num)) {
-      grid[row][col] = num; // ! 设置该数字
+      grid[row][col] = num; // 设置该数字
       if (solveSudoku(grid)) return true;
-      grid[row][col] = UNASSIGNED; // ! 回退重置为 0
+      grid[row][col] = UNASSIGNED; // 回退重置为 0
     }
   }
 
   return false;
 }
 
-// ! 检查 grid[row][col] 位置 num 是否合适 -> 即其它位置原先不存在该数字
+// 检查 grid[row][col] 位置 num 是否合适 -> 即其它位置原先不存在该数字
 function isSafe(
   grid: number[][],
   row: number,
@@ -54,7 +54,7 @@ function isSafe(
   );
 }
 
-// ! 检查数字是否在行中存在
+// 检查数字是否在行中存在
 function usedInRow(grid: number[][], row: number, num: number): boolean {
   for (let col = 0; col < grid.length; col++) {
     if (grid[row][col] === num) return true;
@@ -62,7 +62,7 @@ function usedInRow(grid: number[][], row: number, num: number): boolean {
   return false;
 }
 
-// ! 检查数字是否在列中存在
+// 检查数字是否在列中存在
 function usedInCol(grid: number[][], col: number, num: number): boolean {
   for (let row = 0; row < grid.length; row++) {
     if (grid[row][col] === num) return true;
@@ -70,7 +70,7 @@ function usedInCol(grid: number[][], col: number, num: number): boolean {
   return false;
 }
 
-// ! 检查数字是否在 3 * 3 盒子中存在
+// 检查数字是否在 3 * 3 盒子中存在
 function usedInBox(
   grid: number[][],
   boxStartRow: number,

@@ -30,17 +30,17 @@ function findPath(
   }
 
   if (isSafe(maze, x, y) === true) {
-    solution[x][y] = 1; // ! 标记为 1
+    solution[x][y] = 1; // 标记为 1
     if (findPath(maze, x + 1, y, solution)) return true;
     if (findPath(maze, x, y + 1, solution)) return true;
-    solution[x][y] = 0; // ! 退回为 0
+    solution[x][y] = 0; // 退回为 0
     return false;
   }
 
   return false;
 }
 
-// ! 块为 1 时空闲（安全）
+// 块为 1 时空闲（安全）
 function isSafe(maze: number[][], x: number, y: number): boolean {
   const n = maze.length;
   const m = maze[0].length;
