@@ -5,7 +5,7 @@ describe("Depth First Search", () => {
   let count: number;
   const vertices = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
   const dfsCallBack = ["A", "B", "E", "I", "F", "C", "D", "G", "H"];
-  let graph: Graph;
+  let graph: Graph<string>;
 
   beforeEach(() => {
     count = 0;
@@ -50,29 +50,37 @@ describe("Depth First Search", () => {
 
     const result = dfs(graph);
 
-    expect(result.discovery).toEqual({
-      A: 1,
-      B: 11,
-      C: 2,
-      D: 8,
-      E: 4,
-      F: 3,
-    });
-    expect(result.finished).toEqual({
-      A: 10,
-      B: 12,
-      C: 7,
-      D: 9,
-      E: 5,
-      F: 6,
-    });
-    expect(result.predecessors).toEqual({
-      A: null,
-      B: null,
-      C: "A",
-      D: "A",
-      E: "F",
-      F: "C",
-    });
+    expect(result.discovery).toEqual(
+      new Map([
+        ["A", 1],
+        ["B", 11],
+        ["C", 2],
+        ["D", 8],
+        ["E", 4],
+        ["F", 3],
+      ])
+    );
+
+    expect(result.finished).toEqual(
+      new Map([
+        ["A", 10],
+        ["B", 12],
+        ["C", 7],
+        ["D", 9],
+        ["E", 5],
+        ["F", 6],
+      ])
+    );
+
+    expect(result.predecessors).toEqual(
+      new Map([
+        ["A", null],
+        ["B", null],
+        ["C", "A"],
+        ["D", "A"],
+        ["E", "F"],
+        ["F", "C"],
+      ])
+    );
   });
 });

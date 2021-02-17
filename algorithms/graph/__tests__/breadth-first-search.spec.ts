@@ -4,7 +4,7 @@ import Graph from "../../../data-structures/graph/graph";
 describe("Breadth First Search", () => {
   let count: number;
   const vertices = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
-  let graph: Graph;
+  let graph: Graph<string>;
 
   beforeEach(() => {
     count = 0;
@@ -38,27 +38,31 @@ describe("Breadth First Search", () => {
   test("shortest path - BFS", () => {
     const shortestPathA = bfs(graph, vertices[0]);
 
-    expect(shortestPathA.distances).toEqual({
-      A: 0,
-      B: 1,
-      C: 1,
-      D: 1,
-      E: 2,
-      F: 2,
-      G: 2,
-      H: 2,
-      I: 3,
-    });
-    expect(shortestPathA.predecessors).toEqual({
-      A: null,
-      B: "A",
-      C: "A",
-      D: "A",
-      E: "B",
-      F: "B",
-      G: "C",
-      H: "D",
-      I: "E",
-    });
+    expect(shortestPathA.distances).toEqual(
+      new Map([
+        ["A", 0],
+        ["B", 1],
+        ["C", 1],
+        ["D", 1],
+        ["E", 2],
+        ["F", 2],
+        ["G", 2],
+        ["H", 2],
+        ["I", 3],
+      ])
+    );
+    expect(shortestPathA.predecessors).toEqual(
+      new Map([
+        ["A", null],
+        ["B", "A"],
+        ["C", "A"],
+        ["D", "A"],
+        ["E", "B"],
+        ["F", "B"],
+        ["G", "C"],
+        ["H", "D"],
+        ["I", "E"],
+      ])
+    );
   });
 });

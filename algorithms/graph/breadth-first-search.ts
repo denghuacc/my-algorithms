@@ -7,25 +7,23 @@ enum Colors {
   BLACK = 2,
 }
 
-function initializeColor(
-  vertices: (string | number)[]
-): Record<number | string, Colors> {
-  const color: Record<string | number, Colors> = {};
+function initializeColor<T>(vertices: T[]): Map<T, Colors> {
+  const color: Map<T, Colors> = new Map();
   for (let i = 0; i < vertices.length; i++) {
-    color[vertices[i]] = Colors.WHITE;
+    color.set(vertices[i], Colors.WHITE);
   }
   return color;
 }
 
-export function breadthFirstSearch(
-  graph: Graph,
-  startVertex: string | number,
+export function breadthFirstSearch<T>(
+  graph: Graph<T>,
+  startVertex: T,
   callback: Function
 ): void {
   const vertices = graph.getVertices();
   const adjList = graph.getAdjList();
   const color = initializeColor(vertices);
-  const queue = new Queue<string | number>();
+  const queue = new Queue<T>();
 
   queue.enqueue(startVertex);
 
@@ -33,59 +31,59 @@ export function breadthFirstSearch(
     const u = queue.dequeue()!;
     const neighbors = adjList.get(u)!;
 
-    color[u] = Colors.GREY;
+    color.set(u, Colors.GREY);
 
     for (let i = 0; i < neighbors!.length; i++) {
       const w = neighbors[i];
-      if (color[w] === Colors.WHITE) {
-        color[w] = Colors.GREY;
+      if (color.get(w) === Colors.WHITE) {
+        color.set(w, Colors.GREY);
         queue.enqueue(w);
       }
     }
 
-    color[u] = Colors.BLACK;
+    color.set(u, Colors.BLACK);
     if (callback) callback(u);
   }
 }
 
-interface ReturnObj {
-  distances: Record<string | number, number>;
-  predecessors: Record<string | number, string | number | null>;
+interface ReturnObj<T> {
+  distances: Map<T, number>;
+  predecessors: Map<T, T | null>;
 }
 
 // 改进的 bfs
-export function bfs(graph: Graph, startVertex: string | number): ReturnObj {
+export function bfs<T>(graph: Graph<T>, startVertex: T): ReturnObj<T> {
   const vertices = graph.getVertices();
   const adjList = graph.getAdjList();
   const color = initializeColor(vertices);
-  const queue = new Queue<string | number>();
-  const distances: Record<string | number, number> = {};
-  const predecessors: Record<string | number, string | number | null> = {};
+  const queue = new Queue<T>();
+  const distances: Map<T, number> = new Map();
+  const predecessors: Map<T, T | null> = new Map();
 
   queue.enqueue(startVertex);
 
   for (let i = 0; i < vertices.length; i++) {
-    distances[vertices[i]] = 0;
-    predecessors[vertices[i]] = null;
+    distances.set(vertices[i], 0);
+    predecessors.set(vertices[i], null);
   }
 
   while (!queue.isEmpty()) {
     const u = queue.dequeue()!;
     const neighbors = adjList.get(u)!;
 
-    color[u] = Colors.GREY;
+    color.set(u, Colors.GREY);
 
     for (let i = 0; i < neighbors!.length; i++) {
       const w = neighbors[i];
-      if (color[w] === Colors.WHITE) {
-        color[w] = Colors.GREY;
-        distances[w] = distances[u] + 1;
-        predecessors[w] = u;
+      if (color.get(w) === Colors.WHITE) {
+        color.set(w, Colors.GREY);
+        distances.set(w, distances.get(u)! + 1);
+        predecessors.set(w, u);
         queue.enqueue(w);
       }
     }
 
-    color[u] = Colors.BLACK;
+    color.set(u, Colors.BLACK);
   }
 
   return {
