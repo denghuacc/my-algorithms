@@ -43,7 +43,7 @@
 
 // sliding window pseudo code
 // int left = 0, right = 0;
-// while (right < s.size()) {
+// while (right < s.size) {
 //     window.add(s[right]);
 //     right++;
 

@@ -72,7 +72,7 @@ class KthLargest {
 
   add(val: number): number | null {
     this.minHeap.offer(val);
-    if (this.minHeap.size() > this.k) {
+    if (this.minHeap.size > this.k) {
       this.minHeap.poll();
     }
     return this.minHeap.peek();
@@ -89,30 +89,34 @@ class MinHeap {
     this.heapify();
   }
 
+  get size(): number {
+    return this.data.length;
+  }
+
   heapify(): void {
-    if (this.size() < 2) return;
-    for (let i = 1; i < this.size(); i++) {
+    if (this.size < 2) return;
+    for (let i = 1; i < this.size; i++) {
       this.bubbleUp(i);
     }
   }
 
   peek(): number | null {
-    if (this.size() === 0) return null;
+    if (this.size === 0) return null;
     return this.data[0];
   }
 
   offer(value: number): void {
     this.data.push(value);
-    this.bubbleUp(this.size() - 1);
+    this.bubbleUp(this.size - 1);
   }
 
   poll(): number | null {
-    if (this.size() === 0) {
+    if (this.size === 0) {
       return null;
     }
     const result = this.data[0];
     const last = this.data.pop()!;
-    if (this.size() !== 0) {
+    if (this.size !== 0) {
       this.data[0] = last;
       this.bubbleDown(0);
     }
@@ -132,7 +136,7 @@ class MinHeap {
   }
 
   bubbleDown(index: number): void {
-    const lastIndex = this.size() - 1;
+    const lastIndex = this.size - 1;
     while (true) {
       const leftIndex = index * 2 + 1;
       const rightIndex = index * 2 + 2;
@@ -163,10 +167,6 @@ class MinHeap {
       this.data[index2],
       this.data[index1],
     ];
-  }
-
-  size(): number {
-    return this.data.length;
   }
 }
 
