@@ -40,7 +40,7 @@ export function matrixChainMultiplication(p: number[]): number {
 
 function printOptimalParenthesis(s: number[][], i: number, j: number): void {
   if (i === j) {
-    console.log("A[" + i + "]");
+    console.log(`A[${i}]`);
   } else {
     printOptimalParenthesis(s, i, s[i][j]);
     printOptimalParenthesis(s, s[i][j] + 1, j);

@@ -7,9 +7,7 @@ export function matrixChainMultiplication(
   i = 1,
   j = p.length - 1
 ): number {
-  if (i === j) {
-    return 0;
-  }
+  if (i === j) return 0;
 
   let min = Number.MAX_SAFE_INTEGER;
 
