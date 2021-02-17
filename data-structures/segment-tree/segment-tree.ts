@@ -5,15 +5,19 @@
  * 特性②：线段树实现，有两个数据库，一个是普通的数组结构，一个是转换成树结构
  */
 export default class SegmentTree<T> {
-  array: Array<T>;
-  tree: Array<T>;
+  array: T[];
+  tree: T[];
   merge: (a: T, b: T) => T;
 
-  constructor(arr: Array<T> = [], merge: (a: T, b: T) => T) {
+  constructor(arr: T[] = [], merge: (a: T, b: T) => T) {
     this.array = [...arr]; // 数组数据
     this.tree = []; // 线段树数据
     this.merge = merge; // 融合函数 -> 可以是求区间值的和、求最大值、求最小值
     this.buildSegmentTree(0, 0, this.size - 1);
+  }
+
+  get size(): number {
+    return this.array.length;
   }
 
   // 在 treeIndex 的位置创建表示区间 [start...end] 的线段树
@@ -40,10 +44,6 @@ export default class SegmentTree<T> {
       this.tree[leftTreeIndex],
       this.tree[rightTreeIndex]
     );
-  }
-
-  get size(): number {
-    return this.array.length;
   }
 
   get(index: number) {

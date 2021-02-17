@@ -3,7 +3,7 @@
  * @description 使用数组实现 ES6 的 Set 集合
  */
 export default class ArraySet<T> {
-  array: Array<T>;
+  array: T[];
 
   constructor() {
     this.array = [];

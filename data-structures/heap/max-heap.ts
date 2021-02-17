@@ -11,9 +11,9 @@ import { swap } from "../util";
  * 堆结构可以用来排序和实现优先队列
  */
 export default class MaxHeap<T> {
-  data: Array<T> = [];
+  data: T[] = [];
 
-  constructor(arr?: Array<T>) {
+  constructor(arr?: T[]) {
     if (!arr) {
       this.data = new Array();
     } else {
