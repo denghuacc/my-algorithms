@@ -69,6 +69,7 @@
 // 情况一：数组只有递增，inc 为 true, dec 为 false，返回 true；
 // 情况二：数组只有递减，inc 为 false, dec 为 true，返回 true；
 // 情况三：数组有递增又有递减，inc 为 false, dec 也为 false，返回 false。
+// 情况四：数组的元素都是相同值时，inc 为 true, dec 也为 true，返回 true。
 
 // @lc code=start
 function isMonotonic(A: number[]): boolean {
