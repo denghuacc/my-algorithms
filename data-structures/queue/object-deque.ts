@@ -4,7 +4,7 @@
  * 双端队列是一种特殊的队列，它允许在两端添加和移除元素
  */
 export default class ObjectDeque<T> {
-  items: any;
+  items: Record<string, T>;
   count: number;
   lowestCount: number;
 

@@ -3,7 +3,7 @@
  * @description  使用对象实现队列
  */
 export default class ObjectQueue<T> {
-  items: any;
+  items: Record<string, T>;
   count: number;
   lowestCount: number;
 

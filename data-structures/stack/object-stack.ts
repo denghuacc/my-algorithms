@@ -3,7 +3,7 @@
  * @description 使用对象实现栈
  */
 export default class ObjectStack<T> {
-  items: any;
+  items: Record<string, T>;
   count: number;
 
   constructor() {
