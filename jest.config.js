@@ -1,10 +1,13 @@
 module.exports = {
-  preset: 'ts-jest',
+  preset: "ts-jest",
   rootDir: __dirname,
-  testEnvironment: 'node',
-  testMatch: ['<rootDir>/**/__tests__/**/*spec.[t]s'],
-  moduleFileExtensions: ['ts', 'js'],
-  watchPathIgnorePatterns: ['/node_modules/', '/.git/']
+  testEnvironment: "node",
+  testMatch: ["<rootDir>/**/__tests__/**/*spec.[t]s"],
+  moduleFileExtensions: ["ts", "js"],
+  watchPathIgnorePatterns: ["/node_modules/", "/.git/"],
+  moduleNameMapper: {
+    "@/(.*)": ["<rootDir>/$1"],
+  },
   // coverageDirectory: 'coverage',
   // coverageReporters: ['html', 'lcov', 'text'],
   // collectCoverageFrom: [
@@ -12,4 +15,4 @@ module.exports = {
   //   '/data-structures/**/*.{js,ts}'
   // ],
   // coveragePathIgnorePatterns: ['/node_modules/', '/leetcode/']
-}
+};
