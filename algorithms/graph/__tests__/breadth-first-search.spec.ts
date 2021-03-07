@@ -1,5 +1,5 @@
 import { bfs, breadthFirstSearch } from "../breadth-first-search";
-import Graph from "../../../data-structures/graph/graph";
+import Graph from "@/data-structures/graph/graph";
 
 describe("Breadth First Search", () => {
   let count: number;

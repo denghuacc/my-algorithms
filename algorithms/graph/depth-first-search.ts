@@ -1,4 +1,4 @@
-import Graph from "../../data-structures/graph/graph";
+import Graph from "@/data-structures/graph/graph";
 
 enum Colors {
   WHITE = 0,

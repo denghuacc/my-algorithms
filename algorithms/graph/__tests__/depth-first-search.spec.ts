@@ -1,5 +1,5 @@
 import { dfs, depthFirstSearch } from "../depth-first-search";
-import Graph from "../../../data-structures/graph/graph";
+import Graph from "@/data-structures/graph/graph";
 
 describe("Depth First Search", () => {
   let count: number;
