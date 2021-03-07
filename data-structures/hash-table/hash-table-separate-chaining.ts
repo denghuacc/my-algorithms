@@ -32,9 +32,9 @@ export default class HashTableSeparateChaining<K, V> {
 
   // 增加值
   put(key: K, val: V): boolean {
-    if (key != null && val != null) {
+    if (key && val) {
       const position = this.hashCode(key);
-      if (this.table[position] == null) {
+      if (!this.table[position]) {
         this.table[position] = new LinkedList<ValuePair<K, V>>(); // 链表存储
       }
       this.table[position].addLast(new ValuePair(key, val));
@@ -47,9 +47,9 @@ export default class HashTableSeparateChaining<K, V> {
   get(key: K): V | undefined {
     const position = this.hashCode(key);
     const linkedList = this.table[position];
-    if (linkedList != null && !linkedList.isEmpty()) {
+    if (linkedList && !linkedList.isEmpty()) {
       let current = linkedList.head;
-      while (current != null) {
+      while (current) {
         if (current.key.key === key) {
           return current.key.val;
         }
@@ -63,9 +63,9 @@ export default class HashTableSeparateChaining<K, V> {
   remove(key: K): boolean {
     const position = this.hashCode(key);
     const linkedList = this.table[position];
-    if (linkedList != null && !linkedList.isEmpty()) {
+    if (linkedList && !linkedList.isEmpty()) {
       let current = linkedList.head;
-      while (current != null) {
+      while (current) {
         if (current.key.key === key) {
           linkedList.removeKey(current.key);
           if (linkedList.isEmpty()) {

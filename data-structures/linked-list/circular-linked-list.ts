@@ -18,7 +18,7 @@ export default class CircularLinkedList<T> extends LinkedList<T> {
       const node = new Node(key);
 
       if (index === 0) {
-        if (this.head == null) {
+        if (!this.head) {
           this.head = node;
           node.next = this.head;
         } else {
@@ -29,7 +29,7 @@ export default class CircularLinkedList<T> extends LinkedList<T> {
         }
       } else {
         const previous = this.get(index - 1);
-        if (previous != null) {
+        if (previous) {
           node.next = previous.next;
           previous.next = node;
         }
@@ -44,7 +44,7 @@ export default class CircularLinkedList<T> extends LinkedList<T> {
   set(index: number, key: T): boolean {
     if (index >= 0 && index < this.count) {
       const node = this.get(index);
-      if (node != null) {
+      if (node) {
         node.key = key;
         return true;
       }
@@ -56,7 +56,7 @@ export default class CircularLinkedList<T> extends LinkedList<T> {
   contains(key: T): boolean {
     let current = this.head;
 
-    while (current != null && current.next != null) {
+    while (current && current.next) {
       if (current.key === key) {
         return true;
       }
@@ -84,7 +84,7 @@ export default class CircularLinkedList<T> extends LinkedList<T> {
         }
       } else {
         const previous = this.get(index - 1);
-        if (previous != null && previous.next != null) {
+        if (previous && previous.next) {
           current = previous.next;
           previous.next = current.next;
         }
@@ -99,7 +99,7 @@ export default class CircularLinkedList<T> extends LinkedList<T> {
   removeKey(key: T): boolean {
     let delNode: Node<T> | undefined;
 
-    if (this.head == null) {
+    if (!this.head) {
       return false;
     } else {
       if (this.head.key === key) {
@@ -109,7 +109,7 @@ export default class CircularLinkedList<T> extends LinkedList<T> {
         lastNode.next = this.head; // update last node
       } else {
         let current = this.head;
-        while (current.next != null) {
+        while (current.next) {
           if (current.next.key === key) {
             delNode = current.next;
             const previous = current;
@@ -122,7 +122,7 @@ export default class CircularLinkedList<T> extends LinkedList<T> {
       }
     }
 
-    if (delNode?.key == null) {
+    if (!delNode?.key) {
       return false;
     } else {
       this.count--;
@@ -137,7 +137,7 @@ export default class CircularLinkedList<T> extends LinkedList<T> {
     let str = "Circular Linked List { ";
 
     // 遍历节点
-    while (current != null) {
+    while (current) {
       str += current.key + " -> ";
       current = current.next;
       if (current == this.head) break;

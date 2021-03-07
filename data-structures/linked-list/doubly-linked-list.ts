@@ -20,7 +20,7 @@ export default class DoublyLinkedList<T> extends LinkedList<T> {
       let current = this.head;
 
       if (index === 0) {
-        if (this.head == null || this.tail == null) {
+        if (!this.head || !this.tail) {
           this.head = node;
           this.tail = node;
         } else {
@@ -35,7 +35,7 @@ export default class DoublyLinkedList<T> extends LinkedList<T> {
         this.tail = node;
       } else {
         const previous = this.get(index - 1);
-        if (previous != null && previous.next != null) {
+        if (previous && previous.next) {
           current = previous.next;
           node.next = current;
           previous.next = node;
@@ -53,7 +53,7 @@ export default class DoublyLinkedList<T> extends LinkedList<T> {
   // 删除链表第 index 个位置的值，返回删除的元素 O(N)
   protected remove(index: number): T | undefined {
     if (index >= 0 && index < this.count) {
-      if (this.head == null || this.tail == null) return undefined;
+      if (!this.head || !this.tail) return undefined;
 
       let current: Node<T> | undefined = this.head;
       if (index === 0) {
@@ -85,7 +85,7 @@ export default class DoublyLinkedList<T> extends LinkedList<T> {
   removeKey(key: T): boolean {
     let delNode: Node<T> | undefined;
 
-    if (this.head == null || this.tail == null) return false;
+    if (!this.head || !this.tail) return false;
 
     if (this.head.key === key) {
       delNode = this.head;
@@ -105,20 +105,20 @@ export default class DoublyLinkedList<T> extends LinkedList<T> {
       }
     } else {
       let current = this.head;
-      while (current.next != null) {
+      while (current.next) {
         if (current.next.key === key) {
           delNode = current.next;
           const previous = current;
           const next = current.next.next;
           previous.next = next;
-          if (next != null) next.prev = previous;
+          if (next) next.prev = previous;
           break;
         }
         current = current.next;
       }
     }
 
-    if (delNode?.key == null) {
+    if (!delNode?.key) {
       return false;
     } else {
       this.count--;
@@ -127,14 +127,14 @@ export default class DoublyLinkedList<T> extends LinkedList<T> {
   }
 
   toString(): string {
-    if (this.head == null || this.tail == null) return "";
+    if (!this.head || !this.tail) return "";
 
     let current = this.head;
     let str = "Doubly Linked List { undefined <- ";
 
     // 遍历节点
-    while (current != null) {
-      str += current.key + (current.next == null ? " -> " : " <-> ");
+    while (current) {
+      str += current.key + (!current.next ? " -> " : " <-> ");
       current = current.next!;
     }
 

@@ -23,7 +23,7 @@ export default class LinkedListQueue<T> {
 
   // 入列 O(1)
   enqueue(key: T): void {
-    if (this.tail == undefined) {
+    if (!this.tail) {
       this.tail = new Node(key);
       this.head = this.tail;
     } else {
@@ -35,15 +35,13 @@ export default class LinkedListQueue<T> {
 
   // 出列 O(1)
   dequeue(): T | undefined {
-    if (this.head == null) {
-      return undefined;
-    }
+    if (!this.head) return undefined;
 
     const delNode = this.head;
     this.head = this.head.next;
     delNode.next = undefined;
 
-    if (this.head == null) {
+    if (!this.head) {
       this.tail = undefined;
     }
     this.count--;
@@ -68,12 +66,12 @@ export default class LinkedListQueue<T> {
   }
 
   toString(): string {
-    if (this.head == null) return "";
+    if (!this.head) return "";
     let cur = this.head,
       str = "Queue: head { ";
 
     // 遍历节点
-    while (cur != null) {
+    while (cur) {
       str += cur.key + " -> ";
       cur = cur.next!;
     }

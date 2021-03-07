@@ -31,14 +31,14 @@ export default class UnionFindArray {
 
   // 合并元素 p 和元素 q 所属的集合 O(N)
   unionElements(p: number, q: number): void {
-    const pId = this.find(p);
-    const qId = this.find(q);
+    const pId = this.find(p)!;
+    const qId = this.find(q)!;
 
     if (pId === qId) return;
 
     for (let i = 0; i < this.size; i++) {
       if (this.id[i] === pId) {
-        this.id[i] = qId!;
+        this.id[i] = qId;
       }
     }
   }

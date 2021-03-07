@@ -35,7 +35,7 @@ export default class LinkedList<T> {
         this.head = node;
       } else {
         const previous = this.get(index - 1);
-        if (previous != null) {
+        if (previous) {
           node.next = previous.next;
           previous.next = node;
         }
@@ -60,7 +60,7 @@ export default class LinkedList<T> {
   protected get(index: number): Node<T> | undefined {
     if (index >= 0 && index <= this.count) {
       let node = this.head;
-      for (let i = 0; i < index && node != null; i++) {
+      for (let i = 0; i < index && node; i++) {
         node = node.next;
       }
       return node;
@@ -82,7 +82,7 @@ export default class LinkedList<T> {
   set(index: number, key: T): boolean {
     if (index >= 0 && index < this.count) {
       const node = this.get(index);
-      if (node != null) {
+      if (node) {
         node.key = key;
         return true;
       }
@@ -94,7 +94,7 @@ export default class LinkedList<T> {
   indexOf(key: T): number {
     let current = this.head;
 
-    for (let i = 0; i < this.size && current != null; i++) {
+    for (let i = 0; i < this.size && current; i++) {
       if (current.key === key) {
         return i;
       }
@@ -108,7 +108,7 @@ export default class LinkedList<T> {
   contains(key: T): boolean {
     let current = this.head;
 
-    while (current != null) {
+    while (current) {
       if (current.key === key) {
         return true;
       }
@@ -123,13 +123,13 @@ export default class LinkedList<T> {
     if (index >= 0 && index < this.count) {
       let current = this.head;
 
-      if (current == null) return undefined;
+      if (!current) return undefined;
 
       if (index === 0) {
         this.head = current.next;
       } else {
         const previous = this.get(index - 1);
-        if (previous != null) {
+        if (previous) {
           current = previous.next;
           previous.next = current?.next;
         }
@@ -156,13 +156,13 @@ export default class LinkedList<T> {
     let current = this.head;
     let delNode: Node<T> | undefined;
 
-    if (current == null) return false;
+    if (!current) return false;
 
     if (current.key === key) {
       delNode = current;
       this.head = delNode.next;
     } else {
-      while (current.next != null) {
+      while (current.next) {
         if (current.next.key === key) {
           delNode = current.next;
           const previous = current;
@@ -173,7 +173,7 @@ export default class LinkedList<T> {
       }
     }
 
-    if (delNode?.key == null) {
+    if (!delNode?.key) {
       return false;
     } else {
       this.count--;
@@ -194,7 +194,7 @@ export default class LinkedList<T> {
     let str = "Linked List { ";
 
     // 遍历节点
-    while (current != null) {
+    while (current) {
       str += current.key + " -> ";
       current = current.next;
     }

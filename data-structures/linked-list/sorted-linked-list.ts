@@ -27,7 +27,7 @@ export default class ScoredLinkedList<T> extends LinkedList<T> {
   private getIndex(key: T): number {
     let current = this.head;
     let i = 0;
-    for (; i < this.size && current != null; i++) {
+    for (; i < this.size && current; i++) {
       if (key < current.key) {
         return i;
       }
@@ -43,7 +43,7 @@ export default class ScoredLinkedList<T> extends LinkedList<T> {
     let str = "Sorted Linked List { ";
 
     // 遍历节点
-    while (current != null) {
+    while (current) {
       str += current.key + " -> ";
       current = current.next;
     }

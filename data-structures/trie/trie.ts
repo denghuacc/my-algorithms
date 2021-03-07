@@ -22,7 +22,7 @@ export default class Trie<K, V> {
 
     for (let i = 0; i < word.length; i++) {
       const c = word[i];
-      if (cur.next.get(c) == null) {
+      if (!cur.next.get(c)) {
         cur.next.set(c, new Node());
       }
       cur = cur.next.get(c)!;
@@ -40,7 +40,7 @@ export default class Trie<K, V> {
 
     for (let i = 0; i < word.length; i++) {
       const c = word[i];
-      if (cur.next.get(c) == null) return false;
+      if (!cur.next.get(c)) return false;
       cur = cur.next.get(c)!;
     }
     return cur.isWord;
@@ -51,7 +51,7 @@ export default class Trie<K, V> {
     let cur = this.root;
     for (let i = 0; i < word.length; i++) {
       const c = word[i];
-      if (cur.next.get(c) == null) return false;
+      if (!cur.next.get(c)) return false;
       cur = cur.next.get(c)!;
     }
     return true;

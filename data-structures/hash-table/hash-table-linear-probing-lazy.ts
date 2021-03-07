@@ -31,17 +31,17 @@ export default class HashTableLinearProbingLazy<K, V> {
 
   // 增加值
   put(key: K, val: V): boolean {
-    if (key != null && val != null) {
+    if (key && val) {
       const position = this.hashCode(key);
 
       if (
-        this.table[position] == null ||
-        (this.table[position] != null && this.table[position].isDeleted)
+        !this.table[position] ||
+        (this.table[position] && this.table[position].isDeleted)
       ) {
         this.table[position] = new ValuePairLazy(key, val);
       } else {
         let index = position + 1;
-        while (this.table[index] != null && !this.table[position].isDeleted) {
+        while (this.table[index] && !this.table[position].isDeleted) {
           index++;
         }
         this.table[index] = new ValuePairLazy(key, val);
@@ -55,13 +55,13 @@ export default class HashTableLinearProbingLazy<K, V> {
   get(key: K): V | undefined {
     const position = this.hashCode(key);
 
-    if (this.table[position] != null) {
+    if (this.table[position]) {
       if (this.table[position].key === key && !this.table[position].isDeleted) {
         return this.table[position].val;
       }
       let index = position + 1;
       while (
-        this.table[index] != null &&
+        this.table[index] &&
         (this.table[index].key !== key || this.table[index].isDeleted)
       ) {
         if (this.table[index].key === key && this.table[index].isDeleted) {
@@ -70,7 +70,7 @@ export default class HashTableLinearProbingLazy<K, V> {
         index++;
       }
       if (
-        this.table[index] != null &&
+        this.table[index] &&
         this.table[index].key === key &&
         !this.table[index].isDeleted
       ) {
@@ -84,20 +84,20 @@ export default class HashTableLinearProbingLazy<K, V> {
   remove(key: K): boolean {
     const position = this.hashCode(key);
 
-    if (this.table[position] != null) {
+    if (this.table[position]) {
       if (this.table[position].key === key && !this.table[position].isDeleted) {
         this.table[position].isDeleted = true;
         return true;
       }
       let index = position + 1;
       while (
-        this.table[index] != null &&
+        this.table[index] &&
         (this.table[index].key !== key || this.table[index].isDeleted)
       ) {
         index++;
       }
       if (
-        this.table[index] != null &&
+        this.table[index] &&
         this.table[index].key === key &&
         !this.table[index].isDeleted
       ) {

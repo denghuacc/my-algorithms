@@ -22,8 +22,8 @@ export default class BSTMap<K, V> {
     this.root = this.addNode(this.root!, key, val);
   }
 
-  private addNode(root: Node<K, V>, key: K, val: V): Node<K, V> {
-    if (root == null) {
+  private addNode(root: Node<K, V> | undefined, key: K, val: V): Node<K, V> {
+    if (!root) {
       this.count++;
       return new Node(key, val);
     }
@@ -40,7 +40,7 @@ export default class BSTMap<K, V> {
   }
 
   private getNode(root: Node<K, V>, key: K): Node<K, V> | undefined {
-    if (root == null) return undefined;
+    if (!root) return undefined;
 
     if (key === root.key) {
       return root;
@@ -52,18 +52,18 @@ export default class BSTMap<K, V> {
   }
 
   contains(key: K): boolean {
-    return this.getNode(this.root!, key) != null;
+    return !!this.getNode(this.root!, key);
   }
 
   get(key: K): V | undefined {
     const root = this.getNode(this.root!, key);
-    return root == null ? undefined : root.val;
+    return !root ? undefined : root.val;
   }
 
   set(key: K, newVal: V): void {
     const root = this.getNode(this.root!, key);
 
-    if (root == null) {
+    if (!root) {
       throw new Error(key + " doesn't exist!");
     }
 
@@ -71,7 +71,7 @@ export default class BSTMap<K, V> {
   }
 
   private minNode(root: Node<K, V>): Node<K, V> {
-    if (root.left == null) {
+    if (!root.left) {
       return root;
     }
 
@@ -79,7 +79,7 @@ export default class BSTMap<K, V> {
   }
 
   removeMin(root: Node<K, V>) {
-    if (root.left == null) {
+    if (!root.left) {
       const rightNode = root.right;
       root.right = undefined;
       this.count--;
@@ -93,7 +93,7 @@ export default class BSTMap<K, V> {
   remove(key: K): V | undefined {
     const root = this.getNode(this.root!, key);
 
-    if (root != null) {
+    if (root) {
       this.root = this.removeNode(this.root!, key);
       return root.val;
     }
@@ -102,7 +102,7 @@ export default class BSTMap<K, V> {
   }
 
   private removeNode(root: Node<K, V>, key: K): Node<K, V> | undefined {
-    if (root == null) return undefined;
+    if (!root) return undefined;
 
     if (key < root.key) {
       root.left = this.removeNode(root.left!, key);
@@ -111,14 +111,14 @@ export default class BSTMap<K, V> {
       root.right = this.removeNode(root.right!, key);
       return root;
     } else {
-      if (root.left == null) {
+      if (!root.left) {
         const rightNode = root.right;
         root.right = undefined;
         this.count--;
         return rightNode;
       }
 
-      if (root.right == null) {
+      if (!root.right) {
         const leftNode = root.left;
         root.left = undefined;
         this.count--;

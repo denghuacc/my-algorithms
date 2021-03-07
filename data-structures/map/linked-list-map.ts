@@ -35,7 +35,7 @@ export default class LinkedListMap<K, V> {
 
   // 查询值 O(N)
   has(key: K): boolean {
-    return this.getNode(key) != null;
+    return !!this.getNode(key);
   }
 
   // 删除值 O(N)
@@ -43,7 +43,7 @@ export default class LinkedListMap<K, V> {
     let current = this.head;
     let delNode;
 
-    if (current == null) return false;
+    if (!current) return false;
 
     if (current.key === key) {
       delNode = current;
@@ -51,7 +51,7 @@ export default class LinkedListMap<K, V> {
       this.count--;
       return true;
     } else {
-      while (current.next != null) {
+      while (current.next) {
         if (current.next.key === key) {
           delNode = current.next;
           const previous = current;
@@ -74,7 +74,7 @@ export default class LinkedListMap<K, V> {
   // 通过 key 获取对应的节点
   private getNode(key: K): Node<K, V> | undefined {
     let current = this.head;
-    while (current != null) {
+    while (current) {
       if (current.key === key) {
         return current;
       }

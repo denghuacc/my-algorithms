@@ -25,68 +25,63 @@ export default class RedBlackTree<K, V> {
     return this.size === 0;
   }
 
-  private isRed(root: Node<K, V>): boolean {
-    if (root == null) return false;
+  private isRed(root: Node<K, V> | undefined): boolean {
+    if (!root) return false;
     return root.color === Color.RED ? true : false;
   }
 
   // 二叉树的前序遍历
   preOrder(arr: Array<K> = []): void {
-    this.preOrderTree(this.root!, arr);
+    this.preOrderTree(this.root, arr);
   }
 
-  private preOrderTree(root: Node<K, V>, arr: Array<K>): void {
-    if (root == null) return;
+  private preOrderTree(root: Node<K, V> | undefined, arr: Array<K>): void {
+    if (!root) return;
 
     arr.push(root.key);
-    this.preOrderTree(root.left!, arr);
-    this.preOrderTree(root.right!, arr);
+    this.preOrderTree(root.left, arr);
+    this.preOrderTree(root.right, arr);
   }
 
   // 二叉树的中序遍历
   inOrder(arr: Array<K> = []): void {
-    this.inOrderTree(this.root!, arr);
+    this.inOrderTree(this.root, arr);
   }
 
-  private inOrderTree(root: Node<K, V>, arr: Array<K>): void {
-    if (root == null) return;
+  private inOrderTree(root: Node<K, V> | undefined, arr: Array<K>): void {
+    if (!root) return;
 
-    this.inOrderTree(root.left!, arr);
+    this.inOrderTree(root.left, arr);
     arr.push(root.key);
-    this.inOrderTree(root.right!, arr);
+    this.inOrderTree(root.right, arr);
   }
 
   // 二叉树的后序遍历
   postOrder(arr: Array<K>): void {
-    this.postOrderTree(this.root!, arr);
+    this.postOrderTree(this.root, arr);
   }
 
-  private postOrderTree(root: Node<K, V>, arr: Array<K>): void {
-    if (root == null) return;
+  private postOrderTree(root: Node<K, V> | undefined, arr: Array<K>): void {
+    if (!root) return;
 
-    this.postOrderTree(root.left!, arr);
+    this.postOrderTree(root.left, arr);
     arr.push(root.key);
-    this.postOrderTree(root.right!, arr);
+    this.postOrderTree(root.right, arr);
   }
 
   // 树的层序遍历，需要借助队列 Queue 实现 -> 广度优先搜索 BFS
   levelOrder(arr: Array<K> = []): void {
-    if (this.root == null) return;
+    if (!this.root) return;
 
-    const queue = [];
+    const queue: Node<K, V>[] = [];
     queue.push(this.root);
 
     while (queue.length) {
-      let curNode = queue.shift();
-      arr.push(curNode!.key);
+      let curNode = queue.shift()!;
+      arr.push(curNode.key);
 
-      if (curNode!.left != null) {
-        queue.push(curNode!.left); // 左子节点树先入列
-      }
-
-      if (curNode!.right != null) {
-        queue.push(curNode!.right);
-      }
+      if (curNode.left) queue.push(curNode.left); // 左子节点树先入列
+      if (curNode.right) queue.push(curNode.right);
     }
   }
 
@@ -97,14 +92,14 @@ export default class RedBlackTree<K, V> {
   //    T2 T3            T1   T2
   // 左旋转
   private leftRotate(root: Node<K, V>): Node<K, V> | undefined {
-    const x = root.right;
+    const x = root.right!;
 
     // 左旋转
-    root.right = x!.left;
-    x!.left = root;
+    root.right = x.left;
+    x.left = root;
 
     // 更新颜色
-    x!.color = root.color;
+    x.color = root.color;
     root.color = Color.RED;
 
     return x;
@@ -117,14 +112,14 @@ export default class RedBlackTree<K, V> {
   // y  T1                     T1  T2
   // 右旋转
   private rightRotate(root: Node<K, V>): Node<K, V> | undefined {
-    const x = root.left;
+    const x = root.left!;
 
     // 右旋转
-    root.left = x!.right;
-    x!.right = root;
+    root.left = x.right;
+    x.right = root;
 
     // 更新颜色
-    x!.color = root.color;
+    x.color = root.color;
     root.color = Color.RED;
 
     return x;
@@ -139,22 +134,22 @@ export default class RedBlackTree<K, V> {
 
   // 向红黑树中添加新的元素(key, val)
   add(key: K, val: V): void {
-    this.root = this.addNode(this.root!, key, val);
+    this.root = this.addNode(this.root, key, val);
     this.root!.color = Color.BLACK; // 最终根节点为黑色节点
   }
 
   // 向以 root 为根的红黑树中插入元素 (key, val)，递归算法
   // 返回插入新节点后红黑树的根
-  private addNode(root: Node<K, V>, key: K, val: V): Node<K, V> {
-    if (root == null) {
+  private addNode(root: Node<K, V> | undefined, key: K, val: V): Node<K, V> {
+    if (!root) {
       this.count++;
       return new Node(key, val);
     }
 
     if (key < root.key) {
-      root.left = this.addNode(root.left!, key, val);
+      root.left = this.addNode(root.left, key, val);
     } else if (key > root.key) {
-      root.right = this.addNode(root.right!, key, val);
+      root.right = this.addNode(root.right, key, val);
     } else {
       // key === root.key
       root.val = val;
@@ -162,17 +157,17 @@ export default class RedBlackTree<K, V> {
 
     // 红黑树颜色旋转和颜色翻转
     // 左孩子不是红色，右孩子是红色
-    if (!this.isRed(root.left!) && this.isRed(root.right!)) {
+    if (!this.isRed(root.left) && this.isRed(root.right)) {
       root = this.leftRotate(root)!;
     }
 
     // 左孩子是红色，左孩子的左孩子还是红色
-    if (this.isRed(root.left!) && this.isRed(root.left!.left!)) {
+    if (this.isRed(root.left) && this.isRed(root.left!.left)) {
       root = this.rightRotate(root)!;
     }
 
     // 左孩子是红色，右孩子也是红色
-    if (this.isRed(root.left!) && this.isRed(root.right!)) {
+    if (this.isRed(root.left) && this.isRed(root.right!)) {
       this.flipColors(root);
     }
 
@@ -180,32 +175,35 @@ export default class RedBlackTree<K, V> {
   }
 
   // 返回以 root 为根节点的红黑树中，key 所在的节点
-  private getNode(root: Node<K, V>, key: K): Node<K, V> | undefined {
-    if (root == null) return undefined;
+  private getNode(
+    root: Node<K, V> | undefined,
+    key: K
+  ): Node<K, V> | undefined {
+    if (!root) return undefined;
 
     if (key === root.key) {
       return root;
     } else if (key < root.key) {
-      return this.getNode(root.left!, key);
+      return this.getNode(root.left, key);
     } else {
       // key > root.key
-      return this.getNode(root.right!, key);
+      return this.getNode(root.right, key);
     }
   }
 
   contains(key: K): boolean {
-    return this.getNode(this.root!, key) != null;
+    return !!this.getNode(this.root, key);
   }
 
   get(key: K): V | undefined {
-    const root = this.getNode(this.root!, key);
-    return root == null ? undefined : root.val;
+    const root = this.getNode(this.root, key);
+    return !root ? undefined : root.val;
   }
 
   set(key: K, newVal: V): void {
-    const root = this.getNode(this.root!, key);
+    const root = this.getNode(this.root, key);
 
-    if (root == null) {
+    if (!root) {
       throw new Error(key + " doesn't exist!");
     }
 
@@ -214,23 +212,25 @@ export default class RedBlackTree<K, V> {
 
   // 寻找二分搜索树的最小元素
   minimum(): K | undefined {
-    if (this.count === 0) return;
-    return this.minimumNode(this.root!).key;
+    if (this.count === 0) return undefined;
+    return this.minimumNode(this.root)?.key;
   }
 
-  private minimumNode(root: Node<K, V>): Node<K, V> {
-    if (root.left == null) return root;
+  private minimumNode(root: Node<K, V> | undefined): Node<K, V> | undefined {
+    if (!root) return undefined;
+    if (!root.left) return root;
     return this.minimumNode(root.left);
   }
 
   // 寻找二分搜索树的最大元素
   maximum(): K | undefined {
-    if (this.count === 0) return;
-    return this.maximumNode(this.root!).key;
+    if (!this.count) return undefined;
+    return this.maximumNode(this.root)?.key;
   }
 
-  private maximumNode(root: Node<K, V>): Node<K, V> {
-    if (root.right == null) return root;
+  private maximumNode(root: Node<K, V> | undefined): Node<K, V> | undefined {
+    if (!root) return undefined;
+    if (!root.right) return root;
     return this.maximumNode(root.right);
   }
 
@@ -242,7 +242,7 @@ export default class RedBlackTree<K, V> {
   }
 
   private removeMinNode(root: Node<K, V>): Node<K, V> | undefined {
-    if (root.left == null) {
+    if (!root.left) {
       const rightNode = root.right;
       root.right = undefined;
       this.count--;
@@ -261,7 +261,7 @@ export default class RedBlackTree<K, V> {
   }
 
   private removeMaxNode(root: Node<K, V>): Node<K, V> | undefined {
-    if (root.right == null) {
+    if (!root.right) {
       const leftNode = root.left;
       root.left = undefined;
       this.count--;
@@ -274,31 +274,32 @@ export default class RedBlackTree<K, V> {
 
   // 从红黑树中删除键为 key 的节点
   remove(key: K): V | undefined {
-    const root = this.getNode(this.root!, key);
+    const root = this.getNode(this.root, key);
 
-    if (root != null) {
-      this.root = this.removeNode(this.root!, key);
+    if (root) {
+      this.root = this.removeNode(this.root, key);
       return root.val;
     }
 
     return undefined;
   }
 
-  private removeNode(root: Node<K, V>, key: K): Node<K, V> | undefined {
-    if (root == null) {
-      return undefined;
-    }
+  private removeNode(
+    root: Node<K, V> | undefined,
+    key: K
+  ): Node<K, V> | undefined {
+    if (!root) return undefined;
 
     if (key < root.key) {
-      root.left = this.removeNode(root.left!, key);
+      root.left = this.removeNode(root.left, key);
       return root;
     } else if (key > root.key) {
-      root.right = this.removeNode(root.right!, key);
+      root.right = this.removeNode(root.right, key);
       return root;
     } else {
       // key === root.key
       // 待删除节点左子树为空的情况
-      if (root.left == null) {
+      if (!root.left) {
         const rightNode = root.right;
         root.right = undefined;
         this.count--;
@@ -306,7 +307,7 @@ export default class RedBlackTree<K, V> {
       }
 
       // 待删除节点右子树为空的情况
-      if (root.right == null) {
+      if (!root.right) {
         const leftNode = root.left;
         root.left = undefined;
         this.count--;
@@ -317,7 +318,7 @@ export default class RedBlackTree<K, V> {
 
       // 找到比待删除节点大的最小节点, 即待删除节点右子树的最小节点
       // 用这个节点顶替待删除节点的位置
-      const successor = this.minimumNode(root.right);
+      const successor = this.minimumNode(root.right)!;
       successor.right = this.removeMinNode(root.right);
       successor.left = root.left;
 
@@ -329,7 +330,7 @@ export default class RedBlackTree<K, V> {
   // 判断该二叉树是否是一棵二分搜索树
   isBST(): boolean {
     let arr: Array<K> = [];
-    this.inOrderTree(this.root!, arr);
+    this.inOrderTree(this.root, arr);
     for (let i = 1; i < arr.length; i++) {
       if (arr[i - 1] > arr[i]) {
         return false;

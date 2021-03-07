@@ -28,7 +28,7 @@ export default class AVLMap<K, V> {
   // 获取值 O(logN)
   get(key: K): V | undefined {
     const val = this.avl.get(key);
-    return val == null ? undefined : val;
+    return val;
   }
 
   // 查询值 O(logN)
@@ -39,7 +39,7 @@ export default class AVLMap<K, V> {
   // 删除值 O(logN)
   delete(key: K): boolean {
     const val = this.avl.remove(key);
-    return val == null ? false : true;
+    return !val ? false : true;
   }
 
   // 删除值 O(logN)

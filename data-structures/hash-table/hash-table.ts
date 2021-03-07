@@ -53,14 +53,14 @@ export default class HashTable<K, V> {
   get(key: K): V | undefined {
     const position = this.hashCode(key);
     const valuePair = this.table[position];
-    return valuePair == null ? undefined : valuePair.val;
+    return !valuePair ? undefined : valuePair.val;
   }
 
   // 移除值
   remove(key: K): boolean {
     const position = this.hashCode(key);
     const valuePair = this.table[position];
-    if (valuePair != null) {
+    if (valuePair) {
       delete this.table[position];
       return true;
     }

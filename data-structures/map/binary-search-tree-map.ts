@@ -17,20 +17,20 @@ export default class BSTMap<K, V> {
 
   // 设置值 O(logN)
   set(key: K, val: V): this {
-    this.root = this.setNode(this.root!, key, val);
+    this.root = this.setNode(this.root, key, val);
     return this;
   }
 
-  private setNode(root: Node<K, V>, key: K, val: V): Node<K, V> {
-    if (root == null) {
+  private setNode(root: Node<K, V> | undefined, key: K, val: V): Node<K, V> {
+    if (!root) {
       this.count++;
       return new Node(key, val);
     }
 
     if (key < root.key) {
-      root.left = this.setNode(root.left!, key, val);
+      root.left = this.setNode(root.left, key, val);
     } else if (key > root.key) {
-      root.right = this.setNode(root.right!, key, val);
+      root.right = this.setNode(root.right, key, val);
     } else {
       root.val = val;
     }
@@ -46,7 +46,7 @@ export default class BSTMap<K, V> {
 
   // 查询值 O(logN)
   has(key: K): boolean {
-    return this.getNode(this.root!, key) != null;
+    return !!this.getNode(this.root!, key);
   }
 
   // 清空值 O(1)
@@ -57,34 +57,37 @@ export default class BSTMap<K, V> {
 
   // 删除值 O(logN)
   delete(key: K): boolean {
-    const node = this.getNode(this.root!, key);
+    const node = this.getNode(this.root, key);
 
-    if (node != null) {
-      this.root = this.deleteNode(this.root!, key);
+    if (node) {
+      this.root = this.deleteNode(this.root, key);
       return true;
     }
 
     return false;
   }
 
-  private deleteNode(root: Node<K, V>, key: K): Node<K, V> | undefined {
-    if (root == null) return undefined;
+  private deleteNode(
+    root: Node<K, V> | undefined,
+    key: K
+  ): Node<K, V> | undefined {
+    if (!root) return undefined;
 
     if (key < root.key) {
-      root.left = this.deleteNode(root.left!, key);
+      root.left = this.deleteNode(root.left, key);
       return root;
     } else if (key > root.key) {
-      root.right = this.deleteNode(root.right!, key);
+      root.right = this.deleteNode(root.right, key);
       return root;
     } else {
-      if (root.left == null) {
+      if (!root.left) {
         const rightNode = root.right;
         root.right = undefined;
         this.count--;
         return rightNode;
       }
 
-      if (root.right == null) {
+      if (!root.right) {
         const leftNode = root.left;
         root.left = undefined;
         this.count--;
@@ -101,12 +104,12 @@ export default class BSTMap<K, V> {
   }
 
   private minimum(root: Node<K, V>): Node<K, V> {
-    if (root.left == null) return root;
+    if (!root.left) return root;
     return this.minimum(root.left);
   }
 
   private deleteMin(root: Node<K, V>): Node<K, V> | undefined {
-    if (root.left == null) {
+    if (!root.left) {
       const rightNode = root.right;
       root.right = undefined;
       this.count--;
@@ -118,15 +121,18 @@ export default class BSTMap<K, V> {
   }
 
   // 通过 key 获取对应的节点 辅助函数
-  private getNode(root: Node<K, V>, key: K): Node<K, V> | undefined {
-    if (root == null) return undefined;
+  private getNode(
+    root: Node<K, V> | undefined,
+    key: K
+  ): Node<K, V> | undefined {
+    if (!root) return undefined;
 
     if (key === root.key) {
       return root;
     } else if (key < root.key) {
-      return this.getNode(root.left!, key);
+      return this.getNode(root.left, key);
     } else {
-      return this.getNode(root.right!, key);
+      return this.getNode(root.right, key);
     }
   }
 }
