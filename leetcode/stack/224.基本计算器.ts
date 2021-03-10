@@ -77,4 +77,46 @@ var calculate = function (s: string): number {
 
   return ret + sign * num;
 };
+
+// stack2
+var calculate = function (s: string): number {
+  const n = s.length;
+  const stack: number[] = [1];
+  let sign = 1;
+  let ret = 0;
+  let i = 0;
+
+  while (i < n) {
+    switch (s[i]) {
+      case " ":
+        i++;
+        break;
+      case "+":
+        sign = stack[stack.length - 1];
+        i++;
+        break;
+      case "-":
+        sign = -stack[stack.length - 1];
+        i++;
+        break;
+      case "(":
+        stack.push(sign);
+        i++;
+        break;
+      case ")":
+        stack.pop();
+        i++;
+        break;
+      default:
+        let num = 0;
+        while (i < n && !isNaN(Number(s[i])) && s[i] !== " ") {
+          num += num * 10 + s[i].charCodeAt(0) - "0".charCodeAt(0);
+          i++;
+        }
+        ret += sign * num;
+    }
+  }
+
+  return ret;
+};
 // @lc code=end
