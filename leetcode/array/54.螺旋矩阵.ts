@@ -54,7 +54,7 @@ var spiralOrder = function (matrix: number[][]): number[] {
     for (let c = c1; c <= c2; c++) ret.push(matrix[r1][c]); // 第一行从左到右
     for (let r = r1 + 1; r <= r2; r++) ret.push(matrix[r][c2]); // 最后一列从上到下
     if (r1 < r2 && c1 < c2) {
-      for (let c = c2 - 1; c > c1; c--) ret.push(matrix[r2][c]); // 最后一份从右到左
+      for (let c = c2 - 1; c > c1; c--) ret.push(matrix[r2][c]); // 最后一行从右到左
       for (let r = r2; r > r1; r--) ret.push(matrix[r][c1]); // 第一列从下到上
     }
     // 继续遍历内部矩阵
@@ -62,6 +62,54 @@ var spiralOrder = function (matrix: number[][]): number[] {
     r2--;
     c1++;
     c2--;
+  }
+
+  return ret;
+};
+
+// array2
+var spiralOrder = function (matrix: number[][]): number[] {
+  const rows = matrix.length;
+  const columns = matrix[0].length;
+  if (!rows || !columns) {
+    return [];
+  }
+
+  const visited: boolean[][] = Array.from(new Array(rows), () =>
+    new Array(columns).fill(false)
+  );
+  const total = rows * columns;
+  const ret: number[] = new Array(total).fill(0);
+
+  let directionIndex = 0;
+  let row = 0;
+  let column = 0;
+  const directions: [number, number][] = [
+    [0, 1],
+    [1, 0],
+    [0, -1],
+    [-1, 0],
+  ];
+
+  for (let i = 0; i < total; i++) {
+    ret[i] = matrix[row][column];
+    visited[row][column] = true;
+    const newRow = row + directions[directionIndex][0];
+    const newColumn = column + directions[directionIndex][1];
+
+    if (
+      !(
+        0 <= newRow &&
+        newRow < rows &&
+        0 <= newColumn &&
+        newColumn < columns &&
+        !visited[newRow][newColumn]
+      )
+    ) {
+      directionIndex = (directionIndex + 1) % 4;
+    }
+    row += directions[directionIndex][0];
+    column += directions[directionIndex][1];
   }
 
   return ret;
