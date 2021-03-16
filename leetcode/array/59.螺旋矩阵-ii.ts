@@ -52,4 +52,43 @@ var generateMatrix = function (n: number): number[][] {
 
   return ret;
 };
+
+// array2
+var generateMatrix = function (n: number): number[][] {
+  let num = 1;
+  const tar = n * n;
+  const matrix: number[][] = Array.from(new Array(n), () =>
+    new Array(n).fill(0)
+  );
+  let row = 0;
+  let column = 0;
+
+  // 右下左上
+  const directions = [
+    [0, 1],
+    [1, 0],
+    [0, -1],
+    [-1, 0],
+  ];
+
+  let directionIndex = 0;
+  while (num <= tar) {
+    matrix[row][column] = num;
+    num++;
+    const nextRow = row + directions[directionIndex][0];
+    const nextColumn = column + directions[directionIndex][1];
+    if (
+      nextRow < 0 ||
+      nextRow >= n ||
+      nextColumn < 0 ||
+      nextColumn >= n ||
+      matrix[nextRow][nextColumn] !== 0
+    ) {
+      directionIndex = (directionIndex + 1) % 4; // 顺时针旋转至下一个方向
+    }
+    row = row + directions[directionIndex][0];
+    column = column + directions[directionIndex][1];
+  }
+  return matrix;
+};
 // @lc code=end
