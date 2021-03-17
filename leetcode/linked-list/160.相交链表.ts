@@ -1,17 +1,17 @@
 /*
- * @lc app=leetcode.cn id=160 lang=javascript
+ * @lc app=leetcode.cn id=160 lang=typescript
  *
  * [160] 相交链表
  *
  * https://leetcode-cn.com/problems/intersection-of-two-linked-lists/description/
  *
  * algorithms
- * Easy (34.89%)
- * Likes:    638
+ * Easy (57.83%)
+ * Likes:    1034
  * Dislikes: 0
- * Total Accepted:    99.7K
- * Total Submissions: 183.7K
- * Testcase Example:  '8\n[4,1,8,4,5]\n[5,0,1,8,4,5]\n2\n3'
+ * Total Accepted:    204.3K
+ * Total Submissions: 353.2K
+ * Testcase Example:  '8\n[4,1,8,4,5]\n[5,6,1,8,4,5]\n2\n3'
  *
  * 编写一个程序，找到两个单链表相交的起始节点。
  *
@@ -73,22 +73,24 @@
  *
  */
 
-// @lc code=start
-/**
- * Definition for singly-linked list.
- * function ListNode(val) {
- *     this.val = val;
- *     this.next = null;
- * }
- */
+export {};
 
-/**
- * @param {ListNode} headA
- * @param {ListNode} headB
- * @return {ListNode}
- */
-// tow pointers
-var getIntersectionNode = function (headA, headB) {
+// Definition for singly-linked list.
+class ListNode {
+  val: number;
+  next: ListNode | null;
+  constructor(val?: number, next?: ListNode | null) {
+    this.val = val === undefined ? 0 : val;
+    this.next = next === undefined ? null : next;
+  }
+}
+
+// @lc code=start
+// two pointers
+var getIntersectionNode = function (
+  headA: ListNode | null,
+  headB: ListNode | null
+): ListNode | null {
   let pA = headA;
   let pB = headB;
 
@@ -102,8 +104,11 @@ var getIntersectionNode = function (headA, headB) {
 };
 
 // hash table
-var getIntersectionNode = function (headA, headB) {
-  const set = new Set();
+var getIntersectionNode = function (
+  headA: ListNode | null,
+  headB: ListNode | null
+): ListNode | null {
+  const set: Set<ListNode> = new Set();
   while (headA) {
     set.add(headA);
     headA = headA.next;

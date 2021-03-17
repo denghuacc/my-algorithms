@@ -1,16 +1,16 @@
 /*
- * @lc app=leetcode.cn id=235 lang=javascript
+ * @lc app=leetcode.cn id=235 lang=typescript
  *
  * [235] 二叉搜索树的最近公共祖先
  *
  * https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/
  *
  * algorithms
- * Easy (55.80%)
- * Likes:    269
+ * Easy (66.14%)
+ * Likes:    549
  * Dislikes: 0
- * Total Accepted:    51.6K
- * Total Submissions: 81.5K
+ * Total Accepted:    127.4K
+ * Total Submissions: 192.6K
  * Testcase Example:  '[6,2,8,0,4,7,9,null,null,3,5]\n2\n8'
  *
  * 给定一个二叉搜索树, 找到该树中两个指定节点的最近公共祖先。
@@ -48,34 +48,38 @@
  *
  */
 
-/**
- * Definition for a binary tree node.
- * function TreeNode(val) {
- *     this.val = val;
- *     this.left = this.right = null;
- * }
- */
+export {};
+
+// Definition for a binary tree node.
+class TreeNode {
+  val: number;
+  left: TreeNode | null;
+  right: TreeNode | null;
+  constructor(val?: number, left?: TreeNode | null, right?: TreeNode | null) {
+    this.val = val === undefined ? 0 : val;
+    this.left = left === undefined ? null : left;
+    this.right = right === undefined ? null : right;
+  }
+}
 
 // @lc code=start
-/**
- * @param {TreeNode} root
- * @param {TreeNode} p
- * @param {TreeNode} q
- * @return {TreeNode}
- */
 // recursive
-var lowestCommonAncestor = function (root, p, q) {
-  const parentVal = root.val;
-  const pVal = p.val;
-  const qVal = q.val;
+var lowestCommonAncestor = function (
+  root: TreeNode | null,
+  p: TreeNode | null,
+  q: TreeNode | null
+): TreeNode | null {
+  const parentVal = root!.val;
+  const pVal = p!.val;
+  const qVal = q!.val;
 
   // continue search right child
   if (pVal > parentVal && qVal > parentVal) {
-    return lowestCommonAncestor(root.right, p, q);
+    return lowestCommonAncestor(root!.right, p, q);
   }
   // continue search left child
   else if (pVal < parentVal && qVal < parentVal) {
-    return lowestCommonAncestor(root.left, p, q);
+    return lowestCommonAncestor(root!.left, p, q);
   }
   // or return root node
   else {
@@ -84,10 +88,14 @@ var lowestCommonAncestor = function (root, p, q) {
 };
 
 // iterative
-var lowestCommonAncestor = function (root, p, q) {
-  const pVal = p.val;
-  const qVal = q.val;
-  let node = root;
+var lowestCommonAncestor = function (
+  root: TreeNode | null,
+  p: TreeNode | null,
+  q: TreeNode | null
+): TreeNode | null {
+  const pVal = p!.val;
+  const qVal = q!.val;
+  let node: TreeNode | null = root;
 
   while (node) {
     const parentVal = node.val;

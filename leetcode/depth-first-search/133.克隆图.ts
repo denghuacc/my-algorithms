@@ -1,17 +1,17 @@
 /*
- * @lc app=leetcode.cn id=133 lang=javascript
+ * @lc app=leetcode.cn id=133 lang=typescript
  *
  * [133] 克隆图
  *
  * https://leetcode-cn.com/problems/clone-graph/description/
  *
  * algorithms
- * Medium (21.15%)
- * Likes:    169
+ * Medium (66.51%)
+ * Likes:    338
  * Dislikes: 0
- * Total Accepted:    24K
- * Total Submissions: 41.6K
- * Testcase Example:  '[[2,4],[1,3],[2,4],[1,3]]'
+ * Total Accepted:    57.5K
+ * Total Submissions: 86.5K
+ * Testcase Example:  '[[2,4],[1,3],[2,4],[1,3]]\n[[]]\n[]'
  *
  * 给你无向 连通 图中一个节点的引用，请你返回该图的 深拷贝（克隆）。
  *
@@ -86,34 +86,33 @@
  *
  */
 
-// @lc code=start
-/**
- * // Definition for a Node.
- * function Node(val, neighbors) {
- *    this.val = val === undefined ? 0 : val;
- *    this.neighbors = neighbors === undefined ? [] : neighbors;
- * };
- */
+export {};
 
-/**
- * @param {Node} node
- * @return {Node}
- * dfs
- */
-var cloneGraph = function (node) {
-  const map = new Map();
+// Definition for Node.
+class Node {
+  val: number;
+  neighbors: Node[];
+  constructor(val?: number, neighbors?: Node[]) {
+    this.val = val === undefined ? 0 : val;
+    this.neighbors = neighbors === undefined ? [] : neighbors;
+  }
+}
+
+// @lc code=start
+function cloneGraph(node: Node | null): Node | null {
+  const map: Map<Node, Node> = new Map();
   return dfs(node);
 
-  function dfs(node) {
+  function dfs(node: Node | null): Node | null {
     if (!node) return null;
-    if (map.has(node)) return map.get(node);
+    if (map.has(node)) return map.get(node)!;
 
     const newNode = new Node(node.val);
     map.set(node, newNode);
-    node.neighbors.forEach((neighbor) => {
-      newNode.neighbors.push(dfs(neighbor));
-    });
+    node.neighbors.forEach((neighbor) =>
+      newNode.neighbors.push(dfs(neighbor)!)
+    );
     return newNode;
   }
-};
+}
 // @lc code=end
