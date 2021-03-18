@@ -27,6 +27,7 @@
 
 export {};
 
+// Definition for singly-linked list.
 class ListNode {
   val: number;
   next: ListNode | null;
@@ -44,8 +45,8 @@ var reverseBetween = function (
   n: number
 ): ListNode | null {
   if (!head) return null;
-  let cur = head;
-  let pre = null;
+  let cur: ListNode = head;
+  let pre: ListNode | null = null;
 
   while (m > 1) {
     pre = cur;
@@ -54,9 +55,9 @@ var reverseBetween = function (
     n--;
   }
 
-  let con = pre;
-  let tail = cur;
-  let third = null;
+  let con: ListNode | null = pre;
+  let tail: ListNode | null = cur;
+  let third: ListNode | null = null;
   while (n > 0 && cur) {
     third = cur.next!;
     cur.next = pre;
@@ -81,9 +82,9 @@ var reverseBetween = function (
   m: number,
   n: number
 ): ListNode | null {
-  let left = head;
-  let stop = false;
-  recurseAndReverse(head!, m, n);
+  let left: ListNode | null = head;
+  let stop: boolean = false;
+  recurseAndReverse(head, m, n);
   return head;
 
   function recurseAndReverse(right: ListNode | null, m: number, n: number) {
