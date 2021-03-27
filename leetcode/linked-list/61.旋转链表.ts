@@ -38,6 +38,7 @@
 
 export {};
 
+// Definition for singly-linked list.
 class ListNode {
   val: number;
   next: ListNode | null;
@@ -49,63 +50,31 @@ class ListNode {
 
 // @lc code=start
 var rotateRight = function (head: ListNode | null, k: number): ListNode | null {
-  if (!head) return null;
-  if (!head.next) return head;
+  if (!head || !head.next || k === 0) return head;
 
-  let oldTail = head;
-  let n: number;
+  let cur: ListNode = head;
+  let n = 1;
 
-  for (n = 1; oldTail.next != null; n++) {
-    oldTail = oldTail.next;
-  }
-
-  oldTail.next = head; // link to head
-
-  let newTail = head;
-
-  // new tail: n - (k % n) - 1
-  for (let i = 0; i < n - (k % n) - 1; i++) {
-    newTail = newTail.next!;
-  }
-
-  let newHead = newTail.next;
-
-  newTail.next = null; // break
-
-  return newHead;
-};
-
-// two pointers
-var rotateRight = function (head: ListNode | null, k: number): ListNode | null {
-  if (!head || k === 0) return head;
-
-  let tmp: ListNode = head;
-  let n = 0;
-
-  while (tmp) {
-    tmp = tmp.next!;
+  while (cur.next) {
+    cur = cur.next;
     n++;
   }
 
-  k = k % n;
-  if (k === 0) return head;
+  let add = n - k % n;
 
-  let node = head;
-  tmp = head;
-
-  while (k > 0) {
-    k--;
-    tmp = tmp.next!;
-  }
-  while (tmp.next) {
-    head = head!.next;
-    tmp = tmp.next;
+  if (add === n) {
+    return head;
   }
 
-  const ret = head!.next; // new head
-  head!.next = null; // break
-  tmp.next = node; // link to old head
+  cur.next = head;  // tail link to head to cycle
+  // -> cur pointer continue moving
+  while (add) {
+    cur = cur.next!;
+    add--;
+  }
 
+  const ret = cur.next; // first cache new head
+  cur.next = null; // break cycle
   return ret;
 };
 // @lc code=end
