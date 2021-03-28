@@ -48,6 +48,7 @@
 
 export {};
 
+// Definition for a binary tree node
 class TreeNode {
   val: number;
   left: TreeNode | null;
@@ -63,18 +64,12 @@ class TreeNode {
 class BSTIterator {
   idx: number;
   items: number[];
+
   constructor(root: TreeNode | null) {
     this.idx = 0;
     this.items = [];
-    // inorder gen ascending order element items
-    inorder(root, this.items);
-    function inorder(node: TreeNode | null, items: number[]) {
-      if (node) {
-        if (node.left) inorder(node.left, items);
-        items.push(node.val);
-        if (node.right) inorder(node.right, items);
-      }
-    }
+    // inorder tree and generate ascending order element items
+    this.inorder(root, this.items);
   }
 
   next(): number {
@@ -86,6 +81,15 @@ class BSTIterator {
       return false;
     }
     return true;
+  }
+
+  // recursive inorder
+  private inorder(node: TreeNode | null, items: number[]): void {
+    if (node) {
+      if (node.left) this.inorder(node.left, items);
+      items.push(node.val);
+      if (node.right) this.inorder(node.right, items);
+    }
   }
 }
 
