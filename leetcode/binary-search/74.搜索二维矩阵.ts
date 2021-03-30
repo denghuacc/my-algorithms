@@ -52,34 +52,35 @@ var searchMatrix = function (matrix: number[][], target: number): boolean {
   if (R === 0) return false;
   const C = matrix[0].length;
 
-  let left = 0;
-  let right = R * C - 1;
+  let i = 0;
+  let j = R * C - 1;
 
-  while (left <= right) {
-    const pivotIdx = Math.floor((left + right) / 2); // 先取中间索引
+  while (i <= j) {
+    const pivot = Math.floor((i + j) / 2); // 先取中间索引
+    const val = matrix[Math.floor(pivot / C)][pivot % C]; // 对应索引的值
 
-    // 对应矩阵的值
-    const pivotElement = matrix[Math.floor(pivotIdx / C)][pivotIdx % C];
-
-    // 二分查找
-    if (target === pivotElement) return true;
-    else {
-      if (target < pivotElement) right = pivotIdx - 1;
-      else left = pivotIdx + 1;
+    if (target < val) {
+      j = pivot - 1;
+    } else if (target > val) {
+      i = pivot + 1;
+    } else {
+      return true;
     }
   }
 
   return false;
 };
 
-// binary search 2
+// binary search 2 -> 左上角位置点为基点进行查找
 var searchMatrix = function (matrix: number[][], target: number): boolean {
-  if (matrix.length === 0) return false;
-  let i = 0;
-  let j = matrix[0].length - 1;
-  // 左上角位置点为查找基点
+  const R = matrix.length;
+  if (R === 0) return false;
+  const C = matrix[0].length;
 
-  while (i < matrix.length && j >= 0) {
+  let i = 0;
+  let j = C - 1;
+
+  while (i < R && j >= 0) {
     if (matrix[i][j] < target) {
       i++;
     } else if (matrix[i][j] > target) {
