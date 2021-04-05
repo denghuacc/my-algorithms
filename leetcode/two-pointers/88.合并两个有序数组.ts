@@ -39,6 +39,9 @@
 export {};
 
 // @lc code=start
+/**
+ Do not return anything, modify nums1 in-place instead.
+ */
 // API
 var merge = function (nums1: number[], m: number, nums2: number[], n: number) {
   nums1.splice(m, n, ...nums2);
