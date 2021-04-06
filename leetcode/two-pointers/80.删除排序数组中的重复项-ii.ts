@@ -54,48 +54,45 @@
  */
 
 // @lc code=start
-// two pointers - 删除多余的重复项
+// two pointers
 var removeDuplicates = function (nums: number[]): number {
-  let i = 1;
-  let count = 1;
-  let n = nums.length;
+  const n = nums.length;
+  if (n < 2) return n;
+  let slow = 2;
+  let fast = 2;
 
-  while (i < n) {
-    if (nums[i] === nums[i - 1]) {
+  while (fast < n) {
+    if (nums[slow - 2] !== nums[fast]) {
+      nums[slow] = nums[fast];
+      ++slow;
+    }
+    ++fast;
+  }
+
+  return slow;
+};
+
+// two pointers 2
+var removeDuplicates = function (nums: number[]): number {
+  const n = nums.length;
+  let slow = 1;
+  let fast = 1;
+  let count = 1;
+
+  while (fast < n) {
+    if (nums[fast] === nums[fast - 1]) {
       count++;
-      if (count > 2) {
-        removeElement(nums, i);
-        i--;
-        n--;
-      }
     } else {
       count = 1;
     }
-    i++;
-  }
 
-  return n;
-
-  function removeElement(arr: number[], idx: number) {
-    for (let j = idx + 1; j < arr.length; j++) {
-      arr[j - 1] = arr[j];
+    if (count <= 2) {
+      nums[slow++] = nums[fast];
     }
-    return arr;
-  }
-};
 
-// two pointers - 覆盖多余的重复项
-var removeDuplicates = function (nums: number[]): number {
-  let i = 1;
-  let count = 1;
-
-  for (let j = 1; j < nums.length; j++) {
-    if (nums[j] === nums[j - 1]) count++;
-    else count = 1;
-
-    if (count <= 2) nums[i++] = nums[j];
+    fast++;
   }
 
-  return i;
+  return slow;
 };
 // @lc code=end
