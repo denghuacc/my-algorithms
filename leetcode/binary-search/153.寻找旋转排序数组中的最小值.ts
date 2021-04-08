@@ -67,4 +67,21 @@ var findMin = function (nums: number[]): number {
 
   return -1;
 };
+
+// binary search 2
+var findMin = function (nums: number[]): number {
+  let left = 0;
+  let right = nums.length - 1;
+
+  while (left < right) {
+    const pivot = left + Math.floor((right - left) / 2);
+    if (nums[pivot] < nums[right]) {
+      right = pivot;
+    } else {
+      left = pivot + 1;
+    }
+  }
+
+  return nums[left];
+};
 // @lc code=end
