@@ -41,36 +41,24 @@
  */
 
 // @lc code=start
-// array
-var findMin = function (nums: number[]): number {
-  let min = nums[0];
-  for (let i = 1; i < nums.length; i++) {
-    if (nums[i] < nums[i - 1]) {
-      min = Math.min(min, nums[i]);
-    }
-  }
-
-  return min;
-};
-
 // binary search
 var findMin = function (nums: number[]): number {
   let left = 0;
   let right = nums.length - 1;
 
   while (left < right) {
-    let mid = left + Math.floor((right - left) / 2);
+    let pivot = left + Math.floor((right - left) / 2);
 
     // 最小值在左边
-    if (nums[mid] < nums[right]) {
-      right = mid;
+    if (nums[pivot] < nums[right]) {
+      right = pivot;
     }
     // 最小值在右边
-    else if (nums[mid] > nums[right]) {
-      left = mid + 1;
+    else if (nums[pivot] > nums[right]) {
+      left = pivot + 1;
     }
     // 可能存在重复元素
-    else if (nums[mid] === nums[right]) {
+    else {
       right--;
     }
   }
