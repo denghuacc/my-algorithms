@@ -41,7 +41,7 @@ export {};
 function rob(nums: number[]): number {
   const n = nums.length;
   if (n === 1) return nums[0];
-  // [0, n-1] or [1, n-1]
+  // [0, n-1] or [1, n] 不能一起偷相连的房间（比如第一个和最后一个房间）
   return Math.max(robRange(nums, 0, n - 2), robRange(nums, 1, n - 1));
 
   function robRange(nums: number[], start: number, end: number): number {
@@ -51,7 +51,7 @@ function rob(nums: number[]): number {
     let dpI = 0; // dp[i]
 
     for (let i = end; i >= start; i--) {
-      dpI = Math.max(dpI1, nums[i] + dpI2);
+      dpI = Math.max(dpI1, nums[i] + dpI2); // max
       dpI2 = dpI1;
       dpI1 = dpI;
     }
