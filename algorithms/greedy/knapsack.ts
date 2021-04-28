@@ -15,12 +15,11 @@ export function knapsack(
   for (let i = 0; i < n && load < capacity; i++) {
     if (weights[i] <= capacity - load) {
       val += values[i];
-      load += weights[i];
     } else {
       const r = Math.floor((capacity - load) / weights[i]);
       val += r * values[i];
-      load += weights[i];
     }
+    load += weights[i];
   }
   return val;
 }
