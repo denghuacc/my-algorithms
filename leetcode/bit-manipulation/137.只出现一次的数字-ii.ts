@@ -47,12 +47,13 @@ var singleNumber = function (nums: number[]): number {
     }
   }
 
-  return Infinity;
+  return 0;
 };
 
-// math 3 ∗ (a+b+c) − (a+a+b+b+c) = c
+// math (3 ∗ (a+b) − (a+a+a+b)) / 2 = b
 var singleNumber = function (nums: number[]): number {
-  let [sumOfSet, sumOfNums] = [0, 0];
+  let sumOfSet = 0;
+  let sumOfNums = 0;
   const set: Set<number> = new Set();
 
   for (const num of nums) {
@@ -68,7 +69,8 @@ var singleNumber = function (nums: number[]): number {
 
 // bit manipulation
 var singleNumber = function (nums: number[]): number {
-  let [seenOnce, seenTwice] = [0, 0];
+  let seenOnce = 0;
+  let seenTwice = 0;
   for (const num of nums) {
     seenOnce = ~seenTwice & (seenOnce ^ num);
     seenTwice = ~seenOnce & (seenTwice ^ num);
