@@ -38,13 +38,28 @@
  */
 
 // @lc code=start
-// math
-var reverse = function (x: number) {
+// API
+var reverse = function (x: number): number {
   // 数值转字符串后再翻转
   let str = new Number(x).toString().split("").reverse().join("");
 
-  let res = parseInt(str);
-  res = x > 0 ? res : -res;
-  return res > 2 ** 31 - 1 || res < -(2 ** 31) ? 0 : res;
+  let ret = parseInt(str, 10);
+  ret = x > 0 ? ret : -ret;
+  return ret > 2 ** 31 - 1 || ret < -(2 ** 31) ? 0 : ret;
+};
+
+// math
+var reverse = function (x: number): number {
+  let ret = 0;
+  while (x !== 0) {
+    const digit = x % 10;
+    x = ~~(x / 10);
+    ret = ret * 10 + digit;
+    if (ret > 2 ** 31 - 1 || ret < -(2 ** 31)) {
+      return 0;
+    }
+  }
+
+  return ret;
 };
 // @lc code=end
