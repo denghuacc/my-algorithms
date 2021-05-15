@@ -69,46 +69,6 @@
  */
 
 // @lc code=start
-// math
-var romanToInt = function (s: string): number {
-  let ret = 0;
-  const specMap: Map<string, number> = new Map([
-    ["IV", 4],
-    ["IX", 9],
-    ["XL", 40],
-    ["XC", 90],
-    ["CD", 400],
-    ["CM", 900],
-  ]);
-  const map: Map<string, number> = new Map([
-    ["I", 1],
-    ["V", 5],
-    ["X", 10],
-    ["L", 50],
-    ["C", 100],
-    ["D", 500],
-    ["M", 1000],
-  ]);
-
-  const specKeys = [...specMap.keys()];
-
-  for (const key of specKeys) {
-    const specIndex = s.indexOf(key);
-
-    if (specIndex > -1) {
-      ret += specMap.get(key)!;
-      s = s.slice(0, specIndex) + s.slice(specIndex + 2); // 去除 key
-    }
-  }
-
-  for (const i of s) {
-    const value = map.get(i)!;
-    ret += value;
-  }
-
-  return ret;
-};
-
 // math hash table
 var romanToInt = function (s: string): number {
   let ret = 0;
@@ -123,9 +83,8 @@ var romanToInt = function (s: string): number {
   ]);
 
   for (let i = 0; i < s.length; i++) {
-    map.get(s[i])! < map.get(s[i + 1])!
-      ? (ret -= map.get(s[i])!)
-      : (ret += map.get(s[i])!);
+    const val = map.get(s[i])!;
+    val < map.get(s[i + 1])! ? (ret -= val) : (ret += val);
   }
 
   return ret;
