@@ -91,4 +91,89 @@ var isCousins = function (
     }
   }
 };
+
+// dfs2
+var isCousins = function (
+  root: TreeNode | null,
+  x: number,
+  y: number
+): boolean {
+  let xParent: number | undefined = 0;
+  let yParent: number | undefined = 0;
+  let xDeep = 0;
+  let yDeep = 0;
+  let xFound = false;
+  let yFound = false;
+
+  dfs(root, root?.val, 0);
+
+  return xParent !== yParent && xDeep === yDeep;
+
+  function dfs(
+    node: TreeNode | null,
+    parent: number | undefined,
+    deep: number
+  ) {
+    if (!node) return;
+    if (node.val === x) {
+      xParent = parent;
+      xDeep = deep;
+      xFound = true;
+    } else if (node.val === y) {
+      yParent = parent;
+      yDeep = deep;
+      yFound = true;
+    }
+
+    if (xFound && yFound) return;
+    dfs(node.left, node.val, deep + 1);
+    if (xFound && yFound) return;
+    dfs(node.right, node.val, deep + 1);
+  }
+};
+
+// bfs
+var isCousins = function (
+  root: TreeNode | null,
+  x: number,
+  y: number
+): boolean {
+  if (!root) return false;
+  let xParent: number | undefined = 0;
+  let yParent: number | undefined = 0;
+  let xDeep = 0;
+  let yDeep = 0;
+  let xFound = false;
+  let yFound = false;
+
+  const queue: [TreeNode, number][] = [[root, 0]];
+  update(root, 0, 0);
+
+  while (queue.length) {
+    const [node, deep] = queue.shift()!;
+    if (node.left) {
+      queue.push([node.left, deep + 1]);
+      update(node.left, node.val, deep + 1);
+    }
+    if (node.right) {
+      queue.push([node.right, deep + 1]);
+      update(node.right, node.val, deep + 1);
+    }
+    if (xFound && yFound) break;
+  }
+
+  return xParent !== yParent && xDeep === yDeep;
+
+  function update(node: TreeNode, parent: number, deep: number) {
+    if (node.val === x) {
+      xParent = parent;
+      xDeep = deep;
+      xFound = true;
+    } else if (node.val === y) {
+      yParent = parent;
+      yDeep = deep;
+      yFound = true;
+    }
+  }
+};
 // @lc code=end
