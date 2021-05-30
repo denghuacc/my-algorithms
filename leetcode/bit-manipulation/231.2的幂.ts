@@ -46,13 +46,6 @@ var isPowerOfTwo = function (n: number): boolean {
 
 // bit manipulation
 var isPowerOfTwo = function (n: number): boolean {
-  if (n <= 0) return false;
-  return (n & -n) === n;
-};
-
-// bit manipulation 2
-var isPowerOfTwo = function (n: number): boolean {
-  if (n <= 0) return false;
-  return (n & (n - 1)) === 0;
+  return n > 0 && (n & (n - 1)) == 0;
 };
 // @lc code=end
