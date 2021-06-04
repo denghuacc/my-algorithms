@@ -96,12 +96,13 @@ var getIntersectionNode = function (
 
   while (pA || pB) {
     if (pA === pB) return pA;
-    pA = !pA ? headB : pA.next;
-    pB = !pB ? headA : pB.next;
+    pA = pA ? pA.next : headB;
+    pB = pB ? pB.next : headA;
   }
 
   return null;
 };
+// @lc code=end
 
 // hash table
 var getIntersectionNode = function (
@@ -121,4 +122,3 @@ var getIntersectionNode = function (
 
   return null;
 };
-// @lc code=end
