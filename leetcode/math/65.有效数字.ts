@@ -52,8 +52,8 @@
 // 状态机
 var isNumber = function (s: string): boolean {
   let state = 0;
-  let finals = [0, 0, 0, 1, 0, 1, 1, 0, 1];
-  let transfer = [
+  const finals = [0, 0, 0, 1, 0, 1, 1, 0, 1];
+  const transfer = [
     [0, 1, 6, 2, -1, -1],
     [-1, -1, 6, 2, -1, -1],
     [-1, -1, 3, -1, -1, -1],
@@ -64,7 +64,15 @@ var isNumber = function (s: string): boolean {
     [-1, -1, 5, -1, -1, -1],
     [8, -1, -1, -1, -1, -1],
   ];
-  let make = (c: string) => {
+
+  for (let i = 0; i < s.length; ++i) {
+    state = transfer[state][make(s[i])];
+    if (state < 0) return false;
+  }
+
+  return Boolean(finals[state]);
+
+  function make(c: string) {
     switch (c) {
       case " ":
         return 0;
@@ -74,19 +82,71 @@ var isNumber = function (s: string): boolean {
       case ".":
         return 3;
       case "e":
+      case "E":
         return 4;
       default:
         let code = c.charCodeAt(0);
         if (code >= 48 && code <= 57) return 2;
         else return 5;
     }
-  };
+  }
+};
 
-  for (let i = 0; i < s.length; ++i) {
-    state = transfer[state][make(s[i])];
-    if (state < 0) return false;
+// string simulation
+var isNumber = function (s: string): boolean {
+  const n = s.length;
+  let idx = -1;
+  for (let i = 0; i < n; i++) {
+    const c = s[i];
+    if (c === "e" || c === "E") {
+      if (idx === -1) {
+        idx = i;
+      } else {
+        return false;
+      }
+    }
   }
 
-  return Boolean(finals[state]);
+  let ret = true;
+  if (idx !== -1) {
+    ret &&= check(s, 0, idx - 1, false);
+    ret &&= check(s, idx + 1, n - 1, true);
+  } else {
+    ret &&= check(s, 0, n - 1, false);
+  }
+
+  return ret;
+
+  function check(
+    s: string,
+    start: number,
+    end: number,
+    mustInteger: boolean
+  ): boolean {
+    if (start > end) {
+      return false;
+    }
+    if (s[start] === "+" || s[start] === "-") {
+      start++;
+    }
+
+    let hasDot = false;
+    let hasNum = false;
+
+    for (let i = start; i <= end; i++) {
+      if (s[i] === ".") {
+        if (mustInteger || hasDot) {
+          return false;
+        }
+        hasDot = true;
+      } else if (s[i] >= "0" && s[i] <= "9") {
+        hasNum = true;
+      } else {
+        return false;
+      }
+    }
+
+    return hasNum;
+  }
 };
 // @lc code=end
