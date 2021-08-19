@@ -39,7 +39,33 @@
  */
 
 // @lc code=start
-function reverseVowels(s: string): string {
+var reverseVowels = function (s: string): string {
+  const n = s.length;
+  const vowels = "aeiouAEIOU";
+  const arr = Array.from(s);
+
+  let i = 0;
+  let j = n - 1;
+
+  while (i < j) {
+    while (i < n && !vowels.includes(arr[i])) {
+      i++;
+    }
+    while (j > 0 && !vowels.includes(arr[j])) {
+      j--;
+    }
+    if (i < j) {
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+      i++;
+      j--;
+    }
+  }
+
+  return arr.join("");
+};
+// @lc code=end
+
+var reverseVowels = function (s: string): string {
   const vowelList = ["a", "e", "i", "o", "u", "A", "E", "I", "O", "U"];
   const indexList = [];
 
@@ -62,5 +88,4 @@ function reverseVowels(s: string): string {
   }
 
   return arr.join("");
-}
-// @lc code=end
+};
