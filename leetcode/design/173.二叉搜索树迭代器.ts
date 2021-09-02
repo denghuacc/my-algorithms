@@ -69,7 +69,7 @@ class BSTIterator {
     this.idx = 0;
     this.items = [];
     // inorder tree and generate ascending order element items
-    this.inorder(root, this.items);
+    this.inorder(root);
   }
 
   next(): number {
@@ -84,11 +84,11 @@ class BSTIterator {
   }
 
   // recursive inorder
-  private inorder(node: TreeNode | null, items: number[]): void {
+  private inorder(node: TreeNode | null): void {
     if (node) {
-      if (node.left) this.inorder(node.left, items);
-      items.push(node.val);
-      if (node.right) this.inorder(node.right, items);
+      if (node.left) this.inorder(node.left);
+      this.items.push(node.val);
+      if (node.right) this.inorder(node.right);
     }
   }
 }
