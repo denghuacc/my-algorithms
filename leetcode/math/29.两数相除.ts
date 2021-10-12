@@ -89,4 +89,53 @@ var divide = function (dividend: number, divisor: number): number {
     return count + div(a - tb, b);
   }
 };
+
+// binary search
+var divide = function (dividend: number, divisor: number): number {
+  const MAX = 2 ** 31 - 1;
+  const MIN = -(2 ** 31);
+
+  if (dividend === MIN) {
+    if (divisor === 1) {
+      return MIN;
+    }
+    if (divisor === -1) {
+      return MAX;
+    }
+  }
+
+  if (divisor === MIN) {
+    return dividend === MIN ? 1 : 0;
+  }
+
+  if (divisor === 0) {
+    return 0;
+  }
+
+  let rev = false;
+  if (dividend > 0) {
+    dividend = -dividend;
+    rev = !rev;
+  }
+  if (divisor > 0) {
+    divisor = -divisor;
+    rev = !rev;
+  }
+
+  const candidates: number[] = [];
+  candidates.push(divisor);
+  let index = 0;
+  while (candidates[index] >= dividend - candidates[index]) {
+    candidates.push(candidates[index] + candidates[index]);
+    ++index;
+  }
+  let ret = 0;
+  for (let i = candidates.length - 1; i >= 0; i--) {
+    if (candidates[i] >= dividend) {
+      ret += 1 << i;
+      dividend -= candidates[i];
+    }
+  }
+  return rev ? -ret : ret;
+};
 // @lc code=end
