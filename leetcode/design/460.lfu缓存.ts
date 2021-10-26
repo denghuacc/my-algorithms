@@ -52,12 +52,14 @@ export {};
 
 // @lc code=start
 // two map
+// Time Limit Exceeded
 class LFUCache {
-  size: number;
+  capacity: number;
   values: Map<number, number>;
   times: Map<number, number>;
+
   constructor(capacity: number) {
-    this.size = capacity;
+    this.capacity = capacity;
     this.values = new Map();
     this.times = new Map();
   }
@@ -78,17 +80,16 @@ class LFUCache {
 
   put(key: number, value: number): void {
     let time = 1;
-    let min = Math.min(...this.times.values());
+    let min = Math.min(...this.times.values()); // the min time
     if (this.values.has(key)) {
       time = (this.times.get(key) ?? 0) + 1;
-      this.values.delete(key);
       this.values.delete(key);
     }
     this.values.set(key, value);
     this.times.set(key, time);
-    if (this.size < this.values.size) {
+    if (this.values.size > this.capacity) {
       let keys = this.values.keys();
-      let delKey = keys.next().value;
+      let delKey = keys.next().value; // the first key
       while (delKey && this.times.get(delKey) !== min) {
         delKey = keys.next().value;
       }

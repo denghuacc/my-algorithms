@@ -52,8 +52,6 @@
  * 
  */
 
-import { time } from "console";
-
 // @lc code=start
 class RandomizedSet {
   items: number[];
@@ -65,7 +63,9 @@ class RandomizedSet {
   }
 
   insert(val: number): boolean {
-    if (this.ids.has(val)) return false;
+    if (this.ids.has(val)) {
+      return false;
+    }
     this.items.push(val);
     this.ids.set(val, this.items.length - 1);
     return true;

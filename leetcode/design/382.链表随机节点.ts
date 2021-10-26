@@ -64,7 +64,7 @@ class Solution {
       }
       cur = cur.next;
     }
-    return ret!;
+    return ret;
   }
 
   // random range [0, n)

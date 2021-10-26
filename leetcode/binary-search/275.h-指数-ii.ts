@@ -44,6 +44,8 @@
  *
  */
 
+export {};
+
 // @lc code=start
 // binary search
 function hIndex(citations: number[]): number {
