@@ -63,13 +63,16 @@ var singleNumber = function (nums: number[]): number[] {
   let diff = bitMask & -bitMask;
 
   let x = 0;
+  let y = 0;
 
   for (const num of nums) {
-    if ((num & diff) !== 0) {
+    if (num & diff) {
       x ^= num;
+    } else {
+      y ^= num;
     }
   }
 
-  return [x, bitMask ^ x];
+  return [x, y];
 };
 // @lc code=end
