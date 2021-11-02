@@ -67,7 +67,9 @@ class ListNode {
  Do not return anything, modify it in-place instead.
  */
 function deleteNode(root: ListNode | null): void {
-  root!.val = root!.next!.val; // replace value with next node's value
-  root!.next = root!.next!.next; // replace next
+  if (root) {
+    root.val = root.next!.val;
+    root.next = root.next!.next;
+  }
 }
 // @lc code=end
