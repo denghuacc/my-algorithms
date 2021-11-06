@@ -37,8 +37,11 @@
 var missingNumber = function (nums: number[]): number {
   nums.sort((a, b) => a - b);
 
-  if (nums[nums.length - 1] !== nums.length) return nums.length;
-  else if (nums[0] !== 0) return 0;
+  if (nums[nums.length - 1] !== nums.length) {
+    return nums.length;
+  } else if (nums[0] !== 0) {
+    return 0;
+  }
 
   for (let i = 1; i < nums.length; i++) {
     const expectedNum = nums[i - 1] + 1;
@@ -53,11 +56,11 @@ var missingNumber = function (nums: number[]): number {
 // hash table
 var missingNumber = function (nums: number[]): number {
   const set: Set<number> = new Set();
-
-  for (const num of nums) set.add(num);
+  for (const num of nums) {
+    set.add(num);
+  }
 
   const expectedNum = nums.length + 1;
-
   for (let i = 0; i < expectedNum; i++) {
     if (!set.has(i)) {
       return i;
@@ -80,7 +83,9 @@ var missingNumber = function (nums: number[]): number {
 var missingNumber = function (nums: number[]): number {
   let expectedNum = Math.floor((nums.length * (nums.length + 1)) / 2);
   let actualSum = 0;
-  for (const num of nums) actualSum += num;
+  for (const num of nums) {
+    actualSum += num;
+  }
   return expectedNum - actualSum;
 };
 // @lc code=end
