@@ -31,28 +31,41 @@
 
 // @lc code=start
 var lengthOfLastWord = function (s: string): number {
-  s = s.trim();
-  const arr = s.split(" ");
-  if (arr.length === 0) return 0;
-  const last = arr.pop()!;
-  return last.length;
+  return s
+    .trim()
+    .split(" ")
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .pop()!.length;
 };
 
+// two pointers
 var lengthOfLastWord = function (s: string): number {
   let end = s.length - 1;
-  while (end >= 0 && s[end] === " ") end--;
-  if (end < 0) return 0;
+  while (end >= 0 && s[end] === " ") {
+    end--;
+  }
+  if (end < 0) {
+    return 0;
+  }
   let start = end;
-  while (start >= 0 && s[start] !== " ") start--;
-  return end - start;
-};
-
-var lengthOfLastWord = function (s: string): number {
-  s = s.trim();
-  let end = s.length - 1;
-  if (end < 0) return 0;
-  let start = end;
-  while (start >= 0 && s[start] !== " ") start--;
+  while (start >= 0 && s[start] !== " ") {
+    start--;
+  }
   return end - start;
 };
 // @lc code=end
+
+// two pointers
+var lengthOfLastWord = function (s: string): number {
+  s = s.trim();
+  let end = s.length - 1;
+  if (end < 0) {
+    return 0;
+  }
+  let start = end;
+  while (start >= 0 && s[start] !== " ") {
+    start--;
+  }
+  return end - start;
+};
