@@ -48,27 +48,30 @@
 // @lc code=start
 // dp
 var kInversePairs = function (n: number, k: number): number {
-  // dp[i][j] -> dp[1:i] 包含 j 个 逆序对数组
-  const dp: number[][] = Array.from(new Array(n + 1), () =>
-    new Array(k + 1).fill(0)
-  );
-  const M = 1000000007;
+  const MOD = 1e9 + 7;
+  const dp = Array.from(new Array(2), () => new Array(k + 1).fill(0));
+  dp[0][0] = 1;
 
   for (let i = 1; i <= n; i++) {
-    for (let j = 0; j <= k && j <= Math.floor((i * (i - 1)) / 2); j++) {
-      if (i === 1 && j === 0) {
-        dp[i][j] = 1;
-        break;
-      } else if (j === 0) {
-        dp[i][j] = 1;
-      } else {
-        const val =
-          (dp[i - 1][j] + M - (j - i >= 0 ? dp[i - 1][j - i] : 0)) % M;
-        dp[i][j] = (dp[i][j - 1] + val) % M;
+    for (let j = 0; j <= k; j++) {
+      const cur = i & 1;
+      const prev = cur ^ 1;
+      dp[cur][j] = 0;
+      if (j > 0) {
+        dp[cur][j] = dp[cur][j - 1];
+      }
+      if (j >= i) {
+        dp[cur][j] -= dp[prev][j - i];
+      }
+      dp[cur][j] += dp[prev][j];
+      if (dp[cur][j] < 0) {
+        dp[cur][j] += MOD;
+      } else if (dp[cur][j] >= MOD) {
+        dp[cur][j] -= MOD;
       }
     }
   }
 
-  return dp[n][k];
+  return dp[n & 1][k];
 };
 // @lc code=end
