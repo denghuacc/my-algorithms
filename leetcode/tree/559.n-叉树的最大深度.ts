@@ -71,15 +71,10 @@ var maxDepth = function (root: Node): number {
   } else if (!root.children.length) {
     return 1;
   } else {
-    const heights: number[] = [];
-    for (const node of root.children) {
-      heights.push(maxDepth(node));
-    }
     let max = 0;
-    for (const height of heights) {
-      max = Math.max(height, max);
+    for (const node of root.children) {
+      max = Math.max(maxDepth(node), max);
     }
-
     return max + 1;
   }
 };
@@ -87,8 +82,7 @@ var maxDepth = function (root: Node): number {
 // bfs + iterative
 var maxDepth = function (root: Node): number {
   if (!root) return 0;
-  const queue: Node[] = [];
-  if (root) queue.push(root);
+  const queue: Node[] = [root];
   let max = 0;
 
   while (queue.length) {
