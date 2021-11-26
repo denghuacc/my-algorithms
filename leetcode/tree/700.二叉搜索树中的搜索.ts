@@ -57,7 +57,8 @@ class TreeNode {
 // @lc code=start
 // recursive
 var searchBST = function (root: TreeNode | null, val: number): TreeNode | null {
-  if (!root || root?.val === val) return root;
+  if (root == null) return null;
+  if (root?.val === val) return root;
   return val < root.val
     ? searchBST(root.left, val)
     : searchBST(root.right, val);
@@ -65,9 +66,10 @@ var searchBST = function (root: TreeNode | null, val: number): TreeNode | null {
 
 // iterative
 var searchBST = function (root: TreeNode | null, val: number): TreeNode | null {
-  while (root && val !== root.val) {
+  while (root != null) {
+    if (root.val === val) return root;
     root = val < root.val ? root.left : root.right;
   }
-  return root;
+  return null;
 };
 // @lc code=end
