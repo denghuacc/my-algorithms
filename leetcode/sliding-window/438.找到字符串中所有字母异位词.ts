@@ -64,14 +64,18 @@ function findAnagrams(s: string, p: string): number[] {
   const window: Map<string, number> = new Map();
   const needs: Map<string, number> = new Map();
 
-  for (const c of p) needs.set(c, (needs.get(c) ?? 0) + 1);
+  for (const c of p) {
+    needs.set(c, (needs.get(c) ?? 0) + 1);
+  }
 
   let match = 0;
   while (right < s.length) {
     const c1 = s[right];
     if (needs.has(c1)) {
       window.set(c1, (window.get(c1) ?? 0) + 1);
-      if (window.get(c1) === needs.get(c1)) match++;
+      if (window.get(c1) === needs.get(c1)) {
+        match++;
+      }
     }
     right++;
 
@@ -82,7 +86,9 @@ function findAnagrams(s: string, p: string): number[] {
       const c2 = s[left];
       if (needs.has(c2)) {
         window.set(c2, (window.get(c2) ?? 0) - 1);
-        if (window.get(c2)! < needs.get(c2)!) match--;
+        if (window.get(c2)! < needs.get(c2)!) {
+          match--;
+        }
       }
       left++;
     }
