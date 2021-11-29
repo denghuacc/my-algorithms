@@ -72,6 +72,7 @@
 // math hash table
 var romanToInt = function (s: string): number {
   let ret = 0;
+  let last = 0;
   const map: Map<string, number> = new Map([
     ["I", 1],
     ["V", 5],
@@ -83,8 +84,13 @@ var romanToInt = function (s: string): number {
   ]);
 
   for (let i = 0; i < s.length; i++) {
-    const val = map.get(s[i])!;
-    val < map.get(s[i + 1])! ? (ret -= val) : (ret += val);
+    const cur = map.get(s[i])!;
+    const next = map.get(s[i + 1]) ?? 0;
+    if (cur < next) {
+      ret -= cur;
+    } else {
+      ret += cur;
+    }
   }
 
   return ret;

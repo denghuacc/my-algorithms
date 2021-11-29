@@ -44,19 +44,17 @@ var longestCommonPrefix = function (strs: string[]): string {
   let ret = "";
 
   while (index < first.length) {
-    let bool;
+    let bool = true;
     for (let j = 0; j < strs.length; j++) {
       if (first[index] !== strs[j][index]) {
         bool = false;
         break; // 只要有一次不匹配就打断循环并返回 ret
-      } else {
-        bool = true;
       }
     }
     if (bool) {
       ret += first[index];
     } else {
-      return ret;
+      break;
     }
     index++;
   }

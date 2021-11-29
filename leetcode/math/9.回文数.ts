@@ -44,10 +44,15 @@ export {};
 // @lc code=start
 // math
 var isPalindrome = function (x: number): boolean {
-  // 数值转字符串后再翻转
-  const str = new Number(x).toString().split("").reverse().join("");
-
-  const rev = parseInt(str);
-  return x < 0 ? false : x === rev ? true : false;
+  if (x < 0) {
+    return false;
+  }
+  let cur = 0;
+  let num = x;
+  while (num > 0) {
+    cur = cur * 10 + (num % 10);
+    num = Math.floor(num / 10);
+  }
+  return cur === x;
 };
 // @lc code=end
