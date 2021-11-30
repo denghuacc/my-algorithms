@@ -44,22 +44,21 @@
 // @lc code=start
 // math
 var findNthDigit = function (n: number): number {
-  let base = 9;
-  let digits = 1;
+  let digit = 1;
+  let count = 9;
 
-  while (n - base * digits > 0) {
-    n -= base * digits;
-    base *= 10;
-    digits += 1;
+  while (n > digit * count) {
+    n -= digit * count;
+    digit += 1;
+    count *= 10;
   }
 
-  let idx = n % digits;
-  if (idx === 0) idx = digits;
-  let number = 1;
-  for (let i = 1; i < digits; i++) number *= 10;
-  if (idx === digits) number += Math.floor(n / digits) - 1;
-  else number += Math.floor(n / digits);
-  for (let i = idx; i < digits; i++) number = Math.floor(number / 10);
-  return number % 10;
+  const index = n - 1;
+  const start = Math.floor(Math.pow(10, digit - 1));
+  const num = start + Math.floor(index / digit);
+  const digitIndex = index % digit;
+  const ret =
+    Math.floor(num / Math.floor(Math.pow(10, digit - digitIndex - 1))) % 10;
+  return ret;
 };
 // @lc code=end
