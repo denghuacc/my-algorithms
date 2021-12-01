@@ -52,8 +52,9 @@ var mySqrt = function (x: number): number {
 // binary search
 var mySqrt = function (x: number): number {
   if (x === 0 || x === 1) return x;
-  let l = 0,
-    r = Math.floor(x / 2);
+  let l = 0;
+  let r = Math.floor(x / 2);
+
   while (l <= r) {
     let m = Math.floor((l + r) / 2);
     let s = m * m;

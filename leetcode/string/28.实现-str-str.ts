@@ -58,7 +58,9 @@ var strStr = function (haystack: string, needle: string) {
 var strStr = function (haystack: string, needle: string) {
   const n1 = haystack.length;
   const n2 = needle.length;
-  if (n2 === 0) return 0;
+  if (n2 === 0) {
+    return 0;
+  }
 
   let p1 = 0;
   while (p1 < n1 - n2 + 1) {
@@ -72,7 +74,9 @@ var strStr = function (haystack: string, needle: string) {
       p2++;
       curLength++;
     }
-    if (curLength === n2) return p1 - n2;
+    if (curLength === n2) {
+      return p1 - n2;
+    }
     p1 = p1 - curLength + 1;
   }
 
