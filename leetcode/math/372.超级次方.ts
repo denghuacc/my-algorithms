@@ -31,47 +31,24 @@
 // @lc code=start
 // math
 var superPow = function (a: number, b: number[]): number {
-  const base = 1337;
-  if (b.length === 0) return 1;
-  const last = b.pop()!;
-  const p1 = myPow(a, last);
-  const p2 = myPow(superPow(a, b), 10);
-  return (p1 * p2) % base;
-
-  function myPow(a: number, k: number): number {
-    a %= base;
-    let ret = 1;
-    for (let i = 0; i < k; i++) {
-      ret *= a;
-      ret %= base;
-    }
-    return ret;
+  const MOD = BigInt(1337);
+  let res = BigInt(1);
+  for (let i = b.length - 1; i >= 0; i--) {
+    res = (res * pow(BigInt(a), b[i])) % MOD;
+    a = Number(pow(BigInt(a), 10));
   }
-};
+  return Number(res);
 
-// math2
-var superPow = function (a: number, b: number[]): number {
-  const base = 1337;
-  if (b.length === 0) return 1;
-  const last = b.pop()!;
-  const p1 = myPow(a, last);
-  const p2 = myPow(superPow(a, b), 10);
-  return (p1 * p2) % base;
-
-  // optimize
-  function myPow(a: number, k: number): number {
-    if (k === 0) return 1;
-    a %= base;
-
-    // k 是奇数
-    if (k % 2 === 1) {
-      return (a * myPow(a, k - 1)) % base;
+  function pow(x: bigint, n: number): bigint {
+    let res = BigInt(1);
+    while (n !== 0) {
+      if (n % 2 !== 0) {
+        res = (res * x) % MOD;
+      }
+      x = (x * x) % MOD;
+      n = Math.floor(n / 2);
     }
-    // k 是偶数
-    else {
-      const sub = myPow(a, k / 2);
-      return (sub * sub) % base;
-    }
+    return res;
   }
 };
 // @lc code=end
