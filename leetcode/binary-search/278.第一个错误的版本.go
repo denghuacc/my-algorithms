@@ -37,6 +37,8 @@ package leetcode
 
 import "sort"
 
+var isBadVersion func(version int) bool
+
 // @lc code=start
 /**
  * Forward declaration of isBadVersion API.

@@ -68,6 +68,12 @@
 
 package leetcode
 
+type Iterator struct {
+}
+
+func (i *Iterator) hasNext() bool
+func (i *Iterator) next() int
+
 // @lc code=start
 /*   Below is the interface for Iterator, which is already defined for you.
  *

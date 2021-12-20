@@ -74,6 +74,8 @@
 
 package leetcode
 
+var guess func(int) int
+
 // @lc code=start
 /**
  * Forward declaration of guess API.
