@@ -28,24 +28,17 @@
 
 // @lc code=start
 // string
-function repeatedStringMatch(A: string, B: string): number {
-  for (let i = 0; i < A.length; i++) {
-    if (A[i] === B[0]) {
-      let k = i;
-      let count = 1; // 循环次数
-      let j = 0;
-      while (A[k] === B[j]) {
-        k++;
-        j++;
-        if (j >= B.length) return count;
-        if (k >= A.length) {
-          k = 0;
-          count++;
-        }
-      }
+function repeatedStringMatch(a: string, b: string): number {
+  let str = "";
+  let res = 0;
+  const max = 2 * a.length + b.length;
+  while (str.length < max) {
+    str += a;
+    res++;
+    if (str.includes(b)) {
+      return res;
     }
   }
-
   return -1;
 }
 // @lc code=end
