@@ -1,5 +1,5 @@
 /*
- * @lc app=leetcode.cn id=374 lang=javascript
+ * @lc app=leetcode.cn id=374 lang=typescript
  *
  * [374] 猜数字大小
  *
@@ -72,6 +72,10 @@
  *
  */
 
+var guess = function (n: number): number {
+  return n;
+};
+
 // @lc code=start
 /**
  * Forward declaration of guess API.
@@ -82,11 +86,7 @@
  * var guess = function(num) {}
  */
 
-/**
- * @param {number} n
- * @return {number}
- */
-var guessNumber = function (n) {
+var guessNumber = function (n: number): number {
   let l = 0;
   let r = n;
 
