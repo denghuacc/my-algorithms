@@ -64,6 +64,7 @@
  */
 
 // @lc code=start
+// stack
 var simplifyPath = function (path: string): string {
   const stack: string[] = [];
   const pathArr = path.split("/");
@@ -71,7 +72,8 @@ var simplifyPath = function (path: string): string {
   for (const item of pathArr) {
     if (item === "" || item === ".") {
       continue;
-    } else if (item === "..") {
+    }
+    if (item === "..") {
       stack.pop();
     } else {
       stack.push(item);
