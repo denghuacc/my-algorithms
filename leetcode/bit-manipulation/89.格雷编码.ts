@@ -51,16 +51,14 @@
  */
 
 // @lc code=start
-// 镜像反射法
+// 对称生成
 function grayCode(n: number): number[] {
-  const ret: number[] = [0];
-  let head = 1;
-  for (let i = 0; i < n; i++) {
-    for (let j = ret.length - 1; j >= 0; j--) {
-      ret.push(head + ret[j]);
+  const res: number[] = [0];
+  for (let i = 1; i <= n; i++) {
+    for (let j = res.length - 1; j >= 0; j--) {
+      res.push(res[j] | (1 << (i - 1)));
     }
-    head <<= 1;
   }
-  return ret;
+  return res;
 }
 // @lc code=end
