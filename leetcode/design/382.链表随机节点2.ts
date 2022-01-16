@@ -47,25 +47,19 @@ class ListNode {
 // @lc code=start
 // design
 class Solution {
-  head: ListNode | null;
+  list: number[];
 
   constructor(head: ListNode | null) {
-    this.head = head;
+    this.list = [];
+    while (head) {
+      this.list.push(head.val);
+      head = head.next;
+    }
   }
 
   getRandom(): number {
-    let i = 0;
-    let res = 0;
-    let cur = this.head;
-    while (cur) {
-      i++;
-      const rand = this.createRandom(i);
-      if (rand % i === 0) {
-        res = cur.val;
-      }
-      cur = cur.next;
-    }
-    return res;
+    const rand = this.createRandom(this.list.length);
+    return this.list[rand];
   }
 
   // random range [0, n)
