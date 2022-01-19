@@ -65,4 +65,21 @@ var containsNearbyDuplicate = function (nums: number[], k: number): boolean {
   }
   return false;
 };
+
+// hash table 2
+var containsNearbyDuplicate = function (nums: number[], k: number): boolean {
+  const n = nums.length;
+  const map: Map<number, number> = new Map();
+  for (let i = 0; i < n; i++) {
+    const num = nums[i];
+    if (map.has(num)) {
+      const prev = map.get(num)!;
+      if (i - prev <= k) {
+        return true;
+      }
+    }
+    map.set(num, i);
+  }
+  return false;
+};
 // @lc code=end
