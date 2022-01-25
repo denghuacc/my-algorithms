@@ -6,7 +6,7 @@ import LinkedList from "./linked-list";
  * @description 双向链表需要在增加和删除元素的时候额外维护节点的 prev 指向和 tail 属性
  */
 export default class DoublyLinkedList<T> extends LinkedList<T> {
-  head: Node<T> | undefined;
+  head: Node<T> | undefined = undefined;
   tail: Node<T> | undefined; // 表尾
 
   constructor() {
