@@ -88,18 +88,8 @@ class Deque<T> {
   }
 
   pushFront(val: T) {
-    if (this.isEmpty()) {
-      this.pushBack(val);
-    } else if (this.lowestCount > 0) {
-      this.lowestCount--;
-      this.items[this.lowestCount] = val;
-    } else {
-      for (let i = this.count; i > 0; i--) {
-        this.items[i] = this.items[i - 1];
-      }
-      this.count++;
-      this.items[0] = val;
-    }
+    this.lowestCount--;
+    this.items[this.lowestCount] = val;
   }
 
   pushBack(val: T) {
