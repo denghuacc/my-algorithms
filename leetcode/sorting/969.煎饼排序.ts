@@ -54,32 +54,26 @@
  */
 
 // @lc code=start
-var pancakeSort = function (A: number[]): number[] {
-  const ret: number[] = [];
-  sort(A, A.length);
-  return ret;
-
-  function sort(A: number[], n: number) {
-    if (n === 1) return;
-    let max = 0;
-    let maxIndex = 0;
-    for (let i = 0; i < n; i++) {
-      if (A[i] > max) {
-        maxIndex = i;
-        max = A[i];
+var pancakeSort = function (arr: number[]): number[] {
+  const res: number[] = [];
+  const n = arr.length;
+  for (let i = n; i > 1; i--) {
+    let index = 0;
+    for (let j = 1; j < i; j++) {
+      if (arr[j] >= arr[index]) {
+        index = j;
       }
     }
+    if (index === i - 1) {
+      continue;
+    }
 
-    // 第一次翻转，将最大饼翻到最上面
-    reverse(A, 0, maxIndex);
-    ret.push(maxIndex + 1);
-
-    // 第二次翻转，将最大饼翻到最下面
-    reverse(A, 0, n - 1);
-    ret.push(n);
-
-    sort(A, n - 1); // recursive
+    reverse(arr, 0, index);
+    reverse(arr, 0, i - 1);
+    res.push(index + 1);
+    res.push(i);
   }
+  return res;
 
   function reverse(arr: number[], i: number, j: number) {
     while (i < j) {
