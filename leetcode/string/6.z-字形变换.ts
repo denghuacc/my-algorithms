@@ -51,23 +51,22 @@
 var convert = function (s: string, numRows: number): string {
   if (numRows === 1) return s;
   const len = Math.min(s.length, numRows);
-  const rows: string[] = [];
-  for (let i = 0; i < len; i++) rows[i] = "";
-  let loc = 0;
+  const rows: string[] = Array.from(new Array(len), () => "");
+  let idx = 0;
   let down = false;
 
   for (const i of s) {
-    rows[loc] += i;
-    if (loc === 0 || loc == numRows - 1) {
+    rows[idx] += i;
+    if (idx === 0 || idx === numRows - 1) {
       down = !down;
     }
-    loc += down ? 1 : -1;
+    idx += down ? 1 : -1;
   }
 
-  let ret = "";
+  let res = "";
   for (const row of rows) {
-    ret += row;
+    res += row;
   }
-  return ret;
+  return res;
 };
 // @lc code=end
