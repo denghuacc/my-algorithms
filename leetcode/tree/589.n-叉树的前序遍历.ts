@@ -73,13 +73,12 @@ class Node {
 // @lc code=start
 // recursive
 var preorder = function (root: Node | null): number[] {
-  const ret: number[] = [];
+  const res: number[] = [];
   dfs(root);
-  return ret;
-
+  return res;
   function dfs(root: Node | null) {
     if (root) {
-      ret.push(root.val);
+      res.push(root.val);
       if (root.children.length) {
         for (const child of root.children) {
           dfs(child);
@@ -91,14 +90,15 @@ var preorder = function (root: Node | null): number[] {
 
 // iterative
 var preorder = function (root: Node | null): number[] {
-  const ret: number[] = [];
-  if (!root) return ret;
+  const res: number[] = [];
+  if (!root) {
+    return res;
+  }
   const stack: Node[] = [];
   stack.push(root);
-
   while (stack.length) {
     const node = stack.pop()!;
-    ret.push(node.val);
+    res.push(node.val);
     let len = node.children.length;
     if (len) {
       for (let i = len - 1; i >= 0; i--) {
@@ -106,7 +106,6 @@ var preorder = function (root: Node | null): number[] {
       }
     }
   }
-
-  return ret;
+  return res;
 };
 // @lc code=end
