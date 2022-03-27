@@ -73,9 +73,3 @@
 - trie
 - two-pointers
 - union-find
-
-## QA
-
-- code-judge
-- code-write
-- diff
