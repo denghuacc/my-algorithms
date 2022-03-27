@@ -75,30 +75,109 @@
  * 
  */
 
-import {
-  MaxPriorityQueue,
-  MinPriorityQueue,
-} from "@datastructures-js/priority-queue";
+export {};
 
 // @lc code=start
+class Heap<T> {
+  items: T[] = [];
+  compare: (a: T, b: T) => boolean;
+
+  constructor(compare: (a: T, b: T) => boolean = (a, b) => a > b) {
+    this.items = [];
+    this.compare = compare;
+  }
+
+  get size(): number {
+    return this.items.length;
+  }
+
+  isEmpty(): boolean {
+    return this.items.length === 0;
+  }
+
+  private parent(index: number): number {
+    if (index !== 0) {
+      return Math.floor((index - 1) / 2);
+    } else {
+      return 0;
+    }
+  }
+
+  private leftChild(index: number): number {
+    return index * 2 + 1;
+  }
+
+  private rightChild(index: number): number {
+    return index * 2 + 2;
+  }
+
+  push(val: T) {
+    this.items.push(val);
+    this.siftUp(this.size - 1);
+  }
+
+  pop(): T | undefined {
+    const res = this.peek();
+    this.swap(this.items, 0, this.size - 1);
+    this.items.pop();
+    this.siftDown(0);
+    return res;
+  }
+
+  peek(): T | undefined {
+    if (!this.isEmpty()) {
+      return this.items[0];
+    }
+  }
+
+  private siftUp(index: number): void {
+    while (
+      index > 0 &&
+      this.compare(this.items[index], this.items[this.parent(index)])
+    ) {
+      this.swap(this.items, index, this.parent(index));
+      index = this.parent(index);
+    }
+  }
+
+  private siftDown(index: number): void {
+    while (this.leftChild(index) < this.size) {
+      let idx = this.leftChild(index);
+
+      if (idx + 1 && this.compare(this.items[idx + 1], this.items[idx])) {
+        idx = this.rightChild(index);
+      }
+      if (this.compare(this.items[index], this.items[idx])) {
+        break;
+      }
+      this.swap(this.items, index, idx);
+      index = idx;
+    }
+  }
+
+  private swap(arr: T[], i: number, j: number): void {
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+}
+
 class StockPrice {
   maxTimeStamp: number;
   map: Map<number, number>;
-  maxPQ: any; // MaxPriorityQueue<[number,number]> is unused
-  minPQ: any; // MinPriorityQueue<[number,number]> is unused
+  maxHeap: Heap<number[]>;
+  minHeap: Heap<number[]>;
 
   constructor() {
     this.maxTimeStamp = 0;
     this.map = new Map();
-    this.maxPQ = new MaxPriorityQueue({ priority: (t: any) => t[0] });
-    this.minPQ = new MinPriorityQueue({ priority: (t: any) => t[0] });
+    this.maxHeap = new Heap((a, b) => a?.[0] > b?.[0]);
+    this.minHeap = new Heap((a, b) => a?.[0] < b?.[0]);
   }
 
   update(timestamp: number, price: number): void {
     this.maxTimeStamp = Math.max(this.maxTimeStamp, timestamp);
     this.map.set(timestamp, price);
-    this.maxPQ.enqueue([price, timestamp]);
-    this.minPQ.enqueue([price, timestamp]);
+    this.maxHeap.push([price, timestamp]);
+    this.minHeap.push([price, timestamp]);
   }
 
   current(): number {
@@ -106,22 +185,22 @@ class StockPrice {
   }
 
   maximum(): number | undefined {
-    while (!this.maxPQ.isEmpty()) {
-      const [price, timestamp] = this.maxPQ.front().element;
+    while (!this.maxHeap.isEmpty()) {
+      const [price, timestamp] = this.maxHeap.peek()!;
       if (this.map.get(timestamp) === price) {
         return price;
       }
-      this.maxPQ.dequeue();
+      this.maxHeap.pop();
     }
   }
 
   minimum(): number | undefined {
-    while (!this.minPQ.isEmpty()) {
-      const [price, timestamp] = this.minPQ.front().element;
+    while (!this.minHeap.isEmpty()) {
+      const [price, timestamp] = this.minHeap.peek()!;
       if (this.map.get(timestamp) === price) {
         return price;
       }
-      this.minPQ.dequeue();
+      this.minHeap.pop();
     }
   }
 }

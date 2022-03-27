@@ -523,18 +523,6 @@
   resolved "https://registry.npm.taobao.org/@bcoe/v8-coverage/download/@bcoe/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha1-daLotRy3WKdVPWgEpZMteqznXDk=
 
-"@datastructures-js/heap@^3.2.0":
-  version "3.2.0"
-  resolved "https://registry.npmmirror.com/@datastructures-js/heap/download/@datastructures-js/heap-3.2.0.tgz#d8fcdbf58c462c8a3f0fdfd9c6a57ca11505321e"
-  integrity sha1-2Pzb9YxGLIo/D9/ZxqV8oRUFMh4=
-
-"@datastructures-js/priority-queue@^5.3.0":
-  version "5.3.0"
-  resolved "https://registry.npmmirror.com/@datastructures-js/priority-queue/download/@datastructures-js/priority-queue-5.3.0.tgz#89afce79a19a3226c12cc6e9288f94ff60af26cf"
-  integrity sha1-ia/OeaGaMibBLMbpKI+U/2CvJs8=
-  dependencies:
-    "@datastructures-js/heap" "^3.2.0"
-
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.0.0"
   resolved "https://registry.npm.taobao.org/@istanbuljs/load-nyc-config/download/@istanbuljs/load-nyc-config-1.0.0.tgz#10602de5570baea82f8afbfa2630b24e7a8cfe5b"
