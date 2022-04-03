@@ -91,7 +91,7 @@ func calPoints(ops []string) (sum int) {
 		switch op[0] {
 		case 'C':
 			sum -= points[n-1]
-			points = points[:len(points)-1]
+			points = points[:n-1]
 		case 'D':
 			sum += points[n-1] * 2
 			points = append(points, points[n-1]*2)
