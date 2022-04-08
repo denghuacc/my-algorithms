@@ -106,24 +106,25 @@ var levelOrder = function (root: Node | null): number[][] {
   return levels;
 };
 
-// iterative2
+// iterative ✅
 var levelOrder = function (root: Node | null): number[][] {
   const levels: number[][] = [];
   if (!root) return levels;
-  const queue: Node[] = [];
+  let queue: Node[] = [];
   queue.push(root);
 
   while (queue.length) {
     const level = [];
     const size = queue.length;
     for (let i = 0; i < size; i++) {
-      const node = queue.shift()!;
+      const node = queue[i];
       level.push(node.val);
       if (node.children.length) {
         queue.push(...node.children);
       }
     }
     levels.push(level);
+    queue = queue.slice(size); // slice improve performance
   }
 
   return levels;
