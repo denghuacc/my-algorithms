@@ -51,7 +51,7 @@
 
 // @lc code=start
 var uniqueMorseRepresentations = function (words: string[]): number {
-  var dict: string[] = [
+  var MORSE: string[] = [
     ".-",
     "-...",
     "-.-.",
@@ -80,11 +80,14 @@ var uniqueMorseRepresentations = function (words: string[]): number {
     "--..",
   ];
 
-  // 字符串 -> 摩斯密码 -> 去重
-  return new Set(
-    words.map((i) =>
-      i.split("").reduce((acc, cur) => acc + dict[cur.charCodeAt(0) - 97], "")
-    )
-  ).size;
+  const seen = new Set<string>();
+  for (const word of words) {
+    let code = "";
+    for (const char of word) {
+      code += MORSE[char.charCodeAt(0) - 97];
+    }
+    seen.add(code);
+  }
+  return seen.size;
 };
 // @lc code=end
