@@ -55,7 +55,7 @@
 // @lc code=start
 class RandomizedSet {
   items: number[];
-  ids: Map<number, number>;
+  ids: Map<number, number>; // val -> index
 
   constructor() {
     this.items = [];
@@ -77,11 +77,10 @@ class RandomizedSet {
       const lastIndex = this.items.length - 1;
       const lastItem = this.items[lastIndex];
 
-      // swap val and lastItem in items
-      this.items[lastIndex] = val;
+      // update last item to current item
       this.items[index] = lastItem;
 
-      // update index of lastItem in ids
+      // update index of lastItem
       this.ids.set(lastItem, index);
 
       // remove val in ids and items
@@ -93,13 +92,13 @@ class RandomizedSet {
   }
 
   getRandom(): number {
-    const randomIndex = this.createRandom(this.items.length);
+    const randomIndex = this.getRandomIndex(this.items.length);
     return this.items[randomIndex];
   }
 
   // random range [0, n)
-  private createRandom(n: number) {
-    return Math.floor(Math.random() * Math.floor(n));
+  private getRandomIndex(n: number) {
+    return Math.floor(Math.random() * n);
   }
 }
 
