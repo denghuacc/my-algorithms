@@ -41,9 +41,9 @@ var majorityElement = function (nums: number[]): number {
     map.set(num, (map.get(num) || 0) + 1);
   }
 
-  for (const pair of map.entries()) {
-    if (pair[1] > Math.floor(nums.length / 2)) {
-      return pair[0];
+  for (const [num, count] of map.entries()) {
+    if (count > Math.floor(nums.length / 2)) {
+      return num;
     }
   }
   return -1;

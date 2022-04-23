@@ -71,10 +71,10 @@ var reverseWords = function (s: string): string {
   let right = s.length - 1;
 
   // 首尾去空白字符
-  while (left <= right && s[left] === " ") ++left;
-  while (left <= right && s[right] === " ") --right;
+  while (left <= right && s[left] === " ") left++;
+  while (left <= right && s[right] === " ") right--;
 
-  const deque = [];
+  const deque: string[] = [];
   let word = "";
 
   while (left <= right) {
@@ -85,7 +85,7 @@ var reverseWords = function (s: string): string {
     } else if (c !== " ") {
       word += c;
     }
-    ++left;
+    left++;
   }
 
   deque.unshift(word);

@@ -49,7 +49,7 @@ function numEquivDominoPairs(dominoes: number[][]): number {
   let ret = 0;
   for (let i = 0; i < dominoes.length; i++) {
     const [x, y] = dominoes[i];
-    const val = x < y ? x * 10 + y : y * 10 + x; // get mininal value
+    const val = x < y ? x * 10 + y : y * 10 + x; // get minimal value
     ret += num[val];
     num[val]++;
   }

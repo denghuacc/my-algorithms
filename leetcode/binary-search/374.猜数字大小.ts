@@ -72,6 +72,7 @@
  *
  */
 
+// fake function for type check
 var guess = function (n: number): number {
   return n;
 };

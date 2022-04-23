@@ -53,7 +53,7 @@ var reverse = function (x: number): number {
   let ret = 0;
   while (x !== 0) {
     const digit = x % 10;
-    x = ~~(x / 10);
+    x = Math.floor(x / 10);
     ret = ret * 10 + digit;
     if (ret > 2 ** 31 - 1 || ret < -(2 ** 31)) {
       return 0;

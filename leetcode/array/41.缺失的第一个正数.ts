@@ -47,42 +47,25 @@
 // array
 var firstMissingPositive = function (nums: number[]): number {
   const n = nums.length;
-
-  let contains = 0;
+  // 将负数变为 n + 1
   for (let i = 0; i < n; i++) {
-    if (nums[i] === 1) {
-      contains++;
-      break;
+    if (nums[i] <= 0) {
+      nums[i] = n + 1;
     }
   }
-
-  if (contains === 0) return 1;
-  if (n === 1) return 2; // nums = [1]
-
-  // 用 1 替换负数和零
+  // 将 <= n 的元素对应位置变为负数
   for (let i = 0; i < n; i++) {
-    if (nums[i] <= 0 || nums[i] > n) {
-      nums[i] = 1;
+    let num = Math.abs(nums[i]);
+    if (num <= n) {
+      nums[num - 1] = -Math.abs(nums[num - 1]);
     }
   }
-
-  // 使用索引和数字符号作为检查器
+  // 返回第一个大于零的元素下标 + 1
   for (let i = 0; i < n; i++) {
-    let a = Math.abs(nums[i]);
-    if (a === n) {
-      nums[0] = -Math.abs(nums[0]);
-    } else {
-      nums[a] = -Math.abs(nums[a]);
+    if (nums[i] > 0) {
+      return i + 1;
     }
   }
-
-  // 现在第一个正数的下标，就是第一个缺失的数
-  for (let i = 1; i < n; i++) {
-    if (nums[i] > 0) return i;
-  }
-
-  if (nums[0] > 0) return n;
-
   return n + 1;
 };
 // @lc code=end
