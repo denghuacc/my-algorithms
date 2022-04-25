@@ -36,30 +36,35 @@
 // @lc code=start
 // design
 class Solution {
-  array: number[];
+  nums: number[];
 
   constructor(nums: number[]) {
-    this.array = nums;
+    this.nums = nums;
   }
+
+  // pick(target: number): number {
+  //   const items: number[] = [];
+  //   for (let i = 0; i < this.nums.length; i++) {
+  //     if (target === this.nums[i]) {
+  //       items.push(i);
+  //     }
+  //   }
+  //   const randIdx = Math.floor(Math.random() * items.length);
+  //   return items[randIdx];
+  // }
 
   pick(target: number): number {
-    const indexArray: number[] = [];
-
-    // 收集 target 的全部索引
-    for (let i = 0; i < this.array.length; i++) {
-      if (target === this.array[i]) {
-        indexArray.push(i);
+    let res = 0;
+    let cnt = 0;
+    for (let i = 0; i < this.nums.length; i++) {
+      if (target === this.nums[i]) {
+        cnt++;
+        if (Math.floor(Math.random() * cnt) === 0) {
+          res = i;
+        }
       }
     }
-
-    const random = this.createRandom(indexArray.length);
-
-    return indexArray[random];
-  }
-
-  // random range [0, n)
-  private createRandom(n: number) {
-    return Math.floor(Math.random() * Math.floor(n));
+    return res;
   }
 }
 
