@@ -53,6 +53,8 @@
  *
  */
 
+export {};
+
 // @lc code=start
 // binary search
 function findKthNumber(m: number, n: number, k: number): number {
