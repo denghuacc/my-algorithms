@@ -71,7 +71,7 @@
 // @lc code=start
 // bfs
 function cutOffTree(forest: number[][]): number {
-  const dirs = [
+  const DIRS = [
     [0, 1],
     [0, -1],
     [1, 0],
@@ -117,7 +117,7 @@ function cutOffTree(forest: number[][]): number {
     const row = forest.length;
     const col = forest[0].length;
     let step = 0;
-    const queue: number[][] = [];
+    const queue: [number, number][] = [];
     const visited: boolean[][] = Array.from(new Array(row), () =>
       new Array(col).fill(false)
     );
@@ -131,8 +131,8 @@ function cutOffTree(forest: number[][]): number {
         const cx = cell[0];
         const cy = cell[1];
         for (let j = 0; j < 4; j++) {
-          const nx = cx + dirs[j][0];
-          const ny = cy + dirs[j][1];
+          const nx = cx + DIRS[j][0];
+          const ny = cy + DIRS[j][1];
           if (nx >= 0 && nx < row && ny >= 0 && ny < col) {
             if (!visited[nx][ny] && forest[nx][ny] > 0) {
               if (nx === tx && ny === ty) {

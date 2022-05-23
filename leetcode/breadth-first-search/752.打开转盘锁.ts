@@ -88,21 +88,21 @@ function openLock(deadends: string[], target: string): number {
   let step = 0;
   const queue: string[] = [];
   queue.push("0000");
-  const seen: Set<string> = new Set();
-  seen.add("0000");
+  const visited: Set<string> = new Set();
+  visited.add("0000");
 
   while (queue.length) {
-    ++step;
+    step++;
     const size = queue.length;
     for (let i = 0; i < size; i++) {
       const status = queue.shift()!;
       for (const nextStatus of get(status)) {
-        if (!seen.has(nextStatus) && !dead.has(nextStatus)) {
+        if (!visited.has(nextStatus) && !dead.has(nextStatus)) {
           if (nextStatus === target) {
             return step;
           }
           queue.push(nextStatus);
-          seen.add(nextStatus);
+          visited.add(nextStatus);
         }
       }
     }

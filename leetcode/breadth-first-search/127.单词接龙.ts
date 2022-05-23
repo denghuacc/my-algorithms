@@ -67,7 +67,9 @@ var ladderLength = function (
   const letters = "abcdefghijklmnopqrstuvwxyz";
 
   const wordSet: Set<string> = new Set(wordList);
-  if (!wordSet.size || !wordSet.has(endWord)) return 0;
+  if (!wordSet.size || !wordSet.has(endWord)) {
+    return 0;
+  }
   wordSet.delete(beginWord);
 
   const queue: string[] = [];

@@ -147,7 +147,7 @@ class Deque<T> {
 }
 
 function highestPeak(isWater: number[][]): number[][] {
-  const dirs = [
+  const DIRS = [
     [0, 1],
     [0, -1],
     [1, 0],
@@ -167,7 +167,7 @@ function highestPeak(isWater: number[][]): number[][] {
   }
   while (!queue.isEmpty()) {
     const [x, y] = queue.popFront()!;
-    for (const [dx, dy] of dirs) {
+    for (const [dx, dy] of DIRS) {
       const nx = x + dx;
       const ny = y + dy;
       if (nx < 0 || nx >= m || ny < 0 || ny >= n || res[nx][ny] !== -1) {

@@ -80,7 +80,7 @@
 // bfs
 function snakesAndLadders(board: number[][]): number {
   const n = board.length;
-  const vis: Set<number> = new Set();
+  const visited: Set<number> = new Set();
   const queue: [number, number][] = [[1, 0]];
 
   while (queue.length) {
@@ -97,8 +97,8 @@ function snakesAndLadders(board: number[][]): number {
       if (next === n * n) {
         return p[1] + 1;
       }
-      if (!vis.has(next)) {
-        vis.add(next);
+      if (!visited.has(next)) {
+        visited.add(next);
         queue.push([next, p[1] + 1]);
       }
     }

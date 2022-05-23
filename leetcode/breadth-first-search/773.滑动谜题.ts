@@ -88,21 +88,21 @@ function slidingPuzzle(board: number[][]): number {
   let step = 0;
   const queue: string[] = [];
   queue.push(initial);
-  const seen: Set<string> = new Set();
-  seen.add(initial);
+  const visited: Set<string> = new Set();
+  visited.add(initial);
 
   while (queue.length) {
-    ++step;
+    step++;
     const len = queue.length;
     for (let i = 0; i < len; i++) {
       const status = queue.shift()!;
       for (const nextStatus of get(status)) {
-        if (!seen.has(nextStatus)) {
+        if (!visited.has(nextStatus)) {
           if ("123450" === nextStatus) {
             return step;
           }
           queue.push(nextStatus);
-          seen.add(nextStatus);
+          visited.add(nextStatus);
         }
       }
     }

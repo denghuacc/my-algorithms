@@ -98,17 +98,17 @@ function findMinHeightTrees(n: number, edges: number[][]): number[] {
   ): number {
     const n = adj.length;
     const queue: number[] = [];
-    const visit: boolean[] = new Array(n).fill(false);
+    const visited: boolean[] = new Array(n).fill(false);
     queue.push(u);
-    visit[u] = true;
+    visited[u] = true;
     let node = -1;
 
     while (queue.length) {
       const curr = queue.shift()!;
       node = curr;
       for (const v of adj[curr]) {
-        if (!visit[v]) {
-          visit[v] = true;
+        if (!visited[v]) {
+          visited[v] = true;
           parent[v] = curr;
           queue.push(v);
         }

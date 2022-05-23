@@ -118,7 +118,7 @@ function canMouseWin(
   const MOUSE_WIN = 1;
   const CAT_WIN = 2;
   const MAX_MOVES = 1000;
-  const dirs = [
+  const DIRS = [
     [-1, 0],
     [1, 0],
     [0, -1],
@@ -144,10 +144,10 @@ function canMouseWin(
     }
   }
   const total = rows * cols;
-  const degrees = new Array(total)
+  const degrees: number[][][] = new Array(total)
     .fill(0)
     .map(() => new Array(total).fill(0).map(() => new Array(2).fill(0)));
-  const results = new Array(total)
+  const results: number[][][][] = new Array(total)
     .fill(0)
     .map(() =>
       new Array(total)
@@ -171,7 +171,7 @@ function canMouseWin(
       }
       degrees[mouse][cat][MOUSE_TURN]++;
       degrees[mouse][cat][CAT_TURN]++;
-      for (const dir of dirs) {
+      for (const dir of DIRS) {
         for (
           let row = mouseRow + dir[0], col = mouseCol + dir[1], jump = 1;
           row >= 0 &&
@@ -196,8 +196,8 @@ function canMouseWin(
           jump <= catJump;
           row += dir[0], col += dir[1], jump++
         ) {
-          const nextMouse = getPos(mouseRow, mouseCol),
-            nextCat = getPos(row, col);
+          const nextMouse = getPos(mouseRow, mouseCol);
+          const nextCat = getPos(row, col);
           degrees[nextMouse][nextCat][CAT_TURN]++;
         }
       }
@@ -303,7 +303,7 @@ function canMouseWin(
     const startRow = prevTurn === MOUSE_TURN ? mouseRow : catRow;
     const startCol = prevTurn === MOUSE_TURN ? mouseCol : catCol;
     prevStates.push([mouse, cat, prevTurn]);
-    for (const dir of dirs) {
+    for (const dir of DIRS) {
       for (
         let i = startRow + dir[0], j = startCol + dir[1], jump = 1;
         i >= 0 &&
