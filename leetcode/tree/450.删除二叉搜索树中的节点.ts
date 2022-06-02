@@ -75,38 +75,34 @@ class TreeNode {
 // recursive
 function deleteNode(root: TreeNode | null, key: number): TreeNode | null {
   if (!root) return null;
-  if (key > root.val) {
-    root.right = deleteNode(root.right, key);
-  } else if (key < root.val) {
+
+  if (root.val > key) {
     root.left = deleteNode(root.left, key);
-  } else {
-    if (!root.left && !root.right) {
-      root = null;
-    } else if (root.right) {
-      root.val = successor(root);
-      root.right = deleteNode(root.right, root.val);
-    } else {
-      root.val = predecessor(root);
-      root.left = deleteNode(root.left, root.val);
-    }
+    return root;
   }
 
-  return root;
-
-  function successor(node: TreeNode): number {
-    node = node.right!;
-    while (node.left) {
-      node = node.left;
-    }
-    return node.val;
+  if (root.val < key) {
+    root.right = deleteNode(root.right, key);
+    return root;
   }
 
-  function predecessor(node: TreeNode): number {
-    node = node.left!;
-    while (node.right) {
-      node = node.right;
-    }
-    return node.val;
+  if (!root.left && !root.right) {
+    return null;
   }
+  if (!root.left) {
+    return root.right;
+  }
+  if (!root.right) {
+    return root.left;
+  }
+  let successor = root.right;
+  // minimum node greater than successor
+  while (successor.left) {
+    successor = successor.left;
+  }
+  root.right = deleteNode(root.right, successor.val);
+  successor.left = root.left;
+  successor.right = root.right;
+  return successor;
 }
 // @lc code=end
