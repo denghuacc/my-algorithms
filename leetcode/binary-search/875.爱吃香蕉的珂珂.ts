@@ -58,69 +58,30 @@
  */
 
 // @lc code=start
-// brute force time out
-var minEatingSpeed = function (piles: number[], H: number): number {
-  const max = getMax(piles);
-  for (let k = 1; k < max; k++) {
-    if (canFinish(piles, k, H)) {
-      return k;
-    }
-  }
-  return max;
-
-  function getMax(piles: number[]): number {
-    let max = 0;
-    for (const p of piles) {
-      max = Math.max(max, p);
-    }
-    return max;
-  }
-
-  function canFinish(piles: number[], k: number, H: number) {
-    let time = 0;
-    for (const p of piles) {
-      time += timeOf(p, k);
-    }
-    return time <= H;
-  }
-
-  function timeOf(p: number, k: number) {
-    return Math.floor(p / k) + (p % k > 0 ? 1 : 0);
-  }
-};
-
 // binary search
-var minEatingSpeed = function (piles: number[], H: number): number {
-  let left = 1;
-  let right = getMax(piles) + 1;
-  while (left < right) {
-    let mid = left + Math.floor((right - left) / 2);
-    if (canFinish(piles, mid, H)) {
-      right = mid;
+var minEatingSpeed = function (piles: number[], h: number): number {
+  let low = 1;
+  let high = Math.max(...piles);
+  let k = high;
+  while (low < high) {
+    const speed = Math.floor((high - low) / 2) + low;
+    const time = getTime(piles, speed);
+    if (time <= h) {
+      k = speed;
+      high = speed;
     } else {
-      left = mid + 1;
+      low = speed + 1;
     }
   }
-  return left;
+  return k;
 
-  function getMax(piles: number[]): number {
-    let max = 0;
-    for (const p of piles) {
-      max = Math.max(max, p);
-    }
-    return max;
-  }
-
-  function canFinish(piles: number[], k: number, H: number) {
+  function getTime(piles: number[], speed: number): number {
     let time = 0;
-    for (const p of piles) {
-      time += timeOf(p, k);
+    for (const pile of piles) {
+      const curTime = Math.floor((pile + speed - 1) / speed);
+      time += curTime;
     }
-    return time <= H;
-  }
-
-  function timeOf(p: number, k: number) {
-    return Math.floor(p / k) + (p % k > 0 ? 1 : 0);
+    return time;
   }
 };
 // @lc code=end
