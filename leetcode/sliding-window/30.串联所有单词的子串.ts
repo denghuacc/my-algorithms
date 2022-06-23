@@ -43,12 +43,9 @@
 // @lc code=start
 // sliding window
 var findSubstring = function (s: string, words: string[]): number[] {
-  const ret: number[] = [];
+  const res: number[] = [];
   let wordNum = words.length;
-  if (wordNum === 0) return ret;
-
   let wordLen = words[0].length;
-
   const wordMap: Map<string, number> = new Map();
   for (const w of words) {
     wordMap.set(w, (wordMap.get(w) ?? 0) + 1);
@@ -60,73 +57,19 @@ var findSubstring = function (s: string, words: string[]): number[] {
     while (num < wordNum) {
       const word = s.substring(i + num * wordLen, i + (num + 1) * wordLen);
       if (wordMap.has(word)) {
-        hasMap.set(word, (hasMap.get(word) || 0) + 1);
-        if (hasMap.get(word) > wordMap.get(word)!) break;
-      } else break;
-      num++;
-    }
-    if (num === wordNum) ret.push(i);
-  }
-
-  return ret;
-};
-
-// sliding window 2
-var findSubstring = function (s: string, words: string[]): number[] {
-  const ret: number[] = [];
-  let wordNum = words.length;
-  if (wordNum === 0) return ret;
-
-  let wordLen = words[0].length;
-
-  const wordMap: Map<string, number> = new Map();
-  for (const w of words) {
-    wordMap.set(w, (wordMap.get(w) ?? 0) + 1);
-  }
-
-  for (let j = 0; j < wordLen; j++) {
-    const hasMap = new Map();
-    let num = 0;
-    for (let i = j; i < s.length - wordNum * wordLen + 1; i = i + wordLen) {
-      let hasRemoved = false;
-      while (num < wordNum) {
-        const word = s.substring(i + num * wordLen, i + (num + 1) * wordLen);
-        if (wordMap.has(word)) {
-          hasMap.set(word, (hasMap.get(word) || 0) + 1);
-          if (hasMap.get(word) > wordMap.get(word)!) {
-            hasRemoved = true;
-            let removeNum = 0;
-            while (hasMap.get(word) > wordMap.get(word)!) {
-              const firstWord = s.substring(
-                i + removeNum * wordLen,
-                i + (removeNum + 1) * wordLen
-              );
-              let v = hasMap.get(firstWord);
-              hasMap.set(firstWord, v - 1);
-              removeNum++;
-            }
-            num = num - removeNum + 1;
-            i = i + (removeNum - 1) * wordLen;
-            break;
-          }
-        } else {
-          hasMap.clear();
-          i = i + num * wordLen;
-          num = 0;
+        hasMap.set(word, (hasMap.get(word) ?? 0) + 1);
+        if (hasMap.get(word) > wordMap.get(word)!) {
           break;
         }
-        num++;
+      } else {
+        break;
       }
-      if (num === wordNum) ret.push(i);
-      if (num > 0 && !hasRemoved) {
-        const firstWord = s.substring(i, i + wordLen);
-        let v = hasMap.get(firstWord);
-        hasMap.set(firstWord, v - 1);
-        num = num - 1;
-      }
+      num++;
+    }
+    if (num === wordNum) {
+      res.push(i);
     }
   }
-
-  return ret;
+  return res;
 };
 // @lc code=end
