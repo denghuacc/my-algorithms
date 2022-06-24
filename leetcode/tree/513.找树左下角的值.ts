@@ -116,6 +116,5 @@ var findBottomLeftValue = function (root: TreeNode): number {
       res = node.val; // the leftest node value
     }
   }
-  return res;
 };
 // @lc code=end
