@@ -36,10 +36,12 @@
  *
  */
 
+export {};
+
 // @lc code=start
-class DicNode {
+class TrieNode {
   isWord: boolean;
-  next: Map<string, DicNode>;
+  next: Map<string, TrieNode>;
 
   constructor(isWord = false) {
     this.isWord = isWord;
@@ -48,41 +50,37 @@ class DicNode {
 }
 
 class WordDictionary {
-  root: DicNode;
+  root: TrieNode;
 
   constructor() {
-    this.root = new DicNode();
+    this.root = new TrieNode();
   }
 
   addWord(word: string): void {
     let cur = this.root;
-
     for (let i = 0; i < word.length; i++) {
-      const c = word[i];
-      if (!cur.next.get(c)) {
-        cur.next.set(c, new DicNode());
+      const ch = word[i];
+      if (!cur.next.get(ch)) {
+        cur.next.set(ch, new TrieNode());
       }
-      cur = cur.next.get(c)!;
+      cur = cur.next.get(ch)!;
     }
-
     cur.isWord = true;
   }
 
   search(word: string): boolean {
     return match(this.root, word, 0);
 
-    function match(node: DicNode, word: string, index: number): boolean {
+    function match(node: TrieNode, word: string, index: number): boolean {
       if (index === word.length) {
         return node.isWord;
       }
-
-      let c = word[index];
-
-      if (c !== ".") {
-        if (!node.next.get(c)) {
+      let ch = word[index];
+      if (ch !== ".") {
+        if (!node.next.get(ch)) {
           return false;
         }
-        return match(node.next.get(c)!, word, index + 1);
+        return match(node.next.get(ch)!, word, index + 1);
       } else {
         // 匹配下一个所有的点
         for (let nextC of node.next.keys()) {

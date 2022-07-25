@@ -53,15 +53,13 @@ class Trie {
 
   insert(word: string): void {
     let cur = this.root;
-
     for (let i = 0; i < word.length; i++) {
-      const c = word[i];
-      if (!cur.next.get(c)) {
-        cur.next.set(c, new TrieNode());
+      const ch = word[i];
+      if (!cur.next.get(ch)) {
+        cur.next.set(ch, new TrieNode());
       }
-      cur = cur.next.get(c)!;
+      cur = cur.next.get(ch)!;
     }
-
     if (!cur.isWord) {
       cur.isWord = true;
     }
@@ -69,13 +67,12 @@ class Trie {
 
   search(word: string): boolean {
     let cur = this.root;
-
     for (let i = 0; i < word.length; i++) {
-      const c = word[i];
-      if (!cur.next.get(c)) {
+      const ch = word[i];
+      if (!cur.next.get(ch)) {
         return false;
       }
-      cur = cur.next.get(c)!;
+      cur = cur.next.get(ch)!;
     }
     return cur.isWord;
   }
@@ -83,11 +80,11 @@ class Trie {
   startsWith(prefix: string): boolean {
     let cur = this.root;
     for (let i = 0; i < prefix.length; i++) {
-      const c = prefix[i];
-      if (!cur.next.get(c)) {
+      const ch = prefix[i];
+      if (!cur.next.get(ch)) {
         return false;
       }
-      cur = cur.next.get(c)!;
+      cur = cur.next.get(ch)!;
     }
     return true;
   }

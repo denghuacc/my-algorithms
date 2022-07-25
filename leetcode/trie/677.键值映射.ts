@@ -27,10 +27,12 @@
  *
  */
 
+export {};
+
 // @lc code=start
-class SumNode {
+class TrieNode {
   value: number;
-  next: Map<string, SumNode>;
+  next: Map<string, TrieNode>;
 
   constructor(value = 0) {
     this.value = value;
@@ -39,20 +41,20 @@ class SumNode {
 }
 
 class MapSum {
-  root: SumNode;
+  root: TrieNode;
 
   constructor() {
-    this.root = new SumNode();
+    this.root = new TrieNode();
   }
 
   insert(key: string, val: number): void {
     let cur = this.root;
     for (let i = 0; i < key.length; i++) {
-      const c = key[i];
-      if (!cur.next.get(c)) {
-        cur.next.set(c, new SumNode());
+      const ch = key[i];
+      if (!cur.next.get(ch)) {
+        cur.next.set(ch, new TrieNode());
       }
-      cur = cur.next.get(c)!;
+      cur = cur.next.get(ch)!;
     }
     cur.value = val;
   }
@@ -60,22 +62,21 @@ class MapSum {
   sum(prefix: string): number {
     let cur = this.root;
     for (let i = 0; i < prefix.length; i++) {
-      const c = prefix[i];
-      if (!cur.next.get(c)) {
+      const ch = prefix[i];
+      if (!cur.next.get(ch)) {
         return 0;
       }
-      cur = cur.next.get(c)!;
+      cur = cur.next.get(ch)!;
     }
-    return _sum(cur);
+    return this.getSum(cur);
+  }
 
-    function _sum(node: SumNode) {
-      let res = node.value;
-      for (let c of node.next.keys()) {
-        res += _sum(node.next.get(c)!);
-      }
-
-      return res;
+  private getSum(node: TrieNode): number {
+    let res = node.value;
+    for (const ch of node.next.keys()) {
+      res += this.getSum(node.next.get(ch)!);
     }
+    return res;
   }
 }
 /**

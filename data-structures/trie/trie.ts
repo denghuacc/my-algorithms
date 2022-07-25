@@ -1,14 +1,22 @@
-import { Node } from "../models/trie-models";
+class TrieNode<K, V> {
+  isWord: boolean;
+  next: Map<string, TrieNode<K, V>>;
+
+  constructor(isWord = false) {
+    this.isWord = isWord; // 是否是单词节点
+    this.next = new Map();
+  }
+}
 
 /**
- * @name Trie 字典树 前缀数
+ * @name Trie 字典树/前缀树
  */
 export default class Trie<K, V> {
-  root: Node<K, V>;
+  root: TrieNode<K, V>;
   count: number;
 
   constructor() {
-    this.root = new Node();
+    this.root = new TrieNode();
     this.count = 0;
   }
 
@@ -19,15 +27,13 @@ export default class Trie<K, V> {
   // 添加单词
   add(word: string): void {
     let cur = this.root;
-
     for (let i = 0; i < word.length; i++) {
-      const c = word[i];
-      if (!cur.next.get(c)) {
-        cur.next.set(c, new Node());
+      const ch = word[i];
+      if (!cur.next.get(ch)) {
+        cur.next.set(ch, new TrieNode());
       }
-      cur = cur.next.get(c)!;
+      cur = cur.next.get(ch)!;
     }
-
     if (!cur.isWord) {
       cur.isWord = true;
       this.count++;
@@ -37,11 +43,12 @@ export default class Trie<K, V> {
   // 查询单词
   contains(word: string): boolean {
     let cur = this.root;
-
     for (let i = 0; i < word.length; i++) {
-      const c = word[i];
-      if (!cur.next.get(c)) return false;
-      cur = cur.next.get(c)!;
+      const ch = word[i];
+      if (!cur.next.get(ch)) {
+        return false;
+      }
+      cur = cur.next.get(ch)!;
     }
     return cur.isWord;
   }
@@ -50,9 +57,11 @@ export default class Trie<K, V> {
   isPrefix(word: string): boolean {
     let cur = this.root;
     for (let i = 0; i < word.length; i++) {
-      const c = word[i];
-      if (!cur.next.get(c)) return false;
-      cur = cur.next.get(c)!;
+      const ch = word[i];
+      if (!cur.next.get(ch)) {
+        return false;
+      }
+      cur = cur.next.get(ch)!;
     }
     return true;
   }

@@ -38,6 +38,8 @@ describe("Trie", () => {
     trie.add("cat");
     expect(trie.size).toBe(1);
     expect(trie.contains("cat")).toBe(true);
+    expect(trie.contains("ca")).toBe(false);
+    expect(trie.contains("c")).toBe(false);
   });
 
   test("isPrefix", () => {
