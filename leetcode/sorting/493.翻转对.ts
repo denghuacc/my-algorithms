@@ -133,8 +133,8 @@ var reversePairs = function (nums: number[]): number {
   let ret = 0;
   const bit = new BIT(values.size);
   for (let i = 0; i < nums.length; i++) {
-    let left = values.get(nums[i] * 2);
-    let right = values.size;
+    const left = values.get(nums[i] * 2);
+    const right = values.size;
     ret += bit.query(right) - bit.query(left);
     bit.update(values.get(nums[i]), 1);
   }

@@ -152,8 +152,8 @@ class LFUCache {
   }
 
   private freqInc(node: Node) {
-    let linkedList = node.doublyLinkedList;
-    let preLinkedList = linkedList.prev;
+    const linkedList = node.doublyLinkedList;
+    const preLinkedList = linkedList.prev;
     linkedList.removeNode(node);
     if (linkedList.head.next === linkedList.tail) {
       this.removeDoublyLinkedList(linkedList);

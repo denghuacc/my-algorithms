@@ -92,7 +92,7 @@ function kWeakestRows(mat: number[][], k: number): number[] {
       return aOnes - bOnes;
     });
 
-  let ret: number[] = [];
+  const ret: number[] = [];
   for (let i = 0; i < k; i++) {
     const index = sortedMat[i][1] as number;
     ret.push(index);

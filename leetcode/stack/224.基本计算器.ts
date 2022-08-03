@@ -85,6 +85,7 @@ var calculate = function (s: string): number {
   let sign = 1;
   let ret = 0;
   let i = 0;
+  let num = 0;
 
   while (i < n) {
     switch (s[i]) {
@@ -108,7 +109,6 @@ var calculate = function (s: string): number {
         i++;
         break;
       default:
-        let num = 0;
         while (i < n && !isNaN(Number(s[i])) && s[i] !== " ") {
           num += num * 10 + s[i].charCodeAt(0) - "0".charCodeAt(0);
           i++;

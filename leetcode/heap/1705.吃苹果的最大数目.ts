@@ -146,14 +146,14 @@ class Heap<T> {
 function eatenApples(apples: number[], days: number[]): number {
   let res = 0;
   const heap = new Heap<number[]>((a, b) => a?.[0] < b?.[0]);
-  let n = apples.length;
+  const n = apples.length;
   let i = 0;
   while (i < n) {
     while (!heap.isEmpty() && heap.peek()![0] <= i) {
       heap.pop();
     }
-    let rottenDay = i + days[i];
-    let count = apples[i];
+    const rottenDay = i + days[i];
+    const count = apples[i];
     if (count > 0) {
       heap.push([rottenDay, count]);
     }
@@ -175,7 +175,7 @@ function eatenApples(apples: number[], days: number[]): number {
       break;
     }
     const arr = heap.pop()!;
-    let cur = Math.min(arr[0] - i, arr[1]);
+    const cur = Math.min(arr[0] - i, arr[1]);
     res += cur;
     i += cur;
   }

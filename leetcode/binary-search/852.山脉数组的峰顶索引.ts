@@ -78,7 +78,7 @@ var peakIndexInMountainArray = function (arr: number[]): number {
   let j = n - 1;
 
   while (i < j) {
-    let mid = i + Math.floor((j - i) / 2);
+    const mid = i + Math.floor((j - i) / 2);
     if (arr[mid] < arr[mid + 1]) {
       i = mid + 1;
     } else {

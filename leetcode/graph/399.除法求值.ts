@@ -84,7 +84,7 @@ function calcEquation(
 ): number[] {
   let count = 0;
   const map: Map<string, number> = new Map();
-  let eLen = equations.length;
+  const eLen = equations.length;
 
   for (let i = 0; i < eLen; i++) {
     if (!map.has(equations[i][0])) {

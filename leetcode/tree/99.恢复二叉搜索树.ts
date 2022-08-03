@@ -81,7 +81,7 @@ class TreeNode {
 var recoverTree = function (root: TreeNode | null) {
   const nums: number[] = [];
   inOrder(root, nums);
-  let swapped = findTwoSwapped(nums);
+  const swapped = findTwoSwapped(nums);
   recover(root, 2, swapped[0], swapped[1]);
 
   function inOrder(root: TreeNode | null, nums: number[]) {

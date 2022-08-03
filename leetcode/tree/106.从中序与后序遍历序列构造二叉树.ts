@@ -86,7 +86,7 @@ var buildTree = function (
   let inorderIdx = inorder.length - 1; // inorder pointer from max index
 
   for (let i = postorder.length - 2; i >= 0; i--) {
-    let postorderVal = postorder[i];
+    const postorderVal = postorder[i];
     let node = stack[stack.length - 1];
     if (node.val !== inorder[inorderIdx]) {
       node.right = new TreeNode(postorderVal); // create right child

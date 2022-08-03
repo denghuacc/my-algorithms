@@ -102,7 +102,7 @@ function fractionToDecimal(numerator: number, denominator: number): string {
   }
   if (remainder !== 0) {
     // 有循环节
-    let insertIndex = remainderIndexDic.get(remainder);
+    const insertIndex = remainderIndexDic.get(remainder);
     fractionPart.splice(insertIndex, 0, "(");
     fractionPart.push(")");
   }

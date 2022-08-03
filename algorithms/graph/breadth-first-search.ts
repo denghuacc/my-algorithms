@@ -18,7 +18,7 @@ function initializeColor<T>(vertices: T[]): Map<T, Colors> {
 export function breadthFirstSearch<T>(
   graph: Graph<T>,
   startVertex: T,
-  callback: Function
+  callback: (val: T) => void
 ): void {
   const vertices = graph.getVertices();
   const adjList = graph.getAdjList();

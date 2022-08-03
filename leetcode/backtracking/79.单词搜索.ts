@@ -48,14 +48,14 @@
 // @lc code=start
 // backtracking
 var exist = function (board: string[][], word: string): boolean {
-  let n = board.length;
+  const n = board.length;
   if (n === 0) return false;
-  let m = board[0].length;
+  const m = board[0].length;
   const marked: boolean[][] = Array.from(new Array(n), () =>
     new Array(m).fill(false)
   );
 
-  let direction = [
+  const direction = [
     [0, -1], // 上
     [0, 1], // 下
     [-1, 0], // 左
@@ -82,8 +82,8 @@ var exist = function (board: string[][], word: string): boolean {
     if (board[i][j] === word[start]) {
       marked[i][j] = true;
       for (let k = 0; k < direction.length; k++) {
-        let newX = i + direction[k][0];
-        let newY = j + direction[k][1];
+        const newX = i + direction[k][0];
+        const newY = j + direction[k][1];
         if (inArea(newX, newY) && !marked[newX][newY]) {
           if (dfs(newX, newY, start + 1)) {
             return true;

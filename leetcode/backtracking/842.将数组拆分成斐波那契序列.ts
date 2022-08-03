@@ -92,7 +92,7 @@ function splitIntoFibonacci(S: string): number[] {
       if (curLen > Math.pow(2, 31) - 1) {
         break;
       }
-      let cur = curLen;
+      const cur = curLen;
       if (list.length >= 2) {
         if (cur < sum) {
           continue;

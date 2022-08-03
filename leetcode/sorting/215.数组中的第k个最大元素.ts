@@ -65,7 +65,7 @@ var findKthLargest = function (nums: number[], k: number): number {
   }
 
   function partition(left: number, right: number, pivotIndex: number) {
-    let pivot = nums[pivotIndex];
+    const pivot = nums[pivotIndex];
     swap(nums, pivotIndex, right);
     let storeIndex = left;
 
@@ -102,7 +102,7 @@ var findKthLargest = function (nums: number[], k: number): number {
   }
 
   function partition(arr: number[], left: number, right: number) {
-    let pivot = arr[Math.floor((left + right) / 2)];
+    const pivot = arr[Math.floor((left + right) / 2)];
     let i = left;
     let j = right;
 

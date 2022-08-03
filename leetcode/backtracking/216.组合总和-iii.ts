@@ -126,7 +126,7 @@ var combinationSum3 = function (k: number, n: number): number[][] {
 // combination enumeration
 var combinationSum3 = function (k: number, n: number): number[][] {
   const ret: number[][] = [];
-  let subset: number[] = [];
+  const subset: number[] = [];
   dfs(1, 9);
   return ret;
 

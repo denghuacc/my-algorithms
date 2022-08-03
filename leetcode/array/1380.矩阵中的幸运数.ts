@@ -61,7 +61,7 @@
 // @lc code=start
 // simulation 1 by me
 var luckyNumbers = function (matrix: number[][]): number[] {
-  let res: number[] = [];
+  const res: number[] = [];
   let minRow = Infinity;
   let minRowColIndex = -1;
   const m = matrix.length;
@@ -104,7 +104,7 @@ var luckyNumbers = function (matrix: number[][]): number[] {
 
 // simulation 2
 var luckyNumbers = function (matrix: number[][]): number[] {
-  let res: number[] = [];
+  const res: number[] = [];
   const m = matrix.length;
   const n = matrix[0].length;
 
@@ -142,7 +142,7 @@ var luckyNumbers = function (matrix: number[][]): number[] {
 
 // pretreatment
 var luckyNumbers = function (matrix: number[][]): number[] {
-  let res: number[] = [];
+  const res: number[] = [];
   const m = matrix.length;
   const n = matrix[0].length;
 

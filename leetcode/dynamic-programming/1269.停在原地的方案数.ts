@@ -64,7 +64,7 @@
 // dp
 function numWays(steps: number, arrLen: number): number {
   const MODULO = 1e9 + 7;
-  let maxColumn = Math.min(arrLen - 1, steps);
+  const maxColumn = Math.min(arrLen - 1, steps);
 
   // dp[i][j] -> 在 i 步操作之后，指针位于下标 j 的方案数
   const dp = Array.from(new Array(steps + 1), () =>

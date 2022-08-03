@@ -81,7 +81,7 @@ var numberOfWeakCharacters = function (properties: number[][]): number {
   // attack ascending sort and defense descending sort when attack is equal
   properties.sort((a, b) => (a[0] === b[0] ? b[1] - a[1] : a[0] - b[0]));
   let res = 0;
-  let stack: number[] = [];
+  const stack: number[] = [];
   for (let i = 0; i < properties.length; i++) {
     const [, defense] = properties[i];
     while (stack.length && stack[stack.length - 1] < defense) {

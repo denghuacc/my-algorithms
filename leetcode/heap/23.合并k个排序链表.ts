@@ -39,9 +39,8 @@ class ListNode {
 // @lc code=start
 var mergeKLists = function (lists: Array<ListNode | null>): ListNode | null {
   const nums = [];
-  let dummy: ListNode;
-  let point: ListNode;
-  dummy = point = new ListNode(0);
+  const dummy: ListNode = new ListNode(0);
+  let point: ListNode = dummy;
 
   for (let list of lists) {
     while (list != null) {
@@ -52,7 +51,7 @@ var mergeKLists = function (lists: Array<ListNode | null>): ListNode | null {
 
   nums.sort((a, b) => a - b); // 排序
 
-  for (let num of nums) {
+  for (const num of nums) {
     point.next = new ListNode(num);
     point = point.next;
   }

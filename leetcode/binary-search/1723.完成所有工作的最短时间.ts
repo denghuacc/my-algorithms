@@ -92,7 +92,7 @@ function backtrack(
   if (i >= jobs.length) {
     return true;
   }
-  let cur = jobs[i];
+  const cur = jobs[i];
   for (let j = 0; j < workloads.length; ++j) {
     if (workloads[j] + cur <= limit) {
       workloads[j] += cur;

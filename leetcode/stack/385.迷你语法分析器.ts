@@ -57,7 +57,7 @@
 class NestedInteger {
   private value: number | null = null;
   private list: NestedInteger[] = [];
-  constructor(value: number = 0) {
+  constructor(value = 0) {
     this.setInteger(value);
   }
   isInteger(): boolean {

@@ -70,7 +70,7 @@ function isAdditiveNumber(num: string): boolean {
     }
     let current = 0;
     for (let i = index; i < num.length; i++) {
-      let c = num[i];
+      const c = num[i];
       if (num[index] == "0" && i > index) {
         // 剪枝1：不能做为前导 0，但是它自己是可以单独做为 0 来使用的
         return false;

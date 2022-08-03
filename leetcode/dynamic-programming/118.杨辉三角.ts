@@ -36,7 +36,7 @@
 // @lc code=start
 // dp
 var generate = function (numRows: number): number[][] {
-  let ret: number[][] = [];
+  const ret: number[][] = [];
   if (numRows <= 0) return ret;
   for (let i = 0; i < numRows; i++) {
     const subArr = [];

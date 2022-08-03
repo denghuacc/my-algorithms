@@ -159,10 +159,10 @@ var isScramble = function (s1: string, s2: string): boolean {
   if (str1 !== str2) return false;
   const n = s1.length;
   for (let i = 1; i < n; i++) {
-    let case1 =
+    const case1 =
       isScramble(s1.substring(0, i), s2.substring(0, i)) &&
       isScramble(s1.substring(i), s2.substring(i));
-    let case2 =
+    const case2 =
       isScramble(s1.substring(0, i), s2.substring(n - i)) &&
       isScramble(s1.substring(i), s2.substring(0, n - i));
     if (case1 || case2) return true;

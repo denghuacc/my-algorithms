@@ -28,9 +28,9 @@ var countDigitOne = function (n: number): number {
   let count = 0;
 
   for (let i = 1; i <= n; i *= 10) {
-    let divider = i * 10;
-    let p = Math.floor(n / divider);
-    let k = n % divider;
+    const divider = i * 10;
+    const p = Math.floor(n / divider);
+    const k = n % divider;
     let rest = 0;
 
     count += p * i;

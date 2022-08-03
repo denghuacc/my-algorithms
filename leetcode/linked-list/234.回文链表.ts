@@ -80,7 +80,7 @@ var isPalindrome = function (head: ListNode | null): boolean {
   // now the slow node is the middle node
   // reverse the next half of node
   while (slow) {
-    let p = slow.next!;
+    const p = slow.next!;
     slow.next = pre;
     pre = slow;
     slow = p;

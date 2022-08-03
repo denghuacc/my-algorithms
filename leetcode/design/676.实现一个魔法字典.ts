@@ -72,9 +72,11 @@
 
 // @lc code=start
 class MagicDictionary {
-  words: string[] = [];
+  words: string[];
 
-  constructor() {}
+  constructor() {
+    this.words = [];
+  }
 
   buildDict(dictionary: string[]): void {
     this.words = dictionary;

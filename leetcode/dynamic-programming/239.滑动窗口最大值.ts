@@ -69,7 +69,7 @@ var maxSlidingWindow = function (nums: number[], k: number): number[] {
     if (i % k === 0) left[i] = nums[i];
     else left[i] = Math.max(left[i - 1], nums[i]);
 
-    let j = n - i - 1;
+    const j = n - i - 1;
     if ((j + 1) % k === 0) right[j] = nums[j];
     else right[j] = Math.max(right[j + 1], nums[j]);
   }

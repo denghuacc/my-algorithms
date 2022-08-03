@@ -39,7 +39,7 @@
 // @lc code=start
 // array
 var largestTriangleArea = function (points: number[][]): number {
-  let n = points.length;
+  const n = points.length;
   let ret = 0;
   for (let i = 0; i < n; i++) {
     for (let j = i + 1; j < n; j++) {

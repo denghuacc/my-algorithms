@@ -41,7 +41,7 @@
 // API
 var reverse = function (x: number): number {
   // 数值转字符串后再翻转
-  let str = new Number(x).toString().split("").reverse().join("");
+  const str = new Number(x).toString().split("").reverse().join("");
 
   let ret = parseInt(str, 10);
   ret = x > 0 ? ret : -ret;

@@ -41,7 +41,7 @@ function maxProfit(prices: number[]): number {
   let dpPre0 = 0; // equals  dp[i-2][0]
 
   for (let i = 0; i < n; i++) {
-    let tmp = dpI0;
+    const tmp = dpI0;
     dpI0 = Math.max(dpI0, dpI1 + prices[i]);
     dpI1 = Math.max(dpI1, dpPre0 - prices[i]);
     dpPre0 = tmp;

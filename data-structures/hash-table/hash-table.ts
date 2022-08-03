@@ -10,9 +10,11 @@ interface Table<K, V> {
  * @description 哈希表的作用是尽可能快地在数据结构中找到一个值
  */
 export default class HashTable<K, V> {
-  table: Table<K, V> = {};
+  table: Table<K, V>;
 
-  constructor() {}
+  constructor() {
+    this.table = {};
+  }
 
   hashCode(key: K): number {
     return this.loseloseHashCode(key);

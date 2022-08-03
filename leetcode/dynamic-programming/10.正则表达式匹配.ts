@@ -83,7 +83,7 @@ var isMatch = function (s: string, p: string): boolean {
 var isMatch = function (s: string, p: string): boolean {
   if (p.length === 0) return s.length === 0;
 
-  let firstMatch = (s.length && (p[0] === s[0] || p[0] === ".")) || false;
+  const firstMatch = (s.length && (p[0] === s[0] || p[0] === ".")) || false;
 
   if (p.length >= 2 && p[1] === "*") {
     return (
@@ -96,11 +96,11 @@ var isMatch = function (s: string, p: string): boolean {
 
 // dp
 var isMatch = function (s: string, p: string): boolean {
-  let n = s.length;
-  let m = p.length;
+  const n = s.length;
+  const m = p.length;
 
   // dp[i][j] -> s 的前 i 个字符和 p 的前 j 个字符是否匹配
-  let dp: boolean[][] = Array.from(new Array(n + 1), () =>
+  const dp: boolean[][] = Array.from(new Array(n + 1), () =>
     new Array(m + 1).fill(false)
   );
 

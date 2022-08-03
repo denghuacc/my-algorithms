@@ -76,7 +76,7 @@ function isEscapePossible(
     [-1, 0],
   ];
 
-  let n = blocked.length;
+  const n = blocked.length;
   if (n <= 1) {
     return true;
   }

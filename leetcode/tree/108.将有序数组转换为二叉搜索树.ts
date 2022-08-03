@@ -52,7 +52,7 @@ var sortedArrayToBST = function (nums: number[]): TreeNode | null {
 
   function toBST(left: number, right: number): TreeNode | null {
     if (left > right) return null;
-    let mid = Math.floor((left + right) / 2);
+    const mid = Math.floor((left + right) / 2);
     const root = new TreeNode(nums[mid]);
     root.left = toBST(left, mid - 1);
     root.right = toBST(mid + 1, right);
@@ -66,7 +66,7 @@ var sortedArrayToBST = function (nums: number[]): TreeNode | null {
 
   function toBST(nums: number[], left: number, right: number): TreeNode | null {
     if (left > right) return null;
-    let mid = Math.floor((left + right + 1) / 2);
+    const mid = Math.floor((left + right + 1) / 2);
     const root = new TreeNode(nums[mid]);
     root.left = toBST(nums, left, mid - 1);
     root.right = toBST(nums, mid + 1, right);

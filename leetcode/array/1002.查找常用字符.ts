@@ -54,7 +54,7 @@ function commonChars(A: string[]): string[] {
     let freq = 1;
     // traverse next other string
     for (let j = 1; j < A.length; j++) {
-      let pos = A[j].indexOf(char);
+      const pos = A[j].indexOf(char);
       if (pos !== -1) {
         freq++;
         // remove char

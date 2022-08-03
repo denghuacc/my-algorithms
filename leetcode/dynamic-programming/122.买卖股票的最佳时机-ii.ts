@@ -66,7 +66,7 @@ var maxProfit = function (prices: number[]): number {
   let dpI1 = -Infinity; // dp[i+1]
 
   for (let i = 0; i < n; i++) {
-    let tmp = dpI0;
+    const tmp = dpI0;
     dpI0 = Math.max(dpI0, dpI1 + prices[i]);
     dpI1 = Math.max(dpI1, tmp - prices[i]);
   }
@@ -86,7 +86,7 @@ var maxProfit = function (prices: number[]): number {
       let maxProfit = 0;
       for (let i = start + 1; i < prices.length; i++) {
         if (prices[start] < prices[i]) {
-          let profit = calculate(prices, i + 1) + prices[i] - prices[start];
+          const profit = calculate(prices, i + 1) + prices[i] - prices[start];
           if (profit > maxProfit) {
             maxProfit = profit;
           }

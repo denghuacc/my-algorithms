@@ -66,7 +66,7 @@ var selfDividingNumbers = function (left: number, right: number): number[] {
 };
 
 var selfDividingNumbers = function (left: number, right: number): number[] {
-  let res: number[] = [];
+  const res: number[] = [];
   for (let i = left; i <= right; i++) {
     if (isSelfDividing(i)) {
       res.push(i);

@@ -15,7 +15,7 @@ export default class MaxHeap<T> {
 
   constructor(arr?: T[]) {
     if (!arr) {
-      this.data = new Array();
+      this.data = [];
     } else {
       // 将一个数组转换成堆
       if (Array.isArray(arr) && arr.length !== 0) {

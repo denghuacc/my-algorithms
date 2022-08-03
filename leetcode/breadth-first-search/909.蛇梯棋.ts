@@ -107,7 +107,7 @@ function snakesAndLadders(board: number[][]): number {
   return -1;
 
   function id2rc(id: number, n: number): [number, number] {
-    let r = Math.floor((id - 1) / n);
+    const r = Math.floor((id - 1) / n);
     let c = (id - 1) % n;
     if (r % 2 === 1) {
       c = n - 1 - c;

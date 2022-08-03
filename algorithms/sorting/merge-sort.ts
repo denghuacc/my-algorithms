@@ -14,9 +14,9 @@ import { defaultCompare, ICompareFunction, Compare } from "../util";
 
 export function mergeSort<T>(array: T[], compareFn = defaultCompare): T[] {
   if (array.length > 1) {
-    let mid = Math.floor(array.length / 2); // 分割中间点
-    let left = mergeSort(array.slice(0, mid), compareFn);
-    let right = mergeSort(array.slice(mid), compareFn);
+    const mid = Math.floor(array.length / 2); // 分割中间点
+    const left = mergeSort(array.slice(0, mid), compareFn);
+    const right = mergeSort(array.slice(mid), compareFn);
     array = merge(left, right, compareFn);
   }
   return array;

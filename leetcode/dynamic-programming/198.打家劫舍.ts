@@ -60,7 +60,7 @@ var rob = function (nums: number[]): number {
     if (start >= n) return 0;
     if (memo[start] !== -1) return memo[start];
 
-    let ret = Math.max(dp(nums, start + 1), nums[start] + dp(nums, start + 2));
+    const ret = Math.max(dp(nums, start + 1), nums[start] + dp(nums, start + 2));
 
     memo[start] = ret;
     return ret;

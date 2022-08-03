@@ -80,7 +80,7 @@ var lengthOfLIS = function (nums: number[]): number {
 // Greedy
 var lengthOfLIS = function (nums: number[]): number {
   let len = 1;
-  let n = nums.length;
+  const n = nums.length;
   if (n === 0) return 0;
 
   const arr = new Array<number>(n + 1);
@@ -95,7 +95,7 @@ var lengthOfLIS = function (nums: number[]): number {
       let pos = 0;
 
       while (l <= r) {
-        let mid = Math.floor((l + r) / 2);
+        const mid = Math.floor((l + r) / 2);
         if (arr[mid] < nums[i]) {
           pos = mid;
           l = mid + 1;
@@ -116,12 +116,12 @@ var lengthOfLIS = function (nums: number[]): number {
   const top = new Array<number>(nums.length);
   let piles = 0;
   for (let i = 0; i < nums.length; i++) {
-    let poker = nums[i];
+    const poker = nums[i];
 
     let left = 0;
     let right = piles;
     while (left < right) {
-      let mid = Math.floor((left + right) / 2);
+      const mid = Math.floor((left + right) / 2);
       if (top[mid] > poker) right = mid;
       else if (top[mid] < poker) left = mid + 1;
       else right = mid;

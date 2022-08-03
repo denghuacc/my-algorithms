@@ -112,10 +112,10 @@ function findInMountainArray(target: number, mountainArr: MountainArray) {
       r = mid;
     }
   }
-  let peak = l; // mount peak
+  const peak = l; // mount peak
 
   // search target on the left side of the mount
-  let index = binarySearch(0, peak, true);
+  const index = binarySearch(0, peak, true);
   if (index !== -1) {
     return index;
   }

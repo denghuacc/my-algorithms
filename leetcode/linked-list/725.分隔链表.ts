@@ -90,7 +90,7 @@ var splitListToParts = function (
 
   cur = root;
   for (let i = 0; i < k; i++) {
-    let head = new ListNode(0);
+    const head = new ListNode(0);
     let write = head;
 
     for (let j = 0; j < width + (i < rem ? 1 : 0); j++) {
@@ -121,12 +121,12 @@ var splitListToParts = function (
 
   cur = root;
   for (let i = 0; i < k; i++) {
-    let head = cur;
+    const head = cur;
     for (let j = 0; j < width + (i < rem ? 1 : 0) - 1; j++) {
       if (cur) cur = cur.next;
     }
     if (cur) {
-      let pre = cur;
+      const pre = cur;
       cur = cur.next;
       pre.next = null; // 拆分链表
     }

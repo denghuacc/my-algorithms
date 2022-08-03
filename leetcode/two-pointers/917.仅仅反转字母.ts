@@ -70,7 +70,7 @@
 function reverseOnlyLetters(s: string): string {
   let left = 0;
   let right = s.length - 1;
-  let res = s.split("");
+  const res = s.split("");
   while (left < right) {
     while (left < right && !isLetter(res[left])) {
       left++;

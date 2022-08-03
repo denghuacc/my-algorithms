@@ -38,8 +38,8 @@ function heapify<T>(
   i: number,
   compareFn: ICompareFunction<T>
 ): void {
-  let left = i * 2 + 1; // 左子节点
-  let right = i * 2 + 2; // 右子节点
+  const left = i * 2 + 1; // 左子节点
+  const right = i * 2 + 2; // 右子节点
   let largest = i; // 节点
 
   // 左右子节点比父节点大时，互换位置

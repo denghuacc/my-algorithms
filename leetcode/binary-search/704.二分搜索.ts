@@ -52,7 +52,7 @@ var search = function (nums: number[], target: number): number {
   let right = nums.length - 1;
 
   while (left <= right) {
-    let mid = left + Math.floor((right - left) / 2);
+    const mid = left + Math.floor((right - left) / 2);
     if (target === nums[mid]) {
       return mid;
     } else if (target > nums[mid]) {

@@ -11,6 +11,6 @@ describe("Kruskal Algorithm - Minimum Spanning Tree", () => {
       [0, 0, 0, 2, 2, 0],
     ];
 
-    expect(kruskal(graph)).toEqual([, 0, 1, 1, 1, 3]);
+    expect(kruskal(graph)).toEqual([undefined, 0, 1, 1, 1, 3]);
   });
 });

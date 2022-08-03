@@ -116,7 +116,7 @@ function largestComponentSize(nums: number[]): number {
   }
   const counts = new Array(m + 1).fill(0);
   let res = 0;
-  for (let num of nums) {
+  for (const num of nums) {
     const root = uf.find(num);
     counts[root]++;
     res = Math.max(res, counts[root]);

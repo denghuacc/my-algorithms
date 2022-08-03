@@ -71,7 +71,7 @@ var numSubarraysWithSum = function (nums: number[], goal: number): number {
   let left2 = 0;
   let sum1 = 0;
   let sum2 = 0;
-  let n = nums.length;
+  const n = nums.length;
   let ret = 0;
 
   for (let right = 0; right < n; right++) {

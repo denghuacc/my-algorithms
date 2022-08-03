@@ -14,33 +14,33 @@ describe("HashTableSeparateChaining", () => {
 
   test("generates hashCode", () => {
     // numbers
-    let hashTable: any = new HashTableSeparateChaining<number, number>();
-    expect(hashTable.hashCode(1)).toBe(1);
-    expect(hashTable.hashCode(10)).toBe(10);
-    expect(hashTable.hashCode(100)).toBe(100);
-    expect(hashTable.hashCode(1000)).toBe(1000);
+    const numberHashTable = new HashTableSeparateChaining<number, number>();
+    expect(numberHashTable.hashCode(1)).toBe(1);
+    expect(numberHashTable.hashCode(10)).toBe(10);
+    expect(numberHashTable.hashCode(100)).toBe(100);
+    expect(numberHashTable.hashCode(1000)).toBe(1000);
 
     // strings
-    hashTable = new HashTableSeparateChaining<string, number>();
-    expect(hashTable.hashCode("1")).toBe(12);
-    expect(hashTable.hashCode("10")).toBe(23);
-    expect(hashTable.hashCode("100")).toBe(34);
-    expect(hashTable.hashCode("1000")).toBe(8);
-    expect(hashTable.hashCode("a")).toBe(23);
-    expect(hashTable.hashCode("A")).toBe(28);
-    expect(hashTable.hashCode("Aba")).toBe(1);
+    const stringHashTable = new HashTableSeparateChaining<string, number>();
+    expect(stringHashTable.hashCode("1")).toBe(12);
+    expect(stringHashTable.hashCode("10")).toBe(23);
+    expect(stringHashTable.hashCode("100")).toBe(34);
+    expect(stringHashTable.hashCode("1000")).toBe(8);
+    expect(stringHashTable.hashCode("a")).toBe(23);
+    expect(stringHashTable.hashCode("A")).toBe(28);
+    expect(stringHashTable.hashCode("Aba")).toBe(1);
 
     // objects
-    hashTable = new HashTableSeparateChaining<MyObj, MyObj>();
+    const objHashTable = new HashTableSeparateChaining<MyObj, MyObj>();
     const myObjList = [];
     for (let i = 1; i <= 5; i++) {
       myObjList.push(new MyObj(i, i + 1));
     }
-    expect(hashTable.hashCode(myObjList[0])).toBe(1);
-    expect(hashTable.hashCode(myObjList[1])).toBe(3);
-    expect(hashTable.hashCode(myObjList[2])).toBe(5);
-    expect(hashTable.hashCode(myObjList[3])).toBe(7);
-    expect(hashTable.hashCode(myObjList[4])).toBe(9);
+    expect(objHashTable.hashCode(myObjList[0])).toBe(1);
+    expect(objHashTable.hashCode(myObjList[1])).toBe(3);
+    expect(objHashTable.hashCode(myObjList[2])).toBe(5);
+    expect(objHashTable.hashCode(myObjList[3])).toBe(7);
+    expect(objHashTable.hashCode(myObjList[4])).toBe(9);
   });
 
   test("puts undefined and null keys and values", () => {

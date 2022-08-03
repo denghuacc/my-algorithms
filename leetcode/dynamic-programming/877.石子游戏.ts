@@ -66,8 +66,8 @@ var stoneGame = function (piles: number[]): boolean {
 
   for (let size = 1; size <= n; size++) {
     for (let i = 0; i + size <= n; i++) {
-      let j = i + size - 1;
-      let parity = (j + i + n) % 2;
+      const j = i + size - 1;
+      const parity = (j + i + n) % 2;
 
       // Alex 取石子 增加自己分数
       if (parity === 1) {
@@ -100,7 +100,7 @@ var stoneGame = function (piles: number[]): boolean {
 
   for (let size = 1; size <= n; size++) {
     for (let i = 0; i + size <= n; i++) {
-      let j = size + 1;
+      const j = size + 1;
       dp[i][j] = Math.max(piles[i] - dp[i + 1][j], piles[j - 1] - dp[i][j - 1]);
     }
   }

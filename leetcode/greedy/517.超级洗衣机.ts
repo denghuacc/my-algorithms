@@ -72,7 +72,7 @@ function findMinMoves(machines: number[]): number {
   if (total % n !== 0) {
     return -1;
   }
-  let avg = Math.floor(total / n);
+  const avg = Math.floor(total / n);
   let ret = 0;
   let sum = 0;
   for (let num of machines) {

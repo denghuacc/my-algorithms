@@ -58,7 +58,7 @@ function longestWord(words: string[]): string {
     }
   });
   let longest = "";
-  let candidates: Set<string> = new Set();
+  const candidates: Set<string> = new Set();
   candidates.add("");
   for (const word of words) {
     if (candidates.has(word.slice(0, -1))) {

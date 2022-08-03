@@ -45,7 +45,7 @@ function findMinArrowShots(points: number[][]): number {
   let end = points[0][1];
 
   for (const point of points) {
-    let start = point[0];
+    const start = point[0];
     if (start > end) {
       count++;
       end = point[1];

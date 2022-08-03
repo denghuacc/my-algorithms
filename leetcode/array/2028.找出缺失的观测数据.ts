@@ -77,7 +77,7 @@ function missingRolls(rolls: number[], mean: number, n: number): number[] {
   const m = rolls.length;
   const total = (m + n) * mean;
   const rollsSum = rolls.reduce((a, b) => a + b, 0);
-  let diff = total - rollsSum;
+  const diff = total - rollsSum;
   if (diff < n || diff > n * 6) {
     return [];
   }

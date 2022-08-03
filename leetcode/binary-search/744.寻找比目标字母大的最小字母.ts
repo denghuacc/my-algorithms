@@ -74,7 +74,7 @@ var nextGreatestLetter = function (letters: string[], target: string): string {
   let left = 0;
   let right = letters.length - 1;
   while (left <= right) {
-    let mid = Math.floor((left + right) / 2);
+    const mid = Math.floor((left + right) / 2);
     if (letters[mid] > target) {
       right = mid - 1;
     } else {

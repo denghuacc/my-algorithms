@@ -87,8 +87,8 @@ var scoreOfParentheses = function (S: string): number {
     if (s === "(") {
       stack.push(0);
     } else {
-      let v = stack.pop()!;
-      let w = stack.pop()!;
+      const v = stack.pop()!;
+      const w = stack.pop()!;
       stack.push(w + Math.max(2 * v, 1));
     }
   }

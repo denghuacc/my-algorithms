@@ -158,14 +158,14 @@ function canMouseWin(
 
   // 计算每个状态的度
   for (let mouse = 0; mouse < total; mouse++) {
-    let mouseRow = Math.floor(mouse / cols);
-    let mouseCol = mouse % cols;
+    const mouseRow = Math.floor(mouse / cols);
+    const mouseCol = mouse % cols;
     if (grid[mouseRow][mouseCol] === "#") {
       continue;
     }
     for (let cat = 0; cat < total; cat++) {
-      let catRow = Math.floor(cat / cols);
-      let catCol = cat % cols;
+      const catRow = Math.floor(cat / cols);
+      const catCol = cat % cols;
       if (grid[catRow][catCol] === "#") {
         continue;
       }

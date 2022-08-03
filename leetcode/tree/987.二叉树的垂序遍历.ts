@@ -102,7 +102,7 @@ function verticalTraversal(root: TreeNode | null): number[][] {
   const ret: number[][] = [];
   let lastCol = -Infinity;
   for (const tuple of nodes) {
-    let col = tuple[0],
+    const col = tuple[0],
       row = tuple[1],
       value = tuple[2];
     if (col !== lastCol) {

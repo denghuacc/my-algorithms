@@ -37,7 +37,7 @@ function partition<T>(
   right: number,
   compareFn: ICompareFunction<T>
 ): number {
-  let pivot = array[Math.floor((left + right) / 2)];
+  const pivot = array[Math.floor((left + right) / 2)];
   let i = left;
   let j = right;
 

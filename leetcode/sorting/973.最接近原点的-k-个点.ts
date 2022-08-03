@@ -62,7 +62,7 @@ var kClosest = function (points: number[][], K: number): number[][] {
     map.set(i, distance);
   }
 
-  let ret: number[][] = [];
+  const ret: number[][] = [];
   const sortedEntries = Array.from(map.entries()).sort((a, b) => a[1] - b[1]);
   for (let i = 0; i < K; i++) {
     ret.push(points[sortedEntries[i][0]]);
@@ -76,7 +76,7 @@ var kClosest = function (points: number[][], K: number): number[][] {
     (a, b) => a[0] * a[0] + a[1] * a[1] - (b[0] * b[0] + b[1] * b[1])
   );
 
-  let ret: number[][] = [];
+  const ret: number[][] = [];
   for (let i = 0; i < K; i++) {
     ret.push(points[i]);
   }

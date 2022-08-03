@@ -49,7 +49,7 @@ var kthSmallest = function (matrix: number[][], k: number): number {
   let left = matrix[0][0];
   let right = matrix[n - 1][n - 1];
   while (left < right) {
-    let mid = left + ((right - left) >> 1);
+    const mid = left + ((right - left) >> 1);
     // midVal >= k
     if (check(matrix, mid, k, n)) {
       right = mid;

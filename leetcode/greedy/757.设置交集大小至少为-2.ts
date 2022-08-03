@@ -51,7 +51,7 @@
 function intersectionSizeTwo(intervals: number[][]): number {
   const n = intervals.length;
   let res = 0;
-  let m = 2;
+  const m = 2;
   intervals.sort((a, b) => {
     if (a[0] === b[0]) {
       return b[1] - a[1];
@@ -59,7 +59,7 @@ function intersectionSizeTwo(intervals: number[][]): number {
     return a[0] - b[0];
   });
 
-  const values = Array.from(new Array(n), () => new Array());
+  const values = Array.from(new Array(n), () => []);
   for (let i = n - 1; i >= 0; i--) {
     for (let j = intervals[i][0], k = values[i].length; k < m; k++) {
       res++;

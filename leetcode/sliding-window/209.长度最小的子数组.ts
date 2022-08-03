@@ -32,7 +32,7 @@
 // @lc code=start
 // brute force
 var minSubArrayLen = function (s: number, nums: number[]): number {
-  let n = nums.length;
+  const n = nums.length;
   if (n === 0) return 0;
   let ret = Infinity;
 
@@ -52,7 +52,7 @@ var minSubArrayLen = function (s: number, nums: number[]): number {
 
 // sliding window
 var minSubArrayLen = function (s: number, nums: number[]): number {
-  let n = nums.length;
+  const n = nums.length;
   if (n === 0) return 0;
   let ret = Infinity;
 

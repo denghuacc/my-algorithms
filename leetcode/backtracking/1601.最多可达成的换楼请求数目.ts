@@ -96,7 +96,7 @@ function maximumRequests(n: number, requests: number[][]): number {
     dfs(requests, pos + 1);
 
     // 选 requests[pos]
-    let z = zero;
+    const z = zero;
     cnt++;
     const [x, y] = requests[pos];
     zero -= delta[x] === 0 ? 1 : 0;

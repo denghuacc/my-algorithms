@@ -72,7 +72,7 @@ function cherryPickup(grid: number[][]): number {
         continue;
       }
       for (let x2 = x1; x2 <= Math.min(k, n - 1); x2++) {
-        let y2 = k - x2;
+        const y2 = k - x2;
         if (grid[x2][y2] === -1) {
           continue;
         }

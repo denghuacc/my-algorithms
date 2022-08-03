@@ -53,7 +53,7 @@ var oddEvenList = function (head: ListNode | null): ListNode | null {
   if (!head) return null;
   let odd = head;
   let even = head.next;
-  let evenHead = even;
+  const evenHead = even;
 
   while (even && even.next) {
     odd.next = even.next;

@@ -62,7 +62,7 @@ class MedianFinder {
       let left = 0;
       let right = n - 1;
       while (left <= right) {
-        let mid = Math.floor((left + right) / 2);
+        const mid = Math.floor((left + right) / 2);
         if (this.list[mid] < num) {
           left = mid + 1;
         } else {

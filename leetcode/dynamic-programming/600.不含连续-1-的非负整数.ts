@@ -45,7 +45,7 @@ function findIntegers(n: number): number {
   let pre = 0;
   let ret = 0;
   for (let i = 29; i >= 0; i--) {
-    let val = 1 << i;
+    const val = 1 << i;
     if (n & val) {
       ret += dp[i + 1];
       if (pre === 1) {

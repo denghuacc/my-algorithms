@@ -50,8 +50,8 @@ function largestPalindrome(n: number): number {
   }
   const upper = 10 ** n - 1;
   for (let left = upper; left > upper / 10; left--) {
-    let right = String(left).split("").reverse().join("");
-    let p = BigInt(String(left) + right);
+    const right = String(left).split("").reverse().join("");
+    const p = BigInt(String(left) + right);
     let x = BigInt(upper);
     while (x * x >= p) {
       if (p % x === BigInt(0)) {

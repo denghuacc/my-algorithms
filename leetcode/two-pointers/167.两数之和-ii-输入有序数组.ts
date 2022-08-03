@@ -70,7 +70,7 @@ var twoSum = function (numbers: number[], target: number): number[] {
     let left = i + 1;
     let right = numbers.length - 1;
     while (left <= right) {
-      let mid = left + Math.floor((right - left) / 2);
+      const mid = left + Math.floor((right - left) / 2);
       if (target === numbers[i] + numbers[mid]) {
         return [i + 1, mid + 1];
       } else if (target > numbers[i] + numbers[mid]) {

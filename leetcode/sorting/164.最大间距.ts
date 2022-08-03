@@ -66,14 +66,14 @@ var maximumGap = function (nums: number[]): number {
   while (maxVal >= exp) {
     const cnt = new Array(10).fill(0);
     for (let i = 0; i < n; i++) {
-      let digit = Math.floor(nums[i] / exp) % 10;
+      const digit = Math.floor(nums[i] / exp) % 10;
       cnt[digit]++;
     }
     for (let i = 1; i < 10; i++) {
       cnt[i] += cnt[i - 1];
     }
     for (let i = n - 1; i >= 0; i--) {
-      let digit = Math.floor(nums[i] / exp) % 10;
+      const digit = Math.floor(nums[i] / exp) % 10;
       buf[cnt[digit] - 1] = nums[i];
       cnt[digit]--;
     }

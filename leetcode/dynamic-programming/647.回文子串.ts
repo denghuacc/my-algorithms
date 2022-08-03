@@ -46,7 +46,7 @@
 // 中心扩展法
 var countSubstrings = function (s: string): number {
   const n = s.length;
-  let count: number = 0;
+  let count = 0;
 
   for (let i = 0; i < 2 * n - 1; i++) {
     let left = Math.floor(i / 2);

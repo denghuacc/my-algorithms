@@ -73,9 +73,11 @@
 
 // @lc code=start
 class TimeMap {
-  map: Map<string, [string, number][]> = new Map();
+  map: Map<string, [string, number][]>;
 
-  constructor() {}
+  constructor() {
+    this.map = new Map();
+  }
 
   set(key: string, value: string, timestamp: number): void {
     if (this.map.has(key)) {
@@ -86,12 +88,12 @@ class TimeMap {
   }
 
   get(key: string, timestamp: number): string {
-    let pairs = this.map.get(key);
+    const pairs = this.map.get(key);
     if (pairs) {
       let low = 0;
       let high = pairs.length - 1;
       while (low <= high) {
-        let mid = Math.floor((high - low) / 2) + low;
+        const mid = Math.floor((high - low) / 2) + low;
         if (pairs[mid][1] > timestamp) {
           high = mid - 1;
         } else if (pairs[mid][1] < timestamp) {

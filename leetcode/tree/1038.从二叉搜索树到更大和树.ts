@@ -94,7 +94,7 @@ var bstToGst = function (root: TreeNode | null): TreeNode | null {
     }
     // if right child is exist
     else {
-      let successor = getSuccessor(node);
+      const successor = getSuccessor(node);
       if (!successor.left) {
         successor.left = node;
         node = node.right;

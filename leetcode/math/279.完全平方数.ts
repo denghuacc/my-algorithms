@@ -57,7 +57,7 @@ var numSquares = function (n: number): number {
   }
 
   for (let i = 1; i * i <= n; i++) {
-    let j = n - i * i;
+    const j = n - i * i;
     if (isPerfectSquare(j)) {
       return 2;
     }

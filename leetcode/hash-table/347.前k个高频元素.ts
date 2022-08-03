@@ -41,7 +41,7 @@ var topKFrequent = function (nums: number[], k: number): number[] {
     map.set(num, (map.get(num) ?? 0) + 1);
   }
   const sortMap = new Map([...map].sort((a, b) => b[1] - a[1]));
-  let keyArr = Array.from(sortMap.keys());
+  const keyArr = Array.from(sortMap.keys());
   const ret = keyArr.slice(0, k);
   return ret;
 };

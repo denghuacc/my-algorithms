@@ -98,7 +98,7 @@ class NestedIterator {
       if (this.stack[0].isInteger()) {
         return true;
       } else {
-        let list = this.stack[0].getList();
+        const list = this.stack[0].getList();
         this.stack.shift();
         this.stack.unshift(...list);
       }

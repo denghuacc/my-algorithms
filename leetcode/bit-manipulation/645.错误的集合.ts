@@ -143,7 +143,7 @@ var findErrorNums = function (nums: number[]): number[] {
     xor ^= i;
   }
 
-  let rightMostBit = xor & ~(xor - 1);
+  const rightMostBit = xor & ~(xor - 1);
   for (const num of nums) {
     if ((num & rightMostBit) !== 0) {
       xor1 ^= num;

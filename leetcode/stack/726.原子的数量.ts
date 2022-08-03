@@ -96,7 +96,7 @@ function countOfAtoms(formula: string): string {
     }
   }
 
-  let map = stack.pop()!;
+  const map = stack.pop()!;
   const arr = Array.from(map);
   arr.sort();
   const sb = [];

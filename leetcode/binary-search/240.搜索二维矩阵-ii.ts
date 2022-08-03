@@ -61,8 +61,8 @@ var searchMatrix = function (matrix: number[][], target: number): boolean {
   const shortedDim = Math.min(matrix.length, matrix[0].length);
 
   for (let i = 0; i < shortedDim; i++) {
-    let verticalFound = binarySearch(matrix, target, i, true);
-    let horizontalFound = binarySearch(matrix, target, i, false);
+    const verticalFound = binarySearch(matrix, target, i, true);
+    const horizontalFound = binarySearch(matrix, target, i, false);
     if (verticalFound || horizontalFound) return true;
   }
 
@@ -78,7 +78,7 @@ var searchMatrix = function (matrix: number[][], target: number): boolean {
     let end = isVertical ? matrix[0].length - 1 : matrix.length - 1;
 
     while (start <= end) {
-      let mid = Math.floor((start + end) / 2);
+      const mid = Math.floor((start + end) / 2);
       if (isVertical) {
         if (matrix[s][mid] < target) {
           start = mid + 1;
@@ -120,7 +120,7 @@ var searchMatrix = function (matrix: number[][], target: number): boolean {
       return false;
     }
 
-    let mid = left + Math.floor((right - left) / 2);
+    const mid = left + Math.floor((right - left) / 2);
 
     let row = up;
     while (row <= down && matrix[row][mid] <= target) {

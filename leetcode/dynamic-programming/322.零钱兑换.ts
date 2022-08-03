@@ -47,7 +47,7 @@ var coinChange = function (coins: number[], amount: number): number {
     let ret = Infinity;
 
     for (const coin of coins) {
-      let sub = dpf(n - coin);
+      const sub = dpf(n - coin);
       if (sub === -1) continue;
       ret = Math.min(ret, 1 + sub);
     }
@@ -69,7 +69,7 @@ var coinChange = function (coins: number[], amount: number): number {
     let ret = Infinity;
 
     for (const coin of coins) {
-      let sub = dpf(n - coin);
+      const sub = dpf(n - coin);
       if (sub === -1) continue;
       ret = Math.min(ret, 1 + sub);
     }

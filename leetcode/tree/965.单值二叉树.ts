@@ -70,7 +70,7 @@ var isUnivalTree = function (root: TreeNode | null): boolean {
   const val = root.val;
   const queue: TreeNode[] = [root];
   while (queue.length) {
-    let node = queue.shift()!;
+    const node = queue.shift()!;
     if (node.val !== val) {
       return false;
     }

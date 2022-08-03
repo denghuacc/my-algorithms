@@ -102,7 +102,7 @@ var lengthOfLongestSubstring = function (s: string): number {
 var lengthOfLongestSubstring = function (s: string): number {
   let ret = 0;
   let i = 0;
-  let arr: string[] = [];
+  const arr: string[] = [];
 
   while (i < s.length) {
     if (arr.indexOf(s[i]) === -1) {

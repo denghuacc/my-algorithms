@@ -86,8 +86,8 @@ var rob = function (root: TreeNode | null): number {
 
   function dpf(root: TreeNode | null): [number, number] {
     if (!root) return [0, 0];
-    let left = dpf(root.left);
-    let right = dpf(root.right);
+    const left = dpf(root.left);
+    const right = dpf(root.right);
     const doIt = root.val + left[0] + right[0];
     const notDoIt = Math.max(left[0], left[1]) + Math.max(right[0], right[1]);
     return [notDoIt, doIt];

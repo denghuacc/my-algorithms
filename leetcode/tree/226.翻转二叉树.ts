@@ -57,8 +57,8 @@ class TreeNode {
 // recursive
 var invertTree = function (root: TreeNode | null): TreeNode | null {
   if (!root) return null;
-  let right = invertTree(root.right);
-  let left = invertTree(root.left);
+  const right = invertTree(root.right);
+  const left = invertTree(root.left);
   root.left = right;
   root.right = left;
   return root;
@@ -69,7 +69,7 @@ var invertTree = function (root: TreeNode | null): TreeNode | null {
   const queue: Array<TreeNode | null> = [];
   queue.push(root);
   while (queue.length) {
-    let cur = queue.shift()!;
+    const cur = queue.shift()!;
     [cur.left, cur.right] = [cur.right, cur.left];
     if (cur.left) queue.push(cur.left);
     if (cur.right) queue.push(cur.right);

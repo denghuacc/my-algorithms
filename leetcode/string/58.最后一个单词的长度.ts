@@ -59,7 +59,7 @@ var lengthOfLastWord = function (s: string): number {
 // two pointers
 var lengthOfLastWord = function (s: string): number {
   s = s.trim();
-  let end = s.length - 1;
+  const end = s.length - 1;
   if (end < 0) {
     return 0;
   }

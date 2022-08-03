@@ -10,9 +10,11 @@ import { Node } from "../models/linked-list-models";
  */
 export default class LinkedList<T> {
   head: Node<T> | undefined;
-  protected count: number = 0;
+  protected count: number;
 
-  constructor() {}
+  constructor() {
+    this.count = 0;
+  }
 
   // 获取链表中值的数量 O(1)
   get size(): number {

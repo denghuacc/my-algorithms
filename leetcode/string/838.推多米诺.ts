@@ -62,7 +62,7 @@
 // @lc code=start
 function pushDominoes(dominoes: string): string {
   const strArr = dominoes.split("");
-  let n = strArr.length;
+  const n = strArr.length;
   let i = 0;
   let left = "L";
   while (i < n) {

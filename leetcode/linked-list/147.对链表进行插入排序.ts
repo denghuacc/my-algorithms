@@ -58,12 +58,12 @@ class ListNode {
 
 // @lc code=start
 var insertionSortList = function (head: ListNode | null): ListNode | null {
-  let dummy = new ListNode(0);
+  const dummy = new ListNode(0);
   let pre = dummy;
   let cur = head;
 
   while (cur) {
-    let tmp = cur.next;
+    const tmp = cur.next;
     while (pre.next && pre.next.val < cur.val) {
       pre = pre.next;
     }
@@ -78,7 +78,7 @@ var insertionSortList = function (head: ListNode | null): ListNode | null {
 
 // use tail pointer
 var insertionSortList = function (head: ListNode | null): ListNode | null {
-  let dummy = new ListNode(0);
+  const dummy = new ListNode(0);
   let pre = dummy;
   let tail = dummy;
   let cur = head;
@@ -89,7 +89,7 @@ var insertionSortList = function (head: ListNode | null): ListNode | null {
       tail = cur;
       cur = cur.next;
     } else {
-      let tmp = cur.next;
+      const tmp = cur.next;
       tail.next = tmp;
       while (pre.next && pre.next.val < cur.val) {
         pre = pre.next;

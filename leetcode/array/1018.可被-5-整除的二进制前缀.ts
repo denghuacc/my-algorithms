@@ -63,7 +63,7 @@ function prefixesDivBy5(A: number[]): boolean[] {
   const ret: boolean[] = [];
   let prefix = 0;
 
-  for (let num of A) {
+  for (const num of A) {
     prefix = ((prefix << 1) + num) % 5;
     ret.push(prefix === 0);
   }

@@ -55,7 +55,7 @@
 // hash table
 function leastBricks(wall: number[][]): number {
   const map: Map<number, number> = new Map();
-  for (let widths of wall) {
+  for (const widths of wall) {
     const n = widths.length;
     let sum = 0;
     for (let i = 0; i < n - 1; i++) {

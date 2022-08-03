@@ -1,5 +1,5 @@
 import RedBlackTree from "../red-black-tree";
-let rbt: RedBlackTree<Number, string>;
+let rbt: RedBlackTree<number, string>;
 
 describe("RedBlackTree", () => {
   beforeEach(() => {

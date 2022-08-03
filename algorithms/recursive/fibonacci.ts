@@ -17,7 +17,7 @@ export function fibonacciIterative(n: number): number {
   let cur = 1;
 
   for (let i = 3; i <= n; i++) {
-    let sum = pre + cur;
+    const sum = pre + cur;
     pre = cur;
     cur = sum;
   }

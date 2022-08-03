@@ -81,7 +81,7 @@ var missingNumber = function (nums: number[]): number {
 
 // math 高斯求和 -> 首尾相加除以 2
 var missingNumber = function (nums: number[]): number {
-  let expectedNum = Math.floor((nums.length * (nums.length + 1)) / 2);
+  const expectedNum = Math.floor((nums.length * (nums.length + 1)) / 2);
   let actualSum = 0;
   for (const num of nums) {
     actualSum += num;

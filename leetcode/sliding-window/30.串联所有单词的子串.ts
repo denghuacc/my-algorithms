@@ -44,8 +44,8 @@
 // sliding window
 var findSubstring = function (s: string, words: string[]): number[] {
   const res: number[] = [];
-  let wordNum = words.length;
-  let wordLen = words[0].length;
+  const wordNum = words.length;
+  const wordLen = words[0].length;
   const wordMap: Map<string, number> = new Map();
   for (const w of words) {
     wordMap.set(w, (wordMap.get(w) ?? 0) + 1);

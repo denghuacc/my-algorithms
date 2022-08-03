@@ -96,14 +96,14 @@ class SummaryRanges {
     const ret = [];
     let index = 0;
     while (index < this.items.length) {
-      let start = this.items[index];
+      const start = this.items[index];
       while (
         index < this.items.length - 1 &&
         this.items[index] + 1 === this.items[index + 1]
       ) {
         index++;
       }
-      let end = this.items[index];
+      const end = this.items[index];
       ret.push([start, end]);
       index++;
     }

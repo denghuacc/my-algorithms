@@ -52,10 +52,10 @@ class SegmentTree<T> {
       return;
     }
 
-    let leftTreeIndex = this._leftChild(treeIndex);
-    let rightTreeIndex = this._rightChild(treeIndex);
+    const leftTreeIndex = this._leftChild(treeIndex);
+    const rightTreeIndex = this._rightChild(treeIndex);
 
-    let mid = Math.floor(start + (end - start) / 2);
+    const mid = Math.floor(start + (end - start) / 2);
 
     this._buildSegmentTree(leftTreeIndex, start, mid); // 递归创建左边的子节点线段树
     this._buildSegmentTree(rightTreeIndex, mid + 1, end); // 递归创建右边的子节点线段树
@@ -113,9 +113,9 @@ class SegmentTree<T> {
       return this.tree[treeIndex];
     }
 
-    let mid = Math.floor(start + (end - start) / 2);
-    let leftTreeIndex = this._leftChild(treeIndex);
-    let rightTreeIndex = this._rightChild(treeIndex);
+    const mid = Math.floor(start + (end - start) / 2);
+    const leftTreeIndex = this._leftChild(treeIndex);
+    const rightTreeIndex = this._rightChild(treeIndex);
 
     if (queryL >= mid + 1) {
       return this._query(rightTreeIndex, mid + 1, end, queryL, queryR);
@@ -123,8 +123,8 @@ class SegmentTree<T> {
       return this._query(leftTreeIndex, start, mid, queryL, queryR);
     }
 
-    let leftResult: T = this._query(leftTreeIndex, start, mid, queryL, mid);
-    let rightResult: T = this._query(
+    const leftResult: T = this._query(leftTreeIndex, start, mid, queryL, mid);
+    const rightResult: T = this._query(
       rightTreeIndex,
       mid + 1,
       end,
@@ -150,9 +150,9 @@ class SegmentTree<T> {
       return;
     }
 
-    let mid = Math.floor(start + (end - start) / 2);
-    let leftTreeIndex = this._leftChild(treeIndex);
-    let rightTreeIndex = this._rightChild(treeIndex);
+    const mid = Math.floor(start + (end - start) / 2);
+    const leftTreeIndex = this._leftChild(treeIndex);
+    const rightTreeIndex = this._rightChild(treeIndex);
 
     if (index >= mid + 1) {
       this._set(rightTreeIndex, mid + 1, end, index, val);

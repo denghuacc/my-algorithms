@@ -76,8 +76,8 @@
 
 // dp
 var isMatch = function (s: string, p: string): boolean {
-  let sLen = s.length;
-  let pLen = p.length;
+  const sLen = s.length;
+  const pLen = p.length;
 
   // dp[i][j] -> 字符串 s 的前 i 个字符和模式 p 的前 j 个字符是否能匹配
   const dp: boolean[][] = Array.from(new Array(sLen + 1), () =>

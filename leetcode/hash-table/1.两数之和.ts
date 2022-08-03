@@ -42,7 +42,7 @@ var twoSum = function (nums: number[], target: number): number[] {
 var twoSum = function (nums: number[], target: number): number[] {
   let i = nums.length;
   while (i > 1) {
-    let last = nums.pop()!;
+    const last = nums.pop()!;
     if (nums.indexOf(target - last) > -1) {
       return [nums.indexOf(target - last), nums.length];
     }

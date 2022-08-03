@@ -8,7 +8,7 @@ export class Node<K> {
 }
 
 export class KVNode<K, V> extends Node<K> {
-  height: number = 1;
+  height = 1;
   color: Color = Color.RED;
   constructor(
     public key: K,

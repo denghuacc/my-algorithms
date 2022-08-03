@@ -86,7 +86,7 @@ var calculateMinimumHP = function (dungeon: number[][]): number {
 
   for (let i = n - 1; i >= 0; i--) {
     for (let j = m - 1; j >= 0; j--) {
-      let min = Math.min(dp[i + 1][j], dp[i][j + 1]); // 取最小值
+      const min = Math.min(dp[i + 1][j], dp[i][j + 1]); // 取最小值
       dp[i][j] = Math.max(min - dungeon[i][j], 1); // 初始值 >= 1
     }
   }

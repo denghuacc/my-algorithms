@@ -58,8 +58,8 @@ class TreeNode {
 // recursive
 var sortedListToBST = function (head: ListNode | null): TreeNode | null {
   if (!head) return null;
-  let mid = getMiddleNode(head);
-  let node = new TreeNode(mid.val);
+  const mid = getMiddleNode(head);
+  const node = new TreeNode(mid.val);
   if (head === mid) return node;
   node.left = sortedListToBST(head);
   node.right = sortedListToBST(mid.next);
@@ -98,8 +98,8 @@ var sortedListToBST = function (head: ListNode | null): TreeNode | null {
   function convertListToBST(left: number, right: number) {
     if (left > right) return null;
 
-    let mid = Math.floor((left + right + 1) / 2);
-    let node = new TreeNode(arr[mid]);
+    const mid = Math.floor((left + right + 1) / 2);
+    const node = new TreeNode(arr[mid]);
 
     if (left === right) return node;
     node.left = convertListToBST(left, mid - 1);
@@ -111,7 +111,7 @@ var sortedListToBST = function (head: ListNode | null): TreeNode | null {
 
 // inorder
 var sortedListToBST = function (head: ListNode | null): TreeNode | null {
-  let size = getSize(head!);
+  const size = getSize(head!);
   return convertListToBST(0, size - 1);
 
   function getSize(head: ListNode) {
@@ -127,7 +127,7 @@ var sortedListToBST = function (head: ListNode | null): TreeNode | null {
   function convertListToBST(left: number, right: number) {
     if (left > right) return null;
 
-    let mid = Math.floor((left + right + 1) / 2);
+    const mid = Math.floor((left + right + 1) / 2);
 
     const leftNode = convertListToBST(left, mid - 1);
 

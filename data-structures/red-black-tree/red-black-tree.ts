@@ -13,9 +13,11 @@ import { KVNode as Node, Color } from "../models/tree-models";
  */
 export default class RedBlackTree<K, V> {
   root: Node<K, V> | undefined;
-  protected count: number = 0;
+  protected count: number;
 
-  constructor() {}
+  constructor() {
+    this.count = 0;
+  }
 
   get size(): number {
     return this.count;
@@ -77,7 +79,7 @@ export default class RedBlackTree<K, V> {
     queue.push(this.root);
 
     while (queue.length) {
-      let curNode = queue.shift()!;
+      const curNode = queue.shift()!;
       arr.push(curNode.key);
 
       if (curNode.left) queue.push(curNode.left); // 左子节点树先入列
@@ -329,7 +331,7 @@ export default class RedBlackTree<K, V> {
 
   // 判断该二叉树是否是一棵二分搜索树
   isBST(): boolean {
-    let arr: Array<K> = [];
+    const arr: Array<K> = [];
     this.inOrderTree(this.root, arr);
     for (let i = 1; i < arr.length; i++) {
       if (arr[i - 1] > arr[i]) {

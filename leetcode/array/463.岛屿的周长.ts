@@ -52,8 +52,8 @@ var islandPerimeter = function (grid: number[][]): number {
       if (grid[i][j]) {
         let count = 0;
         for (let k = 0; k < dx.length; k++) {
-          let tx = i + dx[k];
-          let ty = j + dy[k];
+          const tx = i + dx[k];
+          const ty = j + dy[k];
           if (tx < 0 || tx >= n || ty < 0 || ty >= m || !grid[tx][ty]) {
             count += 1;
           }

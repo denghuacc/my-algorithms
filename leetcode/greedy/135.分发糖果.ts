@@ -103,7 +103,7 @@ var candy = function (ratings: number[]): number {
   let oldScope = 0;
 
   for (let i = 1; i < n; i++) {
-    let newScope =
+    const newScope =
       ratings[i] > ratings[i - 1] ? 1 : ratings[i] < ratings[i - 1] ? -1 : 0;
     if ((oldScope > 0 && newScope === 0) || (oldScope < 0 && newScope >= 0)) {
       candies += count(up) + count(down) + Math.max(up, down);

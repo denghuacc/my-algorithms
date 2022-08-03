@@ -48,7 +48,7 @@ var search = function (nums: number[], target: number): number {
   let right = len - 1;
 
   while (left <= right) {
-    let mid = Math.floor((left + right) / 2);
+    const mid = Math.floor((left + right) / 2);
     if (nums[mid] === target) return mid;
 
     if (nums[0] <= nums[mid]) {

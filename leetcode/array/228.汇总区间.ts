@@ -89,7 +89,7 @@
 function summaryRanges(nums: number[]): string[] {
   const ret: string[] = [];
   let i = 0;
-  let j = nums.length - 1;
+  const j = nums.length - 1;
 
   while (i <= j) {
     const low = i;

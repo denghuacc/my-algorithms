@@ -6,13 +6,15 @@ class BSTNode<T> {
   ) {}
 }
 
-export default class BST<T> {
+export default class BST<T = number> {
   root: BSTNode<T> | undefined;
-  count: number = 0;
+  count: number;
   getComparedNumber: (val: T) => number;
 
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   constructor(getComparedNumber = (val: any) => val) {
     this.getComparedNumber = getComparedNumber;
+    this.count = 0;
   }
 
   get size(): number {

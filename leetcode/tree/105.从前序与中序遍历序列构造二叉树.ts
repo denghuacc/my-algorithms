@@ -85,7 +85,7 @@ var buildTree = function (
   let inorderIdx = 0; // inorder pointer from zero
 
   for (let i = 1; i < preorder.length; i++) {
-    let preorderVal = preorder[i];
+    const preorderVal = preorder[i];
     let node = stack[stack.length - 1];
     if (node.val !== inorder[inorderIdx]) {
       node.left = new TreeNode(preorderVal); // create left child

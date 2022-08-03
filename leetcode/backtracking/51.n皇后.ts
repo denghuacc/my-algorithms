@@ -64,7 +64,7 @@ var solveNQueens = function (n: number): string[][] {
     if (subset.length === n) {
       ret.push(
         subset.map((i) => {
-          let strArr: string[] = new Array(n).fill(".");
+          const strArr: string[] = new Array(n).fill(".");
           strArr.splice(i, 1, "Q"); // strArr 的 i 位置替换为 `Q`
           return strArr.join("");
         })

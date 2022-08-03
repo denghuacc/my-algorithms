@@ -59,14 +59,14 @@
 // sliding window
 function medianSlidingWindow(nums: number[], k: number): number[] {
   if (!k || !nums.length) return [];
-  let pq = new PQ();
-  let ret: number[] = [];
+  const pq = new PQ();
+  const ret: number[] = [];
   for (let i = 0; i < nums.length; i++) {
     pq.add(nums[i]);
     if (i >= k) pq.del(nums[i - k]); // 窗口左边移动
     if (i >= k - 1) {
       // 当窗口大小为 k 时 就可以把中位数加入结果数组了
-      let val = pq.getMid(k % 2);
+      const val = pq.getMid(k % 2);
       ret.push(val);
     }
   }
@@ -85,7 +85,7 @@ class PQ {
     let left = 0;
     let right = this.queue.length - 1;
     while (left <= right) {
-      let mid = left + Math.floor((right - left) / 2);
+      const mid = left + Math.floor((right - left) / 2);
       if (this.queue[mid] > val) {
         left = mid + 1;
       } else {

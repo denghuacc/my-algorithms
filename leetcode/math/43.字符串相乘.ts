@@ -45,13 +45,13 @@ var multiply = function (num1: string, num2: string): string {
 var multiply = function (num1: string, num2: string): string {
   if (num1 === "0" || num2 === "0") return "0";
 
-  let l1 = num1.length;
-  let l2 = num2.length;
-  let ret: number[] = new Array(l1 + l2).fill(0);
+  const l1 = num1.length;
+  const l2 = num2.length;
+  const ret: number[] = new Array(l1 + l2).fill(0);
 
   for (let i = l2 - 1; i >= 0; i--) {
     for (let j = l1 - 1; j >= 0; j--) {
-      let sum = ret[i + j + 1] + Number(num2[i]) * Number(num1[j]);
+      const sum = ret[i + j + 1] + Number(num2[i]) * Number(num1[j]);
       ret[i + j + 1] = sum % 10;
       ret[i + j] += (sum / 10) | 0; // 进位
     }
@@ -65,9 +65,9 @@ var multiply = function (num1: string, num2: string): string {
 var multiply = function (num1: string, num2: string): string {
   if (num1 === "0" || num2 === "0") return "0";
 
-  let l1 = num1.length;
-  let l2 = num2.length;
-  let ret: number[] = new Array(l1 + l2 - 1).fill(0);
+  const l1 = num1.length;
+  const l2 = num2.length;
+  const ret: number[] = new Array(l1 + l2 - 1).fill(0);
 
   for (let i = 0; i < l2; i++) {
     for (let j = 0; j < l1; j++) {

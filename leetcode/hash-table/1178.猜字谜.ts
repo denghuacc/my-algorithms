@@ -86,7 +86,7 @@ function findNumOfValidWords(words: string[], puzzles: string[]): number[] {
 
     let subset = mask;
     while (subset) {
-      let s = subset | (1 << getCharCode(puzzle[0]));
+      const s = subset | (1 << getCharCode(puzzle[0]));
       if (map.has(s)) {
         total += map.get(s)!;
       }

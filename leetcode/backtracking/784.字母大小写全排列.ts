@@ -45,7 +45,7 @@ var letterCasePermutation = function (S: string): string[] {
   const ret: string[] = [];
   const n = S.length;
   if (n === 0) return ret;
-  let strArr = S.split("");
+  const strArr = S.split("");
   dfs(strArr, 0);
   return ret;
 

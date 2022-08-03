@@ -60,7 +60,7 @@
 function findAnagrams(s: string, p: string): number[] {
   let left = 0;
   let right = 0;
-  let ret: number[] = [];
+  const ret: number[] = [];
   const window: Map<string, number> = new Map();
   const needs: Map<string, number> = new Map();
 

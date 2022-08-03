@@ -10,9 +10,11 @@ interface Table<K, V> {
  * @description 使用线性探测解决哈希冲突，使用 isDeleted 属性表示值是否被删除
  */
 export default class HashTableLinearProbingLazy<K, V> {
-  table: Table<K, V> = {};
+  table: Table<K, V>;
 
-  constructor() {}
+  constructor() {
+    this.table = {};
+  }
 
   hashCode(key: K): number {
     return this.loseloseHashCode(key);

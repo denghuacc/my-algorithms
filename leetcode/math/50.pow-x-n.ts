@@ -53,7 +53,7 @@ var myPow = function (x: number, n: number): number {
 
   function fastPow(x: number, n: number): number {
     if (n === 0) return 1.0;
-    let half = fastPow(x, Math.floor(n / 2));
+    const half = fastPow(x, Math.floor(n / 2));
 
     if (n % 2 === 0) {
       return half * half;

@@ -41,7 +41,7 @@
  * };
  */
 // binary search
-var solution = function (isBadVersion: any) {
+var solution = function (isBadVersion: (version: number) => boolean) {
   return function (n: number): number {
     let l = 1;
     let r = n;

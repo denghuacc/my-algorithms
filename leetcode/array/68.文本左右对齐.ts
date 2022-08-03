@@ -83,7 +83,7 @@
 function fullJustify(words: string[], maxWidth: number): string[] {
   const ans = [];
   let right = 0;
-  let n = words.length;
+  const n = words.length;
   while (true) {
     const left = right; // 当前行的第一个单词在 words 的位置
     let sumLen = 0; // 统计这一行单词长度之和

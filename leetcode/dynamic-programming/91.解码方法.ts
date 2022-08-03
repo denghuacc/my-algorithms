@@ -84,7 +84,7 @@ function numDecodings(s: string): number {
   let cur = 1; // dp[0] = 1
 
   for (let i = 1; i < s.length; i++) {
-    let tmp = cur;
+    const tmp = cur;
     if (s[i] === "0") {
       if (s[i - 1] === "1" || s[i - 1] === "2") {
         cur = pre; // dp[i] = dp[i-2]

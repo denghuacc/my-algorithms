@@ -66,8 +66,8 @@ var generateTrees = function (n: number): Array<TreeNode | null> {
     }
 
     for (let i = start; i <= end; i++) {
-      let leftTrees = generate(start, i - 1);
-      let rightTrees = generate(i + 1, end);
+      const leftTrees = generate(start, i - 1);
+      const rightTrees = generate(i + 1, end);
 
       for (const leftTree of leftTrees) {
         for (const rightTree of rightTrees) {

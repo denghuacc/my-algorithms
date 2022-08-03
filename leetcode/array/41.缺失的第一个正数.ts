@@ -55,7 +55,7 @@ var firstMissingPositive = function (nums: number[]): number {
   }
   // 将 <= n 的元素对应位置变为负数
   for (let i = 0; i < n; i++) {
-    let num = Math.abs(nums[i]);
+    const num = Math.abs(nums[i]);
     if (num <= n) {
       nums[num - 1] = -Math.abs(nums[num - 1]);
     }

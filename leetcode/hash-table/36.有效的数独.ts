@@ -90,8 +90,8 @@ var isValidSudoku = function (board: string[][]): boolean {
       const num = board[i][j];
 
       if (num !== ".") {
-        let n = num;
-        let boxIndex = Math.floor(i / 3) * 3 + Math.floor(j / 3);
+        const n = num;
+        const boxIndex = Math.floor(i / 3) * 3 + Math.floor(j / 3);
 
         rows[i].set(n, (rows[i].get(n) || 0) + 1);
         columns[j].set(n, (columns[j].get(n) || 0) + 1);

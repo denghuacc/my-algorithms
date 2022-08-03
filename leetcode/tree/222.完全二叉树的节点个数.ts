@@ -62,7 +62,7 @@ var countNodes = function (root: TreeNode | null): number {
   let right = Math.pow(2, depth) - 1;
 
   while (left <= right) {
-    let pivot = left + Math.floor((right - left) / 2);
+    const pivot = left + Math.floor((right - left) / 2);
     if (exists(pivot, depth, root)) {
       left = pivot + 1;
     } else {

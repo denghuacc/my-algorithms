@@ -135,7 +135,7 @@ var eraseOverlapIntervals = function (intervals: number[][]): number {
   let count = 1;
 
   for (let i = 1; i < n; i++) {
-    let start = intervals[i][0];
+    const start = intervals[i][0];
     if (start >= end) {
       end = intervals[i][1];
       count++;

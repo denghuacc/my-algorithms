@@ -100,13 +100,13 @@ function containVirus(isInfected: number[][]): number {
           queue.push([i, j]);
           const neighbor = new Set<number>();
           let firewall = 0;
-          let idx = neighbors.length + 1;
+          const idx = neighbors.length + 1;
           isInfected[i][j] = -idx;
 
           while (queue.length > 0) {
             const [x, y] = queue.shift()!;
             for (let d = 0; d < 4; ++d) {
-              let nx = x + dirs[d][0],
+              const nx = x + dirs[d][0],
                 ny = y + dirs[d][1];
               if (nx >= 0 && nx < m && ny >= 0 && ny < n) {
                 if (isInfected[nx][ny] === 1) {
@@ -150,8 +150,8 @@ function containVirus(isInfected: number[][]): number {
     for (let i = 0; i < neighbors.length; ++i) {
       if (i !== idx) {
         for (const val of neighbors[i]) {
-          let x = val >> 16;
-          let y = val & ((1 << 16) - 1);
+          const x = val >> 16;
+          const y = val & ((1 << 16) - 1);
           isInfected[x][y] = 1;
         }
       }

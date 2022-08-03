@@ -105,7 +105,7 @@ var fractionAddition = function (expression: string): string {
     if (numerator === 0) {
       return [0, 1];
     }
-    let negative = numerator < 0;
+    const negative = numerator < 0;
     if (negative) {
       numerator = -numerator;
     }
@@ -147,7 +147,7 @@ var fractionAddition = function (expression: string): string {
   let numerator = 0;
   let denominator = 1;
   let idx = 0;
-  let n = expression.length;
+  const n = expression.length;
   while (idx < n) {
     let sign = 1;
     let numerator1 = 0;

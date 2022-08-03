@@ -73,8 +73,8 @@ var minimumTotal = function (triangle: number[][]): number {
   dp[0][0] = triangle[0][0];
 
   for (let i = 1; i < n; i++) {
-    let cur = i % 2;
-    let pre = 1 - cur;
+    const cur = i % 2;
+    const pre = 1 - cur;
 
     dp[cur][0] = dp[pre][0] + triangle[i][0];
     for (let j = 1; j < i; j++) {

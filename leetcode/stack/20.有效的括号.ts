@@ -56,7 +56,7 @@
 // @lc code=start
 // stack
 var isValid = function (s: string): boolean {
-  let stack: string[] = [];
+  const stack: string[] = [];
 
   for (let i = 0; i < s.length; i++) {
     const c = s[i];

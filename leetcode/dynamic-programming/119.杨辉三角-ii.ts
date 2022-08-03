@@ -34,7 +34,7 @@
 // @lc code=start
 // dp
 var getRow = function (rowIndex: number): number[] {
-  let ret = [1];
+  const ret = [1];
   for (let i = 0; i < rowIndex; i++) {
     ret.unshift(0); // 最前面插入 0
     for (let j = 0; j < i + 1; j++) {
@@ -46,7 +46,7 @@ var getRow = function (rowIndex: number): number[] {
 
 // 优化
 var getRow = function (rowIndex: number): number[] {
-  let ret = [1];
+  const ret = [1];
   for (let i = 0; i < rowIndex; i++) {
     ret.unshift(0); // 最前面插入 0
     const midIndex = Math.floor((i + 1) / 2);

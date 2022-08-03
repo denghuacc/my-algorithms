@@ -43,7 +43,7 @@ var longestPalindrome = function (s: string): string {
 
   for (let i = 0; i < n; i++) {
     for (let j = 0; i < n; j++) {
-      let k = i + j;
+      const k = i + j;
       if (k >= n) break;
 
       // 子串长度为 1
@@ -73,9 +73,9 @@ var longestPalindrome = function (s: string): string {
   let start = 0;
   let end = 0;
   for (let i = 0; i < n; i++) {
-    let len1 = expandAroundCenter(s, i, i);
-    let len2 = expandAroundCenter(s, i, i + 1);
-    let maxLen = Math.max(len1, len2);
+    const len1 = expandAroundCenter(s, i, i);
+    const len2 = expandAroundCenter(s, i, i + 1);
+    const maxLen = Math.max(len1, len2);
     if (maxLen > end - start) {
       start = i - Math.floor((maxLen - 1) / 2);
       end = i + Math.floor(maxLen / 2);

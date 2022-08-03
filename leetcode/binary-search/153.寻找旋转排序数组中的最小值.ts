@@ -56,7 +56,7 @@ var findMin = function (nums: number[]): number {
   if (nums[right] > nums[0]) return nums[0];
 
   while (left <= right) {
-    let mid = left + Math.floor((right - left) / 2);
+    const mid = left + Math.floor((right - left) / 2);
 
     if (nums[mid] > nums[mid + 1]) return nums[mid + 1];
     if (nums[mid - 1] > nums[mid]) return nums[mid];

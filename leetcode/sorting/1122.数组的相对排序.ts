@@ -49,7 +49,7 @@
 var relativeSortArray = function (arr1: number[], arr2: number[]): number[] {
   const ret: number[] = arr2.slice();
   const set: Set<number> = new Set(arr2);
-  let i = 0;
+  const i = 0;
   const tails: number[] = [];
 
   for (let i = 0; i < arr1.length; i++) {
@@ -73,8 +73,8 @@ var relativeSortArray = function (arr1: number[], arr2: number[]): number[] {
 // custom sort 2
 var relativeSortArray = function (arr1: number[], arr2: number[]): number[] {
   return arr1.sort((a, b) => {
-    let ia = arr2.indexOf(a);
-    let ib = arr2.indexOf(b);
+    const ia = arr2.indexOf(a);
+    const ib = arr2.indexOf(b);
     if (ia === -1 && ib === -1) {
       return a - b;
     } else if (ia === -1) {
@@ -93,7 +93,7 @@ var relativeSortArray = function (arr1: number[], arr2: number[]): number[] {
   for (const x of arr1) {
     upper = Math.max(upper, x);
   }
-  let frequency: number[] = new Array(upper + 1).fill(0);
+  const frequency: number[] = new Array(upper + 1).fill(0);
   for (const x of arr1) {
     ++frequency[x];
   }

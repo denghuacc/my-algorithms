@@ -68,7 +68,7 @@ var sortColors = function (nums: number[]) {
 
 // one pointer
 var sortColors = function (nums: number[]) {
-  let n = nums.length;
+  const n = nums.length;
   let p = 0;
 
   for (let i = 0; i < n; i++) {

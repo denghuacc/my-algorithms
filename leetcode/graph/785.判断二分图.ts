@@ -79,7 +79,7 @@ var isBipartite = function (graph: number[][]): boolean {
 
   function dfs(node: number, color: number, graph: number[][]) {
     colors[node] = color;
-    let cNei = color === RED ? GREEN : RED;
+    const cNei = color === RED ? GREEN : RED;
     for (const neighbor of graph[node]) {
       if (colors[neighbor] === UNCOLORED) {
         dfs(neighbor, cNei, graph);
@@ -107,7 +107,7 @@ var isBipartite = function (graph: number[][]): boolean {
       colors[i] = RED;
       while (queue.length) {
         const node = queue.shift()!;
-        let cNei = colors[node] === RED ? GREEN : RED;
+        const cNei = colors[node] === RED ? GREEN : RED;
         for (const neighbor of graph[node]) {
           if (colors[neighbor] === UNCOLORED) {
             queue.push(neighbor);

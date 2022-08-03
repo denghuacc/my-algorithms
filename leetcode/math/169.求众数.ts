@@ -79,14 +79,14 @@ var majorityElement = function (nums: number[]): number {
   function majorityElementRec(nums: number[], l: number, r: number): number {
     if (l === r) return nums[l];
 
-    let m = Math.floor((r - l) / 2) + l;
-    let left = majorityElementRec(nums, l, m);
-    let right = majorityElementRec(nums, m + 1, r);
+    const m = Math.floor((r - l) / 2) + l;
+    const left = majorityElementRec(nums, l, m);
+    const right = majorityElementRec(nums, m + 1, r);
 
     if (left === right) return left;
 
-    let leftCount = countInRange(nums, left, l, r);
-    let rightCount = countInRange(nums, right, l, r);
+    const leftCount = countInRange(nums, left, l, r);
+    const rightCount = countInRange(nums, right, l, r);
 
     return leftCount > rightCount ? left : right;
   }

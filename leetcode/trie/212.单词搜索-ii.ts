@@ -118,14 +118,14 @@ class Trie {
 
 // trie + backtracking
 var findWords = function (board: string[][], words: string[]): string[] {
-  let n = board.length;
+  const n = board.length;
   if (n === 0) return [];
-  let m = board[0].length;
+  const m = board[0].length;
   const wordsTrie = new Trie();
   for (const word of words) {
     wordsTrie.insert(word);
   }
-  let ret: string[] = [];
+  const ret: string[] = [];
 
   const direction = [
     [0, -1], // 上
@@ -151,8 +151,8 @@ var findWords = function (board: string[][], words: string[]): string[] {
     if (!wordsTrie.startsWith(curStr)) return;
     board[i][j] = "#";
     for (let k = 0; k < direction.length; k++) {
-      let newX = i + direction[k][0];
-      let newY = j + direction[k][1];
+      const newX = i + direction[k][0];
+      const newY = j + direction[k][1];
       if (inArea(newX, newY) && board[newX][newY] !== "#") {
         dfs(newX, newY, curStr);
       }
@@ -168,9 +168,9 @@ var findWords = function (board: string[][], words: string[]): string[] {
 
 // backtracking -> transform leetcode 79
 var findWords = function (board: string[][], words: string[]): string[] {
-  let n = board.length;
+  const n = board.length;
   if (n === 0) return [];
-  let m = board[0].length;
+  const m = board[0].length;
   let marked: boolean[][] = Array.from(new Array(n), () =>
     new Array(m).fill(false)
   );
@@ -207,8 +207,8 @@ var findWords = function (board: string[][], words: string[]): string[] {
     if (board[i][j] === word[start]) {
       marked[i][j] = true;
       for (let k = 0; k < direction.length; k++) {
-        let newX = i + direction[k][0];
-        let newY = j + direction[k][1];
+        const newX = i + direction[k][0];
+        const newY = j + direction[k][1];
         if (inArea(newX, newY) && !marked[newX][newY]) {
           if (dfs(newX, newY, start + 1, word)) {
             return true;

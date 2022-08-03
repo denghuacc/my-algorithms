@@ -9,9 +9,11 @@ import { Node } from "../models/tree-models";
  */
 export default class BST<T> {
   root: Node<T> | undefined;
-  protected count: number = 0;
+  protected count: number;
 
-  constructor() {}
+  constructor() {
+    this.count = 0;
+  }
 
   get size(): number {
     return this.count;
@@ -78,7 +80,7 @@ export default class BST<T> {
       stack.push(this.root);
 
       while (stack.length) {
-        let curNode = stack.pop()!;
+        const curNode = stack.pop()!;
         arr.push(curNode.key);
 
         // 先 right 后 left 后进先出
@@ -139,7 +141,7 @@ export default class BST<T> {
       stack.push(this.root);
 
       while (stack.length) {
-        let curNode = stack.pop()!;
+        const curNode = stack.pop()!;
         arr.unshift(curNode.key); // 与 push 相反
 
         // 先 left 后 right
@@ -160,7 +162,7 @@ export default class BST<T> {
       queue.push(this.root);
 
       while (queue.length) {
-        let curNode = queue.shift()!;
+        const curNode = queue.shift()!;
         arr.push(curNode.key);
 
         if (curNode.left) {

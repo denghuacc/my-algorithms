@@ -62,7 +62,7 @@ function minChanges(nums: number[], k: number): number {
   const MAX_LENGTH = 2 ** 10;
 
   const n = nums.length;
-  let f: number[] = new Array(MAX_LENGTH).fill(Number.MAX_VALUE);
+  const f: number[] = new Array(MAX_LENGTH).fill(Number.MAX_VALUE);
   f[0] = 0;
 
   for (let i = 0; i < k; i++) {

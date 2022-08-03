@@ -71,7 +71,7 @@ var pivotIndex = function (nums: number[]): number {
 
 // prefix sum
 var pivotIndex = function (nums: number[]): number {
-  let total = nums.reduce((acc, i) => acc + i, 0);
+  const total = nums.reduce((acc, i) => acc + i, 0);
   let ret = -1;
   let leftSum = 0; // the sum of element on the left
   for (let i = 0; i < nums.length; i++) {

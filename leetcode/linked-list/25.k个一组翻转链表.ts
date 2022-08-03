@@ -100,10 +100,10 @@ var reverseKGroup = function (
     cur = reverseKGroup(cur, k);
     while (count) {
       count--;
-      let next = head?.next!;
+      const next = head?.next;
       head!.next = cur;
       cur = head;
-      head = next;
+      head = next!;
     }
     head = cur;
   }

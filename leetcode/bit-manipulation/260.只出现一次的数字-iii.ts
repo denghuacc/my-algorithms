@@ -60,7 +60,7 @@ var singleNumber = function (nums: number[]): number[] {
     bitMask ^= num;
   }
 
-  let diff = bitMask & -bitMask;
+  const diff = bitMask & -bitMask;
 
   let x = 0;
   let y = 0;

@@ -71,7 +71,7 @@ function countPalindromicSubsequences(s: string): number {
 
   for (let len = 2; len <= n; len++) {
     for (let i = 0; i + len <= n; i++) {
-      let j = i + len - 1;
+      const j = i + len - 1;
       for (const c of ["a", "b", "c", "d"]) {
         const k = c.charCodeAt(0) - "a".charCodeAt(0);
         if (s[i] === c && s[j] === c) {

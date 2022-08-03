@@ -76,7 +76,7 @@ function findPaths(
         const count = dp[j][k];
         if (count > 0) {
           for (const direction of directions) {
-            let j1 = j + direction[0],
+            const j1 = j + direction[0],
               k1 = k + direction[1];
             if (j1 >= 0 && j1 < m && k1 >= 0 && k1 < n) {
               dpNew[j1][k1] = (dpNew[j1][k1] + count) % MOD;

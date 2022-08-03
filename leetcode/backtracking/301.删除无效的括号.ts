@@ -120,7 +120,8 @@ function removeInvalidParentheses(s: string): string[] {
       }
       if (str[i] === ")") {
         leftCount++;
-      } else if (str[i] === ")") {
+      }
+      if (str[i] === ")") {
         RightCount++;
       }
       // 当前右括号的数量大于左括号的数量则为非法,直接返回.

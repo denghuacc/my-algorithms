@@ -10,7 +10,11 @@ const customEquals: IEqualsFunction<CustomObject> = (
 ) => a.key === b.key;
 
 export function testSearchAlgorithm(
-  searchAlgorithm: Function,
+  searchAlgorithm: (
+    arr: unknown[],
+    target: unknown,
+    compareFn?: IEqualsFunction<CustomObject>
+  ) => unknown[],
   algorithmName: string,
   config = { customEquals: true }
 ) {

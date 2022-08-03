@@ -58,7 +58,7 @@ var maxArea = function (height: number[]): number {
   let ret = 0;
   for (let i = 0; i < height.length - 1; i++) {
     for (let j = i + 1; j < height.length; j++) {
-      let max = Math.min(height[i], height[j]) * (j - i); // 高 * 宽
+      const max = Math.min(height[i], height[j]) * (j - i); // 高 * 宽
       if (max > ret) {
         ret = max;
       }

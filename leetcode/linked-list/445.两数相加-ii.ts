@@ -67,10 +67,10 @@ var addTwoNumbers = function (
   let c = 0;
 
   while (s1.length || s2.length || c > 0) {
-    let a = s1.length ? s1.pop()! : 0;
-    let b = s2.length ? s2.pop()! : 0;
-    let sum = a + b + c;
-    let node = new ListNode(sum % 10);
+    const a = s1.length ? s1.pop()! : 0;
+    const b = s2.length ? s2.pop()! : 0;
+    const sum = a + b + c;
+    const node = new ListNode(sum % 10);
     c = Math.floor(sum / 10);
     node.next = ret;
     ret = node;

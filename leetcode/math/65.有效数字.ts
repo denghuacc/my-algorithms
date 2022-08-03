@@ -73,6 +73,7 @@ var isNumber = function (s: string): boolean {
   return Boolean(finals[state]);
 
   function make(c: string) {
+    const code = c.charCodeAt(0);
     switch (c) {
       case " ":
         return 0;
@@ -85,7 +86,6 @@ var isNumber = function (s: string): boolean {
       case "E":
         return 4;
       default:
-        let code = c.charCodeAt(0);
         if (code >= 48 && code <= 57) return 2;
         else return 5;
     }

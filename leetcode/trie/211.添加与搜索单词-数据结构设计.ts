@@ -75,7 +75,7 @@ class WordDictionary {
       if (index === word.length) {
         return node.isWord;
       }
-      let ch = word[index];
+      const ch = word[index];
       if (ch !== ".") {
         if (!node.next.get(ch)) {
           return false;
@@ -83,7 +83,7 @@ class WordDictionary {
         return match(node.next.get(ch)!, word, index + 1);
       } else {
         // 匹配下一个所有的点
-        for (let nextC of node.next.keys()) {
+        for (const nextC of node.next.keys()) {
           if (match(node.next.get(nextC)!, word, index + 1)) {
             return true;
           }

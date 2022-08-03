@@ -68,7 +68,7 @@
 // @lc code=start
 // iterator
 var readBinaryWatch = function (turnedOn: number): string[] {
-  let ret: string[] = [];
+  const ret: string[] = [];
   for (let h = 0; h < 12; h++) {
     for (let m = 0; m < 60; m++) {
       const hCounts = h.toString(2).split("0").join("").length;
@@ -84,11 +84,11 @@ var readBinaryWatch = function (turnedOn: number): string[] {
 
 // bit + iterator
 var readBinaryWatch = function (turnedOn: number): string[] {
-  let ret: string[] = [];
+  const ret: string[] = [];
   for (let i = 0; i < 1024; i++) {
-    let h = i >> 6;
-    let m = i & 63;
-    let counts = i.toString(2).split("0").join("").length;
+    const h = i >> 6;
+    const m = i & 63;
+    const counts = i.toString(2).split("0").join("").length;
     if (h < 12 && m < 60 && counts === turnedOn) {
       ret.push(`${h}:${(m < 10 ? "0" : "") + m}`);
     }

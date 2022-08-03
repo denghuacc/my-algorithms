@@ -72,7 +72,7 @@
 // math hash table
 var romanToInt = function (s: string): number {
   let ret = 0;
-  let last = 0;
+  const last = 0;
   const map: Map<string, number> = new Map([
     ["I", 1],
     ["V", 5],

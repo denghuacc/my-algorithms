@@ -99,7 +99,7 @@ var preorder = function (root: Node | null): number[] {
   while (stack.length) {
     const node = stack.pop()!;
     res.push(node.val);
-    let len = node.children.length;
+    const len = node.children.length;
     if (len) {
       for (let i = len - 1; i >= 0; i--) {
         stack.push(node.children[i]);

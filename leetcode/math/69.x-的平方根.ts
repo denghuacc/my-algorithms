@@ -56,8 +56,8 @@ var mySqrt = function (x: number): number {
   let r = Math.floor(x / 2);
 
   while (l <= r) {
-    let m = Math.floor((l + r) / 2);
-    let s = m * m;
+    const m = Math.floor((l + r) / 2);
+    const s = m * m;
     if (s === x) {
       return m;
     } else if (s < x) {

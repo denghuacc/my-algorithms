@@ -76,9 +76,9 @@ function rand7(): number {
 
 function rand10(): number {
   while (true) {
-    let row = rand7();
-    let col = rand7();
-    let idx = col + (row - 1) * 7;
+    const row = rand7();
+    const col = rand7();
+    const idx = col + (row - 1) * 7;
 
     if (idx <= 40) {
       return 1 + ((idx - 1) % 10);

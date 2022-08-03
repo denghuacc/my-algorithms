@@ -115,12 +115,12 @@ var imageSmoother = function (img: number[][]): number[][] {
   const res: number[][] = Array.from(new Array(m), () => new Array(n).fill(0));
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
-      let a = Math.max(0, i - 1);
-      let b = Math.max(0, j - 1);
-      let c = Math.min(m - 1, i + 1);
-      let d = Math.min(n - 1, j + 1);
-      let count = (c - a + 1) * (d - b + 1);
-      let total = sum[c + 1][d + 1] - sum[a][d + 1] - sum[c + 1][b] + sum[a][b];
+      const a = Math.max(0, i - 1);
+      const b = Math.max(0, j - 1);
+      const c = Math.min(m - 1, i + 1);
+      const d = Math.min(n - 1, j + 1);
+      const count = (c - a + 1) * (d - b + 1);
+      const total = sum[c + 1][d + 1] - sum[a][d + 1] - sum[c + 1][b] + sum[a][b];
       res[i][j] = Math.floor(total / count);
     }
   }

@@ -6,9 +6,11 @@ import { KVNode as Node } from "../models/tree-models";
  */
 export default class BSTMap<K, V> {
   root: Node<K, V> | undefined;
-  protected count: number = 0;
+  protected count: number;
 
-  constructor() {}
+  constructor() {
+    this.count = 0;
+  }
 
   get size(): number {
     return this.count;

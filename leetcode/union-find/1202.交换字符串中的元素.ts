@@ -82,7 +82,7 @@ function smallestStringWithSwaps(s: string, pairs: number[][]): string {
     }
   }
 
-  const vec: string[][] = Array.from(new Array(n), () => new Array());
+  const vec: string[][] = Array.from(new Array(n), () => []);
   for (let i = 0; i < n; i++) {
     fa[i] = find(i);
     vec[fa[i]].push(s[i]);

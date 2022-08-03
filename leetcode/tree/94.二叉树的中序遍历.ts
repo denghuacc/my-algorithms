@@ -94,7 +94,7 @@ var inorderTraversal = function (root: TreeNode | null): number[] {
       }
 
       prev.right = cur;
-      let tmp = cur;
+      const tmp = cur;
       cur = cur.left;
       tmp.left = null;
     }

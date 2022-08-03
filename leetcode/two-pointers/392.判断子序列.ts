@@ -72,7 +72,7 @@ var isSubsequence = function (s: string, t: string): boolean {
 var isSubsequence = function (s: string, t: string): boolean {
   let tIndex = 0;
   for (let i = 0; i < s.length; i++) {
-    let sVal = s[i];
+    const sVal = s[i];
     let find = false;
     for (; tIndex < t.length; tIndex++) {
       if (sVal === t[tIndex]) {

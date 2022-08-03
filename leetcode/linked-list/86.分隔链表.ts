@@ -41,9 +41,9 @@ var partition = function partition(
   head: ListNode | null,
   x: number
 ): ListNode | null {
-  let beforeHead = new ListNode(0);
+  const beforeHead = new ListNode(0);
   let before = beforeHead;
-  let afterHead = new ListNode(0);
+  const afterHead = new ListNode(0);
   let after = afterHead;
 
   while (head) {

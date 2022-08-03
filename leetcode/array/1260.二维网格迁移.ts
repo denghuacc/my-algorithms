@@ -74,7 +74,7 @@ function shiftGrid(grid: number[][], k: number): number[][] {
 
   const arr = grid.flat();
   k %= m * n;
-  let newArr = arr.slice(m * n - k).concat(arr.slice(0, m * n - k));
+  const newArr = arr.slice(m * n - k).concat(arr.slice(0, m * n - k));
 
   const res: number[][] = [];
   for (let i = 0; i < m * n; i += n) {

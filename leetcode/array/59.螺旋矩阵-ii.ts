@@ -36,8 +36,8 @@ var generateMatrix = function (n: number): number[][] {
   let b = n - 1; // bottom
 
   const ret: number[][] = new Array(n).fill(0).map(() => new Array(n));
+  const tar = n * n;
   let num = 1;
-  let tar = n * n;
 
   while (num <= tar) {
     for (let i = l; i <= r; i++) ret[t][i] = num++; // l -> r

@@ -141,7 +141,7 @@ var ladderLength = function (
   while (beginVisited.size || endVisited.size) {
     // prioritize smaller size collection
     if (beginVisited.size > endVisited.size) {
-      let tmp = beginVisited;
+      const tmp = beginVisited;
       beginVisited = endVisited;
       endVisited = tmp;
     }

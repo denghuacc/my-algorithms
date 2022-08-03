@@ -11,9 +11,11 @@ interface Table<K, V> {
  * @description 使用链表分离解决哈希冲突
  */
 export default class HashTableSeparateChaining<K, V> {
-  table: Table<K, V> = {};
+  table: Table<K, V>;
 
-  constructor() {}
+  constructor() {
+    this.table = {};
+  }
 
   hashCode(key: K): number {
     return this.loseloseHashCode(key);

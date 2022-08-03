@@ -51,7 +51,7 @@
 var countBinarySubstrings = function (s: string): number {
   const counts: number[] = [];
   let ptr = 0;
-  let n = s.length;
+  const n = s.length;
 
   while (ptr < n) {
     const c = s[ptr];
@@ -74,7 +74,7 @@ var countBinarySubstrings = function (s: string): number {
 // string 2 optimize
 var countBinarySubstrings = function (s: string): number {
   let ptr = 0;
-  let n = s.length;
+  const n = s.length;
   let last = 0;
   let ret = 0;
 

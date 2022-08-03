@@ -46,13 +46,13 @@ var addTwoNumbers = function (
   l1: ListNode | null,
   l2: ListNode | null
 ): ListNode | null {
-  let dummy = new ListNode(0); // before the result
+  const dummy = new ListNode(0); // before the result
   let cur = dummy;
   let carry = 0;
 
   while (l1 || l2) {
-    let x = !l1 ? 0 : l1.val;
-    let y = !l2 ? 0 : l2.val;
+    const x = !l1 ? 0 : l1.val;
+    const y = !l2 ? 0 : l2.val;
     let sum = x + y + carry;
 
     carry = sum > 9 ? 1 : 0;

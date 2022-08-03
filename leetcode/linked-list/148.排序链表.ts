@@ -52,12 +52,12 @@ var sortList = function (head: ListNode | null): ListNode | null {
     fast = fast.next.next!;
   }
 
-  let tmp = slow.next;
+  const tmp = slow.next;
   slow.next = null; // break
   let left = sortList(head);
   let right = sortList(tmp);
   let h = new ListNode(-1);
-  let ret = h;
+  const ret = h;
 
   while (left && right) {
     if (left.val < right.val) {

@@ -6,9 +6,11 @@ import { KVNode as Node } from "../models/linked-list-models";
  */
 export default class LinkedListMap<K, V> {
   head: Node<K, V> | undefined;
-  private count: number = 0;
+  private count: number;
 
-  constructor() {}
+  constructor() {
+    this.count = 0;
+  }
 
   get size() {
     return this.count;

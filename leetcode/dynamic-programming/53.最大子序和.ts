@@ -75,7 +75,7 @@ var maxSubArray = function (nums: number[]): number {
 
 // dp 空间复杂度降低
 var maxSubArray = function (nums: number[]): number {
-  let n = nums.length;
+  const n = nums.length;
   if (n === 0) return 0;
   let dp0 = nums[0];
   let dp1 = 0;

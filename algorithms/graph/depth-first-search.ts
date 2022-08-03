@@ -6,7 +6,10 @@ enum Colors {
   BLACK = 2,
 }
 
-export function depthFirstSearch<T>(graph: Graph<T>, callback: Function): void {
+export function depthFirstSearch<T>(
+  graph: Graph<T>,
+  callback: (val: T) => void
+): void {
   const vertices = graph.getVertices();
   const adjList = graph.getAdjList();
   const color = initializeColor(vertices);
@@ -30,7 +33,7 @@ function depthFirstSearchVisit<T>(
   u: T,
   color: Map<T, Colors>,
   adjList: Map<T, T[]>,
-  callback: Function
+  callback: (val: T) => void
 ): void {
   color.set(u, Colors.GREY);
   if (callback) callback(u);

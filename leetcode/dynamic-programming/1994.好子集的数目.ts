@@ -95,7 +95,7 @@ function numberOfGoodSubsets(nums: number[]): number {
 
     // 检查 i 的每个质因数是否均不超过 1 个
     let subset = 0;
-    let x = i;
+    const x = i;
     let check = true;
     for (let j = 0; j < PRIMES.length; j++) {
       const prime = PRIMES[j];

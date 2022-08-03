@@ -85,7 +85,7 @@ var numWaterBottles = function (
   numExchange: number
 ): number {
   // 每次损失 numExchange - 1 个空酒瓶
-  let res = numBottles + Math.floor(numBottles / (numExchange - 1));
+  const res = numBottles + Math.floor(numBottles / (numExchange - 1));
   // 注意边界条件：当 numBottles 为 numExchange - 1 的倍数时，最后一个回合不满足兑换条件
   return numBottles % (numExchange - 1) === 0 ? res - 1 : res;
 };

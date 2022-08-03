@@ -69,8 +69,8 @@ var minDistance = function (word1: string, word2: string): number {
 
   for (let i = 1; i < n + 1; i++) {
     for (let j = 1; j < m + 1; j++) {
-      let left = dp[i - 1][j] + 1;
-      let down = dp[i][j - 1] + 1;
+      const left = dp[i - 1][j] + 1;
+      const down = dp[i][j - 1] + 1;
       let leftDown = dp[i - 1][j - 1];
       if (word1[i - 1] !== word2[j - 1]) {
         leftDown += 1;

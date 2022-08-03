@@ -10,9 +10,11 @@ interface Table<K, V> {
  * @description 使用线性探测解决哈希冲突
  */
 export default class HashTableLinearProbing<K, V> {
-  table: Table<K, V> = {};
+  table: Table<K, V>;
 
-  constructor() {}
+  constructor() {
+    this.table = {};
+  }
 
   hashCode(key: K): number {
     return this.loseloseHashCode(key);

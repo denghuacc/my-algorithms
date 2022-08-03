@@ -3,11 +3,11 @@ const INF = Number.MAX_SAFE_INTEGER;
 export function kruskal(graph: number[][]): number[] {
   const length = graph.length;
   const parent: number[] = [];
-  let ne: number = 0;
-  let a: number = 0;
-  let b: number = 0;
-  let u: number = 0;
-  let v: number = 0;
+  let ne = 0;
+  let a = 0;
+  let b = 0;
+  let u = 0;
+  let v = 0;
 
   const cost = initializeCost(graph);
 

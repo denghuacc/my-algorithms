@@ -49,8 +49,8 @@ var findMedianSortedArrays = function (
   let i = 0;
   let j = 0;
   let cur: number;
-  let n1: number = 0;
-  let n2: number = 0;
+  let n1 = 0;
+  let n2 = 0;
   while (i < len1 || j < len2) {
     if (j === len2 || nums1[i] < nums2[j]) {
       cur = nums1[i];

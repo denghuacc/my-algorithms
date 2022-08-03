@@ -89,7 +89,7 @@ function networkDelayTime(times: number[][], n: number, k: number): number {
     }
   }
 
-  let ret = Math.max(...dist);
+  const ret = Math.max(...dist);
   return ret === Infinity ? -1 : ret;
 }
 // @lc code=end

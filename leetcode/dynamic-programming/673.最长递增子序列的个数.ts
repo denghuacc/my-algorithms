@@ -38,7 +38,7 @@
 // @lc code=start
 // dp
 function findNumberOfLIS(nums: number[]): number {
-  let n = nums.length;
+  const n = nums.length;
   let maxLen = 0;
   let ret = 0;
 

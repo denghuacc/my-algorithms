@@ -1,7 +1,10 @@
 import { Compare } from "../../util";
 
 export function testSortAlgorithm(
-  sortAlgorithm: Function,
+  sortAlgorithm: (
+    arr: number[],
+    compareFn?: (a: number, b: number) => number
+  ) => number[],
   algorithmName: string,
   config = { reverseCompare: true }
 ) {

@@ -91,7 +91,7 @@ var checkValidString = function (s: string): boolean {
 var checkValidString = function (s: string): boolean {
   let minCount = 0;
   let maxCount = 0;
-  let n = s.length;
+  const n = s.length;
   for (let i = 0; i < n; i++) {
     const c = s[i];
     if (c === "(") {

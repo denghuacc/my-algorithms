@@ -42,9 +42,8 @@ class ListNode {
 // sort
 var mergeKLists = function (lists: Array<ListNode | null>): ListNode | null {
   const nums: number[] = []; // the values of linked list
-  let dummy: ListNode;
-  let point: ListNode;
-  dummy = point = new ListNode(0);
+  const dummy: ListNode = new ListNode(0);
+  let point: ListNode = dummy;
 
   for (let node of lists) {
     while (node) {

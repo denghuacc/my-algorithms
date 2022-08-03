@@ -78,8 +78,8 @@ var searchRange = function (nums: number[], target: number): number[] {
 // binary search
 var searchRange = function (nums: number[], target: number): number[] {
   let ret = [-1, -1];
-  let leftIdx = binarySearch(nums, target, true);
-  let rightIdx = binarySearch(nums, target, false) - 1;
+  const leftIdx = binarySearch(nums, target, true);
+  const rightIdx = binarySearch(nums, target, false) - 1;
 
   if (
     leftIdx <= rightIdx &&

@@ -63,7 +63,7 @@
 // @lc code=start
 // hash table
 function isRectangleCover(rectangles: number[][]): boolean {
-  let n = rectangles.length;
+  const n = rectangles.length;
   let left = Infinity;
   let right = -Infinity;
   let top = -Infinity;

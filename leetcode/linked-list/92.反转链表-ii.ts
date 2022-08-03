@@ -55,8 +55,8 @@ var reverseBetween = function (
     n--;
   }
 
-  let con: ListNode | null = pre;
-  let tail: ListNode | null = cur;
+  const con: ListNode | null = pre;
+  const tail: ListNode | null = cur;
   let third: ListNode | null = null;
   while (n > 0 && cur) {
     third = cur.next!;
@@ -83,7 +83,7 @@ var reverseBetween = function (
   n: number
 ): ListNode | null {
   let left: ListNode | null = head;
-  let stop: boolean = false;
+  let stop = false;
   recurseAndReverse(head, m, n);
   return head;
 
@@ -100,7 +100,7 @@ var reverseBetween = function (
     }
 
     if (!stop && left && right) {
-      let v = left.val;
+      const v = left.val;
       left.val = right.val;
       right.val = v;
 

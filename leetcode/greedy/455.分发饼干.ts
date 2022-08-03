@@ -78,8 +78,8 @@ var findContentChildren = function (g: number[], s: number[]): number {
 // sort + greedy
 var findContentChildren = function (g: number[], s: number[]): number {
   let ret = 0;
-  let n1 = g.length;
-  let n2 = s.length;
+  const n1 = g.length;
+  const n2 = s.length;
   g.sort((a, b) => a - b);
   s.sort((a, b) => a - b);
 

@@ -48,7 +48,7 @@ var reverseWords = function (s: string): string {
   const n = s.length;
   let i = 0;
   while (i < n) {
-    let start = i;
+    const start = i;
     while (i < n && s[i] !== " ") {
       i++;
     }
@@ -69,7 +69,7 @@ var reverseWords = function (s: string): string {
   const n = s.length;
   let i = 0;
   while (i < n) {
-    let start = i;
+    const start = i;
     while (i < n && s[i] !== " ") {
       i++;
     }

@@ -47,7 +47,7 @@ var findMin = function (nums: number[]): number {
   let right = nums.length - 1;
 
   while (left < right) {
-    let pivot = left + Math.floor((right - left) / 2);
+    const pivot = left + Math.floor((right - left) / 2);
 
     // 最小值在左边
     if (nums[pivot] < nums[right]) {

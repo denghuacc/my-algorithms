@@ -55,7 +55,7 @@ var numMatchingSubseq = function (S: string, words: string[]): number {
 
 // bucket sort
 var numMatchingSubseq = function (S: string, words: string[]): number {
-  let bucket: { word: string; index: number }[][] = Array.from(
+  const bucket: { word: string; index: number }[][] = Array.from(
     new Array(26),
     () => []
   );
@@ -67,9 +67,9 @@ var numMatchingSubseq = function (S: string, words: string[]): number {
   }
   let count = 0;
   for (const c of S) {
-    let list = bucket[c.charCodeAt(0) - 97];
+    const list = bucket[c.charCodeAt(0) - 97];
     bucket[c.charCodeAt(0) - 97] = [];
-    let len = list.length;
+    const len = list.length;
     for (let i = 0; i < len; i++) {
       let { word, index } = list[i];
       if (index === word.length - 1) {

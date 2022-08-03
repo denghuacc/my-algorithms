@@ -88,7 +88,7 @@ var reorderList = function (head: ListNode | null) {
     let prev: ListNode | null = null;
     let cur = head;
     while (cur) {
-      let nextTmp = cur.next!;
+      const nextTmp = cur.next!;
       cur.next = prev;
       prev = cur;
       cur = nextTmp;

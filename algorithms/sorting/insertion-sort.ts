@@ -9,7 +9,7 @@ import { defaultCompare, Compare } from "../util";
 
 export function insertionSort<T>(array: T[], compareFn = defaultCompare): T[] {
   for (let i = 0; i < array.length; i++) {
-    let current = array[i]; // 保存待插入的元素
+    const current = array[i]; // 保存待插入的元素
     let j = i; // 保存元素 current 应该插入的位置
 
     // 依次和前面的元素进行比较，如果它前一个元素比它大，这个元素往后挪一个位置，然后继续比较寻找
