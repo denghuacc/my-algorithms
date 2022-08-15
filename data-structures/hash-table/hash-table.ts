@@ -1,5 +1,16 @@
-import { ValuePair } from "../models/value-pair";
-import { defaultToString } from "../util";
+class ValuePair<K, V> {
+  key: K;
+  val: V;
+
+  constructor(key: K, val: V) {
+    this.key = key;
+    this.val = val;
+  }
+
+  toString() {
+    return `[#${this.key}: ${this.val}]`;
+  }
+}
 
 interface Table<K, V> {
   [key: string]: ValuePair<K, V>;
@@ -23,7 +34,7 @@ export default class HashTable<K, V> {
   // 散列方法一
   private loseloseHashCode(key: K): number {
     if (typeof key === "number") return key;
-    const tableKey = defaultToString(key);
+    const tableKey = `${key}`;
     let hash = 0;
     for (let i = 0; i < tableKey.length; i++) {
       hash += tableKey.charCodeAt(i);

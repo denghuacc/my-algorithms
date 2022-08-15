@@ -1,4 +1,14 @@
-import { Node } from "../models/tree-models";
+class BSTNode<T> {
+  val: T;
+  left?: BSTNode<T>;
+  right?: BSTNode<T>;
+
+  constructor(val: T, left?: BSTNode<T>, right?: BSTNode<T>) {
+    this.val = val;
+    this.left = left;
+    this.right = right;
+  }
+}
 
 /**
  * @name BST 二叉搜索树
@@ -8,7 +18,7 @@ import { Node } from "../models/tree-models";
  * 应用：可以高效的在树中插入、 查找和删除数据。
  */
 export default class BST<T> {
-  root: Node<T> | undefined;
+  root: BSTNode<T> | undefined;
   protected count: number;
 
   constructor() {
@@ -24,39 +34,39 @@ export default class BST<T> {
   }
 
   // 向二分搜索树中添加值 O(logN)
-  add(key: T): void {
-    this.root = this.addNode(this.root, key);
+  add(val: T): void {
+    this.root = this.addNode(this.root, val);
   }
 
-  private addNode(root: Node<T> | undefined, key: T): Node<T> {
+  private addNode(root: BSTNode<T> | undefined, val: T): BSTNode<T> {
     if (!root) {
       this.count++;
-      return new Node(key);
+      return new BSTNode(val);
     }
 
-    if (key < root.key) {
-      root.left = this.addNode(root.left, key);
-    } else if (key > root.key) {
-      root.right = this.addNode(root.right, key);
+    if (val < root.val) {
+      root.left = this.addNode(root.left, val);
+    } else if (val > root.val) {
+      root.right = this.addNode(root.right, val);
     }
 
     return root;
   }
 
   // 看二分搜索树中是否包含值 O(logN)
-  contains(key: T): boolean {
-    return this.containsNode(this.root, key);
+  contains(val: T): boolean {
+    return this.containsNode(this.root, val);
   }
 
-  private containsNode(root: Node<T> | undefined, key: T): boolean {
+  private containsNode(root: BSTNode<T> | undefined, val: T): boolean {
     if (!root) return false;
 
-    if (key === root.key) {
+    if (val === root.val) {
       return true;
-    } else if (key < root.key) {
-      return this.containsNode(root.left, key);
+    } else if (val < root.val) {
+      return this.containsNode(root.left, val);
     } else {
-      return this.containsNode(root.right, key);
+      return this.containsNode(root.right, val);
     }
   }
 
@@ -65,9 +75,9 @@ export default class BST<T> {
     this.preOrderTree(this.root, arr);
   }
 
-  private preOrderTree(root: Node<T> | undefined, arr: T[] = []): void {
+  private preOrderTree(root: BSTNode<T> | undefined, arr: T[] = []): void {
     if (root) {
-      arr.push(root.key);
+      arr.push(root.val);
       this.preOrderTree(root.left, arr);
       this.preOrderTree(root.right, arr);
     }
@@ -76,12 +86,12 @@ export default class BST<T> {
   // 二分搜索树的前序迭代遍历
   preOrderIterative(arr: T[] = []): void {
     if (this.root) {
-      const stack: Node<T>[] = [];
+      const stack: BSTNode<T>[] = [];
       stack.push(this.root);
 
       while (stack.length) {
         const curNode = stack.pop()!;
-        arr.push(curNode.key);
+        arr.push(curNode.val);
 
         // 先 right 后 left 后进先出
         if (curNode.right) stack.push(curNode.right);
@@ -95,10 +105,10 @@ export default class BST<T> {
     this.inOrderTree(this.root, arr);
   }
 
-  private inOrderTree(root: Node<T> | undefined, arr: T[] = []): void {
+  private inOrderTree(root: BSTNode<T> | undefined, arr: T[] = []): void {
     if (root) {
       this.inOrderTree(root.left, arr);
-      arr.push(root.key);
+      arr.push(root.val);
       this.inOrderTree(root.right, arr);
     }
   }
@@ -106,7 +116,7 @@ export default class BST<T> {
   // 二分搜索树的中序迭代遍历
   inOrderIterative(arr: T[] = []): void {
     if (this.root) {
-      const stack: Node<T>[] = [];
+      const stack: BSTNode<T>[] = [];
       let curNode = this.root;
 
       while (curNode || stack.length) {
@@ -115,7 +125,7 @@ export default class BST<T> {
           curNode = curNode.left!;
         }
         curNode = stack.pop()!;
-        arr.push(curNode.key);
+        arr.push(curNode.val);
         curNode = curNode.right!;
       }
     }
@@ -126,23 +136,23 @@ export default class BST<T> {
     this.postOrderTree(this.root, arr);
   }
 
-  private postOrderTree(root: Node<T> | undefined, arr: T[] = []): void {
+  private postOrderTree(root: BSTNode<T> | undefined, arr: T[] = []): void {
     if (root) {
       this.postOrderTree(root.left, arr);
       this.postOrderTree(root.right, arr);
-      arr.push(root.key);
+      arr.push(root.val);
     }
   }
 
   // 二分搜索树的后序迭代遍历 -> 逆前序迭代遍历
   postOrderIterative(arr: T[] = []): void {
     if (this.root) {
-      const stack: Node<T>[] = [];
+      const stack: BSTNode<T>[] = [];
       stack.push(this.root);
 
       while (stack.length) {
         const curNode = stack.pop()!;
-        arr.unshift(curNode.key); // 与 push 相反
+        arr.unshift(curNode.val); // 与 push 相反
 
         // 先 left 后 right
         if (curNode.left) {
@@ -158,12 +168,12 @@ export default class BST<T> {
   // 二分搜索树的层序遍历 -> 广度优先搜索 BFS
   levelOrder(arr: T[] = []): void {
     if (this.root) {
-      const queue: Node<T>[] = [];
+      const queue: BSTNode<T>[] = [];
       queue.push(this.root);
 
       while (queue.length) {
         const curNode = queue.shift()!;
-        arr.push(curNode.key);
+        arr.push(curNode.val);
 
         if (curNode.left) {
           queue.push(curNode.left); // 左子节点树先入列
@@ -178,10 +188,10 @@ export default class BST<T> {
   // 寻找二分搜索树的最小元素
   min(): T | undefined {
     if (!this.root) return undefined;
-    return this.minNode(this.root).key;
+    return this.minNode(this.root).val;
   }
 
-  private minNode(root: Node<T>): Node<T> {
+  private minNode(root: BSTNode<T>): BSTNode<T> {
     if (!root.left) return root;
     return this.minNode(root.left);
   }
@@ -189,10 +199,10 @@ export default class BST<T> {
   // 寻找二分搜索树的最大元素
   max(): T | undefined {
     if (!this.root) return undefined;
-    return this.maxNode(this.root).key;
+    return this.maxNode(this.root).val;
   }
 
-  private maxNode(root: Node<T>): Node<T> {
+  private maxNode(root: BSTNode<T>): BSTNode<T> {
     if (!root.right) return root;
     return this.maxNode(root.right);
   }
@@ -204,7 +214,7 @@ export default class BST<T> {
     return ret ? ret : undefined;
   }
 
-  private removeMinNode(root: Node<T> | undefined): Node<T> | undefined {
+  private removeMinNode(root: BSTNode<T> | undefined): BSTNode<T> | undefined {
     if (!root) return undefined;
     if (!root.left) {
       const rightNode = root.right;
@@ -224,7 +234,7 @@ export default class BST<T> {
     return ret;
   }
 
-  private removeMaxNode(root: Node<T> | undefined): Node<T> | undefined {
+  private removeMaxNode(root: BSTNode<T> | undefined): BSTNode<T> | undefined {
     if (!root) return undefined;
     if (!root.right) {
       const leftNode = root.left;
@@ -237,21 +247,24 @@ export default class BST<T> {
     return root;
   }
 
-  // 从二分搜索树中删除值为 key 的节点
-  remove(key: T): void {
-    this.root = this.removeNode(this.root, key);
+  // 从二分搜索树中删除值为 val 的节点
+  remove(val: T): void {
+    this.root = this.removeNode(this.root, val);
   }
 
-  protected removeNode(root: Node<T> | undefined, key: T): Node<T> | undefined {
+  protected removeNode(
+    root: BSTNode<T> | undefined,
+    val: T
+  ): BSTNode<T> | undefined {
     if (!root) return undefined;
 
-    if (key < root.key) {
-      root.left = this.removeNode(root.left, key);
+    if (val < root.val) {
+      root.left = this.removeNode(root.left, val);
       return root;
-    } else if (key > root.key) {
-      root.right = this.removeNode(root.right, key);
+    } else if (val > root.val) {
+      root.right = this.removeNode(root.right, val);
       return root;
-    } else if (key === root.key) {
+    } else if (val === root.val) {
       // 待删除节点左子树为空的情况
       if (!root.left) {
         const rightNode = root.right;

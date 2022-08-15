@@ -1,5 +1,18 @@
-import { ValuePairLazy } from "../models/value-pair";
-import { defaultToString } from "../util";
+class ValuePairLazy<K, V> {
+  key: K;
+  val: V;
+  isDeleted: boolean;
+
+  constructor(key: K, val: V, isDeleted = false) {
+    this.key = key;
+    this.val = val;
+    this.isDeleted = isDeleted;
+  }
+
+  toString() {
+    return `[#${this.key}: ${this.val}]`;
+  }
+}
 
 interface Table<K, V> {
   [key: string]: ValuePairLazy<K, V>;
@@ -23,7 +36,7 @@ export default class HashTableLinearProbingLazy<K, V> {
   // 散列方法
   private loseloseHashCode(key: K): number {
     if (typeof key === "number") return key;
-    const tableKey = defaultToString(key);
+    const tableKey = `${key}`;
     let hash = 0;
     for (let i = 0; i < tableKey.length; i++) {
       hash += tableKey.charCodeAt(i);

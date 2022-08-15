@@ -1,19 +1,19 @@
 import RedBlackTree from "../red-black-tree";
-let rbt: RedBlackTree<number, string>;
+let rbt: RedBlackTree<number>;
 
 describe("RedBlackTree", () => {
   beforeEach(() => {
     rbt = new RedBlackTree();
-    rbt.add(23, "23");
-    rbt.add(45, "45");
-    rbt.add(16, "16");
-    rbt.add(7, "7");
-    rbt.add(88, "88");
+    rbt.add(23);
+    rbt.add(45);
+    rbt.add(16);
+    rbt.add(7);
+    rbt.add(88);
   });
 
   test("size", () => {
     expect(rbt.size).toBe(5);
-    rbt.add(17, "17");
+    rbt.add(17);
     expect(rbt.size).toBe(6);
     rbt.remove(45);
     rbt.remove(16);
@@ -28,7 +28,7 @@ describe("RedBlackTree", () => {
     rbt.remove(7);
     rbt.remove(88);
     expect(rbt.isEmpty()).toBe(true);
-    rbt.add(28, "28");
+    rbt.add(28);
     expect(rbt.isEmpty()).toBe(false);
   });
 
@@ -68,7 +68,7 @@ describe("RedBlackTree", () => {
     expect(rbt.minimum()).toBe(7);
     rbt.remove(7);
     expect(rbt.minimum()).toBe(16);
-    rbt.add(11, "11");
+    rbt.add(11);
     expect(rbt.minimum()).toBe(11);
   });
 
@@ -76,7 +76,7 @@ describe("RedBlackTree", () => {
     expect(rbt.maximum()).toBe(88);
     rbt.remove(88);
     expect(rbt.maximum()).toBe(45);
-    rbt.add(55, "55");
+    rbt.add(55);
     expect(rbt.maximum()).toBe(55);
   });
 

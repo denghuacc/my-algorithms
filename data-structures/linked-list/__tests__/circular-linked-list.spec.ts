@@ -122,7 +122,7 @@ describe("LinkedList", () => {
     expect(linkedList.indexOf(2)).toBe(1);
     expect(linkedList.indexOf(3)).toBe(0);
     expect(linkedList.indexOf(4)).toBe(-1);
-    linkedList.addFirst(1); // add repeat key
+    linkedList.addFirst(1); // add repeat val
     expect(linkedList.indexOf(1)).toBe(0);
   });
 
@@ -149,20 +149,20 @@ describe("LinkedList", () => {
     );
     expect(linkedList.size).toBe(3);
     expect(linkedList.removeFirst()).toBe(3);
-    expect(linkedList.head?.key).toBe(2);
-    expect(linkedList.head?.next?.key).toBe(1);
+    expect(linkedList.head?.val).toBe(2);
+    expect(linkedList.head?.next?.val).toBe(1);
     expect(linkedList.head?.next?.next).toBe(linkedList.head);
     expect(linkedList.toString()).toBe(
       "Circular Linked List { 2 -> 1 -> head }"
     );
     expect(linkedList.size).toBe(2);
     expect(linkedList.removeFirst()).toBe(2);
-    expect(linkedList.head?.key).toBe(1);
+    expect(linkedList.head?.val).toBe(1);
     expect(linkedList.head?.next).toBe(linkedList.head);
     expect(linkedList.toString()).toBe("Circular Linked List { 1 -> head }");
     expect(linkedList.size).toBe(1);
     expect(linkedList.removeFirst()).toBe(1);
-    expect(linkedList.head?.key).toBe(undefined);
+    expect(linkedList.head?.val).toBe(undefined);
     expect(linkedList.toString()).toBe("");
     expect(linkedList.size).toBe(0);
     expect(linkedList.removeFirst()).toBe(undefined);
@@ -180,20 +180,20 @@ describe("LinkedList", () => {
     );
     expect(linkedList.size).toBe(3);
     expect(linkedList.removeLast()).toBe(1);
-    expect(linkedList.head?.key).toBe(3);
-    expect(linkedList.head?.next?.key).toBe(2);
+    expect(linkedList.head?.val).toBe(3);
+    expect(linkedList.head?.next?.val).toBe(2);
     expect(linkedList.head?.next?.next).toBe(linkedList.head);
     expect(linkedList.toString()).toBe(
       "Circular Linked List { 3 -> 2 -> head }"
     );
     expect(linkedList.size).toBe(2);
     expect(linkedList.removeLast()).toBe(2);
-    expect(linkedList.head?.key).toBe(3);
+    expect(linkedList.head?.val).toBe(3);
     expect(linkedList.head?.next).toBe(linkedList.head);
     expect(linkedList.toString()).toBe("Circular Linked List { 3 -> head }");
     expect(linkedList.size).toBe(1);
     expect(linkedList.removeLast()).toBe(3);
-    expect(linkedList.head?.key).toBe(undefined);
+    expect(linkedList.head?.val).toBe(undefined);
     expect(linkedList.toString()).toBe("");
     expect(linkedList.size).toBe(0);
     expect(linkedList.removeLast()).toBe(undefined);
@@ -211,23 +211,23 @@ describe("LinkedList", () => {
     );
     expect(linkedList.size).toBe(3);
     expect(linkedList.removeKey(3)).toBe(true);
-    expect(linkedList.head?.key).toBe(2);
-    expect(linkedList.head?.next?.key).toBe(1);
+    expect(linkedList.head?.val).toBe(2);
+    expect(linkedList.head?.next?.val).toBe(1);
     expect(linkedList.head?.next?.next).toBe(linkedList.head);
     expect(linkedList.toString()).toBe(
       "Circular Linked List { 2 -> 1 -> head }"
     );
     expect(linkedList.size).toBe(2);
     expect(linkedList.removeKey(5)).toBe(false);
-    expect(linkedList.head?.key).toBe(2);
-    expect(linkedList.head?.next?.key).toBe(1);
+    expect(linkedList.head?.val).toBe(2);
+    expect(linkedList.head?.next?.val).toBe(1);
     expect(linkedList.head?.next?.next).toBe(linkedList.head);
     expect(linkedList.toString()).toBe(
       "Circular Linked List { 2 -> 1 -> head }"
     );
     expect(linkedList.size).toBe(2);
     expect(linkedList.removeKey(2)).toBe(true);
-    expect(linkedList.head?.key).toBe(1);
+    expect(linkedList.head?.val).toBe(1);
     expect(linkedList.head?.next).toBe(linkedList.head);
     expect(linkedList.toString()).toBe("Circular Linked List { 1 -> head }");
     expect(linkedList.size).toBe(1);

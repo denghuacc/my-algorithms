@@ -1,4 +1,12 @@
-import { Node } from "../models/linked-list-models";
+class LinkedListNode<T> {
+  val: T;
+  next?: LinkedListNode<T>;
+
+  constructor(val: T, next?: LinkedListNode<T>) {
+    this.val = val;
+    this.next = next;
+  }
+}
 
 /**
  * @name LinkedListQueue 队列
@@ -6,8 +14,8 @@ import { Node } from "../models/linked-list-models";
  * 这里使用了表头 head 和表尾 tail 属性，入列和出列都是 O(1)
  */
 export default class LinkedListQueue<T> {
-  head: Node<T> | undefined;
-  tail: Node<T> | undefined;
+  head: LinkedListNode<T> | undefined;
+  tail: LinkedListNode<T> | undefined;
   count: number;
 
   constructor() {
@@ -22,12 +30,12 @@ export default class LinkedListQueue<T> {
   }
 
   // 入列 O(1)
-  enqueue(key: T): void {
+  enqueue(val: T): void {
     if (!this.tail) {
-      this.tail = new Node(key);
+      this.tail = new LinkedListNode(val);
       this.head = this.tail;
     } else {
-      this.tail.next = new Node(key);
+      this.tail.next = new LinkedListNode(val);
       this.tail = this.tail.next;
     }
     this.count++;
@@ -45,12 +53,12 @@ export default class LinkedListQueue<T> {
       this.tail = undefined;
     }
     this.count--;
-    return delNode.key;
+    return delNode.val;
   }
 
   // 获取队列的第一个元素 O(1)
   peek(): T | undefined {
-    return this.head?.key;
+    return this.head?.val;
   }
 
   // 查询队列是否为空 O(1)
@@ -72,7 +80,7 @@ export default class LinkedListQueue<T> {
 
     // 遍历节点
     while (cur) {
-      str += cur.key + " -> ";
+      str += cur.val + " -> ";
       cur = cur.next!;
     }
 

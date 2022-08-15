@@ -1,5 +1,3 @@
-import { swap } from "../util";
-
 /**
  * @name MaxHeap 最大堆
  * @description 堆是一个完全二叉树（把元素顺序排列成树的形状）
@@ -116,4 +114,8 @@ export default class MaxHeap<T> {
       index = maxIndex; // 继续下沉
     }
   }
+}
+
+function swap<T>(array: T[], a: number, b: number) {
+  [array[a], array[b]] = [array[b], array[a]];
 }

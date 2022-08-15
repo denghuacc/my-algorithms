@@ -1,6 +1,18 @@
-import { ValuePair } from "../models/value-pair";
-import { defaultToString } from "../util";
 import LinkedList from "../linked-list/linked-list";
+
+class ValuePair<K, V> {
+  key: K;
+  val: V;
+
+  constructor(key: K, val: V) {
+    this.key = key;
+    this.val = val;
+  }
+
+  toString() {
+    return `[#${this.key}: ${this.val}]`;
+  }
+}
 
 interface Table<K, V> {
   [key: string]: LinkedList<ValuePair<K, V>>;
@@ -24,7 +36,7 @@ export default class HashTableSeparateChaining<K, V> {
   // 散列方法
   private loseloseHashCode(key: K): number {
     if (typeof key === "number") return key;
-    const tableKey = defaultToString(key);
+    const tableKey = `${key}`;
     let hash = 0;
     for (let i = 0; i < tableKey.length; i++) {
       hash += tableKey.charCodeAt(i);
@@ -52,8 +64,8 @@ export default class HashTableSeparateChaining<K, V> {
     if (linkedList && !linkedList.isEmpty()) {
       let current = linkedList.head;
       while (current) {
-        if (current.key.key === key) {
-          return current.key.val;
+        if (current.val.key === key) {
+          return current.val.val;
         }
         current = current.next;
       }
@@ -68,8 +80,8 @@ export default class HashTableSeparateChaining<K, V> {
     if (linkedList && !linkedList.isEmpty()) {
       let current = linkedList.head;
       while (current) {
-        if (current.key.key === key) {
-          linkedList.removeKey(current.key);
+        if (current.val.key === key) {
+          linkedList.removeKey(current.val);
           if (linkedList.isEmpty()) {
             delete this.table[position];
           }

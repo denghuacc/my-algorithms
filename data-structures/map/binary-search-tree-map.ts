@@ -1,11 +1,23 @@
-import { KVNode as Node } from "../models/tree-models";
+class BSTNode<K, V> {
+  key: K;
+  val: V;
+  left?: BSTNode<K, V>;
+  right?: BSTNode<K, V>;
+
+  constructor(key: K, val: V, left?: BSTNode<K, V>, right?: BSTNode<K, V>) {
+    this.key = key;
+    this.val = val;
+    this.left = left;
+    this.right = right;
+  }
+}
 
 /**
  * @name BSTMap 映射
  * @description 使用二叉搜索树实现 ES6 映射 Map
  */
 export default class BSTMap<K, V> {
-  root: Node<K, V> | undefined;
+  root: BSTNode<K, V> | undefined;
   private count: number;
 
   constructor() {
@@ -23,10 +35,14 @@ export default class BSTMap<K, V> {
     return this;
   }
 
-  private setNode(root: Node<K, V> | undefined, key: K, val: V): Node<K, V> {
+  private setNode(
+    root: BSTNode<K, V> | undefined,
+    key: K,
+    val: V
+  ): BSTNode<K, V> {
     if (!root) {
       this.count++;
-      return new Node(key, val);
+      return new BSTNode(key, val);
     }
 
     if (key < root.key) {
@@ -70,9 +86,9 @@ export default class BSTMap<K, V> {
   }
 
   private deleteNode(
-    root: Node<K, V> | undefined,
+    root: BSTNode<K, V> | undefined,
     key: K
-  ): Node<K, V> | undefined {
+  ): BSTNode<K, V> | undefined {
     if (!root) return undefined;
 
     if (key < root.key) {
@@ -105,12 +121,12 @@ export default class BSTMap<K, V> {
     }
   }
 
-  private minimum(root: Node<K, V>): Node<K, V> {
+  private minimum(root: BSTNode<K, V>): BSTNode<K, V> {
     if (!root.left) return root;
     return this.minimum(root.left);
   }
 
-  private deleteMin(root: Node<K, V>): Node<K, V> | undefined {
+  private deleteMin(root: BSTNode<K, V>): BSTNode<K, V> | undefined {
     if (!root.left) {
       const rightNode = root.right;
       root.right = undefined;
@@ -124,9 +140,9 @@ export default class BSTMap<K, V> {
 
   // 通过 key 获取对应的节点 辅助函数
   private getNode(
-    root: Node<K, V> | undefined,
+    root: BSTNode<K, V> | undefined,
     key: K
-  ): Node<K, V> | undefined {
+  ): BSTNode<K, V> | undefined {
     if (!root) return undefined;
 
     if (key === root.key) {

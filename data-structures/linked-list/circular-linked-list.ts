@@ -1,5 +1,14 @@
-import { Node } from "../models/linked-list-models";
 import LinkedList from "./linked-list";
+
+class LinkedListNode<T> {
+  val: T;
+  next?: LinkedListNode<T>;
+
+  constructor(val: T, next?: LinkedListNode<T>) {
+    this.val = val;
+    this.next = next;
+  }
+}
 
 /**
  * @name CircularLinkedList 链表 -> 单向循环链表
@@ -13,9 +22,9 @@ export default class CircularLinkedList<T> extends LinkedList<T> {
   }
 
   // 在链表的 index 位置添加值 O(N)
-  protected add(index: number, key: T): boolean {
+  protected add(index: number, val: T): boolean {
     if (index >= 0 && index <= this.count) {
-      const node = new Node(key);
+      const node = new LinkedListNode(val);
 
       if (index === 0) {
         if (!this.head) {
@@ -41,11 +50,11 @@ export default class CircularLinkedList<T> extends LinkedList<T> {
   }
 
   // 设置链表第 index 个位置的值 O(N)
-  set(index: number, key: T): boolean {
+  set(index: number, val: T): boolean {
     if (index >= 0 && index < this.count) {
       const node = this.get(index);
       if (node) {
-        node.key = key;
+        node.val = val;
         return true;
       }
     }
@@ -53,15 +62,15 @@ export default class CircularLinkedList<T> extends LinkedList<T> {
   }
 
   // 查找链表中是否有某个值 O(N)
-  contains(key: T): boolean {
+  contains(val: T): boolean {
     let current = this.head;
 
     while (current && current.next) {
-      if (current.key === key) {
+      if (current.val === val) {
         return true;
       }
       current = current.next;
-      if (current.key !== key && current.next == this.head) break; // 边界
+      if (current.val !== val && current.next == this.head) break; // 边界
     }
 
     return false;
@@ -90,19 +99,19 @@ export default class CircularLinkedList<T> extends LinkedList<T> {
         }
       }
       this.count--;
-      return current?.key;
+      return current?.val;
     }
     return undefined;
   }
 
-  // 从链表中删除某个元素 key 只删除前面的第一个值 O(N)
-  removeKey(key: T): boolean {
-    let delNode: Node<T> | undefined;
+  // 从链表中删除某个元素 val 只删除前面的第一个值 O(N)
+  removeKey(val: T): boolean {
+    let delNode: LinkedListNode<T> | undefined;
 
     if (!this.head) {
       return false;
     } else {
-      if (this.head.key === key) {
+      if (this.head.val === val) {
         delNode = this.head;
         const lastNode = this.get(this.size - 1)!;
         this.head = delNode.next;
@@ -110,7 +119,7 @@ export default class CircularLinkedList<T> extends LinkedList<T> {
       } else {
         let current = this.head;
         while (current.next) {
-          if (current.next.key === key) {
+          if (current.next.val === val) {
             delNode = current.next;
             const previous = current;
             previous.next = current.next.next;
@@ -122,7 +131,7 @@ export default class CircularLinkedList<T> extends LinkedList<T> {
       }
     }
 
-    if (!delNode?.key) {
+    if (!delNode?.val) {
       return false;
     } else {
       this.count--;
@@ -138,7 +147,7 @@ export default class CircularLinkedList<T> extends LinkedList<T> {
 
     // 遍历节点
     while (current) {
-      str += current.key + " -> ";
+      str += current.val + " -> ";
       current = current.next;
       if (current == this.head) break;
     }

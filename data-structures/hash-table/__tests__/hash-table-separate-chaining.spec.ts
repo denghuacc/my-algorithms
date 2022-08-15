@@ -1,5 +1,13 @@
 import HashTableSeparateChaining from "../hash-table-separate-chaining";
-import { MyObj } from "../../util";
+
+class MyObj {
+  constructor(public el1: unknown, public el2: unknown) {}
+  toString() {
+    return `${(this.el1 as object).toString()}|${(
+      this.el2 as object
+    ).toString()}`;
+  }
+}
 
 describe("HashTableSeparateChaining", () => {
   const A = "Jonathan";
@@ -88,8 +96,8 @@ describe("HashTableSeparateChaining", () => {
       const linkedList = table[i];
       expect(linkedList.size).toBe(1);
       const valuePair = linkedList.head;
-      expect(valuePair!.key.key).toBe(i);
-      expect(valuePair!.key.val).toBe(i);
+      expect(valuePair!.val.key).toBe(i);
+      expect(valuePair!.val.val).toBe(i);
     }
   });
 
@@ -106,26 +114,26 @@ describe("HashTableSeparateChaining", () => {
     let linkedList = table[12];
     expect(linkedList.size).toBe(1);
     let valuePair = linkedList.head;
-    expect(valuePair!.key.key).toBe("1");
-    expect(valuePair!.key.val).toBe(1);
+    expect(valuePair!.val.key).toBe("1");
+    expect(valuePair!.val.val).toBe(1);
 
     linkedList = table[23];
     expect(linkedList.size).toBe(1);
     valuePair = linkedList.head;
-    expect(valuePair!.key.key).toBe("10");
-    expect(valuePair!.key.val).toBe(10);
+    expect(valuePair!.val.key).toBe("10");
+    expect(valuePair!.val.val).toBe(10);
 
     linkedList = table[34];
     expect(linkedList.size).toBe(1);
     valuePair = linkedList.head;
-    expect(valuePair!.key.key).toBe("100");
-    expect(valuePair!.key.val).toBe(100);
+    expect(valuePair!.val.key).toBe("100");
+    expect(valuePair!.val.val).toBe(100);
 
     linkedList = table[8];
     expect(linkedList.size).toBe(1);
     valuePair = linkedList.head;
-    expect(valuePair!.key.key).toBe("1000");
-    expect(valuePair!.key.val).toBe(1000);
+    expect(valuePair!.val.key).toBe("1000");
+    expect(valuePair!.val.val).toBe(1000);
   });
 
   test("puts values with object key without collisions", () => {
@@ -142,32 +150,32 @@ describe("HashTableSeparateChaining", () => {
     let linkedList = table[1];
     expect(linkedList.size).toBe(1);
     let valuePair = linkedList.head;
-    expect(valuePair!.key.key).toBe(myObjList[0]);
-    expect(valuePair!.key.val).toBe(myObjList[0]);
+    expect(valuePair!.val.key).toBe(myObjList[0]);
+    expect(valuePair!.val.val).toBe(myObjList[0]);
 
     linkedList = table[3];
     expect(linkedList.size).toBe(1);
     valuePair = linkedList.head;
-    expect(valuePair!.key.key).toBe(myObjList[1]);
-    expect(valuePair!.key.val).toBe(myObjList[1]);
+    expect(valuePair!.val.key).toBe(myObjList[1]);
+    expect(valuePair!.val.val).toBe(myObjList[1]);
 
     linkedList = table[5];
     expect(linkedList.size).toBe(1);
     valuePair = linkedList.head;
-    expect(valuePair!.key.key).toBe(myObjList[2]);
-    expect(valuePair!.key.val).toBe(myObjList[2]);
+    expect(valuePair!.val.key).toBe(myObjList[2]);
+    expect(valuePair!.val.val).toBe(myObjList[2]);
 
     linkedList = table[7];
     expect(linkedList.size).toBe(1);
     valuePair = linkedList.head;
-    expect(valuePair!.key.key).toBe(myObjList[3]);
-    expect(valuePair!.key.val).toBe(myObjList[3]);
+    expect(valuePair!.val.key).toBe(myObjList[3]);
+    expect(valuePair!.val.val).toBe(myObjList[3]);
 
     linkedList = table[9];
     expect(linkedList.size).toBe(1);
     valuePair = linkedList.head;
-    expect(valuePair!.key.key).toBe(myObjList[4]);
-    expect(valuePair!.key.val).toBe(myObjList[4]);
+    expect(valuePair!.val.key).toBe(myObjList[4]);
+    expect(valuePair!.val.val).toBe(myObjList[4]);
   });
 
   test("puts values with collisions", () => {
@@ -197,16 +205,16 @@ describe("HashTableSeparateChaining", () => {
       expect(linkedList.size).toBe(3);
 
       let valuePair = linkedList.head;
-      expect(valuePair!.key.key).toBe(i);
-      expect(valuePair!.key.val).toBe(i);
+      expect(valuePair!.val.key).toBe(i);
+      expect(valuePair!.val.val).toBe(i);
 
       valuePair = valuePair!.next;
-      expect(valuePair!.key.key).toBe(i);
-      expect(valuePair!.key.val).toBe(i + 10);
+      expect(valuePair!.val.key).toBe(i);
+      expect(valuePair!.val.val).toBe(i + 10);
 
       valuePair = valuePair!.next;
-      expect(valuePair!.key.key).toBe(i);
-      expect(valuePair!.key.val).toBe(i + 100);
+      expect(valuePair!.val.key).toBe(i);
+      expect(valuePair!.val.val).toBe(i + 100);
     }
   });
 

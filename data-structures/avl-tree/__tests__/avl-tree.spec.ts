@@ -1,19 +1,19 @@
 import AVLTree from "../avl-tree";
-let avl: AVLTree<number, string>;
+let avl: AVLTree<number>;
 
 describe("AVLTree", () => {
   beforeEach(() => {
     avl = new AVLTree();
-    avl.add(23, "23");
-    avl.add(45, "45");
-    avl.add(16, "16");
-    avl.add(7, "7");
-    avl.add(88, "88");
+    avl.add(23);
+    avl.add(45);
+    avl.add(16);
+    avl.add(7);
+    avl.add(88);
   });
 
   test("size", () => {
     expect(avl.size).toBe(5);
-    avl.add(17, "17");
+    avl.add(17);
     expect(avl.size).toBe(6);
     avl.remove(45);
     avl.remove(16);
@@ -28,7 +28,7 @@ describe("AVLTree", () => {
     avl.remove(7);
     avl.remove(88);
     expect(avl.isEmpty()).toBe(true);
-    avl.add(28, "28");
+    avl.add(28);
     expect(avl.isEmpty()).toBe(false);
   });
 
@@ -68,7 +68,7 @@ describe("AVLTree", () => {
     expect(avl.min()).toBe(7);
     avl.remove(7);
     expect(avl.min()).toBe(16);
-    avl.add(11, "11");
+    avl.add(11);
     expect(avl.min()).toBe(11);
     avl = new AVLTree();
     expect(avl.min()).toBe(undefined);
@@ -78,7 +78,7 @@ describe("AVLTree", () => {
     expect(avl.max()).toBe(88);
     avl.remove(88);
     expect(avl.max()).toBe(45);
-    avl.add(55, "55");
+    avl.add(55);
     expect(avl.max()).toBe(55);
     avl = new AVLTree();
     expect(avl.max()).toBe(undefined);
@@ -106,10 +106,10 @@ describe("AVLTree", () => {
 
   test("isBalanced", () => {
     expect(avl.isBalanced()).toBe(true);
-    avl.add(90, "90");
-    avl.add(91, "91");
-    avl.add(92, "92");
-    avl.add(93, "94");
+    avl.add(90);
+    avl.add(91);
+    avl.add(92);
+    avl.add(93);
     expect(avl.isBalanced()).toBe(true);
   });
 });

@@ -1,5 +1,13 @@
 import HashTable from "../hash-table";
-import { MyObj } from "../../util";
+
+class MyObj {
+  constructor(public el1: unknown, public el2: unknown) {}
+  toString() {
+    return `${(this.el1 as object).toString()}|${(
+      this.el2 as object
+    ).toString()}`;
+  }
+}
 
 describe("HashTable", () => {
   test("starts empty", () => {

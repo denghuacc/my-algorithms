@@ -39,22 +39,22 @@ describe("LinkedList", () => {
     expect(linkedList.toString()).toBe("");
     expect(linkedList.size).toBe(0);
     linkedList.push(1);
-    expect(linkedList.head?.key).toBe(1);
+    expect(linkedList.head?.val).toBe(1);
     expect(linkedList.head?.next).toBe(undefined);
     expect(linkedList.toString()).toBe("Sorted Linked List { 1 -> undefined }");
     expect(linkedList.size).toBe(1);
     linkedList.push(3);
-    expect(linkedList.head?.key).toBe(1);
-    expect(linkedList.head?.next?.key).toBe(3);
+    expect(linkedList.head?.val).toBe(1);
+    expect(linkedList.head?.next?.val).toBe(3);
     expect(linkedList.head?.next?.next).toBe(undefined);
     expect(linkedList.toString()).toBe(
       "Sorted Linked List { 1 -> 3 -> undefined }"
     );
     expect(linkedList.size).toBe(2);
     linkedList.push(2);
-    expect(linkedList.head?.key).toBe(1);
-    expect(linkedList.head?.next?.key).toBe(2);
-    expect(linkedList.head?.next?.next?.key).toBe(3);
+    expect(linkedList.head?.val).toBe(1);
+    expect(linkedList.head?.next?.val).toBe(2);
+    expect(linkedList.head?.next?.next?.val).toBe(3);
     expect(linkedList.head?.next?.next?.next).toBe(undefined);
     expect(linkedList.toString()).toBe(
       "Sorted Linked List { 1 -> 2 -> 3 -> undefined }"
@@ -95,7 +95,7 @@ describe("LinkedList", () => {
     expect(linkedList.indexOf(2)).toBe(1);
     expect(linkedList.indexOf(3)).toBe(2);
     expect(linkedList.indexOf(4)).toBe(-1);
-    linkedList.push(1); // add repeat key
+    linkedList.push(1); // add repeat val
     expect(linkedList.indexOf(1)).toBe(0);
   });
 
@@ -123,15 +123,15 @@ describe("LinkedList", () => {
     );
     expect(linkedList.size).toBe(3);
     expect(linkedList.removeFirst()).toBe(1);
-    expect(linkedList.head?.key).toBe(2);
-    expect(linkedList.head?.next?.key).toBe(3);
+    expect(linkedList.head?.val).toBe(2);
+    expect(linkedList.head?.next?.val).toBe(3);
     expect(linkedList.head?.next?.next).toBe(undefined);
     expect(linkedList.toString()).toBe(
       "Sorted Linked List { 2 -> 3 -> undefined }"
     );
     expect(linkedList.size).toBe(2);
     expect(linkedList.removeFirst()).toBe(2);
-    expect(linkedList.head?.key).toBe(3);
+    expect(linkedList.head?.val).toBe(3);
     expect(linkedList.head?.next).toBe(undefined);
     expect(linkedList.toString()).toBe("Sorted Linked List { 3 -> undefined }");
     expect(linkedList.size).toBe(1);
@@ -155,15 +155,15 @@ describe("LinkedList", () => {
     );
     expect(linkedList.size).toBe(3);
     expect(linkedList.removeLast()).toBe(3);
-    expect(linkedList.head?.key).toBe(1);
-    expect(linkedList.head?.next?.key).toBe(2);
+    expect(linkedList.head?.val).toBe(1);
+    expect(linkedList.head?.next?.val).toBe(2);
     expect(linkedList.head?.next?.next).toBe(undefined);
     expect(linkedList.toString()).toBe(
       "Sorted Linked List { 1 -> 2 -> undefined }"
     );
     expect(linkedList.size).toBe(2);
     expect(linkedList.removeLast()).toBe(2);
-    expect(linkedList.head?.key).toBe(1);
+    expect(linkedList.head?.val).toBe(1);
     expect(linkedList.head?.next).toBe(undefined);
     expect(linkedList.toString()).toBe("Sorted Linked List { 1 -> undefined }");
     expect(linkedList.size).toBe(1);
@@ -187,23 +187,23 @@ describe("LinkedList", () => {
     );
     expect(linkedList.size).toBe(3);
     expect(linkedList.removeKey(2)).toBe(true);
-    expect(linkedList.head?.key).toBe(1);
-    expect(linkedList.head?.next?.key).toBe(3);
+    expect(linkedList.head?.val).toBe(1);
+    expect(linkedList.head?.next?.val).toBe(3);
     expect(linkedList.head?.next?.next).toBe(undefined);
     expect(linkedList.toString()).toBe(
       "Sorted Linked List { 1 -> 3 -> undefined }"
     );
     expect(linkedList.size).toBe(2);
     expect(linkedList.removeKey(5)).toBe(false);
-    expect(linkedList.head?.key).toBe(1);
-    expect(linkedList.head?.next?.key).toBe(3);
+    expect(linkedList.head?.val).toBe(1);
+    expect(linkedList.head?.next?.val).toBe(3);
     expect(linkedList.head?.next?.next).toBe(undefined);
     expect(linkedList.toString()).toBe(
       "Sorted Linked List { 1 -> 3 -> undefined }"
     );
     expect(linkedList.size).toBe(2);
     expect(linkedList.removeKey(3)).toBe(true);
-    expect(linkedList.head?.key).toBe(1);
+    expect(linkedList.head?.val).toBe(1);
     expect(linkedList.head?.next).toBe(undefined);
     expect(linkedList.toString()).toBe("Sorted Linked List { 1 -> undefined }");
     expect(linkedList.size).toBe(1);

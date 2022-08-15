@@ -5,7 +5,7 @@ import AVLTree from "../avl-tree/avl-tree";
  * @description 使用 AVLTree 实现 ES6 的 Set 集合
  */
 export default class AVLSet<T> {
-  avl: AVLTree<T, T>;
+  avl: AVLTree<T>;
 
   constructor() {
     this.avl = new AVLTree();
@@ -18,7 +18,7 @@ export default class AVLSet<T> {
 
   // 添加元素 O(logN)
   add(val: T): this {
-    this.avl.add(val, val);
+    this.avl.add(val);
     return this;
   }
 

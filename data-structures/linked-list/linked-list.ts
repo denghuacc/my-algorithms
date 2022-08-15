@@ -1,4 +1,12 @@
-import { Node } from "../models/linked-list-models";
+class LinkedListNode<T> {
+  val: T;
+  next?: LinkedListNode<T>;
+
+  constructor(val: T, next?: LinkedListNode<T>) {
+    this.val = val;
+    this.next = next;
+  }
+}
 
 /**
  * @name LinkedList 链表 -> 单向链表
@@ -9,7 +17,7 @@ import { Node } from "../models/linked-list-models";
  * 应用②：相对于数组，不能直接通过索引访问任何一个元素，需要从表头开始一个个去查找。
  */
 export default class LinkedList<T> {
-  head: Node<T> | undefined;
+  head: LinkedListNode<T> | undefined;
   protected count: number;
 
   constructor() {
@@ -27,9 +35,9 @@ export default class LinkedList<T> {
   }
 
   // 在链表的 index 位置添加值 O(N)
-  protected add(index: number, key: T): boolean {
+  protected add(index: number, val: T): boolean {
     if (index >= 0 && index <= this.count) {
-      const node = new Node(key);
+      const node = new LinkedListNode(val);
 
       if (index === 0) {
         const current = this.head;
@@ -49,17 +57,17 @@ export default class LinkedList<T> {
   }
 
   // 在表头添加值 O(1)
-  addFirst(key: T): boolean {
-    return this.add(0, key);
+  addFirst(val: T): boolean {
+    return this.add(0, val);
   }
 
   // 在表尾添加值 O(N)
-  addLast(key: T): boolean {
-    return this.add(this.count, key);
+  addLast(val: T): boolean {
+    return this.add(this.count, val);
   }
 
   // 获取链表第 index 个位置的节点 O(N)
-  protected get(index: number): Node<T> | undefined {
+  protected get(index: number): LinkedListNode<T> | undefined {
     if (index >= 0 && index <= this.count) {
       let node = this.head;
       for (let i = 0; i < index && node; i++) {
@@ -72,32 +80,32 @@ export default class LinkedList<T> {
 
   // 获取链表的第一个值 O(1)
   getFirst(): T | undefined {
-    return this.get(0)?.key;
+    return this.get(0)?.val;
   }
 
   // 获取链表的最后一个值 O(N)
   getLast(): T | undefined {
-    return this.get(this.count - 1)?.key;
+    return this.get(this.count - 1)?.val;
   }
 
   // 设置链表第 index 个位置的值 O(N)
-  set(index: number, key: T): boolean {
+  set(index: number, val: T): boolean {
     if (index >= 0 && index < this.count) {
       const node = this.get(index);
       if (node) {
-        node.key = key;
+        node.val = val;
         return true;
       }
     }
     return false;
   }
 
-  // 查找元素 key 的索引 O(N)
-  indexOf(key: T): number {
+  // 查找元素 val 的索引 O(N)
+  indexOf(val: T): number {
     let current = this.head;
 
     for (let i = 0; i < this.size && current; i++) {
-      if (current.key === key) {
+      if (current.val === val) {
         return i;
       }
       current = current.next;
@@ -107,11 +115,11 @@ export default class LinkedList<T> {
   }
 
   // 查找链表中是否有某个值 O(N)
-  contains(key: T): boolean {
+  contains(val: T): boolean {
     let current = this.head;
 
     while (current) {
-      if (current.key === key) {
+      if (current.val === val) {
         return true;
       }
       current = current.next;
@@ -137,7 +145,7 @@ export default class LinkedList<T> {
         }
       }
       this.count--;
-      return current?.key;
+      return current?.val;
     }
     return undefined;
   }
@@ -152,20 +160,20 @@ export default class LinkedList<T> {
     return this.remove(this.count - 1);
   }
 
-  // 从链表中删除某个元素 key 只删除前面的第一个值 O(N)
+  // 从链表中删除某个元素 val 只删除前面的第一个值 O(N)
   // 也可以使用查找元素的索引，然后根据索引删除
-  removeKey(key: T): boolean {
+  removeKey(val: T): boolean {
     let current = this.head;
-    let delNode: Node<T> | undefined;
+    let delNode: LinkedListNode<T> | undefined;
 
     if (!current) return false;
 
-    if (current.key === key) {
+    if (current.val === val) {
       delNode = current;
       this.head = delNode.next;
     } else {
       while (current.next) {
-        if (current.next.key === key) {
+        if (current.next.val === val) {
           delNode = current.next;
           const previous = current;
           previous.next = current.next.next;
@@ -175,7 +183,7 @@ export default class LinkedList<T> {
       }
     }
 
-    if (!delNode?.key) {
+    if (!delNode?.val) {
       return false;
     } else {
       this.count--;
@@ -197,7 +205,7 @@ export default class LinkedList<T> {
 
     // 遍历节点
     while (current) {
-      str += current.key + " -> ";
+      str += current.val + " -> ";
       current = current.next;
     }
 

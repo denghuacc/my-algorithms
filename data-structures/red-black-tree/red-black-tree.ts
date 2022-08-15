@@ -1,4 +1,21 @@
-import { KVNode as Node, Color } from "../models/tree-models";
+enum Color {
+  RED,
+  BLACK,
+}
+
+class RBTreeNode<T> {
+  val: T;
+  left?: RBTreeNode<T>;
+  right?: RBTreeNode<T>;
+  color: Color;
+
+  constructor(val: T, left?: RBTreeNode<T>, right?: RBTreeNode<T>) {
+    this.val = val;
+    this.left = left;
+    this.right = right;
+    this.color = Color.RED;
+  }
+}
 
 /**
  * @name RedBlackTree 红黑树
@@ -11,8 +28,8 @@ import { KVNode as Node, Color } from "../models/tree-models";
  * 4. 如果一个节点是红色的，那么它的孩子节点都是黑色的
  * 5. 从任意一个节点到叶子节点，经过的黑色节点是一样的
  */
-export default class RedBlackTree<K, V> {
-  root: Node<K, V> | undefined;
+export default class RedBlackTree<T> {
+  root: RBTreeNode<T> | undefined;
   protected count: number;
 
   constructor() {
@@ -27,60 +44,60 @@ export default class RedBlackTree<K, V> {
     return this.size === 0;
   }
 
-  private isRed(root: Node<K, V> | undefined): boolean {
+  private isRed(root: RBTreeNode<T> | undefined): boolean {
     if (!root) return false;
     return root.color === Color.RED ? true : false;
   }
 
   // 二叉树的前序遍历
-  preOrder(arr: Array<K> = []): void {
+  preOrder(arr: Array<T> = []): void {
     this.preOrderTree(this.root, arr);
   }
 
-  private preOrderTree(root: Node<K, V> | undefined, arr: Array<K>): void {
+  private preOrderTree(root: RBTreeNode<T> | undefined, arr: Array<T>): void {
     if (!root) return;
 
-    arr.push(root.key);
+    arr.push(root.val);
     this.preOrderTree(root.left, arr);
     this.preOrderTree(root.right, arr);
   }
 
   // 二叉树的中序遍历
-  inOrder(arr: Array<K> = []): void {
+  inOrder(arr: Array<T> = []): void {
     this.inOrderTree(this.root, arr);
   }
 
-  private inOrderTree(root: Node<K, V> | undefined, arr: Array<K>): void {
+  private inOrderTree(root: RBTreeNode<T> | undefined, arr: Array<T>): void {
     if (!root) return;
 
     this.inOrderTree(root.left, arr);
-    arr.push(root.key);
+    arr.push(root.val);
     this.inOrderTree(root.right, arr);
   }
 
   // 二叉树的后序遍历
-  postOrder(arr: Array<K>): void {
+  postOrder(arr: Array<T>): void {
     this.postOrderTree(this.root, arr);
   }
 
-  private postOrderTree(root: Node<K, V> | undefined, arr: Array<K>): void {
+  private postOrderTree(root: RBTreeNode<T> | undefined, arr: Array<T>): void {
     if (!root) return;
 
     this.postOrderTree(root.left, arr);
-    arr.push(root.key);
+    arr.push(root.val);
     this.postOrderTree(root.right, arr);
   }
 
   // 树的层序遍历，需要借助队列 Queue 实现 -> 广度优先搜索 BFS
-  levelOrder(arr: Array<K> = []): void {
+  levelOrder(arr: Array<T> = []): void {
     if (!this.root) return;
 
-    const queue: Node<K, V>[] = [];
+    const queue: RBTreeNode<T>[] = [];
     queue.push(this.root);
 
     while (queue.length) {
       const curNode = queue.shift()!;
-      arr.push(curNode.key);
+      arr.push(curNode.val);
 
       if (curNode.left) queue.push(curNode.left); // 左子节点树先入列
       if (curNode.right) queue.push(curNode.right);
@@ -88,12 +105,12 @@ export default class RedBlackTree<K, V> {
   }
 
   //   root                     x
-  //  /   \     左旋转         /  \
-  // T1   x   --------->   root   T3
-  //     / \              /   \
-  //    T2 T3            T1   T2
+  //  /   \      左旋转       /   \
+  // T1    x   --------->    root  T3
+  //      / \               /   \
+  //     T2 T3             T1   T2
   // 左旋转
-  private leftRotate(root: Node<K, V>): Node<K, V> | undefined {
+  private leftRotate(root: RBTreeNode<T>): RBTreeNode<T> | undefined {
     const x = root.right!;
 
     // 左旋转
@@ -107,13 +124,13 @@ export default class RedBlackTree<K, V> {
     return x;
   }
 
-  //     root                   x
-  //    /   \     右旋转       /  \
-  //   x    T2   ------->   y   root
-  //  / \                       /  \
-  // y  T1                     T1  T2
+  //     root                    x
+  //    /   \     右旋转       /   \
+  //   x    T2   ------->     y   root
+  //  / \                         /  \
+  // y  T1                       T1  T2
   // 右旋转
-  private rightRotate(root: Node<K, V>): Node<K, V> | undefined {
+  private rightRotate(root: RBTreeNode<T>): RBTreeNode<T> | undefined {
     const x = root.left!;
 
     // 右旋转
@@ -128,32 +145,32 @@ export default class RedBlackTree<K, V> {
   }
 
   // 颜色翻转
-  private flipColors(root: Node<K, V>): void {
+  private flipColors(root: RBTreeNode<T>): void {
     root.color = Color.RED;
     root.left!.color = Color.BLACK;
     root.right!.color = Color.BLACK;
   }
 
-  // 向红黑树中添加新的元素(key, val)
-  add(key: K, val: V): void {
-    this.root = this.addNode(this.root, key, val);
+  // 向红黑树中添加新的元素 val
+  add(val: T): void {
+    this.root = this.addNode(this.root, val);
     this.root!.color = Color.BLACK; // 最终根节点为黑色节点
   }
 
-  // 向以 root 为根的红黑树中插入元素 (key, val)，递归算法
+  // 向以 root 为根的红黑树中插入元素 (val, val)，递归算法
   // 返回插入新节点后红黑树的根
-  private addNode(root: Node<K, V> | undefined, key: K, val: V): Node<K, V> {
+  private addNode(root: RBTreeNode<T> | undefined, val: T): RBTreeNode<T> {
     if (!root) {
       this.count++;
-      return new Node(key, val);
+      return new RBTreeNode(val);
     }
 
-    if (key < root.key) {
-      root.left = this.addNode(root.left, key, val);
-    } else if (key > root.key) {
-      root.right = this.addNode(root.right, key, val);
+    if (val < root.val) {
+      root.left = this.addNode(root.left, val);
+    } else if (val > root.val) {
+      root.right = this.addNode(root.right, val);
     } else {
-      // key === root.key
+      // val === root.val
       root.val = val;
     }
 
@@ -176,74 +193,78 @@ export default class RedBlackTree<K, V> {
     return root;
   }
 
-  // 返回以 root 为根节点的红黑树中，key 所在的节点
+  // 返回以 root 为根节点的红黑树中，val 所在的节点
   private getNode(
-    root: Node<K, V> | undefined,
-    key: K
-  ): Node<K, V> | undefined {
+    root: RBTreeNode<T> | undefined,
+    val: T
+  ): RBTreeNode<T> | undefined {
     if (!root) return undefined;
 
-    if (key === root.key) {
+    if (val === root.val) {
       return root;
-    } else if (key < root.key) {
-      return this.getNode(root.left, key);
+    } else if (val < root.val) {
+      return this.getNode(root.left, val);
     } else {
-      // key > root.key
-      return this.getNode(root.right, key);
+      // val > root.val
+      return this.getNode(root.right, val);
     }
   }
 
-  contains(key: K): boolean {
-    return !!this.getNode(this.root, key);
+  contains(val: T): boolean {
+    return !!this.getNode(this.root, val);
   }
 
-  get(key: K): V | undefined {
-    const root = this.getNode(this.root, key);
+  get(val: T): T | undefined {
+    const root = this.getNode(this.root, val);
     return !root ? undefined : root.val;
   }
 
-  set(key: K, newVal: V): void {
-    const root = this.getNode(this.root, key);
+  set(val: T, newVal: T): void {
+    const root = this.getNode(this.root, val);
 
     if (!root) {
-      throw new Error(key + " doesn't exist!");
+      throw new Error(val + " doesn't exist!");
     }
 
     root.val = newVal;
   }
 
   // 寻找二分搜索树的最小元素
-  minimum(): K | undefined {
+  minimum(): T | undefined {
     if (this.count === 0) return undefined;
-    return this.minimumNode(this.root)?.key;
+    return this.minimumNode(this.root)?.val;
   }
 
-  private minimumNode(root: Node<K, V> | undefined): Node<K, V> | undefined {
+  private minimumNode(
+    root: RBTreeNode<T> | undefined
+  ): RBTreeNode<T> | undefined {
     if (!root) return undefined;
     if (!root.left) return root;
     return this.minimumNode(root.left);
   }
 
   // 寻找二分搜索树的最大元素
-  maximum(): K | undefined {
+  maximum(): T | undefined {
     if (!this.count) return undefined;
-    return this.maximumNode(this.root)?.key;
+    return this.maximumNode(this.root)?.val;
   }
 
-  private maximumNode(root: Node<K, V> | undefined): Node<K, V> | undefined {
+  private maximumNode(
+    root: RBTreeNode<T> | undefined
+  ): RBTreeNode<T> | undefined {
     if (!root) return undefined;
     if (!root.right) return root;
     return this.maximumNode(root.right);
   }
 
   // 从树中删除最小值所在节点, 返回最小值
-  removeMin(): K | undefined {
+  removeMin(): T | undefined {
     const ret = this.minimum();
     this.root = this.removeMinNode(this.root!);
     return ret;
   }
 
-  private removeMinNode(root: Node<K, V>): Node<K, V> | undefined {
+  private removeMinNode(root: RBTreeNode<T>): RBTreeNode<T> | undefined {
     if (!root.left) {
       const rightNode = root.right;
       root.right = undefined;
@@ -256,13 +277,13 @@ export default class RedBlackTree<K, V> {
   }
 
   // 从二分搜索树中删除最大值所在节点
-  removeMax(): K | undefined {
+  removeMax(): T | undefined {
     const ret = this.maximum();
     this.root = this.removeMaxNode(this.root!);
     return ret;
   }
 
-  private removeMaxNode(root: Node<K, V>): Node<K, V> | undefined {
+  private removeMaxNode(root: RBTreeNode<T>): RBTreeNode<T> | undefined {
     if (!root.right) {
       const leftNode = root.left;
       root.left = undefined;
@@ -274,12 +295,12 @@ export default class RedBlackTree<K, V> {
     return root;
   }
 
-  // 从红黑树中删除键为 key 的节点
-  remove(key: K): V | undefined {
-    const root = this.getNode(this.root, key);
+  // 从红黑树中删除键为 val 的节点
+  remove(val: T): T | undefined {
+    const root = this.getNode(this.root, val);
 
     if (root) {
-      this.root = this.removeNode(this.root, key);
+      this.root = this.removeNode(this.root, val);
       return root.val;
     }
 
@@ -287,19 +308,19 @@ export default class RedBlackTree<K, V> {
   }
 
   private removeNode(
-    root: Node<K, V> | undefined,
-    key: K
-  ): Node<K, V> | undefined {
+    root: RBTreeNode<T> | undefined,
+    val: T
+  ): RBTreeNode<T> | undefined {
     if (!root) return undefined;
 
-    if (key < root.key) {
-      root.left = this.removeNode(root.left, key);
+    if (val < root.val) {
+      root.left = this.removeNode(root.left, val);
       return root;
-    } else if (key > root.key) {
-      root.right = this.removeNode(root.right, key);
+    } else if (val > root.val) {
+      root.right = this.removeNode(root.right, val);
       return root;
     } else {
-      // key === root.key
+      // val === root.val
       // 待删除节点左子树为空的情况
       if (!root.left) {
         const rightNode = root.right;
@@ -331,7 +352,7 @@ export default class RedBlackTree<K, V> {
 
   // 判断该二叉树是否是一棵二分搜索树
   isBST(): boolean {
-    const arr: Array<K> = [];
+    const arr: Array<T> = [];
     this.inOrderTree(this.root, arr);
     for (let i = 1; i < arr.length; i++) {
       if (arr[i - 1] > arr[i]) {

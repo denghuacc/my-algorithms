@@ -1,11 +1,21 @@
-import { KVNode as Node } from "../models/linked-list-models";
+class LinkedListNode<K, V> {
+  key: K;
+  val: V;
+  next?: LinkedListNode<K, V>;
+
+  constructor(key: K, val: V, next?: LinkedListNode<K, V>) {
+    this.key = key;
+    this.val = val;
+    this.next = next;
+  }
+}
 
 /**
  * @name LinkedListMap 映射
  * @description 使用链表实现 ES6 映射 Map
  */
 export default class LinkedListMap<K, V> {
-  head: Node<K, V> | undefined;
+  head: LinkedListNode<K, V> | undefined;
   private count: number;
 
   constructor() {
@@ -19,7 +29,7 @@ export default class LinkedListMap<K, V> {
   // 设置值 O(N)
   set(key: K, val: V): this {
     if (!this.has(key)) {
-      const newNode = new Node(key, val, this.head);
+      const newNode = new LinkedListNode(key, val, this.head);
       this.head = newNode;
       this.count++;
     } else {
@@ -74,7 +84,7 @@ export default class LinkedListMap<K, V> {
   }
 
   // 通过 key 获取对应的节点
-  private getNode(key: K): Node<K, V> | undefined {
+  private getNode(key: K): LinkedListNode<K, V> | undefined {
     let current = this.head;
     while (current) {
       if (current.key === key) {

@@ -14,21 +14,21 @@ export default class ScoredLinkedList<T> extends LinkedList<T> {
 
   // 添加元素 O(N)
   // 不能使用 addFirst 和 addLast 来添加元素
-  push(key: T): void {
+  push(val: T): void {
     if (this.isEmpty()) {
-      super.addFirst(key);
+      super.addFirst(val);
     } else {
-      const index = this.getIndex(key);
-      super.add(index, key);
+      const index = this.getIndex(val);
+      super.add(index, val);
     }
   }
 
-  // 获取需要插入的值 key 所在的合适索引位置 O(N)
-  private getIndex(key: T): number {
+  // 获取需要插入的值 val 所在的合适索引位置 O(N)
+  private getIndex(val: T): number {
     let current = this.head;
     let i = 0;
     for (; i < this.size && current; i++) {
-      if (key < current.key) {
+      if (val < current.val) {
         return i;
       }
       current = current.next;
@@ -44,7 +44,7 @@ export default class ScoredLinkedList<T> extends LinkedList<T> {
 
     // 遍历节点
     while (current) {
-      str += current.key + " -> ";
+      str += current.val + " -> ";
       current = current.next;
     }
 

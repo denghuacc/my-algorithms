@@ -5,7 +5,7 @@ import RedBlackTree from "../red-black-tree/red-black-tree";
  * @description 使用 Red Black Tree 实现 ES6 的 Set 集合
  */
 export default class RedBlackTreeSet<T> {
-  rbt: RedBlackTree<T, T>;
+  rbt: RedBlackTree<T>;
 
   constructor() {
     this.rbt = new RedBlackTree();
@@ -18,7 +18,7 @@ export default class RedBlackTreeSet<T> {
 
   // 添加元素 O(logN)
   add(val: T): this {
-    this.rbt.add(val, val);
+    this.rbt.add(val);
     return this;
   }
 

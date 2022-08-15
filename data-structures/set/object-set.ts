@@ -1,13 +1,12 @@
 /**
- * @name MapSet 集合
+ * @name ObjectSet 集合
  * @description 使用对象实现 ES6 集合
- * 因为对象的 key 值只支持字符串和 symbol，其它类型的值都会先转换成字符串，所以可能会出错
  */
-export default class MapSet {
-  items: Record<string, string>;
+export default class ObjectSet<T extends string | number | symbol> {
+  items: Record<T, T>;
 
   constructor() {
-    this.items = {};
+    this.items = {} as Record<T, T>;
   }
 
   // 获取集合的元素数量 O(1)
@@ -16,7 +15,7 @@ export default class MapSet {
   }
 
   // 添加元素 O(N)
-  add(val: string): this {
+  add(val: T): this {
     if (!this.has(val)) {
       this.items[val] = val;
     }
@@ -24,7 +23,7 @@ export default class MapSet {
   }
 
   //  删除元素 O(N)
-  delete(val: string): boolean {
+  delete(val: T): boolean {
     if (this.has(val)) {
       delete this.items[val];
       return true;
@@ -33,12 +32,12 @@ export default class MapSet {
   }
 
   //  查询元素 O(N)
-  has(val: string): boolean {
+  has(val: T): boolean {
     return Object.hasOwn(this.items, val);
   }
 
   // 清除元素 O(1)
   clear(): void {
-    this.items = {};
+    this.items = {} as Record<T, T>;
   }
 }
