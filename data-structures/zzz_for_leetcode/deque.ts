@@ -1,45 +1,45 @@
 export default class Deque<T> {
   items: Record<string, T>;
-  count: number;
-  lowestCount: number;
+  frontPointer: number;
+  rearPointer: number;
 
   constructor() {
     this.items = {};
-    this.count = 0;
-    this.lowestCount = 0;
+    this.frontPointer = 0;
+    this.rearPointer = 0;
   }
 
   get size(): number {
-    return this.count - this.lowestCount;
+    return this.rearPointer - this.frontPointer;
   }
 
   pushFront(val: T) {
-    this.lowestCount--;
-    this.items[this.lowestCount] = val;
+    this.frontPointer--;
+    this.items[this.frontPointer] = val;
   }
 
-  pushBack(val: T) {
-    this.items[this.count] = val;
-    this.count++;
+  pushLast(val: T) {
+    this.items[this.rearPointer] = val;
+    this.rearPointer++;
   }
 
   popFront(): T | undefined {
     if (this.isEmpty()) {
       return undefined;
     }
-    const res = this.items[this.lowestCount];
-    delete this.items[this.lowestCount];
-    this.lowestCount++;
+    const res = this.items[this.frontPointer];
+    delete this.items[this.frontPointer];
+    this.frontPointer++;
     return res;
   }
 
-  popBack(): T | undefined {
+  popLast(): T | undefined {
     if (this.isEmpty()) {
       return undefined;
     }
-    this.count--;
-    const res = this.items[this.count];
-    delete this.items[this.count];
+    this.rearPointer--;
+    const res = this.items[this.rearPointer];
+    delete this.items[this.rearPointer];
     return res;
   }
 
@@ -47,14 +47,14 @@ export default class Deque<T> {
     if (this.isEmpty()) {
       return undefined;
     }
-    return this.items[this.lowestCount];
+    return this.items[this.frontPointer];
   }
 
-  peekBack(): T | undefined {
+  peekLast(): T | undefined {
     if (this.isEmpty()) {
       return undefined;
     }
-    return this.items[this.count - 1];
+    return this.items[this.rearPointer - 1];
   }
 
   isEmpty(): boolean {
@@ -63,8 +63,8 @@ export default class Deque<T> {
 
   clear() {
     this.items = {};
-    this.count = 0;
-    this.lowestCount = 0;
+    this.rearPointer = 0;
+    this.frontPointer = 0;
   }
 
   toArray(): T[] {

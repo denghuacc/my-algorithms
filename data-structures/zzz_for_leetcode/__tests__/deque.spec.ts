@@ -17,43 +17,43 @@ describe("Deque", () => {
     expect(deque.peekFront()).toBe(3);
   });
 
-  test("pushBack", () => {
-    expect(deque.peekBack()).toBe(undefined);
-    deque.pushBack(1);
-    expect(deque.peekBack()).toBe(1);
-    deque.pushBack(2);
-    expect(deque.peekBack()).toBe(2);
-    deque.pushBack(3);
-    expect(deque.peekBack()).toBe(3);
+  test("pushLast", () => {
+    expect(deque.peekLast()).toBe(undefined);
+    deque.pushLast(1);
+    expect(deque.peekLast()).toBe(1);
+    deque.pushLast(2);
+    expect(deque.peekLast()).toBe(2);
+    deque.pushLast(3);
+    expect(deque.peekLast()).toBe(3);
   });
 
   test("popFront", () => {
     expect(deque.popFront()).toBe(undefined);
-    deque.pushBack(1);
-    deque.pushBack(2);
-    deque.pushBack(3);
+    deque.pushLast(1);
+    deque.pushLast(2);
+    deque.pushLast(3);
     expect(deque.popFront()).toBe(1);
     expect(deque.popFront()).toBe(2);
     expect(deque.popFront()).toBe(3);
     expect(deque.popFront()).toBe(undefined);
   });
 
-  test("popBack", () => {
+  test("popLast", () => {
     expect(deque.popFront()).toBe(undefined);
-    deque.pushBack(1);
-    deque.pushBack(2);
-    deque.pushBack(3);
-    expect(deque.popBack()).toBe(3);
-    expect(deque.popBack()).toBe(2);
-    expect(deque.popBack()).toBe(1);
-    expect(deque.popBack()).toBe(undefined);
+    deque.pushLast(1);
+    deque.pushLast(2);
+    deque.pushLast(3);
+    expect(deque.popLast()).toBe(3);
+    expect(deque.popLast()).toBe(2);
+    expect(deque.popLast()).toBe(1);
+    expect(deque.popLast()).toBe(undefined);
   });
 
   test("peekFront", () => {
     expect(deque.peekFront()).toBe(undefined);
-    deque.pushBack(1);
-    deque.pushBack(2);
-    deque.pushBack(3);
+    deque.pushLast(1);
+    deque.pushLast(2);
+    deque.pushLast(3);
     expect(deque.peekFront()).toBe(1);
     deque.popFront();
     expect(deque.peekFront()).toBe(2);
@@ -64,26 +64,26 @@ describe("Deque", () => {
   });
 
   test("peekFront", () => {
-    expect(deque.peekBack()).toBe(undefined);
-    deque.pushBack(1);
-    deque.pushBack(2);
-    deque.pushBack(3);
-    expect(deque.peekBack()).toBe(3);
-    deque.popBack();
-    expect(deque.peekBack()).toBe(2);
-    deque.popBack();
-    expect(deque.peekBack()).toBe(1);
-    deque.popBack();
-    expect(deque.peekBack()).toBe(undefined);
+    expect(deque.peekLast()).toBe(undefined);
+    deque.pushLast(1);
+    deque.pushLast(2);
+    deque.pushLast(3);
+    expect(deque.peekLast()).toBe(3);
+    deque.popLast();
+    expect(deque.peekLast()).toBe(2);
+    deque.popLast();
+    expect(deque.peekLast()).toBe(1);
+    deque.popLast();
+    expect(deque.peekLast()).toBe(undefined);
   });
 
   test("size", () => {
     expect(deque.size).toBe(0);
-    deque.pushBack(1);
+    deque.pushLast(1);
     expect(deque.size).toBe(1);
-    deque.pushBack(2);
+    deque.pushLast(2);
     expect(deque.size).toBe(2);
-    deque.pushBack(3);
+    deque.pushLast(3);
     expect(deque.size).toBe(3);
     deque.popFront();
     expect(deque.size).toBe(2);
@@ -93,21 +93,21 @@ describe("Deque", () => {
 
   test("isEmpty", () => {
     expect(deque.isEmpty()).toBe(true);
-    deque.pushBack(1);
+    deque.pushLast(1);
     expect(deque.isEmpty()).toBe(false);
-    deque.pushBack(2);
+    deque.pushLast(2);
     expect(deque.size).toBe(2);
-    deque.pushBack(3);
+    deque.pushLast(3);
     expect(deque.isEmpty()).toBe(false);
-    deque.pushBack(2);
+    deque.pushLast(2);
     expect(deque.isEmpty()).toBe(false);
     deque.clear();
     expect(deque.isEmpty()).toBe(true);
   });
 
   test("clear", () => {
-    deque.pushBack(1);
-    deque.pushBack(2);
+    deque.pushLast(1);
+    deque.pushLast(2);
     expect(deque.size).toBe(2);
     expect(deque.isEmpty()).toBe(false);
     deque.clear();
