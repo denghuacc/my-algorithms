@@ -61,28 +61,28 @@
 
 // @lc code=start
 class MyCircularQueue {
-  size: number;
+  capacity: number;
   items: number[];
 
   constructor(k: number) {
-    this.size = k;
+    this.capacity = k;
     this.items = [];
   }
 
   enQueue(value: number): boolean {
-    if (this.items.length < this.size) {
-      this.items.push(value);
-      return true;
+    if (this.isFull()) {
+      return false;
     }
-    return false;
+    this.items.push(value);
+    return true;
   }
 
   deQueue(): boolean {
-    if (this.items.length > 0) {
-      this.items.shift();
-      return true;
+    if (this.isEmpty()) {
+      return false;
     }
-    return false;
+    this.items.shift();
+    return true;
   }
 
   Front(): number {
@@ -104,7 +104,7 @@ class MyCircularQueue {
   }
 
   isFull(): boolean {
-    return this.items.length === this.size;
+    return this.items.length === this.capacity;
   }
 }
 
