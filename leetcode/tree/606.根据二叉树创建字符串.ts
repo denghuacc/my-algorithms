@@ -108,12 +108,8 @@ var tree2str = function (root: TreeNode | null): string {
       if (!node.left && node.right) {
         res += "()";
       }
-      if (node.right) {
-        stack.push(node.right);
-      }
-      if (node.left) {
-        stack.push(node.left);
-      }
+      if (node.right) stack.push(node.right);
+      if (node.left) stack.push(node.left);
     }
   }
   return res;

@@ -45,17 +45,6 @@ class TreeNode {
   }
 }
 
-// 解题思路 递归
-// 1. root == null 深度 0
-// 2. 分别求出 left 和 right 的深度
-// 3. 取最大值 + 1 为 root 的最大深度
-
-// 解题思路 迭代
-// 1. root == null 深度 0
-// 2. 创建 queue， root 和它的深度入列
-// 3. root 出列，如果有左右子节点入列，如此循环
-// 4. 每次循环深度 + 1
-
 // @lc code=start
 // recursive
 var maxDepth = function (root: TreeNode | null): number {

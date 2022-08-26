@@ -106,9 +106,7 @@ var findBottomLeftValue = function (root: TreeNode): number {
   return res;
 
   function dfs(node: TreeNode, depth: number) {
-    if (!node) {
-      return;
-    }
+    if (!node) return;
     if (node.left) dfs(node.left, depth + 1);
     if (node.right) dfs(node.right, depth + 1);
     if (depth > curDepth) {

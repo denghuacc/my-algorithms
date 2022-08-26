@@ -87,15 +87,9 @@ class CBTInserter {
     const queue: TreeNode[] = [root!];
     while (queue.length) {
       const node = queue.shift()!;
-      if (node.left) {
-        queue.push(node.left);
-      }
-      if (node.right) {
-        queue.push(node.right);
-      }
-      if (!(node.left && node.right)) {
-        this.candidate.push(node);
-      }
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
+      if (!(node.left && node.right)) this.candidate.push(node);
     }
   }
 

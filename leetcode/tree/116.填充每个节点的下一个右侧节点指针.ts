@@ -95,21 +95,16 @@ var connect = function (root: Node | null): Node | null {
   let start: Node | null = root;
 
   while (start && start.left) {
-    let head: Node = start; 
-
+    let head: Node = start;
     while (head) {
       head.left!.next = head.right;
-
       if (head.next) {
         head.right!.next = head.next.left;
       }
-
       head = head.next!;
     }
-
     start = start.left;
   }
-
   return root;
 };
 // @lc code=end

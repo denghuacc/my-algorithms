@@ -99,19 +99,18 @@ function verticalTraversal(root: TreeNode | null): number[][] {
     }
   });
 
-  const ret: number[][] = [];
+  const res: number[][] = [];
   let lastCol = -Infinity;
   for (const tuple of nodes) {
-    const col = tuple[0],
-      row = tuple[1],
-      value = tuple[2];
+    const col = tuple[0];
+    const value = tuple[2];
     if (col !== lastCol) {
       lastCol = col;
-      ret.push([]);
+      res.push([]);
     }
-    ret[ret.length - 1].push(value);
+    res[res.length - 1].push(value);
   }
-  return ret;
+  return res;
 
   function dfs(node: TreeNode | null, row: number, col: number) {
     if (node === null) return;

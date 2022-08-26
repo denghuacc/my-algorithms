@@ -82,23 +82,23 @@ class TreeNode {
  * Encodes a tree to a single string.
  */
 function serialize(root: TreeNode | null): string {
-  let ret = "";
-  if (!root) return ret;
+  let res = "";
+  if (!root) return res;
 
   const queue: TreeNode[] = [root];
   while (queue.length) {
     const front = queue.shift()!;
     if (front) {
-      ret += `${front.val},`;
+      res += `${front.val},`;
       queue.push(front.left!);
       queue.push(front.right!);
     } else {
-      ret += "null,";
+      res += "null,";
     }
   }
 
-  ret = ret.substring(0, ret.length - 1); // remove trailing comma
-  return ret;
+  res = res.slice(0, res.length - 1); // remove trailing comma
+  return res;
 }
 
 /*

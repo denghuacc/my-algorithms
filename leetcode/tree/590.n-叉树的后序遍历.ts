@@ -70,13 +70,13 @@ class Node {
 // recursive
 var postorder = function (root: Node | null): number[] {
   const res: number[] = [];
-  _postorder(root);
+  dfs(root);
   return res;
 
-  function _postorder(node: Node | null) {
+  function dfs(node: Node | null) {
     if (node) {
       for (const child of node.children) {
-        _postorder(child);
+        dfs(child);
       }
       res.push(node.val);
     }

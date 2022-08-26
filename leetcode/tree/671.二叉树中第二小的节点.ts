@@ -66,20 +66,20 @@ class TreeNode {
 
 // @lc code=start
 function findSecondMinimumValue(root: TreeNode | null): number {
-  let ret = -1;
+  let res = -1;
   const rootVal = root!.val;
   dfs(root);
-  return ret;
+  return res;
 
   function dfs(node: TreeNode | null) {
     if (node === null) {
       return;
     }
-    if (ret !== -1 && node.val >= ret) {
+    if (res !== -1 && node.val >= res) {
       return;
     }
     if (node.val > rootVal) {
-      ret = node.val;
+      res = node.val;
     }
     dfs(node.left);
     dfs(node.right);

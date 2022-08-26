@@ -66,23 +66,19 @@ class TreeNode {
 // recursive
 var lowestCommonAncestor = function (
   root: TreeNode | null,
-  p: TreeNode | null,
-  q: TreeNode | null
+  p: TreeNode,
+  q: TreeNode
 ): TreeNode | null {
-  const parentVal = root!.val;
-  const pVal = p!.val;
-  const qVal = q!.val;
+  if (!root) return null;
+  const parentVal = root.val;
+  const pVal = p.val;
+  const qVal = q.val;
 
-  // continue search right child
   if (pVal > parentVal && qVal > parentVal) {
-    return lowestCommonAncestor(root!.right, p, q);
-  }
-  // continue search left child
-  else if (pVal < parentVal && qVal < parentVal) {
-    return lowestCommonAncestor(root!.left, p, q);
-  }
-  // or return root node
-  else {
+    return lowestCommonAncestor(root.right, p, q);
+  } else if (pVal < parentVal && qVal < parentVal) {
+    return lowestCommonAncestor(root.left, p, q);
+  } else {
     return root;
   }
 };
@@ -90,16 +86,15 @@ var lowestCommonAncestor = function (
 // iterative
 var lowestCommonAncestor = function (
   root: TreeNode | null,
-  p: TreeNode | null,
-  q: TreeNode | null
+  p: TreeNode,
+  q: TreeNode
 ): TreeNode | null {
-  const pVal = p!.val;
-  const qVal = q!.val;
+  const pVal = p.val;
+  const qVal = q.val;
   let node: TreeNode | null = root;
 
   while (node) {
     const parentVal = node.val;
-
     if (pVal > parentVal && qVal > parentVal) {
       node = node.right;
     } else if (pVal < parentVal && qVal < parentVal) {

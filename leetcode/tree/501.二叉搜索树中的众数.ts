@@ -57,13 +57,13 @@ class TreeNode {
 // @lc code=start
 // inorder
 var findMode = function (root: TreeNode | null): number[] {
-  let ret: number[] = [];
+  let res: number[] = [];
   let count = 0;
   let maxCount = 0;
   let lastMode!: number;
 
   inorder(root);
-  return ret;
+  return res;
 
   function inorder(node: TreeNode | null) {
     if (node) {
@@ -74,10 +74,10 @@ var findMode = function (root: TreeNode | null): number[] {
         count = 1;
       }
       if (count === maxCount) {
-        ret.push(node.val);
+        res.push(node.val);
       } else if (count > maxCount) {
         maxCount = count;
-        ret = [node.val]; // replace ret with new value
+        res = [node.val]; // replace res with new value
       }
       lastMode = node.val;
       if (node.right) inorder(node.right);

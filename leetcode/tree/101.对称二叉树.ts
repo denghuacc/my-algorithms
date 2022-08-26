@@ -76,7 +76,7 @@ var isSymmetric = function (root: TreeNode | null): boolean {
 
 // iterative
 var isSymmetric = function (root: TreeNode | null): boolean {
-  const queue: Array<TreeNode | null> = [];
+  const queue: (TreeNode | null)[] = [];
   queue.push(root);
   queue.push(root);
 
@@ -96,8 +96,8 @@ var isSymmetric = function (root: TreeNode | null): boolean {
 
 // iterative 2
 var isSymmetric = function (root: TreeNode | null): boolean {
-  const queue1: Array<TreeNode | null> = [];
-  const queue2: Array<TreeNode | null> = [];
+  const queue1: (TreeNode | null)[] = [];
+  const queue2: (TreeNode | null)[] = [];
   queue1.push(root);
   queue2.push(root);
 

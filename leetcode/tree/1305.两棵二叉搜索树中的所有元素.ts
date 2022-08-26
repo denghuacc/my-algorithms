@@ -87,7 +87,6 @@ function getAllElements(
       }
       break;
     }
-
     if (arr1[p1] < arr2[p2]) {
       res.push(arr1[p1]);
       p1++;

@@ -124,12 +124,8 @@ function isEvenOddTree(root: TreeNode | null): boolean {
         return false;
       }
       prev = value;
-      if (node.left) {
-        queue.push(node.left);
-      }
-      if (node.right) {
-        queue.push(node.right);
-      }
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
     }
     level++;
   }

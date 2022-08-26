@@ -96,24 +96,17 @@ class TreeNode {
 function leafSimilar(root1: TreeNode | null, root2: TreeNode | null): boolean {
   const arr1: number[] = [];
   const arr2: number[] = [];
-
   dfs(root1, arr1);
   dfs(root2, arr2);
-
   return arr1.toString() === arr2.toString();
 
   function dfs(node: TreeNode | null, arr: number[]) {
     if (!node) return;
-
     if (!node.left && !node.right) {
       arr.push(node.val);
     } else {
-      if (node.left) {
-        dfs(node.left, arr);
-      }
-      if (node.right) {
-        dfs(node.right, arr);
-      }
+      if (node.left) dfs(node.left, arr);
+      if (node.right) dfs(node.right, arr);
     }
   }
 }

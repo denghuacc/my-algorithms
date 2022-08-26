@@ -56,15 +56,15 @@ class TreeNode {
 // @lc code=start
 // recursive dfs
 var averageOfLevels = function (root: TreeNode | null): number[] {
-  const ret: number[] = [];
+  const res: number[] = [];
   const tmp: number[][] = [];
   levelOrder(root, 0);
 
   for (const arr of tmp) {
-    ret.push(getAverageOfArray(arr));
+    res.push(getAverageOfArray(arr));
   }
 
-  return ret;
+  return res;
 
   // level traverse
   function levelOrder(node: TreeNode | null, level: number) {
@@ -83,8 +83,8 @@ var averageOfLevels = function (root: TreeNode | null): number[] {
 
 // iterative bfs
 var averageOfLevels = function (root: TreeNode | null): number[] {
-  const ret: number[] = [];
-  if (!root) return ret;
+  const res: number[] = [];
+  if (!root) return res;
   const queue: TreeNode[] = [];
   queue.push(root);
 
@@ -98,23 +98,23 @@ var averageOfLevels = function (root: TreeNode | null): number[] {
       if (node.left) queue.push(node.left);
       if (node.right) queue.push(node.right);
     }
-    ret.push(sum / size);
+    res.push(sum / size);
   }
 
-  return ret;
+  return res;
 };
 
 // dfs2
 var averageOfLevels = function (root: TreeNode | null): number[] {
   // Map<level，[the count of level，the sum of level]>
   const map: Map<number, [number, number]> = new Map();
-  const ret: number[] = [];
+  const res: number[] = [];
   dfs(root, 0);
 
   for (const [_, val] of map.entries()) {
-    ret.push(val[1] / val[0]);
+    res.push(val[1] / val[0]);
   }
-  return ret;
+  return res;
 
   function dfs(node: TreeNode | null, i: number) {
     if (!node) return;

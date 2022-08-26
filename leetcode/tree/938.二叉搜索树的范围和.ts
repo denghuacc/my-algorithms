@@ -101,7 +101,6 @@ var rangeSumBST = function (
       stack.push(root);
       root = root.left;
     }
-
     root = stack.pop()!;
     if (root.val >= low && root.val <= high) {
       sum += root.val;

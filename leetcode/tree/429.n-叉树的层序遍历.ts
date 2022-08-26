@@ -124,7 +124,7 @@ var levelOrder = function (root: Node | null): number[][] {
       }
     }
     levels.push(level);
-    queue = queue.slice(size); // slice improve performance
+    queue = queue.slice(size);
   }
 
   return levels;

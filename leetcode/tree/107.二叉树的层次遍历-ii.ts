@@ -52,13 +52,17 @@ class TreeNode {
 // @lc code=start
 // recursive
 var levelOrderBottom = function (root: TreeNode | null): number[][] {
-  const ret: number[][] = [];
+  const res: number[][] = [];
   levelOrder(root, 0);
-  return ret.reverse();
+  return res.reverse();
 
   function levelOrder(node: TreeNode | null, level: number) {
     if (!node) return;
-    ret[level] ? ret[level].push(node.val) : (ret[level] = [node.val]);
+    if (res.length === level) {
+      res[level] = [node.val];
+    } else {
+      res[level].push(node.val);
+    }
     level++;
     levelOrder(node.left, level);
     levelOrder(node.right, level);
@@ -67,8 +71,8 @@ var levelOrderBottom = function (root: TreeNode | null): number[][] {
 
 // iterative
 var levelOrderBottom = function (root: TreeNode | null): number[][] {
-  const ret: number[][] = [];
-  if (!root) return ret;
+  const res: number[][] = [];
+  if (!root) return res;
   const queue: TreeNode[] = [];
   queue.push(root);
 
@@ -83,9 +87,9 @@ var levelOrderBottom = function (root: TreeNode | null): number[][] {
       if (node.left) queue.push(node.left);
       if (node.right) queue.push(node.right);
     }
-    ret.unshift(level);
+    res.push(level);
   }
 
-  return ret;
+  return res.reverse();
 };
 // @lc code=end

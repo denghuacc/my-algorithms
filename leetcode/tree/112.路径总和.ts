@@ -97,7 +97,6 @@ var hasPathSum = function (root: TreeNode | null, sum: number): boolean {
     const currentSum = sumQueue.shift()!;
 
     if (!node.right && !node.left && currentSum === 0) return true;
-
     if (node.left) {
       nodeQueue.push(node.left);
       sumQueue.push(currentSum - node.left.val);

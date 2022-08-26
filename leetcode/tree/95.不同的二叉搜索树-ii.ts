@@ -71,13 +71,12 @@ var generateTrees = function (n: number): Array<TreeNode | null> {
 
       for (const leftTree of leftTrees) {
         for (const rightTree of rightTrees) {
-          const currentTree = new TreeNode(i);
-          currentTree.left = leftTree;
-          currentTree.right = rightTree;
+          const currentTree = new TreeNode(i, leftTree, rightTree);
           allTrees.push(currentTree);
         }
       }
     }
+
     return allTrees;
   }
 };

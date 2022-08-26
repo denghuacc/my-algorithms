@@ -88,13 +88,9 @@ var sumRootToLeaf = function (root: TreeNode | null): number {
   return dfs(root, 0);
 
   function dfs(node: TreeNode | null, val: number): number {
-    if (!node) {
-      return 0;
-    }
+    if (!node) return 0;
     val = val * 2 + node.val;
-    if (!node.left && !node.right) {
-      return val;
-    }
+    if (!node.left && !node.right) return val;
     return dfs(node.left, val) + dfs(node.right, val);
   }
 };

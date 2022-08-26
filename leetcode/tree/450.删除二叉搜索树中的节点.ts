@@ -80,21 +80,14 @@ function deleteNode(root: TreeNode | null, key: number): TreeNode | null {
     root.left = deleteNode(root.left, key);
     return root;
   }
-
   if (root.val < key) {
     root.right = deleteNode(root.right, key);
     return root;
   }
+  if (!root.left && !root.right) return null;
+  if (!root.left) return root.right;
+  if (!root.right) return root.left;
 
-  if (!root.left && !root.right) {
-    return null;
-  }
-  if (!root.left) {
-    return root.right;
-  }
-  if (!root.right) {
-    return root.left;
-  }
   let successor = root.right;
   // minimum node greater than successor
   while (successor.left) {

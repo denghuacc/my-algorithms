@@ -46,15 +46,15 @@ class TreeNode {
 // @lc code=start
 // dfs
 var rightSideView = function (root: TreeNode | null): number[] {
-  const ret: number[] = [];
-  if (!root) return ret;
+  const res: number[] = [];
+  if (!root) return res;
   const levels: number[][] = [];
   dfs(root, 0);
   for (const level of levels) {
-    ret.push(level.pop()!); // push the last one of level
+    res.push(level.pop()!); // push the last one of level
   }
 
-  return ret;
+  return res;
 
   function dfs(node: TreeNode, depth: number) {
     if (levels.length === depth) levels.push([]);
@@ -66,16 +66,16 @@ var rightSideView = function (root: TreeNode | null): number[] {
 
 // dfs2
 var rightSideView = function (root: TreeNode | null): number[] {
-  const ret: number[] = [];
-  if (!root) return ret;
+  const res: number[] = [];
+  if (!root) return res;
   let maxDepth = -1;
   dfs(root, 0);
-  return ret;
+  return res;
 
   function dfs(node: TreeNode, depth: number) {
     if (depth > maxDepth) {
       maxDepth = depth;
-      ret.push(node.val);
+      res.push(node.val);
     }
 
     // prioritize process right child
@@ -87,8 +87,8 @@ var rightSideView = function (root: TreeNode | null): number[] {
 
 // bfs
 var rightSideView = function (root: TreeNode | null): number[] {
-  const ret: number[] = [];
-  if (!root) return ret;
+  const res: number[] = [];
+  if (!root) return res;
   const queue: TreeNode[] = [];
   queue.push(root);
 
@@ -101,11 +101,11 @@ var rightSideView = function (root: TreeNode | null): number[] {
       // push last node val in this loop
       // pushing children to queue in this loop not disturb the size
       if (i === size - 1) {
-        ret.push(node.val);
+        res.push(node.val);
       }
     }
   }
 
-  return ret;
+  return res;
 };
 // @lc code=end

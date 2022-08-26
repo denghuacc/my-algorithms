@@ -85,15 +85,15 @@ class TreeNode {
 // @lc code=start
 function findTilt(root: TreeNode | null): number {
   if (!root) return 0;
-  let ret = 0;
+  let res = 0;
   dfs(root);
-  return ret;
+  return res;
 
   function dfs(node: TreeNode | null): number {
     if (!node) return 0;
     const left = dfs(node.left);
     const right = dfs(node.right);
-    ret += Math.abs(left - right);
+    res += Math.abs(left - right);
     return node.val + left + right;
   }
 }

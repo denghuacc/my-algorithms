@@ -47,13 +47,13 @@ class TreeNode {
 // @lc code=start
 // recursive
 var preorderTraversal = function (root: TreeNode | null): number[] {
-  const ret: number[] = [];
+  const res: number[] = [];
   preorder(root);
-  return ret;
+  return res;
 
   function preorder(node: TreeNode | null) {
     if (node) {
-      ret.push(node.val);
+      res.push(node.val);
       preorder(node.left);
       preorder(node.right);
     }
@@ -62,31 +62,31 @@ var preorderTraversal = function (root: TreeNode | null): number[] {
 
 // iterative
 var preorderTraversal = function (root: TreeNode | null): number[] {
-  const ret: number[] = [];
-  if (!root) return ret;
+  const res: number[] = [];
+  if (!root) return res;
   const stack: TreeNode[] = [];
   stack.push(root);
 
   while (stack.length) {
     const node = stack.pop()!;
-    ret.push(node.val);
+    res.push(node.val);
 
     // first right last left
     if (node.right) stack.push(node.right);
     if (node.left) stack.push(node.left);
   }
 
-  return ret;
+  return res;
 };
 
 // morris
 var preorderTraversal = function (root: TreeNode | null): number[] {
-  const ret: number[] = [];
+  const res: number[] = [];
 
   let node = root;
   while (node) {
     if (!node.left) {
-      ret.push(node.val);
+      res.push(node.val);
       node = node.right;
     } else {
       let pred = node.left;
@@ -95,7 +95,7 @@ var preorderTraversal = function (root: TreeNode | null): number[] {
       }
 
       if (!pred.right) {
-        ret.push(node.val);
+        res.push(node.val);
         pred.right = node;
         node = node.left;
       } else {
@@ -105,6 +105,6 @@ var preorderTraversal = function (root: TreeNode | null): number[] {
     }
   }
 
-  return ret;
+  return res;
 };
 // @lc code=end

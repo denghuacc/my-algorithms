@@ -50,27 +50,27 @@ class TNode {
 var countSmaller = function (nums: number[]): number[] {
   const n = nums.length;
   let root: TNode | null = null;
-  const ret = new Array(n).fill(0);
+  const res = new Array(n).fill(0);
   for (let i = n - 1; i >= 0; i--) {
-    root = insertNode(root, nums[i], ret, i)!;
+    root = insertNode(root, nums[i], res, i)!;
   }
-  return ret;
+  return res;
 
   function insertNode(
     root: TNode | null,
     val: number,
-    ret: number[],
+    res: number[],
     retIndx: number
   ): TNode | null {
-    if (!root) root = new TNode(val);
-    else if (val <= root.val) {
+    if (!root) {
+      root = new TNode(val);
+    } else if (val <= root.val) {
       root.count += 1;
-      root.left = insertNode(root.left, val, ret, retIndx);
+      root.left = insertNode(root.left, val, res, retIndx);
     } else if (val > root.val) {
-      ret[retIndx] += root.count + 1;
-      root.right = insertNode(root.right, val, ret, retIndx);
+      res[retIndx] += root.count + 1;
+      root.right = insertNode(root.right, val, res, retIndx);
     }
-
     return root;
   }
 };

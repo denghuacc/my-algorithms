@@ -66,7 +66,7 @@ var invertTree = function (root: TreeNode | null): TreeNode | null {
 
 var invertTree = function (root: TreeNode | null): TreeNode | null {
   if (!root) return null;
-  const queue: Array<TreeNode | null> = [];
+  const queue: TreeNode[] = [];
   queue.push(root);
   while (queue.length) {
     const cur = queue.shift()!;

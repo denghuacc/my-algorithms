@@ -46,17 +46,6 @@ class TreeNode {
   }
 }
 
-// 解题思路 递归
-// 1. root == null 深度 0
-// 2. 没有 left 和 right 深度 1
-// 3. 有 left 或者 right 取其中最小值深度
-
-// 解题思路 迭代
-// 1. root == null 深度 0
-// 2. 创建 stack 初始放入根节点，根节点深度为 1
-// 3. 出栈取出根节点，没有 left 和 right 深度，取最小值
-// 4. 有 left 或者 right 继续放入栈中，如此循环
-
 // @lc code=start
 // recursive
 var minDepth = function (root: TreeNode | null): number {
@@ -68,7 +57,7 @@ var minDepth = function (root: TreeNode | null): number {
   return min + 1;
 };
 
-// DFS iterative
+// iterative
 var minDepth = function (root: TreeNode | null): number {
   const stack: [TreeNode | null, number][] = [];
   if (!root) return 0;
@@ -90,7 +79,7 @@ var minDepth = function (root: TreeNode | null): number {
   return min;
 };
 
-// BFS iterative
+// iterative
 var minDepth = function (root: TreeNode | null): number {
   const queue: [TreeNode | null, number][] = [];
   if (!root) return 0;

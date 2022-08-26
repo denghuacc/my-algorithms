@@ -71,10 +71,10 @@ function distanceK(
   k: number
 ): number[] {
   const parents: Map<number, TreeNode> = new Map();
-  const ret: number[] = [];
+  const res: number[] = [];
   findParents(root!);
-  findRet(target, null, 0);
-  return ret;
+  findRes(target, null, 0);
+  return res;
 
   function findParents(node: TreeNode) {
     if (node.left) {
@@ -87,26 +87,20 @@ function distanceK(
     }
   }
 
-  function findRet(
+  function findRes(
     node: TreeNode | null,
     from: TreeNode | null,
     depth: number
   ) {
     if (!node) return;
-
     if (depth === k) {
-      ret.push(node.val);
+      res.push(node.val);
       return;
     }
-    if (node.left !== from) {
-      findRet(node.left, node, depth + 1);
-    }
-    if (node.right !== from) {
-      findRet(node.right, node, depth + 1);
-    }
-    if (parents.get(node.val) !== from) {
-      findRet(parents.get(node.val)!, node, depth + 1);
-    }
+    if (node.left !== from) findRes(node.left, node, depth + 1);
+    if (node.right !== from) findRes(node.right, node, depth + 1);
+    if (parents.get(node.val) !== from)
+      findRes(parents.get(node.val)!, node, depth + 1);
   }
 }
 // @lc code=end

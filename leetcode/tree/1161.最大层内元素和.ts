@@ -113,12 +113,8 @@ var maxLevelSum = function (root: TreeNode | null): number {
       sumArr[level] += node.val;
     }
 
-    if (node.left) {
-      dfs(node.left, level + 1);
-    }
-    if (node.right) {
-      dfs(node.right, level + 1);
-    }
+    if (node.left) dfs(node.left, level + 1);
+    if (node.right) dfs(node.right, level + 1);
   }
 };
 // @lc code=end

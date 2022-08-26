@@ -46,43 +46,43 @@ class TreeNode {
 // @lc code=start
 // recursive
 var postorderTraversal = function (root: TreeNode | null): number[] {
-  const ret: number[] = [];
+  const res: number[] = [];
   postorder(root);
-  return ret;
+  return res;
 
   function postorder(node: TreeNode | null): void {
     if (node) {
       postorder(node.left);
       postorder(node.right);
-      ret.push(node.val);
+      res.push(node.val);
     }
   }
 };
 
 // iterative -> inverse preorder
 var postorderTraversal = function (root: TreeNode | null): number[] {
-  const ret: number[] = [];
-  if (!root) return ret;
+  const res: number[] = [];
+  if (!root) return res;
   const stack: TreeNode[] = [];
 
   stack.push(root);
   while (stack.length) {
     const node = stack.pop()!;
-    ret.unshift(node!.val); // unshift -> opposite to preorder
+    res.unshift(node!.val); // unshift -> opposite to preorder
 
     // first left last right -> opposite to preorder
     if (node.left) stack.push(node.left);
     if (node.right) stack.push(node.right);
   }
 
-  return ret;
+  return res;
 };
 // @lc code=end
 
 // iteration2
 var postorderTraversal = function (root: TreeNode | null): number[] {
-  const ret: number[] = [];
-  if (!root) return ret;
+  const res: number[] = [];
+  if (!root) return res;
   const stack: TreeNode[] = [];
   let prev: TreeNode | null = root;
 
@@ -93,7 +93,7 @@ var postorderTraversal = function (root: TreeNode | null): number[] {
     }
     root = stack.pop()!; // the node of minimal value (left bottom)
     if (!root.right || root.right === prev) {
-      ret.push(root.val);
+      res.push(root.val);
       prev = root;
       root = null;
     } else {
@@ -102,5 +102,5 @@ var postorderTraversal = function (root: TreeNode | null): number[] {
     }
   }
 
-  return ret;
+  return res;
 };

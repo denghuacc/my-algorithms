@@ -82,16 +82,16 @@ var pathSum = function (root: TreeNode | null, sum: number): number {
   return calcPathSum(root, sum, 0);
 
   function calcPathSum(node: TreeNode | null, sum: number, subset: number) {
-    let ret = 0;
+    let res = 0;
     if (!node) return 0;
     subset += node.val;
-    ret += map.get(subset - sum) ?? 0;
+    res += map.get(subset - sum) ?? 0;
     map.set(subset, (map.get(subset) ?? 0) + 1);
-    ret +=
+    res +=
       calcPathSum(node.left, sum, subset) +
       calcPathSum(node.right, sum, subset);
     map.set(subset, map.get(subset)! - 1); // rollback
-    return ret;
+    return res;
   }
 };
 // @lc code=end

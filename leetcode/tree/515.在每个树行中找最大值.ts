@@ -64,11 +64,8 @@ class TreeNode {
 // bfs
 var largestValues = function (root: TreeNode | null): number[] {
   const res: number[] = [];
-  if (!root) {
-    return res;
-  }
-  const queue: TreeNode[] = [];
-  queue.push(root);
+  if (!root) return res;
+  const queue: TreeNode[] = [root];
 
   while (queue.length) {
     const size = queue.length;
@@ -93,9 +90,7 @@ var largestValues = function (root: TreeNode | null): number[] {
   return res;
 
   function dfs(node: TreeNode, depth: number) {
-    if (!node) {
-      return;
-    }
+    if (!node) return;
     if (depth === res.length) {
       res.push(node.val);
     } else {

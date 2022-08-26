@@ -75,41 +75,32 @@ class TreeNode {
 // recursive
 var lowestCommonAncestor = function (
   root: TreeNode | null,
-  p: TreeNode | null,
-  q: TreeNode | null
+  p: TreeNode,
+  q: TreeNode
 ): TreeNode | null {
-  let ret: TreeNode | null = null;
+  let res: TreeNode | null = null;
   dfs(root, p, q);
-  return ret;
+  return res;
 
-  function dfs(
-    root: TreeNode | null,
-    p: TreeNode | null,
-    q: TreeNode | null
-  ): boolean {
+  function dfs(root: TreeNode | null, p: TreeNode, q: TreeNode): boolean {
     if (!root) return false;
     const isLeftSon = dfs(root.left, p, q);
     const isRightSon = dfs(root.right, p, q);
-
     if (
       (isLeftSon && isRightSon) ||
-      ((root.val === p!.val || root.val === q!.val) &&
-        (isLeftSon || isRightSon))
+      ((root.val === p.val || root.val === q.val) && (isLeftSon || isRightSon))
     ) {
-      ret = root;
+      res = root;
     }
-
-    return (
-      isLeftSon || isRightSon || root.val === p!.val || root.val === q!.val
-    );
+    return isLeftSon || isRightSon || root.val === p.val || root.val === q.val;
   }
 };
 
 // save parent node
 var lowestCommonAncestor = function (
   root: TreeNode | null,
-  p: TreeNode | null,
-  q: TreeNode | null
+  p: TreeNode,
+  q: TreeNode
 ): TreeNode | null {
   const map: Map<number, TreeNode> = new Map();
   const set: Set<number> = new Set();

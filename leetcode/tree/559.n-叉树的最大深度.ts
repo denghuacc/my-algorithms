@@ -96,7 +96,7 @@ var maxDepth = function (root: Node): number {
       }
       size--;
     }
-    max++; // max depth add 1 per loop
+    max++;
   }
 
   return max;

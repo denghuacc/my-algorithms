@@ -79,46 +79,9 @@ var isValidBST = function (root: TreeNode | null): boolean {
   }
 };
 
-// iterative
-var isValidBST = function (root: TreeNode | null): boolean {
-  const stack: Array<TreeNode | null> = [];
-  const lowers: Array<number | null> = [];
-  const uppers: Array<number | null> = [];
-  let lower = null;
-  let upper = null;
-  let val: number;
-  update(root, lower, upper);
-
-  while (stack.length) {
-    root = stack.pop()!;
-    lower = lowers.pop()!;
-    upper = uppers.pop()!;
-
-    if (!root) continue;
-    val = root.val;
-    // maybe lower === 0 or upper === 0
-    if (lower && val <= lower) return false;
-    if (upper && val >= upper) return false;
-    update(root.right, val, upper);
-    update(root.left, lower, val);
-  }
-
-  return true;
-
-  function update(
-    root: TreeNode | null,
-    lower: number | null,
-    upper: number | null
-  ) {
-    stack.push(root);
-    lowers.push(lower);
-    uppers.push(upper);
-  }
-};
-
 // inorder
 var isValidBST = function (root: TreeNode | null): boolean {
-  const stack: Array<TreeNode | null> = [];
+  const stack: TreeNode[] = [];
   let inorderValue = -Infinity;
 
   while (stack.length || root) {

@@ -72,7 +72,7 @@ var levelOrder = function (root: TreeNode | null): number[][] {
   const levels: number[][] = [];
   if (!root) return levels;
 
-  const queue: Array<TreeNode | null> = [];
+  const queue: TreeNode[] = [];
   queue.push(root);
   let level = 0;
   while (queue.length) {

@@ -78,8 +78,8 @@ var isSameTree = function (p: TreeNode | null, q: TreeNode | null): boolean {
   if (!p && !q) return true;
   if (!check(p, q)) return false;
 
-  const queueP: Array<TreeNode | null> = [];
-  const queueQ: Array<TreeNode | null> = [];
+  const queueP: (TreeNode | null)[] = [];
+  const queueQ: (TreeNode | null)[] = [];
   queueP.push(p);
   queueQ.push(q);
 

@@ -63,10 +63,7 @@ class TreeNode {
 // @lc code=start
 // iterative
 var isUnivalTree = function (root: TreeNode | null): boolean {
-  if (root === null) {
-    return true;
-  }
-
+  if (root === null) return true;
   const val = root.val;
   const queue: TreeNode[] = [root];
   while (queue.length) {
@@ -74,12 +71,8 @@ var isUnivalTree = function (root: TreeNode | null): boolean {
     if (node.val !== val) {
       return false;
     }
-    if (node.left) {
-      queue.push(node.left);
-    }
-    if (node.right) {
-      queue.push(node.right);
-    }
+    if (node.left) queue.push(node.left);
+    if (node.right) queue.push(node.right);
   }
   return true;
 };

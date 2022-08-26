@@ -52,11 +52,11 @@ var sumOfLeftLeaves = function (root: TreeNode | null): number {
 
   function dfs(node: TreeNode | null) {
     if (node) {
-      if (node?.left && isLeafNode(node.left)) {
+      if (node.left && isLeafNode(node.left)) {
         total += node.left.val;
       }
-      if (node?.left) dfs(node.left);
-      if (node?.right) dfs(node.right);
+      if (node.left) dfs(node.left);
+      if (node.right) dfs(node.right);
     }
   }
 

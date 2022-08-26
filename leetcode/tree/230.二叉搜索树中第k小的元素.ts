@@ -76,16 +76,16 @@ var kthSmallest = function (root: TreeNode | null, k: number): number {
 
 // recursive + inOrder 2
 var kthSmallest = function (root: TreeNode | null, k: number): number {
-  let ret = Infinity;
+  let res = Infinity;
   inOrder(root);
-  return ret;
+  return res;
 
   function inOrder(node: TreeNode | null) {
     if (node) {
       if (node.left) inOrder(node.left);
       // 直接在这里获取第 k 个最小值
       if (--k === 0) {
-        ret = node.val;
+        res = node.val;
       }
       if (node.right) inOrder(node.right);
     }
@@ -113,7 +113,7 @@ var kthSmallest = function (root: TreeNode | null, k: number): number {
 
 // iterative + inOrder 2
 var kthSmallest = function (root: TreeNode | null, k: number): number {
-  let ret = Infinity;
+  let res = Infinity;
   const stack: TreeNode[] = [];
   let cur = root;
 
@@ -124,11 +124,11 @@ var kthSmallest = function (root: TreeNode | null, k: number): number {
     }
     cur = stack.pop()!;
     if (--k === 0) {
-      ret = cur.val;
+      res = cur.val;
     }
     cur = cur.right;
   }
 
-  return ret;
+  return res;
 };
 // @lc code=end

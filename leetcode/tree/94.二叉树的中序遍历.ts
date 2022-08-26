@@ -46,73 +46,34 @@ class TreeNode {
 // @lc code=start
 // recursive
 var inorderTraversal = function (root: TreeNode | null): number[] {
-  const ret: number[] = [];
+  const res: number[] = [];
   inorder(root);
-  return ret;
+  return res;
 
   function inorder(node: TreeNode | null) {
     if (node) {
       inorder(node.left);
-      ret.push(node.val);
+      res.push(node.val);
       inorder(node.right);
     }
   }
 };
-// @lc code=end
 
 // iterative
 var inorderTraversal = function (root: TreeNode | null): number[] {
-  const ret: number[] = [];
+  const res: number[] = [];
   const stack: TreeNode[] = [];
   let cur = root;
   while (cur || stack.length) {
     while (cur) {
       stack.push(cur);
-      cur = cur.left!; // LIFO -> the smallest value first out
+      cur = cur.left!;
     }
-    cur = stack.pop()!; // left node
-    ret.push(cur.val); // add up node value
-    cur = cur.right!; // right node
+    cur = stack.pop()!;
+    console.log("cur.val", cur.val);
+    res.push(cur.val);
+    cur = cur.right!;
   }
-  return ret;
+  return res;
 };
-
-// morris
-var inorderTraversal = function (root: TreeNode | null): number[] {
-  const ret: number[] = [];
-  let cur = root;
-  let prev: TreeNode | null = null;
-
-  while (cur) {
-    if (!cur.left) {
-      ret.push(cur.val);
-      cur = cur.right!;
-    } else {
-      prev = cur.left;
-      while (prev.right) {
-        prev = prev.right;
-      }
-
-      prev.right = cur;
-      const tmp = cur;
-      cur = cur.left;
-      tmp.left = null;
-    }
-  }
-
-  return ret;
-};
-
-// morris - Threaded Binary Tree
-
-// If current does not have left child
-
-// a. Add current’s value
-
-// b. Go to the right, i.e., current = current.right
-
-// Else
-
-// a. In current's left subtree, make current the right child of the rightmost node
-
-// b. Go to this left child, i.e., current = current.left
+// @lc code=end

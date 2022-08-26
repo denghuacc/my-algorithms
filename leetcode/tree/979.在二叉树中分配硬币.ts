@@ -81,20 +81,20 @@ class TreeNode {
 
 // @lc code=start
 var distributeCoins = function (root: TreeNode | null): number {
-  let ret = 0;
+  let res = 0;
   dfs(root);
-  return ret;
+  return res;
 
   function dfs(node: TreeNode | null): number {
     if (!node) return 0;
     const left = dfs(node.left);
     const right = dfs(node.right);
-    ret += Math.abs(left) + Math.abs(right);
+    res += Math.abs(left) + Math.abs(right);
     return node.val + left + right - 1;
   }
 };
 // @lc code=end
 
-// the number of moves from that leaf to or from its parent is excess = Math.abs(num_coins - 1). 
+// the number of moves from that leaf to or from its parent is excess = Math.abs(num_coins - 1).
 // the number of moves we make from this node to and from its children is abs(dfs(node.left)) + abs(dfs(node.right)).
 // we have an excess of node.val + dfs(node.left) + dfs(node.right) - 1 coins at this node.
