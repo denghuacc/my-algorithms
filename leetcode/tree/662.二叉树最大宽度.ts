@@ -85,17 +85,15 @@ var widthOfBinaryTree = function (root: TreeNode | null): number {
   let maxWidth = 1n;
 
   while (queue.length) {
+    const width = queue[queue.length - 1][1] - queue[0][1] + 1n;
+    if (width > maxWidth) {
+      maxWidth = width;
+    }
     const size = queue.length;
     for (let i = 0; i < size; i++) {
       const [node, idx] = queue.shift()!;
       if (node.left) queue.push([node.left, 2n * idx]);
       if (node.right) queue.push([node.right, 2n * idx + 1n]);
-    }
-    if (queue.length) {
-      const width = queue[queue.length - 1][1] - queue[0][1] + 1n;
-      if (width > maxWidth) {
-        maxWidth = width;
-      }
     }
   }
 
@@ -125,5 +123,4 @@ var widthOfBinaryTree = function (root: TreeNode | null): number {
     if (node.right) dfs(node.right, 2n * idx + 1n, level + 1);
   }
 };
-
 // @lc code=end
