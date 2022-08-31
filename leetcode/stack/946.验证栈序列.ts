@@ -47,7 +47,7 @@
  */
 
 // @lc code=start
-// greedy
+// stack
 var validateStackSequences = function (
   pushed: number[],
   popped: number[]
@@ -56,7 +56,6 @@ var validateStackSequences = function (
   const stack: number[] = [];
 
   let j = 0;
-
   for (const x of pushed) {
     stack.push(x);
     while (stack.length && j < n && stack[stack.length - 1] === popped[j]) {
@@ -64,7 +63,24 @@ var validateStackSequences = function (
       j++;
     }
   }
-
   return j === n;
+};
+
+var validateStackSequences = function (
+  pushed: number[],
+  popped: number[]
+): boolean {
+  const n = pushed.length;
+  const stack: number[] = [];
+
+  for (let i = 0, j = 0; i < n; i++) {
+    stack.push(pushed[i]);
+    while (stack.length && stack[stack.length - 1] === popped[j]) {
+      stack.pop();
+      j++;
+    }
+  }
+
+  return stack.length === 0;
 };
 // @lc code=end
