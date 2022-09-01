@@ -1,4 +1,4 @@
-# go-algorithms
+# algorithms
 
 ## leetcode
 
