@@ -43,35 +43,28 @@ var findLongestChain = function (pairs: number[][]): number {
 
   // dp[i] -> 以 pairs[i] 结尾的最长链的长度
   const dp: number[] = new Array(n).fill(1);
-
-  for (let j = 1; j < n; j++) {
-    for (let i = 0; i < j; i++) {
-      if (pairs[i][1] < pairs[j][0]) {
-        dp[j] = Math.max(dp[j], dp[i] + 1);
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < i; j++) {
+      if (pairs[i][0] > pairs[j][1]) {
+        dp[i] = Math.max(dp[i], dp[j] + 1);
       }
     }
   }
-
-  let ret = 0;
-  for (const x of dp) {
-    if (x > ret) ret = x;
-  }
-  return ret;
+  return dp[n - 1];
 };
 
 // greedy
 var findLongestChain = function (pairs: number[][]): number {
   pairs.sort((a, b) => a[1] - b[1]);
-  let cur = -Infinity;
-  let ret = 0;
 
-  for (const pair of pairs) {
-    if (cur < pair[0]) {
-      cur = pair[1];
-      ret++;
+  let res = 0;
+  let curY = -Infinity;
+  for (const [x, y] of pairs) {
+    if (x > curY) {
+      res++;
+      curY = y;
     }
   }
-
-  return ret;
+  return res;
 };
 // @lc code=end
