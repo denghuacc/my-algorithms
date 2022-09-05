@@ -36,36 +36,31 @@
  */
 
 // @lc code=start
-// API
 var mySqrt = function (x: number): number {
-  return Math.floor(Math.sqrt(x));
-};
-
-var mySqrt = function (x: number): number {
-  let r = 0;
-  while (!(r * r <= x && (r + 1) * (r + 1) > x)) {
-    r++;
+  let right = 0;
+  while (!(right * right <= x && (right + 1) * (right + 1) > x)) {
+    right++;
   }
-  return r;
+  return right;
 };
 
 // binary search
 var mySqrt = function (x: number): number {
   if (x === 0 || x === 1) return x;
-  let l = 0;
-  let r = Math.floor(x / 2);
+  let left = 0;
+  let right = Math.floor(x / 2);
 
-  while (l <= r) {
-    const m = Math.floor((l + r) / 2);
-    const s = m * m;
-    if (s === x) {
-      return m;
-    } else if (s < x) {
-      l = m + 1;
+  while (left <= right) {
+    const mid = Math.floor((left + right) / 2);
+    const target = Math.floor(x / mid);
+    if (mid === target) {
+      return mid;
+    } else if (mid < target) {
+      left = mid + 1;
     } else {
-      r = m - 1;
+      right = mid - 1;
     }
   }
-  return r;
+  return right;
 };
 // @lc code=end
