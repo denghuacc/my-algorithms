@@ -48,16 +48,16 @@
 // @lc code=start
 // binary search -> m x n 矩阵可以视为长度为 m x n的有序数组
 var searchMatrix = function (matrix: number[][], target: number): boolean {
-  const R = matrix.length;
-  if (R === 0) return false;
-  const C = matrix[0].length;
+  const m = matrix.length;
+  if (m === 0) return false;
+  const n = matrix[0].length;
 
   let i = 0;
-  let j = R * C - 1;
+  let j = m * n - 1;
 
   while (i <= j) {
     const pivot = Math.floor((i + j) / 2); // 先取中间索引
-    const val = matrix[Math.floor(pivot / C)][pivot % C]; // 对应索引的值
+    const val = matrix[Math.floor(pivot / n)][pivot % n]; // 对应索引的值
 
     if (target < val) {
       j = pivot - 1;
@@ -73,14 +73,14 @@ var searchMatrix = function (matrix: number[][], target: number): boolean {
 
 // binary search 2 -> 左上角位置点为基点进行查找
 var searchMatrix = function (matrix: number[][], target: number): boolean {
-  const R = matrix.length;
-  if (R === 0) return false;
-  const C = matrix[0].length;
+  const m = matrix.length;
+  if (m === 0) return false;
+  const n = matrix[0].length;
 
   let i = 0;
-  let j = C - 1;
+  let j = n - 1;
 
-  while (i < R && j >= 0) {
+  while (i < m && j >= 0) {
     if (matrix[i][j] < target) {
       i++;
     } else if (matrix[i][j] > target) {

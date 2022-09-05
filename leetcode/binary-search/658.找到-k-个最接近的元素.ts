@@ -77,6 +77,7 @@ var findClosestElements = function (
   x: number
 ): number[] {
   let right = binarySearch(arr, x);
+  console.log("right", right);
   let left = right - 1;
   while (k > 0) {
     if (left < 0) {
@@ -94,10 +95,12 @@ var findClosestElements = function (
     let left = 0;
     let right = arr.length - 1;
 
-    while (left < right) {
+    while (left <= right) {
       const mid = left + Math.floor((right - left) / 2);
-      if (arr[mid] >= target) {
-        right = mid;
+      if (arr[mid] === target) {
+        return mid;
+      } else if (arr[mid] > target) {
+        right = mid - 1;
       } else {
         left = mid + 1;
       }

@@ -34,18 +34,6 @@
  */
 
 // @lc code=start
-// array
-var findMin = function (nums: number[]): number {
-  let min = nums[0];
-  for (let i = 1; i < nums.length; i++) {
-    if (nums[i] < nums[i - 1]) {
-      min = Math.min(min, nums[i]);
-    }
-  }
-
-  return min;
-};
-
 // binary search
 var findMin = function (nums: number[]): number {
   if (nums.length === 1) return nums[0];

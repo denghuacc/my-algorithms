@@ -64,16 +64,16 @@ var findPeakElement = function (nums: number[]): number {
 
 // binary search
 var findPeakElement = function (nums: number[]): number {
-  let l = 0;
-  let r = nums.length - 1;
-  while (l < r) {
-    const m = l + ((r - l) >> 1);
-    if (nums[m] < nums[m + 1]) {
-      l = m + 1;
+  let left = 0;
+  let right = nums.length - 1;
+  while (left <= right) {
+    const mid = left + Math.floor((right - left) / 2);
+    if (nums[mid] < nums[mid + 1]) {
+      left = mid + 1;
     } else {
-      r = m;
+      right = mid - 1;
     }
   }
-  return l;
+  return left;
 };
 // @lc code=end

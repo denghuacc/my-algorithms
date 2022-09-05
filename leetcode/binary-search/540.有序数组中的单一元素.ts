@@ -53,30 +53,16 @@
 function singleNonDuplicate(nums: number[]): number {
   let left = 0;
   let right = nums.length - 1;
+
   while (left < right) {
-    const mid = Math.floor((left + right) / 2);
-    if (nums[mid] === nums[mid - 1]) {
-      // answer in left
-      if ((mid - left) % 2 === 0) {
-        right = mid - 2;
-      }
-      // answer in right
-      else {
-        left = mid + 1;
-      }
-    } else if (nums[mid] === nums[mid + 1]) {
-      // answer in right
-      if ((right - mid) % 2 === 0) {
-        left = mid + 2;
-      }
-      // answer in left
-      else {
-        right = mid - 1;
-      }
+    const mid = left + Math.floor((left + right) / 2);
+    if (nums[mid] === nums[mid ^ 1]) {
+      left = mid + 1;
     } else {
-      return nums[mid];
+      right = mid;
     }
   }
-  return nums[right];
+
+  return nums[left];
 }
 // @lc code=end

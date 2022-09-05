@@ -45,7 +45,7 @@ var findMedianSortedArrays = function (
 ): number {
   const len1 = nums1.length;
   const len2 = nums2.length;
-  const mid = (len1 + len2) >> 1;
+  const mid = Math.floor((len1 + len2) / 2);
   let i = 0;
   let j = 0;
   let cur: number;

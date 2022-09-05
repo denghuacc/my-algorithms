@@ -32,26 +32,6 @@
  */
 
 // @lc code=start
-// API
-var searchRange = function (nums: number[], target: number): number[] {
-  const ret = [-1, -1];
-  const firstIndex = nums.indexOf(target);
-  if (firstIndex > -1) {
-    ret[0] = firstIndex;
-  } else {
-    return ret;
-  }
-
-  const lastIndex = nums.lastIndexOf(target);
-  if (lastIndex > -1) {
-    ret[1] = lastIndex;
-  } else {
-    return ret;
-  }
-
-  return ret;
-};
-
 // array 线性扫描
 var searchRange = function (nums: number[], target: number): number[] {
   const ret = [-1, -1];

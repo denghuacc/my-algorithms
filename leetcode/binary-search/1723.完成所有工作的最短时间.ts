@@ -64,18 +64,18 @@ function minimumTimeRequired(jobs: number[], k: number): number {
     low++;
     high--;
   }
-  let l = jobs[0];
-  let r = jobs.reduce((acc, i) => acc + i);
+  let left = jobs[0];
+  let right = jobs.reduce((acc, i) => acc + i);
 
-  while (l < r) {
-    const mid = Math.floor((l + r) >> 1);
+  while (left < right) {
+    const mid = left + Math.floor((right - left) / 2);
     if (check(jobs, k, mid)) {
-      r = mid;
+      right = mid;
     } else {
-      l = mid + 1;
+      left = mid + 1;
     }
   }
-  return l;
+  return left;
 }
 
 function check(jobs: number[], k: number, limit: number): boolean {

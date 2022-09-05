@@ -44,18 +44,6 @@
  */
 
 // @lc code=start
-// API
-var searchInsert = function (nums: number[], target: number): number {
-  const index = nums.indexOf(target);
-  if (index > -1) {
-    return index;
-  } else {
-    nums.push(target);
-    nums.sort((a, b) => a - b);
-    return nums.indexOf(target);
-  }
-};
-
 // array
 var searchInsert = function (nums: number[], target: number): number {
   if (nums[0] > target) return 0; // first
@@ -69,20 +57,20 @@ var searchInsert = function (nums: number[], target: number): number {
 
 // binary search
 var searchInsert = function (nums: number[], target: number): number {
-  let l = 0;
-  let r = nums.length - 1;
+  let left = 0;
+  let right = nums.length - 1;
 
-  while (l <= r) {
-    const m = Math.round((l + r) / 2);
-    if (nums[m] === target) {
-      return m;
-    } else if (nums[m] > target) {
-      r = m - 1;
+  while (left <= right) {
+    const mid = Math.round((left + right) / 2);
+    if (nums[mid] === target) {
+      return mid;
+    } else if (nums[mid] > target) {
+      right = mid - 1;
     } else {
-      l = m + 1;
+      left = mid + 1;
     }
   }
 
-  return l;
+  return left;
 };
 // @lc code=end

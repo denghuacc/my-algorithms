@@ -11,7 +11,7 @@
  * Dislikes: 0
  * Total Accepted:    15K
  * Total Submissions: 34.8K
- * Testcase Example:  '[3,6,7,11]\r\n8\r'
+ * Testcase Example:  '[3,6,7,11]\right\n8\right'
  *
  * 珂珂喜欢吃香蕉。这里有 N 堆香蕉，第 i 堆中有 piles[i] 根香蕉。警卫已经离开了，将在 H 小时后回来。
  *
@@ -62,20 +62,18 @@
 var minEatingSpeed = function (piles: number[], h: number): number {
   let low = 1;
   let high = Math.max(...piles);
-  let k = high;
   while (low < high) {
     const speed = Math.floor((high - low) / 2) + low;
-    const time = getTime(piles, speed);
+    const time = getTime(speed);
     if (time <= h) {
-      k = speed;
       high = speed;
     } else {
       low = speed + 1;
     }
   }
-  return k;
+  return high;
 
-  function getTime(piles: number[], speed: number): number {
+  function getTime(speed: number): number {
     let time = 0;
     for (const pile of piles) {
       const curTime = Math.floor((pile + speed - 1) / speed);

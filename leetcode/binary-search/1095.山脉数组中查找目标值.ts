@@ -81,7 +81,6 @@
  *
  */
 
-
 /**
  * // This is the MountainArray's API interface.
  * // You should not implement it, or speculate about its implementation
@@ -102,17 +101,17 @@ interface MountainArray {
 // @lc code=start
 // binary search
 function findInMountainArray(target: number, mountainArr: MountainArray) {
-  let l = 0;
-  let r = mountainArr.length() - 1;
-  while (l < r) {
-    const mid = Math.floor((l + r) / 2);
+  let left = 0;
+  let right = mountainArr.length() - 1;
+  while (left < right) {
+    const mid = Math.floor((left + right) / 2);
     if (mountainArr.get(mid) < mountainArr.get(mid + 1)) {
-      l = mid + 1;
+      left = mid + 1;
     } else {
-      r = mid;
+      right = mid;
     }
   }
-  const peak = l; // mount peak
+  const peak = left; // mount peak
 
   // search target on the left side of the mount
   const index = binarySearch(0, peak, true);
@@ -124,17 +123,17 @@ function findInMountainArray(target: number, mountainArr: MountainArray) {
   return binarySearch(peak + 1, mountainArr.length() - 1, false);
 
   // flag is determining if you need to convert
-  function binarySearch(l: number, r: number, flag: boolean): number {
+  function binarySearch(left: number, right: number, flag: boolean): number {
     if (!flag) target *= -1;
-    while (l <= r) {
-      const mid = Math.floor((l + r) / 2);
+    while (left <= right) {
+      const mid = left + Math.floor((right - left) / 2);
       const cur = mountainArr.get(mid) * (flag ? 1 : -1);
       if (cur === target) {
         return mid;
       } else if (cur < target) {
-        l = mid + 1;
+        left = mid + 1;
       } else if (cur > target) {
-        r = mid - 1;
+        right = mid - 1;
       }
     }
     return -1;

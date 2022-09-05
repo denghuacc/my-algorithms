@@ -61,7 +61,7 @@ function findKthNumber(m: number, n: number, k: number): number {
   let left = 1;
   let right = m * n;
   while (left < right) {
-    const mid = left + ((right - left) >> 1);
+    const mid = left + Math.floor((right - left) / 2);
     let count = Math.floor(mid / n) * n;
     for (let i = Math.floor(mid / n) + 1; i <= m; i++) {
       count += Math.floor(mid / i);

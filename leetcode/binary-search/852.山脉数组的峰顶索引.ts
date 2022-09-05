@@ -54,18 +54,6 @@
 // @lc code=start
 // traverse
 var peakIndexInMountainArray = function (arr: number[]): number {
-  const n = arr.length;
-  let index = -1;
-  for (let i = 1; i < n - 1; i++) {
-    if (arr[i] > arr[i - 1] && arr[i] > arr[i + 1]) {
-      index = i;
-    }
-  }
-  return index;
-};
-
-// traverse 2
-var peakIndexInMountainArray = function (arr: number[]): number {
   let i = 0;
   while (arr[i] < arr[i + 1]) i++;
   return i;
@@ -74,18 +62,18 @@ var peakIndexInMountainArray = function (arr: number[]): number {
 // binary search
 var peakIndexInMountainArray = function (arr: number[]): number {
   const n = arr.length;
-  let i = 0;
-  let j = n - 1;
+  let left = 0;
+  let right = n - 1;
 
-  while (i < j) {
-    const mid = i + Math.floor((j - i) / 2);
+  while (left < right) {
+    const mid = left + Math.floor((right - left) / 2);
     if (arr[mid] < arr[mid + 1]) {
-      i = mid + 1;
+      left = mid + 1;
     } else {
-      j = mid;
+      right = mid;
     }
   }
 
-  return i;
+  return left;
 };
 // @lc code=end

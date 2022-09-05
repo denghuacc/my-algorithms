@@ -41,19 +41,6 @@
  */
 
 // @lc code=start
-// brute force
-var searchMatrix = function (matrix: number[][], target: number): boolean {
-  for (let i = 0; i < matrix.length; i++) {
-    for (let j = 0; j < matrix[0].length; j++) {
-      if (matrix[i][j] === target) {
-        return true;
-      }
-    }
-  }
-
-  return false;
-};
-
 // binary search
 var searchMatrix = function (matrix: number[][], target: number): boolean {
   if (matrix.length === 0) return false;

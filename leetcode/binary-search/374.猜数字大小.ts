@@ -88,18 +88,18 @@ var guess = function (n: number): number {
  */
 
 var guessNumber = function (n: number): number {
-  let l = 0;
-  let r = n;
+  let left = 0;
+  let right = n;
 
-  while (l < r) {
-    const mid = Math.floor((r - l) / 2) + l;
+  while (left < right) {
+    const mid = Math.floor((right - left) / 2) + left;
     if (guess(mid) <= 0) {
-      r = mid;
+      right = mid;
     } else {
-      l = mid + 1;
+      left = mid + 1;
     }
   }
 
-  return l;
+  return left;
 };
 // @lc code=end
