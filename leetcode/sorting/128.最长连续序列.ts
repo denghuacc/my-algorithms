@@ -51,21 +51,17 @@ var longestConsecutive = function (nums: number[]): number {
 
 // hash table
 var longestConsecutive = function (nums: number[]): number {
-  const set: Set<number> = new Set();
+  const set: Set<number> = new Set(nums);
 
-  for (const num of nums) set.add(num);
   let longest = 0;
-
   for (const num of set.values()) {
     if (!set.has(num - 1)) {
       let curNum = num;
       let curLongest = 1;
-
       while (set.has(curNum + 1)) {
         curNum += 1;
         curLongest += 1;
       }
-
       longest = Math.max(longest, curLongest);
     }
   }

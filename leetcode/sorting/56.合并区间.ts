@@ -33,39 +33,38 @@
 // @lc code=start
 // array sort
 var merge = function (intervals: number[][]): number[][] {
-  const len = intervals.length;
-  if (len === 0) return [];
-  const ret: number[][] = [];
+  const n = intervals.length;
   intervals.sort((a, b) => a[0] - b[0]);
-  ret.push(intervals[0]);
+  const res: number[][] = [];
+  res.push(intervals[0]);
 
-  for (let i = 1; i < len; i++) {
-    if (intervals[i][0] > ret[ret.length - 1][1]) {
-      ret.push(intervals[i]);
+  for (let i = 1; i < n; i++) {
+    if (intervals[i][0] > res[res.length - 1][1]) {
+      res.push(intervals[i]);
     } else {
-      if (intervals[i][1] > ret[ret.length - 1][1]) {
-        ret[ret.length - 1][1] = intervals[i][1];
+      if (intervals[i][1] > res[res.length - 1][1]) {
+        res[res.length - 1][1] = intervals[i][1];
       }
     }
   }
-  return ret;
+  return res;
 };
 
 // array sort
 var merge = function (intervals: number[][]): number[][] {
   intervals.sort((a, b) => a[0] - b[0]);
-  const ret: number[][] = [];
+  const res: number[][] = [];
   let idx = -1;
 
   for (const interval of intervals) {
-    if (idx === -1 || interval[0] > ret[idx][1]) {
-      ret.push(interval);
+    if (idx === -1 || interval[0] > res[idx][1]) {
+      res.push(interval);
       idx++;
     } else {
-      ret[idx][1] = Math.max(ret[idx][1], interval[1]);
+      res[idx][1] = Math.max(res[idx][1], interval[1]);
     }
   }
 
-  return ret;
+  return res;
 };
 // @lc code=end
