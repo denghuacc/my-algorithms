@@ -45,71 +45,25 @@
  */
 
 // @lc code=start
-// custom sort
-var relativeSortArray = function (arr1: number[], arr2: number[]): number[] {
-  const ret: number[] = arr2.slice();
-  const set: Set<number> = new Set(arr2);
-  const i = 0;
-  const tails: number[] = [];
-
-  for (let i = 0; i < arr1.length; i++) {
-    const num = arr1[i];
-    if (ret.includes(num)) {
-      const index = ret.indexOf(num);
-      if (set.has(num)) {
-        ret.splice(index, 1, num); // replace
-        set.delete(num);
-      } else {
-        ret.splice(index, 0, num); // insert
-      }
-    } else {
-      tails.push(num);
-    }
-  }
-
-  return ret.concat(tails.sort((a, b) => a - b));
-};
-
-// custom sort 2
-var relativeSortArray = function (arr1: number[], arr2: number[]): number[] {
-  return arr1.sort((a, b) => {
-    const ia = arr2.indexOf(a);
-    const ib = arr2.indexOf(b);
-    if (ia === -1 && ib === -1) {
-      return a - b;
-    } else if (ia === -1) {
-      return 1; // do nothing
-    } else if (ib === -1) {
-      return -1; // swap
-    } else {
-      return ia - ib;
-    }
-  });
-};
-
 // counting sort
 var relativeSortArray = function (arr1: number[], arr2: number[]): number[] {
-  let upper = 0;
-  for (const x of arr1) {
-    upper = Math.max(upper, x);
+  const counts = new Array(1001).fill(0);
+  for (const num of arr1) {
+    counts[num]++;
   }
-  const frequency: number[] = new Array(upper + 1).fill(0);
-  for (const x of arr1) {
-    ++frequency[x];
-  }
-  const ret: number[] = new Array(arr1.length);
-  let index = 0;
-  for (const x of arr2) {
-    for (let i = 0; i < frequency[x]; i++) {
-      ret[index++] = x;
-    }
-    frequency[x] = 0;
-  }
-  for (let i = 0; i <= upper; i++) {
-    for (let j = 0; j < frequency[i]; j++) {
-      ret[index++] = i;
+  let idx = 0;
+  for (const num of arr2) {
+    while (counts[num] > 0) {
+      arr1[idx++] = num;
+      counts[num]--;
     }
   }
-  return ret;
+  for (let i = 0; i < counts.length; i++) {
+    while (counts[i] > 0) {
+      arr1[idx++] = i;
+      counts[i]--;
+    }
+  }
+  return arr1;
 };
 // @lc code=end

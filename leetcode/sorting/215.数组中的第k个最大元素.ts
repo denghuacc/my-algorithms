@@ -32,11 +32,6 @@
  *
  */
 
-var findKthLargest = function (nums: number[], k: number): number {
-  nums = nums.sort((a, b) => a - b);
-  return nums[nums.length - k];
-};
-
 // @lc code=start
 // quick select
 var findKthLargest = function (nums: number[], k: number): number {
@@ -48,12 +43,8 @@ var findKthLargest = function (nums: number[], k: number): number {
     right: number,
     targetIndex: number
   ): number {
-    if (left === right) return nums[left];
-
-    // random index
-    let pivotIndex = Math.floor(Math.random() * (right - left + 1) + left);
-
-    pivotIndex = partition(left, right, pivotIndex);
+    const randomIndex = Math.floor(Math.random() * (right - left + 1) + left);
+    const pivotIndex = partition(left, right, randomIndex);
 
     if (targetIndex === pivotIndex) {
       return nums[targetIndex];
@@ -68,56 +59,14 @@ var findKthLargest = function (nums: number[], k: number): number {
     const pivot = nums[pivotIndex];
     swap(nums, pivotIndex, right);
     let storeIndex = left;
-
     for (let i = left; i <= right; i++) {
       if (nums[i] < pivot) {
         swap(nums, storeIndex, i);
         storeIndex++;
       }
     }
-
     swap(nums, storeIndex, right);
-
     return storeIndex;
-  }
-
-  function swap(arr: number[], a: number, b: number) {
-    [arr[a], arr[b]] = [arr[b], arr[a]];
-  }
-};
-
-// quick sorting
-var findKthLargest = function (nums: number[], k: number): number {
-  const sortedNums = quickSort(nums, 0, nums.length - 1);
-  return sortedNums[nums.length - k];
-
-  function quickSort(arr: number[], left: number, right: number) {
-    let index;
-    if (arr.length > 1) {
-      index = partition(arr, left, right);
-      if (left < index - 1) quickSort(arr, left, index - 1);
-      if (index < right) quickSort(arr, index, right);
-    }
-    return arr;
-  }
-
-  function partition(arr: number[], left: number, right: number) {
-    const pivot = arr[Math.floor((left + right) / 2)];
-    let i = left;
-    let j = right;
-
-    while (i <= j) {
-      while (arr[i] < pivot) i++;
-      while (arr[j] > pivot) j--;
-
-      if (i <= j) {
-        swap(arr, i, j);
-        i++;
-        j--;
-      }
-    }
-
-    return i;
   }
 
   function swap(arr: number[], a: number, b: number) {

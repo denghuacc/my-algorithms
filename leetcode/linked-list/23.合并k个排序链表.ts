@@ -39,54 +39,43 @@ class ListNode {
 }
 
 // @lc code=start
-// sort
+// merge sorting
 var mergeKLists = function (lists: Array<ListNode | null>): ListNode | null {
-  const nums: number[] = []; // the values of linked list
-  const dummy: ListNode = new ListNode(0);
-  let point: ListNode = dummy;
+  return mergeList(lists, 0, lists.length - 1);
 
-  for (let node of lists) {
-    while (node) {
-      nums.push(node.val);
-      node = node.next;
+  function mergeList(
+    lists: Array<ListNode | null>,
+    left: number,
+    right: number
+  ): ListNode | null {
+    if (left === right) {
+      return lists[left];
     }
+    if (left > right) {
+      return null;
+    }
+    const mid = left + Math.floor((right - left) / 2);
+    return merge(mergeList(lists, left, mid), mergeList(lists, mid + 1, right));
   }
 
-  nums.sort((a, b) => a - b); // sort
-
-  for (const num of nums) {
-    point.next = new ListNode(num);
-    point = point.next;
-  }
-
-  return dummy.next;
-};
-
-// recursive
-var mergeKLists = function (lists: Array<ListNode | null>): ListNode | null {
-  let len = lists.length;
-  if (len === 0) return null;
-
-  while (len > 1) {
-    for (let i = 0; i < Math.floor(len / 2); i++) {
-      lists[i] = mergeTwoLists(lists[i], lists[len - 1 - i]); // merge two linked list
+  function merge(
+    head1: ListNode | null,
+    head2: ListNode | null
+  ): ListNode | null {
+    const dummy = new ListNode(0);
+    let cur = dummy;
+    while (head1 && head2) {
+      if (head1.val < head2.val) {
+        cur.next = head1;
+        head1 = head1.next!;
+      } else {
+        cur.next = head2;
+        head2 = head2.next!;
+      }
+      cur = cur.next!;
     }
-    len = Math.floor((len + 1) / 2);
-  }
-
-  return lists[0];
-
-  // leetcode 21
-  function mergeTwoLists(l1: ListNode | null, l2: ListNode | null) {
-    if (!l1) return l2;
-    if (!l2) return l1;
-    if (l1.val < l2.val) {
-      l1.next = mergeTwoLists(l1.next, l2);
-      return l1;
-    } else {
-      l2.next = mergeTwoLists(l1, l2.next);
-      return l2;
-    }
+    cur.next = head1 ? head1 : head2;
+    return dummy.next;
   }
 };
 // @lc code=end

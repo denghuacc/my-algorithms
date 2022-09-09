@@ -40,36 +40,44 @@ class ListNode {
 }
 
 // @lc code=start
-// merge sorted
+// merge sorting
 var sortList = function (head: ListNode | null): ListNode | null {
-  if (!head || !head.next) return head;
+  return sort(head, null);
 
-  let slow = head;
-  let fast = head.next;
-
-  while (fast && fast.next) {
-    slow = slow.next!;
-    fast = fast.next.next!;
-  }
-
-  const tmp = slow.next;
-  slow.next = null; // break
-  let left = sortList(head);
-  let right = sortList(tmp);
-  let h = new ListNode(-1);
-  const ret = h;
-
-  while (left && right) {
-    if (left.val < right.val) {
-      h.next = left;
-      left = left.next;
-    } else {
-      h.next = right;
-      right = right.next;
+  function sort(head: ListNode | null, tail: ListNode | null): ListNode | null {
+    if (!head) return null;
+    if (head.next === tail) {
+      head.next = null;
+      return head;
     }
-    h = h.next;
+    let slow = head;
+    let fast = head;
+    while (fast !== tail) {
+      slow = slow.next!;
+      fast = fast.next!;
+      if (fast !== tail) {
+        fast = fast.next!;
+      }
+    }
+    const mid = slow;
+    return merge(sort(head, mid), sort(mid, tail));
   }
-  h.next = left ? left : right;
-  return ret.next;
+
+  function merge(head1: ListNode | null, head2: ListNode | null) {
+    const dummy = new ListNode(0);
+    let cur = dummy;
+    while (head1 && head2) {
+      if (head1.val < head2.val) {
+        cur.next = head1;
+        head1 = head1.next!;
+      } else {
+        cur.next = head2;
+        head2 = head2.next!;
+      }
+      cur = cur.next!;
+    }
+    cur.next = head1 ? head1 : head2;
+    return dummy.next;
+  }
 };
 // @lc code=end

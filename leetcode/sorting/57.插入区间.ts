@@ -38,44 +38,47 @@ var insert = function (
   intervals: number[][],
   newInterval: number[]
 ): number[][] {
-  intervals.push(newInterval);
-  const n = intervals.length;
-  if (n === 0) return [];
-  const ret: number[][] = [];
-  intervals.sort((a, b) => a[0] - b[0]); // sort
-  ret.push(intervals[0]);
-
-  for (let i = 1; i < n; i++) {
-    if (intervals[i][0] > ret[ret.length - 1][1]) {
-      ret.push(intervals[i]); // concat interval
-    } else {
-      if (intervals[i][1] > ret[ret.length - 1][1]) {
-        ret[ret.length - 1][1] = intervals[i][1]; // merge interval
+  const res: number[][] = [];
+  let [left, right] = newInterval;
+  let placed = false;
+  for (const [l, r] of intervals) {
+    if (l > right) {
+      if (!placed) {
+        res.push([left, right]);
+        placed = true;
       }
+      res.push([l, r]);
+    } else if (r < left) {
+      res.push([l, r]);
+    } else {
+      left = Math.min(left, l);
+      right = Math.max(right, r);
     }
   }
-  return ret;
+  if (!placed) {
+    res.push([left, right]);
+  }
+  return res;
 };
+// @lc code=end
 
-// array sort 2
+// the same as leetcode 56
 var insert = function (
   intervals: number[][],
   newInterval: number[]
 ): number[][] {
   intervals.push(newInterval);
-  intervals.sort((a, b) => a[0] - b[0]); // sort
-  const ret: number[][] = [];
-  let idx = -1;
+  intervals.sort((a, b) => a[0] - b[0]);
 
+  const res: number[][] = [];
+  let idx = -1;
   for (const interval of intervals) {
-    if (idx === -1 || interval[0] > ret[idx][1]) {
-      ret.push(interval); // concat interval
+    if (idx === -1 || interval[0] > res[idx][1]) {
+      res.push(interval);
       idx++;
     } else {
-      ret[idx][1] = Math.max(ret[idx][1], interval[1]); // merge interval
+      res[idx][1] = Math.max(res[idx][1], interval[1]);
     }
   }
-
-  return ret;
+  return res;
 };
-// @lc code=end
