@@ -66,17 +66,29 @@
 
 // @lc code=start
 // sorting
-function specialArray(nums: number[]): number {
-  nums.sort((a, b) => a - b);
+var specialArray = function (nums: number[]): number {
+  nums.sort((a, b) => b - a);
   const n = nums.length;
-  for (let i = 0, j = n - 1; i < j; i++, j--) {
-    [nums[i], nums[j]] = [nums[j], nums[i]];
-  }
   for (let i = 1; i <= n; i++) {
     if (nums[i - 1] >= i && (i === n || nums[i] < i)) {
       return i;
     }
   }
   return -1;
-}
+};
+
+// counting sorting
+var specialArray = function (nums: number[]): number {
+  const counts = new Array(1010).fill(0);
+  for (const num of nums) {
+    counts[num]++;
+  }
+  for (let i = 1009, total = 0; i >= 0; i--) {
+    total += counts[i];
+    if (total === i) {
+      return i;
+    }
+  }
+  return -1;
+};
 // @lc code=end
