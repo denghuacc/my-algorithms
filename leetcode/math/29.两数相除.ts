@@ -72,11 +72,9 @@ var divide = function (dividend: number, divisor: number): number {
   a = a > 0 ? a : -a;
   b = b > 0 ? b : -b;
 
-  const ret = div(a, b);
-
-  if (sign > 0) return ret > MAX ? MAX : ret;
-
-  return -ret;
+  const res = div(a, b);
+  if (sign > 0) return res > MAX ? MAX : res;
+  return -res;
 
   function div(a: number, b: number): number {
     if (a < b) return 0;
@@ -126,16 +124,16 @@ var divide = function (dividend: number, divisor: number): number {
   candidates.push(divisor);
   let index = 0;
   while (candidates[index] >= dividend - candidates[index]) {
-    candidates.push(candidates[index] + candidates[index]);
-    ++index;
+    candidates.push(candidates[index] * 2);
+    index++;
   }
-  let ret = 0;
+  let res = 0;
   for (let i = candidates.length - 1; i >= 0; i--) {
     if (candidates[i] >= dividend) {
-      ret += 1 << i;
+      res += 1 << i;
       dividend -= candidates[i];
     }
   }
-  return rev ? -ret : ret;
+  return rev ? -res : res;
 };
 // @lc code=end

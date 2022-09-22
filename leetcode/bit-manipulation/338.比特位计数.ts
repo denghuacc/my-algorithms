@@ -37,22 +37,42 @@
 
 // @lc code=start
 // bit manipulation
-function countBits(num: number): number[] {
-  const bits: number[] = new Array(num + 1).fill(0);
-
+var countBits = function (num: number): number[] {
+  const counts: number[] = new Array(num + 1).fill(0);
   for (let i = 0; i <= num; i++) {
-    bits[i] = countOnes(i);
+    counts[i] = getOneCounts(i);
   }
+  return counts;
 
-  return bits;
-
-  function countOnes(num: number): number {
-    let ones = 0;
-    while (num > 0) {
+  function getOneCounts(num: number): number {
+    let count = 0;
+    while (num !== 0) {
       num &= num - 1;
-      ones++;
+      count++;
     }
-    return ones;
+    return count;
   }
-}
+};
+
+// math
+var countBits = function (num: number): number[] {
+  const counts: number[] = [];
+  for (let i = 0; i <= num; i++) {
+    const count = getOneCounts(i);
+    counts.push(count);
+  }
+  return counts;
+
+  function getOneCounts(num: number): number {
+    let count = 0;
+    while (num > 0) {
+      const remainder = num % 2;
+      if (remainder === 1) {
+        count++;
+      }
+      num = Math.floor(num / 2);
+    }
+    return count;
+  }
+};
 // @lc code=end

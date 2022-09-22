@@ -56,18 +56,18 @@
 // bit manipulation
 function maxProduct(words: string[]): number {
   const n = words.length;
-  const hash = new Array(n);
+  const masks: number[] = new Array(n).fill(0);
   let max = 0;
 
   for (let i = 0; i < n; i++) {
     for (const c of words[i]) {
-      hash[i] |= 1 << (c.charCodeAt(0) - "a".charCodeAt(0));
+      masks[i] |= 1 << (c.charCodeAt(0) - "a".charCodeAt(0));
     }
   }
 
-  for (let i = 0; i < n - 1; i++) {
+  for (let i = 0; i < n; i++) {
     for (let j = i + 1; j < n; j++) {
-      if ((hash[i] & hash[j]) === 0) {
+      if ((masks[i] & masks[j]) === 0) {
         max = Math.max(max, words[i].length * words[j].length);
       }
     }

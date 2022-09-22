@@ -49,16 +49,16 @@ var addBinary = function (a: string, b: string): string {
 
 // math
 var addBinary = function (a: string, b: string): string {
-  let ret = "";
-  let ca = 0;
+  let res = "";
+  let carry = 0;
   for (let i = a.length - 1, j = b.length - 1; i >= 0 || j >= 0; i--, j--) {
-    let sum = ca;
+    let sum = carry;
     sum += i >= 0 ? parseInt(a[i]) : 0;
     sum += j >= 0 ? parseInt(b[j]) : 0;
-    ret += sum % 2;
-    ca = Math.floor(sum / 2);
+    res += sum % 2;
+    carry = Math.floor(sum / 2);
   }
-  ret += ca === 1 ? ca : "";
-  return ret.split("").reverse().join("");
+  res += carry === 1 ? carry : "";
+  return res.split("").reverse().join("");
 };
 // @lc code=ends
