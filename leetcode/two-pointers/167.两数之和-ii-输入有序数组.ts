@@ -33,18 +33,6 @@
  */
 
 // @lc code=start
-// brute force
-var twoSum = function (numbers: number[], target: number): number[] {
-  for (let i = 0; i < numbers.length; i++) {
-    for (let j = i + 1; j < numbers.length; j++) {
-      if (numbers[i] + numbers[j] === target) {
-        return [i + 1, j + 1];
-      }
-    }
-  }
-  return [-1, -1];
-};
-
 // two pointers
 var twoSum = function (numbers: number[], target: number): number[] {
   let left = 0;
@@ -52,11 +40,11 @@ var twoSum = function (numbers: number[], target: number): number[] {
 
   while (left < right) {
     const sum = numbers[left] + numbers[right];
-    if (target === sum) {
+    if (sum === target) {
       return [left + 1, right + 1];
-    } else if (target > sum) {
+    } else if (sum < target) {
       left++;
-    } else if (target < sum) {
+    } else {
       right--;
     }
   }
@@ -71,11 +59,12 @@ var twoSum = function (numbers: number[], target: number): number[] {
     let right = numbers.length - 1;
     while (left <= right) {
       const mid = left + Math.floor((right - left) / 2);
-      if (target === numbers[i] + numbers[mid]) {
+      const sum = numbers[i] + numbers[mid];
+      if (sum === target) {
         return [i + 1, mid + 1];
-      } else if (target > numbers[i] + numbers[mid]) {
+      } else if (sum < target) {
         left = mid + 1;
-      } else if (target < numbers[i] + numbers[mid]) {
+      } else {
         right = mid - 1;
       }
     }

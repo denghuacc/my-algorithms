@@ -33,43 +33,40 @@
 // brute force
 var minSubArrayLen = function (s: number, nums: number[]): number {
   const n = nums.length;
-  if (n === 0) return 0;
-  let ret = Infinity;
+  let res = Infinity;
 
   for (let i = 0; i < n; i++) {
     let sum = 0;
     for (let j = i; j < n; j++) {
       sum += nums[j];
       if (sum >= s) {
-        ret = Math.min(ret, j - i + 1);
+        res = Math.min(res, j - i + 1);
         break;
       }
     }
   }
 
-  return ret === Infinity ? 0 : ret;
+  return res === Infinity ? 0 : res;
 };
 
 // sliding window
 var minSubArrayLen = function (s: number, nums: number[]): number {
   const n = nums.length;
-  if (n === 0) return 0;
-  let ret = Infinity;
-
-  let start = 0;
-  let end = 0;
+  let res = Infinity;
+  let left = 0;
+  let right = 0;
   let sum = 0;
 
-  while (end < n) {
-    sum += nums[end];
+  while (right < n) {
+    sum += nums[right];
     while (sum >= s) {
-      ret = Math.min(ret, end - start + 1);
-      sum -= nums[start];
-      start++;
+      res = Math.min(res, right - left + 1);
+      sum -= nums[left];
+      left++;
     }
-    end++;
+    right++;
   }
 
-  return ret === Infinity ? 0 : ret;
+  return res === Infinity ? 0 : res;
 };
 // @lc code=end
