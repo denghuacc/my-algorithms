@@ -14,7 +14,7 @@
 0 <= len(s1) <= 100
 0 <= len(s2) <= 100
 
-说明：
+难度：简单
 
 来源：力扣（LeetCode）
 链接：https://leetcode.cn/problems/check-permutation-lcci
