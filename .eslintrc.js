@@ -20,7 +20,11 @@ module.exports = {
   },
   overrides: [
     {
-      files: ["leetcode/*/*.ts", "cracking-the-coding-interview/*.ts"],
+      files: [
+        "leetcode/*/*.ts",
+        "leetcode-pick/*/*.ts",
+        "cracking-the-coding-interview/*.ts",
+      ],
       rules: {
         "no-irregular-whitespace": "off",
         "no-var": "off",
