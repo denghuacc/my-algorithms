@@ -51,37 +51,18 @@
  */
 
 // @lc code=start
-// array
-var pivotIndex = function (nums: number[]): number {
-  let ret = -1;
-  for (let i = 0; i < nums.length; i++) {
-    const left = nums.slice(0, i);
-    const right = nums.slice(i + 1);
-    if (sum(left) === sum(right)) {
-      ret = i;
-      break;
-    }
-  }
-  return ret;
-
-  function sum(arr: number[]): number {
-    return arr.reduce((acc, i) => acc + i, 0);
-  }
-};
-
 // prefix sum
 var pivotIndex = function (nums: number[]): number {
-  const total = nums.reduce((acc, i) => acc + i, 0);
-  let ret = -1;
-  let leftSum = 0; // the sum of element on the left
+  const total = nums.reduce((a, b) => a + b);
+  let sum = 0;
   for (let i = 0; i < nums.length; i++) {
-    // leftSum === rightSum === total - nums[i] - leftSum
-    if (2 * leftSum + nums[i] === total) {
-      ret = i;
-      break;
+    // leftSum -> pivotIndex -> rightSum
+    // sum === total - nums[i] - sum
+    if (2 * sum + nums[i] === total) {
+      return i;
     }
-    leftSum += nums[i];
+    sum += nums[i];
   }
-  return ret;
+  return -1;
 };
 // @lc code=end
