@@ -33,6 +33,8 @@
  *
  */
 
+export {};
+
 // @lc code=start
 class TrieNode {
   isWord: boolean;

@@ -57,6 +57,8 @@
  * 
  */
 
+export {};
+
 // @lc code=start
 class KthLargest {
   minHeap: MinHeap;

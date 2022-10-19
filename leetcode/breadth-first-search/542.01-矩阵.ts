@@ -52,8 +52,6 @@
  *
  */
 
-export {};
-
 // @lc code=start
 // bfs
 function updateMatrix(mat: number[][]): number[][] {

@@ -3,100 +3,94 @@
  *
  * [173] 二叉搜索树迭代器
  *
- * https://leetcode.cn/problems/binary-search-tree-iterator/description/
+ * https://leetcode-cn.com/problems/binary-search-tree-iterator/description/
  *
  * algorithms
- * Medium (81.38%)
- * Likes:    648
+ * Medium (74.35%)
+ * Likes:    249
  * Dislikes: 0
- * Total Accepted:    104.4K
- * Total Submissions: 128.3K
+ * Total Accepted:    29.6K
+ * Total Submissions: 39.7K
  * Testcase Example:  '["BSTIterator","next","next","hasNext","next","hasNext","next","hasNext","next","hasNext"]\n' +
-  '[[[7,3,15,null,null,9,20]],[],[],[],[],[],[],[],[],[]]'
+  '[[[7,3,15,null,null,9,20]],[null],[null],[null],[null],[null],[null],[null],[null],[null]]'
  *
- * 实现一个二叉搜索树迭代器类BSTIterator ，表示一个按中序遍历二叉搜索树（BST）的迭代器：
+ * 实现一个二叉搜索树迭代器。你将使用二叉搜索树的根节点初始化迭代器。
  * 
- * 
- * 
- * BSTIterator(TreeNode root) 初始化 BSTIterator 类的一个对象。BST 的根节点 root
- * 会作为构造函数的一部分给出。指针应初始化为一个不存在于 BST 中的数字，且该数字小于 BST 中的任何元素。
- * boolean hasNext() 如果向指针右侧遍历存在数字，则返回 true ；否则返回 false 。
- * int next()将指针向右移动，然后返回指针处的数字。
- * 
- * 
- * 注意，指针初始化为一个不存在于 BST 中的数字，所以对 next() 的首次调用将返回 BST 中的最小元素。
- * 
- * 
- * 
- * 你可以假设 next() 调用总是有效的，也就是说，当调用 next() 时，BST 的中序遍历中至少存在一个下一个数字。
+ * 调用 next() 将返回二叉搜索树中的下一个最小的数。
  * 
  * 
  * 
  * 示例：
  * 
  * 
- * 输入
- * ["BSTIterator", "next", "next", "hasNext", "next", "hasNext", "next",
- * "hasNext", "next", "hasNext"]
- * [[[7, 3, 15, null, null, 9, 20]], [], [], [], [], [], [], [], [], []]
- * 输出
- * [null, 3, 7, true, 9, true, 15, true, 20, false]
  * 
- * 解释
- * BSTIterator bSTIterator = new BSTIterator([7, 3, 15, null, null, 9, 20]);
- * bSTIterator.next();    // 返回 3
- * bSTIterator.next();    // 返回 7
- * bSTIterator.hasNext(); // 返回 True
- * bSTIterator.next();    // 返回 9
- * bSTIterator.hasNext(); // 返回 True
- * bSTIterator.next();    // 返回 15
- * bSTIterator.hasNext(); // 返回 True
- * bSTIterator.next();    // 返回 20
- * bSTIterator.hasNext(); // 返回 False
- * 
+ * BSTIterator iterator = new BSTIterator(root);
+ * iterator.next();    // 返回 3
+ * iterator.next();    // 返回 7
+ * iterator.hasNext(); // 返回 true
+ * iterator.next();    // 返回 9
+ * iterator.hasNext(); // 返回 true
+ * iterator.next();    // 返回 15
+ * iterator.hasNext(); // 返回 true
+ * iterator.next();    // 返回 20
+ * iterator.hasNext(); // 返回 false
  * 
  * 
  * 
  * 提示：
  * 
  * 
- * 树中节点的数目在范围 [1, 10^5] 内
- * 0 
- * 最多调用 10^5 次 hasNext 和 next 操作
- * 
- * 
- * 
- * 
- * 进阶：
- * 
- * 
- * 你可以设计一个满足下述条件的解决方案吗？next() 和 hasNext() 操作均摊时间复杂度为 O(1) ，并使用 O(h) 内存。其中 h
- * 是树的高度。
+ * next() 和 hasNext() 操作的时间复杂度是 O(1)，并使用 O(h) 内存，其中 h 是树的高度。
+ * 你可以假设 next() 调用总是有效的，也就是说，当调用 next() 时，BST 中至少存在一个下一个最小的数。
  * 
  * 
  */
+
+export {};
+
+// Definition for a binary tree node
+class TreeNode {
+  val: number;
+  left: TreeNode | null;
+  right: TreeNode | null;
+  constructor(val?: number, left?: TreeNode | null, right?: TreeNode | null) {
+    this.val = val === undefined ? 0 : val;
+    this.left = left === undefined ? null : left;
+    this.right = right === undefined ? null : right;
+  }
+}
 
 // @lc code=start
-/**
- * Definition for a binary tree node.
- * class TreeNode {
- *     val: number
- *     left: TreeNode | null
- *     right: TreeNode | null
- *     constructor(val?: number, left?: TreeNode | null, right?: TreeNode | null) {
- *         this.val = (val===undefined ? 0 : val)
- *         this.left = (left===undefined ? null : left)
- *         this.right = (right===undefined ? null : right)
- *     }
- * }
- */
-
 class BSTIterator {
-  constructor(root: TreeNode | null) {}
+  idx: number;
+  items: number[];
 
-  next(): number {}
+  constructor(root: TreeNode | null) {
+    this.idx = 0;
+    this.items = [];
+    // inorder tree and generate ascending order element items
+    this.inorder(root);
+  }
 
-  hasNext(): boolean {}
+  next(): number {
+    return this.items[this.idx++];
+  }
+
+  hasNext(): boolean {
+    if (this.idx === this.items.length) {
+      return false;
+    }
+    return true;
+  }
+
+  // recursive inorder
+  private inorder(node: TreeNode | null): void {
+    if (node) {
+      if (node.left) this.inorder(node.left);
+      this.items.push(node.val);
+      if (node.right) this.inorder(node.right);
+    }
+  }
 }
 
 /**

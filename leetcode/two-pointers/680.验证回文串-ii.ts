@@ -51,8 +51,6 @@
  *
  */
 
-export {};
-
 // @lc code=start
 // two pointers
 function validPalindrome(s: string): boolean {

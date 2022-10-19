@@ -62,7 +62,6 @@
 export {};
 
 // @lc code=start
-// hash table
 var minimumLengthEncoding = function (words: string[]): number {
   const good: Set<string> = new Set(words);
   for (const word of words) {

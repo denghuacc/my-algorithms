@@ -69,6 +69,7 @@ var dailyTemperatures = function (temperatures: number[]): number[] {
   return res;
 };
 
+// stack
 var dailyTemperatures = function (temperatures: number[]): number[] {
   const n = temperatures.length;
   const res = new Array(n).fill(0);

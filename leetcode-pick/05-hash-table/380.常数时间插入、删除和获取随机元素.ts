@@ -52,6 +52,8 @@
  * 
  */
 
+export {};
+
 // @lc code=start
 class RandomizedSet {
   items: number[];

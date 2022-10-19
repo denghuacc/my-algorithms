@@ -70,6 +70,8 @@
  * 
  */
 
+export {};
+
 // @lc code=start
 class MagicDictionary {
   words: string[];
