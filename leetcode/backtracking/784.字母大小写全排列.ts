@@ -41,34 +41,31 @@
 
 // @lc code=start
 // backtracking search
-var letterCasePermutation = function (S: string): string[] {
-  const ret: string[] = [];
-  const n = S.length;
-  if (n === 0) return ret;
-  const strArr = S.split("");
+var letterCasePermutation = function (s: string): string[] {
+  const res: string[] = [];
+  const strArr = s.split("");
   dfs(strArr, 0);
-  return ret;
+  return res;
 
   function dfs(strArr: string[], idx: number) {
-    if (idx === n) {
-      ret.push(strArr.join(""));
+    if (idx === strArr.length) {
+      res.push(strArr.join(""));
       return;
     }
 
-    strArr[idx] = S[idx];
-    dfs(strArr, idx + 1);
-
-    // create a branch if str is letter 
-    if (!Number.isInteger(parseInt(S[idx]))) {
-      strArr[idx] = exchangeCase(S[idx]);
+    if (isDigit(strArr[idx])) {
       dfs(strArr, idx + 1);
+      return;
     }
+
+    strArr[idx] = strArr[idx].toUpperCase();
+    dfs(strArr, idx + 1);
+    strArr[idx] = strArr[idx].toLowerCase();
+    dfs(strArr, idx + 1);
   }
 
-  function exchangeCase(letter: string) {
-    return letter.charCodeAt(0) >= "a".charCodeAt(0)
-      ? letter.toUpperCase()
-      : letter.toLowerCase();
+  function isDigit(ch: string) {
+    return parseFloat(ch).toString() === "NaN" ? false : true;
   }
 };
 // @lc code=end
