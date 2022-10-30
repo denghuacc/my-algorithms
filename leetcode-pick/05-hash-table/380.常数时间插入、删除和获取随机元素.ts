@@ -56,51 +56,47 @@ export {};
 
 // @lc code=start
 class RandomizedSet {
-  items: number[];
-  ids: Map<number, number>; // val -> index
+  values: number[];
+  valToIdx: Map<number, number>; // val -> index
 
   constructor() {
-    this.items = [];
-    this.ids = new Map();
+    this.values = [];
+    this.valToIdx = new Map();
   }
 
   insert(val: number): boolean {
-    if (this.ids.has(val)) {
+    if (this.valToIdx.has(val)) {
       return false;
     }
-    this.items.push(val);
-    this.ids.set(val, this.items.length - 1);
+    this.values.push(val);
+    this.valToIdx.set(val, this.values.length - 1);
     return true;
   }
 
   remove(val: number): boolean {
-    if (this.ids.has(val)) {
-      const index = this.ids.get(val)!;
-      const lastIndex = this.items.length - 1;
-      const lastItem = this.items[lastIndex];
+    if (this.valToIdx.has(val)) {
+      const index = this.valToIdx.get(val)!;
+      const lastIndex = this.values.length - 1;
+      const lastItem = this.values[lastIndex];
 
       // update last item to current item
-      this.items[index] = lastItem;
+      this.values[index] = lastItem;
 
       // update index of lastItem
-      this.ids.set(lastItem, index);
+      this.valToIdx.set(lastItem, index);
 
-      // remove val in ids and items
-      this.ids.delete(val);
-      this.items.pop();
+      // remove val in valToIdx and values
+      this.valToIdx.delete(val);
+      this.values.pop();
       return true;
     }
     return false;
   }
 
   getRandom(): number {
-    const randomIndex = this.getRandomIndex(this.items.length);
-    return this.items[randomIndex];
-  }
-
-  // random range [0, n)
-  private getRandomIndex(n: number) {
-    return Math.floor(Math.random() * n);
+    // random range [0, n)
+    const randomIndex = Math.floor(Math.random() * this.values.length);
+    return this.values[randomIndex];
   }
 }
 
