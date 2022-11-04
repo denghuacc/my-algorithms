@@ -56,25 +56,25 @@
 // sliding window
 var lengthOfLongestSubstring = function (s: string): number {
   const n = s.length;
-  const map = new Map();
+  const map: Map<string, number> = new Map();
   let left = 0;
   let right = 0;
-  let ret = 0;
+  let res = 0;
 
   while (right < n) {
-    const c1 = s[right];
-    map.set(c1, (map.get(c1) ?? 0) + 1);
+    const ch1 = s[right];
+    map.set(ch1, (map.get(ch1) ?? 0) + 1);
     right++;
     // 移动 left 缩小窗口
-    while (map.get(c1) > 1) {
-      const c2 = s[left];
-      map.set(c2, (map.get(c2) ?? 0) - 1);
+    while (map.get(ch1)! > 1) {
+      const ch2 = s[left];
+      map.set(ch2, (map.get(ch2) ?? 0) - 1);
       left++;
     }
-    ret = Math.max(ret, right - left);
+    res = Math.max(res, right - left);
   }
 
-  return ret;
+  return res;
 };
 
 // sliding window 2
@@ -82,7 +82,7 @@ var lengthOfLongestSubstring = function (s: string): number {
   const n = s.length;
   const set = new Set();
   let right = -1; // 右指针未移动
-  let ret = 0;
+  let res = 0;
 
   for (let left = 0; left < n; left++) {
     // 左指针右移 移除一个字符
@@ -90,32 +90,11 @@ var lengthOfLongestSubstring = function (s: string): number {
     // 右指针不断右移
     while (right + 1 < n && !set.has(s[right + 1])) {
       set.add(s[right + 1]);
-      ++right;
+      right++;
     }
-    ret = Math.max(ret, right - left + 1);
+    res = Math.max(res, right - left + 1);
   }
 
-  return ret;
-};
-
-// array + API
-var lengthOfLongestSubstring = function (s: string): number {
-  let ret = 0;
-  let i = 0;
-  const arr: string[] = [];
-
-  while (i < s.length) {
-    if (arr.indexOf(s[i]) === -1) {
-      arr.push(s[i]);
-    } else {
-      arr.shift();
-      continue;
-    }
-
-    ret = Math.max(ret, arr.length);
-    i++;
-  }
-
-  return ret;
+  return res;
 };
 // @lc code=end

@@ -50,29 +50,34 @@ export {};
 // @lc code=start
 // sliding window
 function checkInclusion(s1: string, s2: string): boolean {
-  let left = 0;
-  let right = 0;
-  const window: Map<string, number> = new Map();
   const needs: Map<string, number> = new Map();
-  let match = 0;
-  for (let i = 0; i < s1.length; i++) {
-    const c = s1[i];
-    needs.set(c, (needs.get(c) ?? 0) + 1);
+  const window: Map<string, number> = new Map();
+  for (const ch of s1) {
+    needs.set(ch, (needs.get(ch) ?? 0) + 1);
   }
 
+  let left = 0;
+  let right = 0;
+  let match = 0;
   while (right < s2.length) {
-    const c1 = s2[right];
-    if (needs.has(c1)) {
-      window.set(c1, (window.get(c1) ?? 0) + 1);
-      if (window.get(c1) === needs.get(c1)) match++;
+    const ch1 = s2[right];
+    if (needs.has(ch1)) {
+      window.set(ch1, (window.get(ch1) ?? 0) + 1);
+      if (window.get(ch1) === needs.get(ch1)) {
+        match++;
+      }
     }
     right++;
     while (match === needs.size) {
-      if (right - left === s1.length) return true;
-      const c2 = s2[left];
-      if (needs.has(c2)) {
-        window.set(c2, (window.get(c2) ?? 0) - 1);
-        if (window.get(c2)! < needs.get(c2)!) match--;
+      if (right - left === s1.length) {
+        return true;
+      }
+      const ch2 = s2[left];
+      if (needs.has(ch2)) {
+        window.set(ch2, (window.get(ch2) ?? 0) - 1);
+        if (window.get(ch2)! < needs.get(ch2)!) {
+          match--;
+        }
       }
       left++;
     }

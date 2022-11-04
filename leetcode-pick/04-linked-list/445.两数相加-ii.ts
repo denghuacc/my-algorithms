@@ -52,30 +52,27 @@ var addTwoNumbers = function (
 ): ListNode | null {
   const s1: number[] = [];
   const s2: number[] = [];
-
   while (l1) {
     s1.push(l1.val);
     l1 = l1.next;
   }
-
   while (l2) {
     s2.push(l2.val);
     l2 = l2.next;
   }
 
-  let ret: ListNode | null = null;
-  let c = 0;
-
-  while (s1.length || s2.length || c > 0) {
-    const a = s1.length ? s1.pop()! : 0;
-    const b = s2.length ? s2.pop()! : 0;
-    const sum = a + b + c;
-    const node = new ListNode(sum % 10);
-    c = Math.floor(sum / 10);
-    node.next = ret;
-    ret = node;
+  let res: ListNode | null = null;
+  let carry = 0;
+  while (s1.length || s2.length || carry > 0) {
+    const v1 = s1.length ? s1.pop()! : 0;
+    const v2 = s2.length ? s2.pop()! : 0;
+    const sum = v1 + v2 + carry;
+    carry = Math.floor(sum / 10);
+    const val = sum % 10;
+    const node = new ListNode(val);
+    node.next = res;
+    res = node;
   }
-
-  return ret;
+  return res;
 };
 // @lc code=end

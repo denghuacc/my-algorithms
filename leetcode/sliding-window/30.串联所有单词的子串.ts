@@ -44,21 +44,21 @@
 // sliding window
 var findSubstring = function (s: string, words: string[]): number[] {
   const res: number[] = [];
-  const wordNum = words.length;
+  const wordCount = words.length;
   const wordLen = words[0].length;
   const wordMap: Map<string, number> = new Map();
-  for (const w of words) {
-    wordMap.set(w, (wordMap.get(w) ?? 0) + 1);
+  for (const word of words) {
+    wordMap.set(word, (wordMap.get(word) ?? 0) + 1);
   }
 
-  for (let i = 0; i < s.length - wordNum * wordLen + 1; i++) {
-    const hasMap = new Map();
+  for (let i = 0; i < s.length - wordCount * wordLen + 1; i++) {
+    const counts: Map<string, number> = new Map();
     let num = 0;
-    while (num < wordNum) {
+    while (num < wordCount) {
       const word = s.substring(i + num * wordLen, i + (num + 1) * wordLen);
       if (wordMap.has(word)) {
-        hasMap.set(word, (hasMap.get(word) ?? 0) + 1);
-        if (hasMap.get(word) > wordMap.get(word)!) {
+        counts.set(word, (counts.get(word) ?? 0) + 1);
+        if (counts.get(word)! > wordMap.get(word)!) {
           break;
         }
       } else {
@@ -66,7 +66,7 @@ var findSubstring = function (s: string, words: string[]): number[] {
       }
       num++;
     }
-    if (num === wordNum) {
+    if (num === wordCount) {
       res.push(i);
     }
   }

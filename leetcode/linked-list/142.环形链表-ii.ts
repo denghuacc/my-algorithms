@@ -84,14 +84,37 @@ class ListNode {
 
 // @lc code=start
 // hash table
-function detectCycle(head: ListNode | null): ListNode | null {
+var detectCycle = function (head: ListNode | null): ListNode | null {
   const set: Set<ListNode> = new Set();
-  let node = head;
-  while (node) {
-    if (set.has(node)) return node;
-    set.add(node);
-    node = node.next;
+  let cur = head;
+  while (cur) {
+    if (set.has(cur)) return cur;
+    set.add(cur);
+    cur = cur.next;
   }
   return null;
-}
+};
+
+var detectCycle = function (head: ListNode | null): ListNode | null {
+  if (!head) return null;
+  let fast = head;
+  let slow = head;
+  while (fast) {
+    slow = slow.next!;
+    if (fast.next) {
+      fast = fast.next.next!;
+    } else {
+      return null;
+    }
+    if (slow === fast) {
+      let cur = head;
+      while (cur !== slow) {
+        cur = cur.next!;
+        slow = slow.next!;
+      }
+      return cur;
+    }
+  }
+  return null;
+};
 // @lc code=end

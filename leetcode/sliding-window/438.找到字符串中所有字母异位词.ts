@@ -58,16 +58,15 @@
 // @lc code=start
 // sliding window
 function findAnagrams(s: string, p: string): number[] {
-  let left = 0;
-  let right = 0;
-  const ret: number[] = [];
   const window: Map<string, number> = new Map();
   const needs: Map<string, number> = new Map();
-
-  for (const c of p) {
-    needs.set(c, (needs.get(c) ?? 0) + 1);
+  for (const ch of p) {
+    needs.set(ch, (needs.get(ch) ?? 0) + 1);
   }
 
+  const res: number[] = [];
+  let left = 0;
+  let right = 0;
   let match = 0;
   while (right < s.length) {
     const c1 = s[right];
@@ -78,10 +77,9 @@ function findAnagrams(s: string, p: string): number[] {
       }
     }
     right++;
-
     while (match === needs.size) {
       if (right - left === p.length) {
-        ret.push(left);
+        res.push(left);
       }
       const c2 = s[left];
       if (needs.has(c2)) {
@@ -93,7 +91,6 @@ function findAnagrams(s: string, p: string): number[] {
       left++;
     }
   }
-
-  return ret;
+  return res;
 }
 // @lc code=end

@@ -32,21 +32,24 @@
 // @lc code=start
 // sliding window
 var minWindow = function (s: string, t: string): string {
+  const window: Map<string, number> = new Map();
+  const needs: Map<string, number> = new Map();
+  for (const ch of t) {
+    needs.set(ch, (needs.get(ch) ?? 0) + 1);
+  }
+
   let start = 0;
   let minLen = Infinity;
   let left = 0;
   let right = 0;
-  const window: Map<string, number> = new Map();
-  const needs: Map<string, number> = new Map();
-
-  for (const c of t) needs.set(c, (needs.get(c) ?? 0) + 1);
-
   let match = 0;
   while (right < s.length) {
-    const c1 = s[right];
-    if (needs.has(c1)) {
-      window.set(c1, (window.get(c1) ?? 0) + 1);
-      if (window.get(c1) === needs.get(c1)) match++;
+    const ch1 = s[right];
+    if (needs.has(ch1)) {
+      window.set(ch1, (window.get(ch1) ?? 0) + 1);
+      if (window.get(ch1) === needs.get(ch1)) {
+        match++;
+      }
     }
     right++;
 
@@ -55,60 +58,63 @@ var minWindow = function (s: string, t: string): string {
         start = left;
         minLen = right - left;
       }
-      const c2 = s[left];
-      if (needs.has(c2)) {
-        window.set(c2, (window.get(c2) ?? 0) - 1);
-        if (window.get(c2)! < needs.get(c2)!) match--;
+      const ch2 = s[left];
+      if (needs.has(ch2)) {
+        window.set(ch2, (window.get(ch2) ?? 0) - 1);
+        if (window.get(ch2)! < needs.get(ch2)!) {
+          match--;
+        }
       }
       left++;
     }
   }
 
-  return minLen === Infinity ? "" : s.substr(start, minLen);
+  return minLen === Infinity ? "" : s.slice(start, s.length - minLen);
 };
 
 // sliding window 2
 var minWindow = function (s: string, t: string): string {
-  const ori: Map<string, number> = new Map();
-  const cnt: Map<string, number> = new Map();
+  const needs: Map<string, number> = new Map();
+  const window: Map<string, number> = new Map();
 
   const sLen = s.length;
   const tLen = t.length;
 
-  for (let i = 0; i < tLen; i++) {
-    const c = t[i];
-    ori.set(c, (ori.get(c) ?? 0) + 1);
+  for (const ch of t) {
+    needs.set(ch, (needs.get(ch) ?? 0) + 1);
   }
 
-  let l = 0;
-  let r = -1;
+  let left = 0;
+  let right = -1;
   let len = Number.MAX_SAFE_INTEGER;
   let retL = -1;
   let retR = -1;
 
-  while (r < sLen) {
-    ++r;
-    if (r < sLen && ori.has(s[r])) {
-      cnt.set(s[r], (cnt.get(s[r]) ?? 0) + 1);
+  while (right < sLen) {
+    right++;
+    const ch1 = s[right];
+    if (right < sLen && needs.has(ch1)) {
+      window.set(ch1, (window.get(ch1) ?? 0) + 1);
     }
-    while (check() && l <= r) {
-      if (r - l + 1 < len) {
-        len = r - l + 1;
-        retL = l;
-        retR = l + len;
+    while (check() && left <= right) {
+      if (right - left + 1 < len) {
+        len = right - left + 1;
+        retL = left;
+        retR = left + len;
       }
-      if (ori.has(s[l])) {
-        cnt.set(s[l], (cnt.get(s[l]) ?? 0) - 1);
+      const ch2 = s[left];
+      if (needs.has(ch2)) {
+        window.set(ch2, (window.get(ch2) ?? 0) - 1);
       }
-      ++l;
+      left++;
     }
   }
 
-  return retL === -1 ? "" : s.substring(retL, retR);
+  return retL === -1 ? "" : s.slice(retL, retR);
 
   function check() {
-    for (const [key, value] of ori.entries()) {
-      if ((cnt.get(key) ?? 0) < value) {
+    for (const [key, value] of needs.entries()) {
+      if ((window.get(key) ?? 0) < value) {
         return false;
       }
     }

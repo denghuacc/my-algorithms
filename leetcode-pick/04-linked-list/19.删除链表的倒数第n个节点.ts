@@ -85,7 +85,7 @@ var removeNthFromEnd = function (
   let first = dummy;
   let second = dummy;
 
-  for (let i = 1; i <= n + 1; i++) {
+  for (let i = 0; i < n + 1; i++) {
     first = first.next!;
   }
 
