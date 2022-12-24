@@ -79,7 +79,7 @@ function largestMerge(word1: string, word2: string): string {
   let p1 = 0;
   let p2 = 0;
   while (p1 < word1.length || p2 < word2.length) {
-    // word1.slice(p1) 可以比较后面一连串字符（即使当前字符相同通过后面不同的字符中找到值）
+    // word1.slice(p1) 可以比较后面一连串字符（即使当前字符相同也可通过后面不同的字符中找到值）
     // word1[p1] 只比较当前的字符
     if (p1 < word1.length && word1.slice(p1) > word2.slice(p2)) {
       res += word1[p1];
