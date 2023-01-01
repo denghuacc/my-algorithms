@@ -1,4 +1,4 @@
 import { countingSort } from "../counting-sort";
-import { testSortAlgorithm } from "./test-sort-algorithm";
+import { testSortAlgorithmNoCompare } from "./test-sort-algorithm-no-compare";
 
-testSortAlgorithm(countingSort, "Counting Sort", { reverseCompare: false });
+testSortAlgorithmNoCompare(countingSort, "Counting Sort");

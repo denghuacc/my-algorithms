@@ -1,22 +1,12 @@
-import { IEqualsFunction } from "../../util";
-
-interface CustomObject {
-  key: number;
-}
-
-const customEquals: IEqualsFunction<CustomObject> = (
-  a: CustomObject,
-  b: CustomObject
-) => a.key === b.key;
+import { defaultCompare, Compare } from "../../util";
 
 export function testSearchAlgorithm(
-  searchAlgorithm: (
-    arr: unknown[],
-    target: unknown,
-    compareFn?: IEqualsFunction<CustomObject>
-  ) => unknown[],
-  algorithmName: string,
-  config = { customEquals: true }
+  searchAlgorithm: <T>(
+    arr: T[],
+    target: T,
+    compareFn: <T>(a: T, b: T) => Compare
+  ) => number,
+  algorithmName: string
 ) {
   describe(algorithmName, () => {
     const SIZE = 10;
@@ -30,32 +20,25 @@ export function testSearchAlgorithm(
     }
 
     test("works with empty arrays", () => {
-      expect(searchAlgorithm([], 1)).toBe(-1);
+      expect(searchAlgorithm([], 1, defaultCompare)).toBe(-1);
     });
 
     test("finds value at the first position", () => {
       const array = createSortedArray();
-      expect(searchAlgorithm(array, 1)).toBe(0);
+      expect(searchAlgorithm(array, 1, defaultCompare)).toBe(0);
     });
 
     test("finds value at the last position", () => {
       const array = createSortedArray();
-      expect(searchAlgorithm(array, SIZE)).toBe(SIZE - 1);
+      expect(searchAlgorithm(array, SIZE, defaultCompare)).toBe(SIZE - 1);
     });
 
     test("finds value at different positions", () => {
       const array = createSortedArray();
 
       for (let value = 1; value <= SIZE; value++) {
-        expect(searchAlgorithm(array, value)).toBe(value - 1);
+        expect(searchAlgorithm(array, value, defaultCompare)).toBe(value - 1);
       }
     });
-
-    if (config.customEquals) {
-      test("finds value with custom equals function", () => {
-        const array = [{ key: 1 }, { key: 2 }, { key: 3 }];
-        expect(searchAlgorithm(array, { key: 2 }, customEquals)).toBe(1);
-      });
-    }
   });
 }

@@ -6,8 +6,12 @@
 // 3. 重复第二步，直到所有元素均排序完毕。
 
 import { swap, defaultCompare, Compare } from "../util";
+import type { ICompareFunction } from "../util";
 
-export function selectionSort<T>(array: T[], compareFn = defaultCompare): T[] {
+export function selectionSort<T>(
+  array: T[],
+  compareFn: ICompareFunction<T> = defaultCompare
+): T[] {
   const len = array.length;
   let minIndex: number;
 

@@ -6,9 +6,12 @@
 // 3. 针对所有的元素重复以上的步骤，除了最后一个。
 // 4. 持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。
 
-import { swap, defaultCompare, Compare } from "../util";
+import { swap, defaultCompare, Compare, ICompareFunction } from "../util";
 
-export function bubbleSort<T>(array: T[], compareFn = defaultCompare): T[] {
+export function bubbleSort<T>(
+  array: T[],
+  compareFn: ICompareFunction<T> = defaultCompare
+): T[] {
   const len = array.length;
   for (let i = 0; i < len; i++) {
     for (let j = 0; j < len - 1; j++) {
@@ -23,7 +26,7 @@ export function bubbleSort<T>(array: T[], compareFn = defaultCompare): T[] {
 // 优化：减少内循环中不必要的比较
 export function bubbleSortImproved<T>(
   array: T[],
-  compareFn = defaultCompare
+  compareFn: ICompareFunction<T> = defaultCompare
 ): T[] {
   const len = array.length;
   for (let i = 0; i < len; i++) {
@@ -41,7 +44,7 @@ export function bubbleSortImproved<T>(
 // 双指针
 export function bubbleSortDoublePointer<T>(
   array: T[],
-  compareFn = defaultCompare
+  compareFn: ICompareFunction<T> = defaultCompare
 ): T[] {
   let i = array.length - 1;
 

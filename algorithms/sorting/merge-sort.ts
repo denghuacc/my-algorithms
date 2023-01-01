@@ -12,7 +12,10 @@
 
 import { defaultCompare, ICompareFunction, Compare } from "../util";
 
-export function mergeSort<T>(array: T[], compareFn = defaultCompare): T[] {
+export function mergeSort<T>(
+  array: T[],
+  compareFn: ICompareFunction<T> = defaultCompare
+): T[] {
   if (array.length > 1) {
     const mid = Math.floor(array.length / 2); // 分割中间点
     const left = mergeSort(array.slice(0, mid), compareFn);

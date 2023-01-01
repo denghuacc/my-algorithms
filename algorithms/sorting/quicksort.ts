@@ -11,7 +11,10 @@
 
 import { swap, defaultCompare, ICompareFunction, Compare } from "../util";
 
-export function quickSort<T>(array: T[], compareFn = defaultCompare): T[] {
+export function quickSort<T>(
+  array: T[],
+  compareFn: ICompareFunction<T> = defaultCompare
+): T[] {
   return quick(array, 0, array.length - 1, compareFn);
 }
 

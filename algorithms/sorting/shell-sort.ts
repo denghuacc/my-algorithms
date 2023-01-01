@@ -7,8 +7,12 @@
 // 仅增量因子为 1 时，整个序列作为一个表来处理，表长度即为整个序列的长度。
 
 import { defaultCompare, Compare } from "../util";
+import type { ICompareFunction } from "../util";
 
-export function shellSort<T>(array: T[], compareFn = defaultCompare): T[] {
+export function shellSort<T>(
+  array: T[],
+  compareFn: ICompareFunction<T> = defaultCompare
+): T[] {
   let increment = array.length / 2;
 
   while (increment > 0) {
@@ -37,7 +41,10 @@ export function shellSort<T>(array: T[], compareFn = defaultCompare): T[] {
   return array;
 }
 
-export function shellSort2<T>(array: T[], compareFn = defaultCompare): T[] {
+export function shellSort2<T>(
+  array: T[],
+  compareFn: ICompareFunction<T> = defaultCompare
+): T[] {
   const len = array.length;
   let temp;
   let gap = 1;

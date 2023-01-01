@@ -13,7 +13,10 @@
 
 import { swap, defaultCompare, ICompareFunction, Compare } from "../util";
 
-export function heapSort<T>(array: T[], compareFn = defaultCompare): T[] {
+export function heapSort<T>(
+  array: T[],
+  compareFn: ICompareFunction<T> = defaultCompare
+): T[] {
   let size = array.length;
   buildHeap(array, compareFn);
 

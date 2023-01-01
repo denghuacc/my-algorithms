@@ -5,9 +5,12 @@
 // 从第二个元素开始，依次和前面的元素进行比较，如果发现元素比它大，交换位置，这样前二个的元素排序完成。
 // 再第三个元素开始...以此类推，最后完成排序。
 
-import { defaultCompare, Compare } from "../util";
+import { defaultCompare, Compare, ICompareFunction } from "../util";
 
-export function insertionSort<T>(array: T[], compareFn = defaultCompare): T[] {
+export function insertionSort<T>(
+  array: T[],
+  compareFn: ICompareFunction<T> = defaultCompare
+): T[] {
   for (let i = 0; i < array.length; i++) {
     const current = array[i]; // 保存待插入的元素
     let j = i; // 保存元素 current 应该插入的位置

@@ -1,4 +1,4 @@
 import { radixSort } from "../radix-sort";
-import { testSortAlgorithm } from "./test-sort-algorithm";
+import { testSortAlgorithmNoCompare } from "./test-sort-algorithm-no-compare";
 
-testSortAlgorithm(radixSort, "Radix Sort", { reverseCompare: false });
+testSortAlgorithmNoCompare(radixSort, "Radix Sort");

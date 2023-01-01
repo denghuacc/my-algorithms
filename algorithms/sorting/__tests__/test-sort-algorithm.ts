@@ -1,10 +1,7 @@
-import { Compare } from "../../util";
+import { Compare, defaultCompare } from "../../util";
 
 export function testSortAlgorithm(
-  sortAlgorithm: (
-    arr: number[],
-    compareFn?: (a: number, b: number) => number
-  ) => number[],
+  sortAlgorithm: <T>(array: T[], compareFn?: (a: T, b: T) => Compare) => T[],
   algorithmName: string,
   config = { reverseCompare: true }
 ) {
@@ -28,20 +25,20 @@ export function testSortAlgorithm(
     }
 
     test("works with empty arrays", () => {
-      expect(sortAlgorithm([])).toEqual([]);
+      expect(sortAlgorithm([], defaultCompare)).toEqual([]);
     });
 
     test("works with sorted arrays", () => {
       let array = createSortedArray();
       const sortedArray = createSortedArray();
-      array = sortAlgorithm(array);
+      array = sortAlgorithm(array, defaultCompare);
       expect(array).toEqual(sortedArray);
     });
 
     test("works with non-sorted arrays", () => {
       let array = createNonSortedArray();
       const sortedArray = createSortedArray();
-      array = sortAlgorithm(array);
+      array = sortAlgorithm(array, defaultCompare);
 
       expect(array).toEqual(sortedArray);
 

@@ -1,4 +1,4 @@
-export type ICompareFunction<T> = (a: T, b: T) => number;
+export type ICompareFunction<T> = (a: T, b: T) => Compare;
 export type IEqualsFunction<T> = (a: T, b: T) => boolean;
 export type IDiffFunction<T> = (a: T, b: T) => number;
 
@@ -14,7 +14,7 @@ export function swap<T>(array: T[], a: number, b: number): void {
   [array[a], array[b]] = [array[b], array[a]];
 }
 
-export function defaultCompare<T>(a: T, b: T): number {
+export function defaultCompare<T>(a: T, b: T): Compare {
   if (a === b) return Compare.EQUALS;
   return a < b ? Compare.LESS_THAN : Compare.BIGGER_THAN;
 }
