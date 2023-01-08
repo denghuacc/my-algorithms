@@ -19,7 +19,7 @@ class AVLTreeNode<T> {
  * 任意一个节点（不论深度）的左子树和右子树高度最多相差1。
  */
 export default class AVLTree<T> {
-  root?: AVLTreeNode<T> | undefined;
+  root: AVLTreeNode<T> | undefined;
   protected count: number;
 
   constructor() {
