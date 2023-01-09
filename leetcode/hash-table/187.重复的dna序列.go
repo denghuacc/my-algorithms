@@ -51,7 +51,7 @@ package leetcode
 func findRepeatedDnaSequences(s string) (ret []string) {
 	const L = 10
 	n := len(s)
-	cnt := make(map[string]int, n)
+	cnt := make(map[string]int)
 
 	for i := 0; i <= n-L; i++ {
 		sub := s[i : i+L]

@@ -58,7 +58,7 @@ import "sort"
 // binary search
 func minOperations(target []int, arr []int) int {
 	n := len(target)
-	pos := make(map[int]int, n)
+	pos := make(map[int]int)
 	for i, val := range target {
 		pos[val] = i
 	}
