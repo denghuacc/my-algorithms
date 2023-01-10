@@ -56,21 +56,20 @@
 // @lc code=start
 // dfs
 function crackSafe(n: number, k: number): string {
-  if (n === 1 && k === 1) return "0";
-  const seen: Set<string> = new Set();
-  const ret: string[] = [];
-  const start = "0".repeat(n - 1);
-  dfs(start, k);
-  ret.push(start);
-  return ret.join("");
+  const highest = Math.pow(10, n - 1);
+  const seen: Set<number> = new Set();
+  let res = "";
+  dfs(0);
+  res += "0".repeat(n - 1);
+  return res;
 
-  function dfs(node: string, k: number) {
+  function dfs(node: number) {
     for (let i = 0; i < k; i++) {
-      const nei = node + i;
+      const nei = node * 10 + i;
       if (!seen.has(nei)) {
         seen.add(nei);
-        dfs(nei.substring(1), k);
-        ret.push(String(i));
+        dfs(nei % highest);
+        res += i;
       }
     }
   }
