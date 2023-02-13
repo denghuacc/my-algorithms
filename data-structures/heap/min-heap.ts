@@ -103,8 +103,11 @@ export default class MinHeap<T> {
       let minIndex = this.leftChild(index);
 
       // 如果存在右子节点且比左子节点的值更小时，最小的子节点索引赋值为右子节点
-      if (minIndex + 1 && this.data[minIndex + 1] < this.data[minIndex]) {
-        minIndex = this.rightChild(index);
+      if (
+        minIndex + 1 < this.size &&
+        this.data[minIndex + 1] < this.data[minIndex]
+      ) {
+        minIndex = minIndex + 1; // right child
       }
 
       // 父节点小于子节点时，下沉终止

@@ -195,16 +195,19 @@ class Heap<T> {
 
   private siftDown(index: number): void {
     while (this.leftChild(index) < this.size) {
-      let idx = this.leftChild(index);
+      let pos = this.leftChild(index);
 
-      if (idx + 1 && this.compare(this.items[idx + 1], this.items[idx])) {
-        idx = this.rightChild(index);
+      if (
+        pos + 1 < this.size &&
+        this.compare(this.items[pos + 1], this.items[pos])
+      ) {
+        pos = pos + 1; // right child
       }
-      if (this.compare(this.items[index], this.items[idx])) {
+      if (this.compare(this.items[index], this.items[pos])) {
         break;
       }
-      this.swap(this.items, index, idx);
-      index = idx;
+      this.swap(this.items, index, pos);
+      index = pos;
     }
   }
 

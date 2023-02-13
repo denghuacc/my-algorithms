@@ -103,8 +103,11 @@ export default class MaxHeap<T> {
       let maxIndex = this.leftChild(index);
 
       // 如果存在右子节点且比左子节点的值更大时，最大的子节点索引赋值为右子节点
-      if (maxIndex + 1 && this.data[maxIndex + 1] > this.data[maxIndex]) {
-        maxIndex = this.rightChild(index);
+      if (
+        maxIndex + 1 < this.size &&
+        this.data[maxIndex + 1] > this.data[maxIndex]
+      ) {
+        maxIndex = maxIndex + 1; // right child
       }
 
       // 父节点大于子节点时，下沉终止
