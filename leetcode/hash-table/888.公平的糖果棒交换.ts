@@ -66,8 +66,6 @@
  *
  */
 
-import * as _ from "lodash";
-
 // sumA - x + y === sumB + x - y;
 // sumA - sumB - (x - y) === x - y
 // sumA - sumB === 2 * (x - y)
@@ -76,8 +74,8 @@ import * as _ from "lodash";
 // @lc code=start
 // hash table
 function fairCandySwap(A: number[], B: number[]): number[] {
-  const sumA = _.sum(A);
-  const sumB = _.sum(B);
+  const sumA = A.reduce((a, b) => a + b);
+  const sumB = B.reduce((a, b) => a + b);
   const delta = Math.floor((sumA - sumB) / 2);
 
   const setA: Set<number> = new Set(A);

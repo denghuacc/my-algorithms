@@ -65,19 +65,20 @@
  *
  */
 
-import * as _ from "lodash";
-
 // @lc code=start
 // greedy
 function leastInterval(tasks: string[], n: number): number {
-  const freq: Record<string, number> = _.countBy(tasks);
-  const maxExec = Math.max(...Object.values(freq));
+  const freq: Map<string, number> = new Map();
+  for (const task of tasks) {
+    freq.set(task, (freq.get(task) ?? 0) + 1);
+  }
+  const maxExec = Math.max(...freq.values());
   let maxCount = 0;
-  Object.values(freq).forEach((v) => {
-    if (v === maxExec) {
+  for (const f of freq.values()) {
+    if (f === maxExec) {
       maxCount++;
     }
-  });
+  }
   return Math.max((maxExec - 1) * (n + 1) + maxCount, tasks.length);
 }
 // @lc code=end

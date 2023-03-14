@@ -75,8 +75,6 @@
  *
  */
 
-import * as _ from "lodash";
-
 // @lc code=start
 // hash table
 function displayTable(orders: string[][]): string[][] {
@@ -95,9 +93,14 @@ function displayTable(orders: string[][]): string[][] {
     }
   }
 
-  const table2foodsCount = new Map(
-    Array.from(table2foods).map((v) => [v[0], _.countBy(v[1])])
-  );
+  const table2foodsCount: Map<string, Map<string, number>> = new Map();
+  for (const [table, foods] of table2foods) {
+    const counts: Map<string, number> = new Map();
+    for (const food of foods) {
+      counts.set(food, (counts.get(food) ?? 0) + 1);
+    }
+    table2foodsCount.set(table, counts);
+  }
 
   const tableSortedArr = Array.from(tableSet).sort(
     (a, b) => parseInt(a) - parseInt(b)
@@ -110,7 +113,7 @@ function displayTable(orders: string[][]): string[][] {
     const foodCounts = table2foodsCount.get(table)!;
     const row = [table];
     for (const food of foodSortedArr) {
-      const count = foodCounts[food] ?? 0;
+      const count = foodCounts.get(food) ?? 0;
       row.push(String(count));
     }
     tableContents.push(row);

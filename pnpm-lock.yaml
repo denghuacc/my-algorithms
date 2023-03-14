@@ -2,13 +2,11 @@ lockfileVersion: 5.3
 
 specifiers:
   '@types/jest': ^29.2.5
-  '@types/lodash': ^4.14.191
   '@types/node': ^18.11.18
   '@typescript-eslint/eslint-plugin': ^5.47.1
   '@typescript-eslint/parser': ^5.47.1
   eslint: ^8.31.0
   jest: ^29.3.1
-  lodash: ^4.17.21
   prettier: ^2.8.1
   ts-jest: ^29.0.3
   ts-node: ^10.9.1
@@ -16,13 +14,11 @@ specifiers:
 
 devDependencies:
   '@types/jest': 29.2.5
-  '@types/lodash': 4.14.191
   '@types/node': 18.11.18
   '@typescript-eslint/eslint-plugin': 5.47.1_05da8f9785354fe9ae8569fc7b1a482c
   '@typescript-eslint/parser': 5.47.1_eslint@8.31.0+typescript@4.9.4
   eslint: 8.31.0
   jest: 29.3.1_c94e0f8eadb71b347b2a0c987637d777
-  lodash: 4.17.21
   prettier: 2.8.1
   ts-jest: 29.0.3_jest@29.3.1+typescript@4.9.4
   ts-node: 10.9.1_0581ab4a3d99d86da3e98604f38a692c
@@ -799,10 +795,6 @@ packages:
 
   /@types/json-schema/7.0.11:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}
-    dev: true
-
-  /@types/lodash/4.14.191:
-    resolution: {integrity: sha512-BdZ5BCCvho3EIXw6wUCXHe7rS53AIDPLE+JzwgT+OsJk53oBfbSmZZ7CX4VaRoN78N+TJpFi9QPlfIVNmJYWxQ==}
     dev: true
 
   /@types/node/18.11.18:
@@ -2360,10 +2352,6 @@ packages:
 
   /lodash.merge/4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
-    dev: true
-
-  /lodash/4.17.21:
-    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
     dev: true
 
   /lru-cache/5.1.1:

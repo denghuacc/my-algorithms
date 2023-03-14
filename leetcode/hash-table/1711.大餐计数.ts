@@ -51,8 +51,6 @@
  *
  */
 
-import * as _ from "lodash";
-
 // @lc code=start
 // Time Limit Exceeded
 var countPairs = function (deliciousness: number[]): number {
@@ -72,7 +70,7 @@ var countPairs = function (deliciousness: number[]): number {
 // hash table
 var countPairs = function (deliciousness: number[]): number {
   const MOD = 1e9 + 7;
-  const maxVal = _.max(deliciousness)!;
+  const maxVal = Math.max(...deliciousness);
   const maxSum = maxVal * 2;
   let pairs = 0;
   const map: Map<number, number> = new Map();

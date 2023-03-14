@@ -45,36 +45,38 @@
  *
  */
 
-import * as _ from "lodash";
-
 // @lc code=start
 // stack
 function removeDuplicateLetters(s: string): string {
   const visit: number[] = new Array(26).fill(0);
-  const num = _.countBy(s);
+  const num: Map<string, number> = new Map();
+  for (const ch of s) {
+    num.set(ch, (num.get(ch) ?? 0) + 1);
+  }
+
   const stack: string[] = [];
 
   for (let i = 0; i < s.length; i++) {
-    const c = s[i];
-    if (!visit[getCharCode(c)]) {
-      while (stack.length && stack[stack.length - 1] > c) {
-        if (num[stack[stack.length - 1]] > 0) {
+    const ch = s[i];
+    if (!visit[getCharCode(ch)]) {
+      while (stack.length && stack[stack.length - 1] > ch) {
+        if (num.get(stack[stack.length - 1])! > 0) {
           visit[getCharCode(stack[stack.length - 1])] = 0;
           stack.pop();
         } else {
           break;
         }
       }
-      visit[getCharCode(c)] = 1;
-      stack.push(c);
+      visit[getCharCode(ch)] = 1;
+      stack.push(ch);
     }
-    num[c] -= 1;
+    num.set(ch, (num.get(ch) ?? 0) - 1);
   }
 
   return stack.join("");
 
-  function getCharCode(c: string): number {
-    return c.charCodeAt(0) - "a".charCodeAt(0);
+  function getCharCode(ch: string): number {
+    return ch.charCodeAt(0) - "a".charCodeAt(0);
   }
 }
 // @lc code=end

@@ -66,8 +66,6 @@
  *
  */
 
-import * as _ from "lodash";
-
 export {};
 
 // @lc code=start
@@ -104,7 +102,7 @@ class UnionFind {
 }
 
 function largestComponentSize(nums: number[]): number {
-  const m = _.max(nums)!;
+  const m = Math.max(...nums);
   const uf = new UnionFind(m + 1);
   for (const num of nums) {
     for (let i = 2; i * i <= num; i++) {

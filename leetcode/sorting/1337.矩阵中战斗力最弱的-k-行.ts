@@ -77,24 +77,31 @@
  *
  */
 
-import * as _ from "lodash";
-
 // @lc code=start
 function kWeakestRows(mat: number[][], k: number): number[] {
-  const sortedMat = mat
-    .map((row, index) => [_.countBy(row), index])
-    .sort((a, b) => {
-      const aOnes = (a[0] as { 1: number })["1"] ?? 0;
-      const bOnes = (b[0] as { 1: number })["1"] ?? 0;
-      if (aOnes === bOnes) {
-        return (a[1] as number) - (b[1] as number);
-      }
-      return aOnes - bOnes;
-    });
+  const sortedMat: [Map<number, number>, number][] = [];
+
+  for (let i = 0; i < mat.length; i++) {
+    const row = mat[i];
+    const counts: Map<number, number> = new Map();
+    for (const num of row) {
+      counts.set(num, (counts.get(num) ?? 0) + 1);
+    }
+    sortedMat.push([counts, i]);
+  }
+
+  sortedMat.sort((a, b) => {
+    const aOnes = a[0].get(1) ?? 0;
+    const bOnes = b[0].get(1) ?? 0;
+    if (aOnes === bOnes) {
+      return a[1] - b[1];
+    }
+    return aOnes - bOnes;
+  });
 
   const ret: number[] = [];
   for (let i = 0; i < k; i++) {
-    const index = sortedMat[i][1] as number;
+    const index = sortedMat[i][1];
     ret.push(index);
   }
   return ret;
