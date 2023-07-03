@@ -50,21 +50,22 @@ var addTwoNumbers = function (
   let cur = dummy;
   let carry = 0;
 
-  while (l1 || l2) {
-    const x = !l1 ? 0 : l1.val;
-    const y = !l2 ? 0 : l2.val;
-    let sum = x + y + carry;
-
-    carry = sum > 9 ? 1 : 0;
+  while (l1 || l2 || carry > 0) {
+    let sum = carry;
+    if (l1) {
+      sum += l1.val;
+      l1 = l1.next;
+    }
+    if (l2) {
+      sum += l2.val;
+      l2 = l2.next;
+    }
+    carry = Math.floor(sum / 10);
     sum = sum % 10;
     cur.next = new ListNode(sum);
-
     cur = cur.next;
-    if (l1) l1 = l1.next;
-    if (l2) l2 = l2.next;
   }
 
-  if (carry === 1) cur.next = new ListNode(carry);
   return dummy.next;
 };
 // @lc code=end
