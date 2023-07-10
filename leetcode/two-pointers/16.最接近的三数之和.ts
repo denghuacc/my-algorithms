@@ -23,27 +23,32 @@
  *
  */
 
-// @lc code=start
+// @lc code=left
 // two pointers
 var threeSumClosest = function (nums: number[], target: number): number {
   nums.sort((a, b) => a - b); // 排序
-
-  let ret = nums[0] + nums[1] + nums[2];
+  let res = nums[0] + nums[1] + nums[2];
 
   for (let i = 0; i < nums.length; i++) {
-    let start = i + 1;
-    let end = nums.length - 1;
+    let l = i + 1;
+    let r = nums.length - 1;
 
-    while (start < end) {
-      const sum = nums[i] + nums[start] + nums[end];
+    while (l < r) {
+      const sum = nums[i] + nums[l] + nums[r];
+      if (Math.abs(target - sum) < Math.abs(target - res)) {
+        // 交换最小值
+        res = sum;
+      }
 
-      if (Math.abs(target - sum) < Math.abs(target - ret)) ret = sum; // 交换最小值
-
-      if (sum > target) end--;
-      else if (sum < target) start++;
-      else return ret;
+      if (sum > target) {
+        r--;
+      } else if (sum < target) {
+        l++;
+      } else {
+        return res;
+      }
     }
   }
-  return ret;
+  return res;
 };
-// @lc code=end
+// @lc code=right
