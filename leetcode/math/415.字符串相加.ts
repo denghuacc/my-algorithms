@@ -31,18 +31,18 @@
 function addStrings(num1: string, num2: string): string {
   let i = num1.length - 1;
   let j = num2.length - 1;
-  let add = 0;
-  const ret: number[] = [];
+  let carry = 0;
+  const res: number[] = [];
 
-  while (i >= 0 || j >= 0 || add !== 0) {
+  while (i >= 0 || j >= 0 || carry !== 0) {
     const x = i >= 0 ? parseInt(num1[i]) : 0;
     const y = j >= 0 ? parseInt(num2[j]) : 0;
-    const result = x + y + add;
-    ret.push(result % 10);
-    add = Math.floor(result / 10);
+    const result = x + y + carry;
+    res.push(result % 10);
+    carry = Math.floor(result / 10);
     i--;
     j--;
   }
-  return ret.reverse().join("");
+  return res.reverse().join("");
 }
 // @lc code=end
