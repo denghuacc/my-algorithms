@@ -41,7 +41,7 @@ var trap = function (height: number[]): number {
       maxLeft = Math.max(maxLeft, height[j]);
     }
 
-    for (let j = i; j < size; i++) {
+    for (let j = i; j < size; j++) {
       maxRight = Math.max(maxRight, height[j]);
     }
 
