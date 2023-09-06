@@ -59,7 +59,7 @@ impl Solution {
             }
             n /= 3;
         }
-        return true;
+        true
     }
 }
 // @lc code=end

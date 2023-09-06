@@ -69,7 +69,7 @@ impl Solution {
                 map.insert(sum, i);
             }
         }
-        return res as i32;
+        res as i32
     }
 }
 // @lc code=end

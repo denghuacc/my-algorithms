@@ -59,13 +59,14 @@
 // @lc code=start
 impl Solution {
     pub fn shortest_subarray(nums: Vec<i32>, k: i32) -> i32 {
+        use std::collections::VecDeque;
         let n = nums.len();
         let mut prefix_sums = vec![0; n + 1];
         for i in 0..n {
             prefix_sums[i + 1] = prefix_sums[i] + nums[i] as i64;
         }
         let mut res = n + 1;
-        let mut queue = std::collections::VecDeque::<usize>::new();
+        let mut queue = VecDeque::<usize>::new();
         for i in 0..=n {
             while let Some(&j) = queue.back() {
                 if prefix_sums[i] <= prefix_sums[j] {

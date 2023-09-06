@@ -61,7 +61,8 @@
 // @lc code=start
 impl Solution {
     pub fn count_consistent_strings(allowed: String, words: Vec<String>) -> i32 {
-        let mut set = std::collections::HashSet::<char>::new();
+        use std::collections::HashSet;
+        let mut set = HashSet::<char>::new();
         for ch in allowed.chars() {
             set.insert(ch);
         }
@@ -78,7 +79,7 @@ impl Solution {
                 res += 1;
             }
         }
-        return res;
+        res
     }
 }
 // @lc code=end

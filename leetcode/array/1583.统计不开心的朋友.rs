@@ -86,27 +86,28 @@
 // @lc code=start
 impl Solution {
     pub fn unhappy_friends(n: i32, preferences: Vec<Vec<i32>>, pairs: Vec<Vec<i32>>) -> i32 {
-        let mut order = vec![vec![0; n as usize]; n as usize];
+        let n = n as usize;
+        let mut order = vec![vec![0; n]; n];
         for i in 0..n {
             for j in 0..n - 1 {
-                order[i as usize][preferences[i as usize][j as usize] as usize] = j;
+                order[i][preferences[i][j] as usize] = j;
             }
         }
-        let mut matches = vec![0; n as usize];
+        let mut matches = vec![0; n];
         for pair in pairs {
-            let a = pair[0];
-            let b = pair[1];
-            matches[a as usize] = b;
-            matches[b as usize] = a;
+            let a = pair[0] as usize;
+            let b = pair[1] as usize;
+            matches[a] = b;
+            matches[b] = a;
         }
         let mut unhappy_count = 0;
         for x in 0..n {
-            let y = matches[x as usize];
-            let idx = order[x as usize][y as usize];
+            let y = matches[x];
+            let idx = order[x][y];
             for i in 0..idx {
-                let u = preferences[x as usize][i as usize];
-                let v = matches[u as usize];
-                if order[u as usize][x as usize] < order[u as usize][v as usize] {
+                let u = preferences[x][i] as usize;
+                let v = matches[u];
+                if order[u][x] < order[u][v] {
                     unhappy_count += 1;
                     break;
                 }

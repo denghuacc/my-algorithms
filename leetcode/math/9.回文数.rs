@@ -75,7 +75,7 @@ impl Solution {
             cur = cur * 10 + num % 10;
             num /= 10;
         }
-        return cur == x;
+        cur == x
     }
 }
 // @lc code=end

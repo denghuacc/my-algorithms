@@ -95,12 +95,12 @@ impl Solution {
     // }
 
     pub fn profitable_schemes(n: i32, min_profit: i32, group: Vec<i32>, profit: Vec<i32>) -> i32 {
-        const MOD: i32 = 1e9 as i32 + 7;
-        let len = group.len();
         let n = n as usize;
         let min_profit = min_profit as usize;
+        const MOD: i32 = 1e9 as i32 + 7;
+        let len = group.len();
 
-        let mut dp = vec![vec![0; min_profit as usize + 1]; n as usize + 1];
+        let mut dp = vec![vec![0; min_profit + 1]; n + 1];
         for i in 0..n + 1 {
             dp[i][0] = 1
         }

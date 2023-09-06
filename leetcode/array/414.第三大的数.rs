@@ -65,9 +65,9 @@ impl Solution {
     // }
 
     pub fn third_max(nums: Vec<i32>) -> i32 {
-        let mut a = i64::min_value();
-        let mut b = i64::min_value();
-        let mut c = i64::min_value();
+        let mut a = i64::MIN;
+        let mut b = i64::MIN;
+        let mut c = i64::MIN;
 
         for i in 0..nums.len() {
             let num = nums[i] as i64;
@@ -75,19 +75,15 @@ impl Solution {
                 c = b;
                 b = a;
                 a = num;
-            } else if a > num && num > b {
+            } else if num < a && num > b {
                 c = b;
                 b = num;
-            } else if b > num && num > c {
+            } else if num < b && num > c {
                 c = num;
             }
         }
 
-        return if c == i64::min_value() {
-            a as i32
-        } else {
-            c as i32
-        };
+        return if c == i64::MIN { a as i32 } else { c as i32 };
     }
 }
 // @lc code=end

@@ -80,14 +80,15 @@ impl Solution {
                     / 4.0;
             }
         }
-        return dp[n][n];
+        dp[n][n]
     }
 }
 
 fn get_index(i: i32) -> usize {
     if i < 0 {
-        return 0;
+        0
+    } else {
+        i as usize
     }
-    return i as usize;
 }
 // @lc code=end

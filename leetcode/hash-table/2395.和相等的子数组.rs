@@ -68,7 +68,7 @@ impl Solution {
             }
             set.insert(sum);
         }
-        return false;
+        false
     }
 }
 // @lc code=end

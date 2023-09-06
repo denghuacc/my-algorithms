@@ -46,12 +46,12 @@
 // @lc code=start
 impl Solution {
     pub fn find_nth_digit(n: i32) -> i32 {
-        let mut digit = 1;
-        let mut count = 9;
-        let mut n = n;
+        let mut digit = 1 as u64;
+        let mut count = 9 as u64;
+        let mut n = n as u64;
         let mut start = 1;
 
-        while n as u64 > digit as u64 * count as u64 {
+        while n > digit * count {
             n -= digit * count;
             digit += 1;
             count *= 10;
@@ -64,7 +64,7 @@ impl Solution {
         for _ in 0..c {
             num /= 10;
         }
-        num % 10
+        (num % 10) as i32
     }
 }
 // @lc code=end

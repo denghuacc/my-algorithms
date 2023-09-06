@@ -70,7 +70,7 @@ impl Solution {
                 covered = i as i32 + 2;
             }
         }
-        return res;
+        res
     }
 }
 // @lc code=end

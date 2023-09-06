@@ -68,15 +68,19 @@ impl Solution {
                 l = mid + 1;
             }
         }
-        return ((r + 1) % MOD) as i32;
+        ((r + 1) % MOD) as i32
     }
 }
 
 fn lcm(a: i64, b: i64) -> i64 {
-    return (a * b) / gcd(a, b);
+    (a * b) / gcd(a, b)
 }
 
 fn gcd(a: i64, b: i64) -> i64 {
-    return if b != 0 { gcd(b, a % b) } else { a };
+    if b != 0 {
+        gcd(b, a % b)
+    } else {
+        a
+    }
 }
 // @lc code=end

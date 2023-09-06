@@ -78,7 +78,7 @@ impl Solution {
                 dp[i + 1][j + 1] += (dp[i][j] - 1.0) / 2.0;
             }
         }
-        return (1 as f64).min(dp[query_row][query_glass]);
+        (1 as f64).min(dp[query_row][query_glass])
     }
 }
 // @lc code=end

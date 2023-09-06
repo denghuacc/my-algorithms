@@ -62,7 +62,7 @@ impl Solution {
                 }
             }
         }
-        return b;
+        b
     }
 }
 // @lc code=end

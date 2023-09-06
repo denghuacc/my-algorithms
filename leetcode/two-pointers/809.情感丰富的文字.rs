@@ -63,7 +63,7 @@ impl Solution {
                 res += 1
             }
         }
-        return res;
+        res
     }
 }
 
@@ -92,6 +92,6 @@ fn expend(s: String, t: String) -> bool {
             return false;
         }
     }
-    return i == s.len() && j == t.len();
+    i == s.len() && j == t.len()
 }
 // @lc code=end

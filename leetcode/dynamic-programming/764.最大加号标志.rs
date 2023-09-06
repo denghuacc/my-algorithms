@@ -107,7 +107,7 @@ impl Solution {
                 res = res.max(dp[j][i])
             }
         }
-        return res as i32;
+        res as i32
     }
 }
 // @lc code=end

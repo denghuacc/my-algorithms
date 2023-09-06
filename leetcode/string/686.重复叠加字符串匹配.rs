@@ -69,7 +69,7 @@ impl Solution {
                 return res;
             }
         }
-        return -1;
+        -1
     }
 }
 // @lc code=end

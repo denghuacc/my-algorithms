@@ -87,7 +87,7 @@ impl Solution {
                 pre = last;
             }
         }
-        return res;
+        res
     }
 }
 // @lc code=end

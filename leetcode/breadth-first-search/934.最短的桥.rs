@@ -64,10 +64,11 @@
 // @lc code=start
 impl Solution {
     pub fn shortest_bridge(mut grid: Vec<Vec<i32>>) -> i32 {
+        use std::collections::VecDeque;
         let n = grid.len();
         const DIRS: [(i32, i32); 4] = [(0, 1), (1, 0), (0, -1), (-1, 0)];
         let mut islands = vec![];
-        let mut queue = std::collections::VecDeque::new();
+        let mut queue = VecDeque::new();
 
         for i in 0..n {
             for j in 0..n {
@@ -114,7 +115,7 @@ impl Solution {
                 }
             }
         }
-        return 0;
+        0
     }
 }
 

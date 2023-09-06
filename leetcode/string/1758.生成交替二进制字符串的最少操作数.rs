@@ -65,7 +65,7 @@ impl Solution {
                 cnt += 1;
             }
         }
-        return cnt.min(n as i32 - cnt);
+        cnt.min(n as i32 - cnt)
     }
 }
 // @lc code=end

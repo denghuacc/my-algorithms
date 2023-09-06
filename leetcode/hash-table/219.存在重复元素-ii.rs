@@ -81,7 +81,7 @@ impl Solution {
 
     pub fn contains_nearby_duplicate(nums: Vec<i32>, k: i32) -> bool {
         for i in 0..nums.len() {
-            let mut j = i32::max(0, i as i32 - k);
+            let mut j = 0.max(i as i32 - k);
             while j < i as i32 {
                 if nums[i] == nums[j as usize] {
                     return true;

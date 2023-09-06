@@ -67,13 +67,15 @@
 // @lc code=start
 impl Solution {
     pub fn count_students(students: Vec<i32>, sandwiches: Vec<i32>) -> i32 {
+        let n = sandwiches.len();
         let mut counts = vec![0, 0];
-        for i in 0..students.len() {
+        for i in 0..n {
             counts[students[i] as usize] += 1
         }
-        for i in 0..sandwiches.len() {
-            if counts[sandwiches[i] as usize] > 0 {
-                counts[sandwiches[i] as usize] -= 1
+        for i in 0..n {
+            let idx = sandwiches[i] as usize;
+            if counts[idx] > 0 {
+                counts[idx] -= 1
             } else {
                 break;
             }

@@ -62,7 +62,7 @@ impl Solution {
         }
         let mut nums = nums;
         nums.sort();
-        let mut min = std::i32::MAX;
+        let mut min = i32::MAX;
         let k = k as usize;
         for i in 0..nums.len() - k + 1 {
             min = min.min(nums[i + k - 1] - nums[i]);

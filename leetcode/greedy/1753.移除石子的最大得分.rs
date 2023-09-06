@@ -75,7 +75,7 @@ impl Solution {
     pub fn maximum_score(a: i32, b: i32, c: i32) -> i32 {
         let total = a + b + c;
         let max = *vec![a, b, c].iter().max().unwrap();
-        return (total - max).min(total / 2);
+        (total - max).min(total / 2)
     }
 }
 // @lc code=end

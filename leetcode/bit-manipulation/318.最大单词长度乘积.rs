@@ -55,17 +55,18 @@
 // @lc code=start
 impl Solution {
     pub fn max_product(words: Vec<String>) -> i32 {
-        let mut map = vec![0; words.len()];
+        let n = words.len();
+        let mut map = vec![0; n];
         for (i, word) in words.iter().enumerate() {
             for c in word.chars() {
                 map[i] |= 1 << (c as usize - 'a' as usize);
             }
         }
         let mut res = 0;
-        for i in 0..words.len() {
-            for j in i + 1..words.len() {
+        for i in 0..n {
+            for j in i + 1..n {
                 if map[i] & map[j] == 0 {
-                    res = std::cmp::max(res, words[i].len() as i32 * words[j].len() as i32);
+                    res = res.max(words[i].len() as i32 * words[j].len() as i32);
                 }
             }
         }

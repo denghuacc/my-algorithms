@@ -99,7 +99,7 @@
 // @lc code=start
 impl Solution {
     pub fn is_number(s: String) -> bool {
-        if s.contains("inf") {
+        if s.contains("inf") || s.contains("Infinity") || s.contains("nan") {
             return false;
         }
 

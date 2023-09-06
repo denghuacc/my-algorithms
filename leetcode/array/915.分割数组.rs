@@ -64,7 +64,7 @@ impl Solution {
         let mut left_pos = 0;
 
         for i in 0..n {
-            cur_max = i32::max(cur_max, nums[i]);
+            cur_max = cur_max.max(nums[i]);
             if left_max > nums[i] {
                 left_max = cur_max;
                 left_pos = i;

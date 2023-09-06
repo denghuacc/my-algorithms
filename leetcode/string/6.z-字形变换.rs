@@ -75,7 +75,7 @@ impl Solution {
         if n == 1 {
             return s;
         }
-        let len = std::cmp::min(n, num_rows as usize);
+        let len = n.min(num_rows as usize);
         let mut rows = vec![String::new(); len + 1];
         let mut idx: usize = 0;
         let mut down = false;

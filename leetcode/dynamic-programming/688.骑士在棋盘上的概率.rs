@@ -71,26 +71,29 @@ const DIRS: [(i32, i32); 8] = [
 
 impl Solution {
     pub fn knight_probability(n: i32, k: i32, row: i32, column: i32) -> f64 {
-        let mut dp = vec![vec![vec![0.0; n as usize]; n as usize]; k as usize + 1];
+        let n = n as usize;
+        let k = k as usize;
+        let row = row as usize;
+        let column = column as usize;
+        let mut dp = vec![vec![vec![0.0; n]; n]; k + 1];
         for step in 0..=k {
             for i in 0..n {
                 for j in 0..n {
                     if step == 0 {
-                        dp[step as usize][i as usize][j as usize] = 1.0;
+                        dp[step][i][j] = 1.0;
                     } else {
                         for &(di, dj) in DIRS.iter() {
-                            let ni = i as i32 + di;
-                            let nj = j as i32 + dj;
+                            let ni = (i as i32 + di) as usize;
+                            let nj = (j as i32 + dj) as usize;
                             if ni >= 0 && ni < n && nj >= 0 && nj < n {
-                                dp[step as usize][i as usize][j as usize] +=
-                                    dp[step as usize - 1][ni as usize][nj as usize] / 8.0;
+                                dp[step][i][j] += dp[step - 1][ni][nj] / 8.0;
                             }
                         }
                     }
                 }
             }
         }
-        dp[k as usize][row as usize][column as usize]
+        dp[k][row][column]
     }
 }
 // @lc code=end

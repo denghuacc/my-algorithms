@@ -84,8 +84,7 @@ impl Solution {
             if left >= right {
                 return true;
             }
-            return check_self_palindrome(&a, left, right)
-                || check_self_palindrome(&b, left, right);
+            check_self_palindrome(&a, left, right) || check_self_palindrome(&b, left, right)
         }
 
         fn check_self_palindrome(a: &Vec<u8>, mut left: usize, mut right: usize) -> bool {
@@ -93,7 +92,7 @@ impl Solution {
                 left += 1;
                 right -= 1;
             }
-            return left >= right;
+            left >= right
         }
     }
 }

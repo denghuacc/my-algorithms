@@ -65,14 +65,14 @@ impl Solution {
         for i in 0..points.len() {
             let point = points[i].clone();
             if point[0] == x || point[1] == y {
-                let distance = i32::abs(point[0] - x) + i32::abs(point[1] - y);
+                let distance = (point[0] - x).abs() + (point[1] - y).abs();
                 if distance < min_distance {
                     min_distance = distance;
                     idx = i as i32;
                 }
             }
         }
-        return idx;
+        idx
     }
 }
 // @lc code=end

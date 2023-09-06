@@ -115,7 +115,7 @@ impl DetectSquares {
             }
             res
         } else {
-            return 0;
+            0
         }
     }
 }

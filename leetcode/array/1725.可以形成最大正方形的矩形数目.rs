@@ -58,7 +58,7 @@ impl Solution {
     pub fn count_good_rectangles(rectangles: Vec<Vec<i32>>) -> i32 {
         let sides = rectangles
             .iter()
-            .map(|r| i32::min(r[0], r[1]))
+            .map(|r| r[0].min(r[1]))
             .collect::<Vec<_>>();
         let mut res = 0;
         let mut max = 0;

@@ -74,7 +74,7 @@ impl Solution {
             }
             first_indexes[idx] = i + 1;
         }
-        return true;
+        true
     }
 }
 // @lc code=end

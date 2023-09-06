@@ -94,13 +94,16 @@
 use std::collections::VecDeque;
 impl Solution {
     pub fn second_minimum(n: i32, edges: Vec<Vec<i32>>, time: i32, change: i32) -> i32 {
-        let mut graph: Vec<Vec<usize>> = vec![vec![]; n as usize + 1];
+        let n = n as usize;
+        let mut graph: Vec<Vec<usize>> = vec![vec![]; n + 1];
         for edge in edges {
-            graph[edge[0] as usize].push(edge[1] as usize);
-            graph[edge[1] as usize].push(edge[0] as usize);
+            let v = edge[0] as usize;
+            let w = edge[1] as usize;
+            graph[v].push(w);
+            graph[w].push(v);
         }
 
-        let mut path = vec![vec![i32::MAX; 2]; n as usize + 1];
+        let mut path = vec![vec![i32::MAX; 2]; n + 1];
         path[1][0] = 0;
         let mut queue = VecDeque::new();
         queue.push_back((1, 0));
@@ -119,7 +122,7 @@ impl Solution {
         }
 
         let mut res = 0;
-        for i in 0..path[n as usize][1] as usize {
+        for i in 0..path[n][1] as usize {
             if res % (2 * change) >= change {
                 res = res + (2 * change - (res % (2 * change)));
             }

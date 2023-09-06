@@ -70,9 +70,10 @@ impl Solution {
         let sum = amount.iter().sum::<i32>();
         let max = *amount.iter().max().unwrap();
         if max >= sum - max {
-            return max;
+            max
+        } else {
+            max + (sum - max * 2 - 1) / 2 + 1
         }
-        return max + (sum - max * 2 - 1) / 2 + 1;
     }
 }
 // @lc code=end

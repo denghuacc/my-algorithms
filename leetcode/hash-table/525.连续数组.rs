@@ -43,7 +43,7 @@
  */
 
 // @lc code=start
-use std::{cmp, collections::HashMap};
+use std::collections::HashMap;
 impl Solution {
     // pub fn find_max_length(nums: Vec<i32>) -> i32 {
     //     let mut max_length = 0;
@@ -86,7 +86,7 @@ impl Solution {
 
             if map.contains_key(&counter) {
                 let pre_index = map.get(&counter).unwrap();
-                max_length = cmp::max(max_length, i as i32 - pre_index)
+                max_length = max_length.max(i as i32 - pre_index)
             } else {
                 map.insert(counter, i as i32);
             }

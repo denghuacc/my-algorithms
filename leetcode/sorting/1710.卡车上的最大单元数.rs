@@ -75,7 +75,7 @@ impl Solution {
                 }
             }
         }
-        return res;
+        res
     }
 }
 // @lc code=end

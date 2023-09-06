@@ -64,12 +64,12 @@ impl Solution {
         let mut res = vec![];
         let m = matrix.len();
         let n = matrix[0].len();
-        let mut row_min = vec![std::i32::MAX; m];
-        let mut col_max = vec![std::i32::MIN; n];
+        let mut row_min = vec![i32::MAX; m];
+        let mut col_max = vec![i32::MIN; n];
         for i in 0..m {
             for j in 0..n {
-                row_min[i] = std::cmp::min(row_min[i], matrix[i][j]);
-                col_max[j] = std::cmp::max(col_max[j], matrix[i][j]);
+                row_min[i] = row_min[i].min(matrix[i][j]);
+                col_max[j] = col_max[j].max(matrix[i][j]);
             }
         }
         for i in 0..m {

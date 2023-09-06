@@ -69,7 +69,7 @@ impl Solution {
                 res += max_freq - min_freq;
             }
         }
-        return res as i32;
+        res as i32
     }
 }
 // @lc code=end

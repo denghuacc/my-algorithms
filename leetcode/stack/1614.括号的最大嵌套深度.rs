@@ -90,7 +90,7 @@ impl Solution {
             } else if c == ')' {
                 size -= 1;
             }
-            depth = std::cmp::max(depth, size);
+            depth = depth.max(size);
         }
         depth
     }

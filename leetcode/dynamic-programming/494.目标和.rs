@@ -92,14 +92,14 @@ impl Solution {
             return 0;
         }
         let n = nums.len();
-        let neg = diff / 2;
+        let neg = (diff / 2) as usize;
 
-        let mut dp = vec![0; neg as usize + 1];
+        let mut dp = vec![0; neg + 1];
         dp[0] = 1;
 
-        for num in nums.iter() {
-            for j in (*num..neg + 1).rev() {
-                dp[j as usize] += dp[j as usize - *num as usize]
+        for &num in nums.iter() {
+            for j in (num as usize..neg + 1).rev() {
+                dp[j] += dp[j - num as usize]
             }
         }
 

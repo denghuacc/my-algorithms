@@ -65,7 +65,7 @@ impl Solution {
             x = (x * 2 + num) % MOD;
             y = (y * 2) % MOD;
         }
-        return ((res + MOD) % MOD) as i32;
+        ((res + MOD) % MOD) as i32
     }
 }
 // @lc code=end

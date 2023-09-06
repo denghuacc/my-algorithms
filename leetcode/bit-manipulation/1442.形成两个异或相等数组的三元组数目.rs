@@ -75,10 +75,11 @@
 // @lc code=start
 impl Solution {
     pub fn count_triplets(arr: Vec<i32>) -> i32 {
+        use std::collections::HashMap;
         let mut res = 0;
         let mut s = 0;
-        let mut cnt = std::collections::HashMap::new();
-        let mut total = std::collections::HashMap::new();
+        let mut cnt = HashMap::new();
+        let mut total = HashMap::new();
 
         for (i, &x) in arr.iter().enumerate() {
             let t = s ^ x;

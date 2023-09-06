@@ -69,7 +69,8 @@
 // @lc code=start
 impl Solution {
     pub fn count_balls(low_limit: i32, high_limit: i32) -> i32 {
-        let mut idx_to_cnt = std::collections::HashMap::<i32, i32>::new();
+        use std::collections::HashMap;
+        let mut idx_to_cnt = HashMap::<i32, i32>::new();
         for i in low_limit..=high_limit {
             let idx = get_idx(i);
             if let Some(&mut cnt) = idx_to_cnt.get_mut(&idx) {
@@ -82,7 +83,7 @@ impl Solution {
         for &cnt in idx_to_cnt.values() {
             res = res.max(cnt);
         }
-        return res;
+        res
     }
 }
 
@@ -93,6 +94,6 @@ fn get_idx(num: i32) -> i32 {
         idx += num % 10;
         num = num / 10;
     }
-    return idx;
+    idx
 }
 // @lc code=end

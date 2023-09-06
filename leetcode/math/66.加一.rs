@@ -94,7 +94,7 @@ impl Solution {
         }
         let mut digits = vec![0; n + 1];
         digits[0] = 1;
-        return digits;
+        digits
     }
 }
 // @lc code=end

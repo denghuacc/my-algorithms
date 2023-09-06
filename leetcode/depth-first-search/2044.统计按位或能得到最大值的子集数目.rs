@@ -70,7 +70,7 @@ impl Solution {
         let mut cnt = 0;
         let mut max_or = 0;
         dfs(0, 0, &nums, &mut cnt, &mut max_or);
-        return cnt;
+        cnt
     }
 }
 

@@ -63,15 +63,17 @@
 // @lc code=start
 impl Solution {
     pub fn valid_path(n: i32, edges: Vec<Vec<i32>>, source: i32, destination: i32) -> bool {
-        let mut adj_list: Vec<Vec<_>> = vec![vec![]; n as usize];
+        use std::collections::{HashSet, VecDeque};
+        let n = n as usize;
+        let mut adj_list: Vec<Vec<_>> = vec![vec![]; n];
         for edge in edges.iter() {
             let x = edge[0] as usize;
             let y = edge[1] as usize;
             adj_list[x].push(y);
             adj_list[y].push(x);
         }
-        let mut visited = std::collections::HashSet::new();
-        let mut queue = std::collections::VecDeque::new();
+        let mut visited = HashSet::new();
+        let mut queue = VecDeque::new();
         queue.push_back(source as usize);
         visited.insert(source as usize);
         while !queue.is_empty() {
@@ -79,7 +81,7 @@ impl Solution {
                 if vertex == destination as usize {
                     break;
                 }
-                for &next in adj_list[vertex as usize].iter() {
+                for &next in adj_list[vertex].iter() {
                     if !visited.contains(&next) {
                         queue.push_back(next);
                         visited.insert(next);
@@ -87,7 +89,7 @@ impl Solution {
                 }
             }
         }
-        return visited.contains(&(destination as usize));
+        visited.contains(&(destination as usize))
     }
 }
 // @lc code=end

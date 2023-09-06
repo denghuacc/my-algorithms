@@ -96,20 +96,21 @@ impl Solution {
     pub fn last_stone_weight_ii(stones: Vec<i32>) -> i32 {
         let sum = stones.iter().fold(0, |acc, i| acc + i);
         let n = stones.len();
-        let m = sum / 2;
+        let m = (sum / 2) as usize;
 
-        let mut dp = vec![false; m as usize + 1];
+        let mut dp = vec![false; m + 1];
         dp[0] = true;
 
         for &weight in stones.iter() {
+            let weight = weight as usize;
             for j in (weight..m + 1).rev() {
-                dp[j as usize] = dp[j as usize] || dp[j as usize - weight as usize]
+                dp[j] = dp[j] || dp[j - weight]
             }
         }
 
         for j in (0..m + 1).rev() {
-            if dp[j as usize] {
-                return sum - 2 * j;
+            if dp[j] {
+                return sum - 2 * j as i32;
             }
         }
 

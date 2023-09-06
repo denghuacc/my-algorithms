@@ -68,7 +68,7 @@ impl Solution {
             pre = num.max(pre + 1);
             res += pre - num;
         }
-        return res;
+        res
     }
 }
 // @lc code=end

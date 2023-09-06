@@ -91,7 +91,7 @@ impl Solution {
         if cnt0 % 2 == 0 {
             return cnt1 >= 1 && cnt2 >= 1;
         }
-        return cnt1 - cnt2 > 2 || cnt2 - cnt1 > 2;
+        cnt1 - cnt2 > 2 || cnt2 - cnt1 > 2
     }
 }
 // @lc code=end

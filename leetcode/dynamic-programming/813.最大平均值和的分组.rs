@@ -54,26 +54,25 @@
 // @lc code=start
 impl Solution {
     pub fn largest_sum_of_averages(nums: Vec<i32>, k: i32) -> f64 {
+        let k = k as usize;
         let n = nums.len();
         let mut prefix_sum = vec![0; n + 1];
         for i in 0..n {
             prefix_sum[i + 1] = prefix_sum[i] + nums[i];
         }
-        let mut dp = vec![vec![0.0; k as usize + 1]; n + 1];
+        let mut dp = vec![vec![0.0; k + 1]; n + 1];
         for i in 1..=n {
             dp[i][1] = (prefix_sum[i] as f64) / i as f64;
         }
-        for j in 2..=k as usize {
+        for j in 2..=k {
             for i in j..=n {
                 for x in j - 1..i {
-                    dp[i][j] = f64::max(
-                        dp[i][j],
-                        dp[x][j - 1] + (prefix_sum[i] - prefix_sum[x]) as f64 / (i - x) as f64,
-                    )
+                    dp[i][j] = dp[i][j]
+                        .max(dp[x][j - 1] + (prefix_sum[i] - prefix_sum[x]) as f64 / (i - x) as f64)
                 }
             }
         }
-        return dp[n][k as usize];
+        return dp[n][k];
     }
 }
 // @lc code=end

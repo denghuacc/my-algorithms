@@ -65,7 +65,7 @@ impl Solution {
                 res += r - l;
             }
         }
-        return res;
+        res
     }
 }
 // @lc code=end

@@ -62,8 +62,8 @@ impl Solution {
         let mut min_x = m;
         let mut min_y = n;
         for op in ops {
-            min_x = i32::min(min_x, op[0]);
-            min_y = i32::min(min_y, op[1]);
+            min_x = min_x.min(op[0]);
+            min_y = min_y.min(op[1]);
         }
         min_x * min_y
     }

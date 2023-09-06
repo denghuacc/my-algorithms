@@ -57,7 +57,7 @@ impl Solution {
             cur += x;
             res = res.max(cur);
         }
-        return res;
+        res
     }
 }
 // @lc code=end

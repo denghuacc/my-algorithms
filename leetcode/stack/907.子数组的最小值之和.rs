@@ -70,7 +70,7 @@ impl Solution {
             res = (res + dp[i]) % MOD;
             stack.push(i);
         }
-        return res;
+        res
     }
 }
 // @lc code=end

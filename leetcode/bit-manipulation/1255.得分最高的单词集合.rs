@@ -108,7 +108,7 @@ impl Solution {
                 res = res.max(sum);
             }
         }
-        return res;
+        res
     }
 }
 // @lc code=end

@@ -93,7 +93,7 @@ impl Solution {
             let mut i = 0;
             while i + size < n {
                 let j = size + 1;
-                dp[i][j] = i32::max(piles[i] - dp[i + 1][j], piles[j - 1] - dp[i][j - 1]);
+                dp[i][j] = (piles[i] - dp[i + 1][j]).max(piles[j - 1] - dp[i][j - 1]);
                 i += 1;
             }
         }

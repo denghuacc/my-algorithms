@@ -74,7 +74,7 @@ impl Solution {
             }
             res += cnt;
         }
-        return (res % MOD) as i32;
+        (res % MOD) as i32
     }
 }
 // @lc code=end

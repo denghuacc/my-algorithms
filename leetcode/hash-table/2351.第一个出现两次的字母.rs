@@ -69,7 +69,7 @@ impl Solution {
                 set.insert(u);
             }
         }
-        return 'a';
+        'a'
     }
 }
 // @lc code=end

@@ -62,7 +62,7 @@ impl Solution {
             map.insert(v, i);
         }
         let mut res = vec![];
-        let mut min: usize = std::usize::MAX;
+        let mut min: usize = usize::MAX;
         for (i, v) in list2.iter().enumerate() {
             if let Some(&index) = map.get(v) {
                 let sum = index + i;

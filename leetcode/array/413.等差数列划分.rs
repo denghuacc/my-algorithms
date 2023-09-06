@@ -64,7 +64,7 @@ impl Solution {
         }
         let mut diff = nums[1] - nums[0];
         let mut t = 0;
-        let mut ret = 0;
+        let mut res = 0;
 
         for i in 2..n {
             if nums[i] - nums[i - 1] == diff {
@@ -73,9 +73,9 @@ impl Solution {
                 diff = nums[i] - nums[i - 1];
                 t = 0;
             }
-            ret += t;
+            res += t;
         }
-        return ret;
+        res
     }
 }
 // @lc code=end

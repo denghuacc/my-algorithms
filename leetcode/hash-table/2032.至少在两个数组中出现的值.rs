@@ -79,7 +79,7 @@ impl Solution {
                 res.push(key)
             }
         }
-        return res;
+        res
     }
 }
 // @lc code=end

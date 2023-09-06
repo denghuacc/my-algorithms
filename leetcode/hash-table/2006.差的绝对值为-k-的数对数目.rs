@@ -81,9 +81,10 @@ impl Solution {
     // }
 
     pub fn count_k_difference(nums: Vec<i32>, k: i32) -> i32 {
+        use std::collections::HashMap;
         let mut res = 0;
         let n = nums.len();
-        let mut map = std::collections::HashMap::new();
+        let mut map = HashMap::new();
         for i in 0..n {
             res += *map.entry(nums[i] + k).or_insert(0);
             res += *map.entry(nums[i] - k).or_insert(0);

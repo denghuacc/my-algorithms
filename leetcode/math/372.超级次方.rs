@@ -61,13 +61,14 @@
 // @lc code=start
 impl Solution {
     pub fn super_pow(a: i32, b: Vec<i32>) -> i32 {
-        return Self::dfs(a, b.clone(), b.len() as i32 - 1);
+        Self::dfs(a, b.clone(), b.len() as i32 - 1)
     }
     fn dfs(a: i32, b: Vec<i32>, u: i32) -> i32 {
         if u == -1 {
-            return 1;
+            1
+        } else {
+            Self::pow(Self::dfs(a, b.clone(), u - 1), 10) * Self::pow(a, b[u as usize]) % 1337
         }
-        return Self::pow(Self::dfs(a, b.clone(), u - 1), 10) * Self::pow(a, b[u as usize]) % 1337;
     }
     fn pow(mut a: i32, mut b: i32) -> i32 {
         let mut ret = 1;
@@ -79,7 +80,7 @@ impl Solution {
             a = a * a % 1337;
             b /= 2;
         }
-        return ret;
+        ret
     }
 }
 // @lc code=end

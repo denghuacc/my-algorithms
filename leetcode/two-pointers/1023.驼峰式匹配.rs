@@ -89,7 +89,7 @@ impl Solution {
                     return false;
                 }
             }
-            return j == n;
+            j == n
         }
     }
 }

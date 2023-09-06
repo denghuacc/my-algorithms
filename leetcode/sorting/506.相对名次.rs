@@ -60,7 +60,8 @@
 // @lc code=start
 impl Solution {
     pub fn find_relative_ranks(score: Vec<i32>) -> Vec<String> {
-        let mut score_map = std::collections::HashMap::new();
+        use std::collections::HashMap;
+        let mut score_map = HashMap::new();
         for (i, s) in score.iter().enumerate() {
             score_map.insert(s, i);
         }
@@ -74,8 +75,8 @@ impl Solution {
                 2 => "Bronze Medal".to_string(),
                 _ => (i + 1).to_string(),
             };
-            if let Some(j) = score_map.get(s) {
-                res[*j] = rank;
+            if let Some(&j) = score_map.get(s) {
+                res[j] = rank;
             }
         }
         res

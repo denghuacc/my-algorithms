@@ -66,7 +66,7 @@ impl Solution {
         if a == b {
             -1
         } else {
-            std::cmp::max(a.len(), b.len()) as i32
+            a.len().max(b.len()) as i32
         }
     }
 }

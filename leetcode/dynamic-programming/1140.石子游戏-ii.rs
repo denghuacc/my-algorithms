@@ -71,7 +71,7 @@ impl Solution {
                 }
             }
         }
-        return dp[0][1];
+        dp[0][1]
     }
 }
 // @lc code=end

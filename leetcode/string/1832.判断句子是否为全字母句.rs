@@ -58,7 +58,7 @@ impl Solution {
         for ch in sentence.chars() {
             set.insert(ch);
         }
-        return set.len() == 26;
+        set.len() == 26
     }
 }
 // @lc code=end

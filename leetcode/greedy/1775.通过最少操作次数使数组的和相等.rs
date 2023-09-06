@@ -84,7 +84,7 @@ impl Solution {
         if diff > 0 {
             return help(&cnt2, &cnt1, diff);
         }
-        return help(&cnt1, &cnt2, diff.abs());
+        help(&cnt1, &cnt2, diff.abs())
     }
 }
 
@@ -102,6 +102,6 @@ fn help(cnt1: &Vec<i32>, cnt2: &Vec<i32>, mut diff: i32) -> i32 {
             diff -= t * i;
         }
     }
-    return res;
+    res
 }
 // @lc code=end
