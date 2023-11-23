@@ -98,4 +98,27 @@ var minimumRecolors = function (blocks: string, k: number): number {
   }
   return res;
 };
+
+var minimumRecolors = function (blocks: string, k: number): number {
+  const n = blocks.length;
+  let count = 0;
+  let res = 0;
+  for (let i = 0; i < n; i++) {
+    if (i < k) {
+      if (blocks[i] === "W") {
+        count++;
+        res++;
+      }
+    } else {
+      if (blocks[i] === "W") {
+        count++;
+      }
+      if (blocks[i - k] === "W") {
+        count--;
+      }
+      res = Math.min(res, count);
+    }
+  }
+  return res;
+};
 // @lc code=end
