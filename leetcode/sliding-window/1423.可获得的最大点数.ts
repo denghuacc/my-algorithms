@@ -3,14 +3,14 @@
  *
  * [1423] 可获得的最大点数
  *
- * https://leetcode-cn.com/problems/maximum-points-you-can-obtain-from-cards/description/
+ * https://leetcode.cn/problems/maximum-points-you-can-obtain-from-cards/description/
  *
  * algorithms
- * Medium (45.10%)
- * Likes:    102
+ * Medium (54.94%)
+ * Likes:    349
  * Dislikes: 0
- * Total Accepted:    20.2K
- * Total Submissions: 37.3K
+ * Total Accepted:    58.9K
+ * Total Submissions: 104.6K
  * Testcase Example:  '[1,2,3,4,5,6,1]\n3'
  *
  * 几张卡牌 排成一行，每张卡牌都有一个对应的点数。点数由整数数组 cardPoints 给出。
@@ -71,25 +71,21 @@
  */
 
 // @lc code=start
-// sliding window
 function maxScore(cardPoints: number[], k: number): number {
   const n = cardPoints.length;
+  const size = n - k;
+  let total = 0;
   let sum = 0;
-
-  // 前 n - k 个元素的和
-  for (let i = 0; i < n - k; i++) {
+  for (let i = 0; i < size; i++) {
+    total += cardPoints[i];
     sum += cardPoints[i];
   }
-
   let minSum = sum;
-  let total = sum;
-
-  for (let i = n - k, j = 0; i < n; i++, j++) {
+  for (let i = size; i < n; i++) {
     total += cardPoints[i];
-    sum = sum - cardPoints[j] + cardPoints[i]; // 滑动窗口求和
-    minSum = Math.min(minSum, sum);
+    sum += cardPoints[i] - cardPoints[i - size];
+    minSum = Math.min(sum, minSum);
   }
-
   return total - minSum;
 }
 // @lc code=end
