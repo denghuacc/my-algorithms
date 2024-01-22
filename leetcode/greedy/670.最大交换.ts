@@ -86,4 +86,20 @@ var maximumSwap = function (num: number): number {
   [numStrArr[idx1], numStrArr[idx2]] = [numStrArr[idx2], numStrArr[idx1]];
   return Number(numStrArr.join(""));
 };
+
+var maximumSwap = function (num: number): number {
+  const strArr = String(num).split("");
+  const sortStrArr = strArr.slice();
+  sortStrArr.sort((a, b) => Number(b) - Number(a));
+  const n = strArr.length;
+  for (let i = 0; i < n; i++) {
+    if (strArr[i] !== sortStrArr[i]) {
+      const j = strArr.lastIndexOf(sortStrArr[i]);
+      strArr[j] = strArr[i];
+      strArr[i] = sortStrArr[i];
+      return Number(strArr.join(""));
+    }
+  }
+  return Number(strArr.join(""));
+};
 // @lc code=end
