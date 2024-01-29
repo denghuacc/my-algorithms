@@ -55,12 +55,12 @@
  */
 
 // @lc code=start
-// dp
+// dp cv
 function findRotateSteps(ring: string, key: string): number {
   const n = ring.length;
   const m = key.length;
 
-  // 字符 ii 在 ring 中出现的位置集合
+  // 字符 i 在 ring 中出现的位置集合
   const pos: number[][] = Array.from(new Array(26), () => []);
   for (let i = 0; i < n; i++) {
     pos[getIdx(ring, i)].push(i);
@@ -68,7 +68,7 @@ function findRotateSteps(ring: string, key: string): number {
 
   // 从前往后拼写出 key 的第 i 个字符， ring 的第 j 个字符与 12:00 方向对齐的最少步数
   const dp: number[][] = Array.from(new Array(m), () =>
-    new Array(n).fill(Number.MAX_SAFE_INTEGER)
+    new Array(n).fill(Infinity)
   );
 
   for (const i of pos[getIdx(key, 0)]) {
@@ -85,10 +85,7 @@ function findRotateSteps(ring: string, key: string): number {
     }
   }
 
-  return dp[m - 1].reduce(
-    (pre, cur) => Math.min(pre, cur),
-    Number.MAX_SAFE_INTEGER
-  );
+  return Math.min(...dp[m - 1]);
 
   function getIdx(str: string, idx: number) {
     return str.charCodeAt(idx) - "a".charCodeAt(0);
