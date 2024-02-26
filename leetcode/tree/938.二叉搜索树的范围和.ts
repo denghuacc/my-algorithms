@@ -65,26 +65,14 @@ var rangeSumBST = function (
   low: number,
   high: number
 ): number {
-  const arr: number[] = [];
-  inorder(root, arr);
-  let sum = 0;
-  for (let i = 0; i < arr.length; i++) {
-    const val = arr[i];
-    if (val >= low) {
-      sum += val;
-    }
-    if (val === high) break;
-  }
-
-  return sum;
-
-  function inorder(node: TreeNode | null, arr: number[]) {
-    if (node) {
-      inorder(node.left, arr);
-      arr.push(node.val);
-      inorder(node.right, arr);
-    }
-  }
+  if (!root) return 0;
+  if (root.val < low) return rangeSumBST(root.right, low, high);
+  if (root.val > high) return rangeSumBST(root.left, low, high);
+  return (
+    root.val +
+    rangeSumBST(root.left, low, high) +
+    rangeSumBST(root.right, low, high)
+  );
 };
 
 // iterative
@@ -93,21 +81,22 @@ var rangeSumBST = function (
   low: number,
   high: number
 ): number {
+  if (!root) return 0;
   let sum = 0;
-  const stack: TreeNode[] = [];
-
-  while (root || stack.length) {
-    while (root) {
-      stack.push(root);
-      root = root.left;
+  const queue: TreeNode[] = [root];
+  while (queue.length) {
+    const node = queue.shift()!;
+    if (node.val < low) {
+      if (node.right) queue.push(node.right);
+    } else if (node.val > high) {
+      if (node.left) queue.push(node.left);
+    } else {
+      sum += node.val;
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
     }
-    root = stack.pop()!;
-    if (root.val >= low && root.val <= high) {
-      sum += root.val;
-    }
-    root = root.right;
   }
-
   return sum;
 };
+
 // @lc code=end
