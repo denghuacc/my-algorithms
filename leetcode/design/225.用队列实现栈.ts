@@ -35,26 +35,34 @@
 
 // @lc code=start
 class MyStack {
-  items: number[];
+  queue: number[];
 
   constructor() {
-    this.items = [];
+    this.queue = [];
   }
 
   push(x: number): void {
-    this.items.push(x);
+    let n = this.queue.length;
+    this.queue.push(x);
+    while (n > 0) {
+      this.queue.push(this.queue[0]);
+      this.queue = this.queue.slice(1);
+      n--;
+    }
   }
 
   pop(): number {
-    return this.items.pop()!;
+    const res = this.queue[0];
+    this.queue = this.queue.slice(1);
+    return res;
   }
 
   top(): number {
-    return this.items[this.items.length - 1];
+    return this.queue[0];
   }
 
   empty(): boolean {
-    return this.items.length === 0;
+    return this.queue.length === 0;
   }
 }
 
