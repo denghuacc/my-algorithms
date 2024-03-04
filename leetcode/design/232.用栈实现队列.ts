@@ -49,26 +49,40 @@
 
 // @lc code=start
 class MyQueue {
-  items: number[];
+  inStack: number[];
+  outStack: number[];
 
   constructor() {
-    this.items = [];
+    this.inStack = [];
+    this.outStack = [];
   }
 
   push(x: number): void {
-    this.items.push(x);
+    this.inStack.push(x);
   }
 
   pop(): number {
-    return this.items.shift()!;
+    if (!this.outStack.length) {
+      this.in2out();
+    }
+    return this.outStack.pop()!;
   }
 
   peek(): number {
-    return this.items[0];
+    if (!this.outStack.length) {
+      this.in2out();
+    }
+    return this.outStack[this.outStack.length - 1];
   }
 
   empty(): boolean {
-    return this.items.length === 0;
+    return this.inStack.length === 0 && this.outStack.length === 0;
+  }
+
+  private in2out() {
+    while (this.inStack.length) {
+      this.outStack.push(this.inStack.pop()!);
+    }
   }
 }
 
