@@ -38,9 +38,9 @@ class NumArray {
   // sum[i] 存储前 i 个元素和，sum[0] = 0
   // sum[i] 存储 nums[0...i-1] 的和
   constructor(nums: number[]) {
-    this.sum = [];
-    this.sum[0] = 0;
-    for (let i = 1; i < nums.length + 1; i++) {
+    const n = nums.length;
+    this.sum = new Array(n + 1).fill(0);
+    for (let i = 1; i < n + 1; i++) {
       this.sum[i] = this.sum[i - 1] + nums[i - 1];
     }
   }
