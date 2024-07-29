@@ -88,20 +88,24 @@ function calPoints(ops: string[]): number {
     const n = points.length;
     switch (op) {
       case "C":
-        sum -= points[n - 1];
+        const last = points[n - 1];
+        sum -= last;
         points.pop();
         break;
       case "D":
-        sum += points[n - 1] * 2;
-        points.push(points[n - 1] * 2);
+        const double = points[n - 1] * 2;
+        sum += double;
+        points.push(double);
         break;
       case "+":
-        sum += points[n - 1] + points[n - 2];
-        points.push(points[n - 1] + points[n - 2]);
+        const pls = points[n - 1] + points[n - 2];
+        sum += pls;
+        points.push(pls);
         break;
       default:
-        sum += parseInt(op, 10);
-        points.push(parseInt(op, 10));
+        const num = parseInt(op, 10);
+        sum += num;
+        points.push(num);
     }
   }
   return sum;
