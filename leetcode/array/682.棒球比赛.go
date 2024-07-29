@@ -90,14 +90,17 @@ func calPoints(ops []string) (sum int) {
 		n := len(points)
 		switch op[0] {
 		case 'C':
-			sum -= points[n-1]
+			last := points[n-1]
+			sum -= last
 			points = points[:n-1]
 		case 'D':
-			sum += points[n-1] * 2
-			points = append(points, points[n-1]*2)
+			double := points[n-1] * 2
+			sum += double
+			points = append(points, double)
 		case '+':
-			sum += points[n-1] + points[n-2]
-			points = append(points, points[n-1]+points[n-2])
+			pls := points[n-1] + points[n-2]
+			sum += pls
+			points = append(points, pls)
 		default:
 			pt, _ := strconv.Atoi(op)
 			sum += pt
