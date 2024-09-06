@@ -50,21 +50,24 @@ var merge = function (nums1: number[], m: number, nums2: number[], n: number) {
 
 // two pointers
 var merge = function (nums1: number[], m: number, nums2: number[], n: number) {
-  let i = m - 1;
-  let j = n - 1;
-  let k = m + n - 1;
-  while (i >= 0 && j >= 0) {
-    if (nums1[i] > nums2[j]) {
-      nums1[k] = nums1[i];
-      i--;
+  let p1 = 0;
+  let p2 = 0;
+  const sorted: number[] = [];
+
+  while (p1 < m || p2 < n) {
+    if (p1 === m) {
+      sorted.push(nums2[p2++]);
+    } else if (p2 === n) {
+      sorted.push(nums1[p1++]);
+    } else if (nums1[p1] < nums2[p2]) {
+      sorted.push(nums1[p1++]);
     } else {
-      nums1[k] = nums2[j];
-      j--;
+      sorted.push(nums2[p2++]);
     }
-    k--;
   }
-  if (j >= 0) {
-    nums1.splice(0, j + 1, ...nums2.slice(0, j + 1));
+
+  for (let p1 = 0; p1 < m + n; p1++) {
+    nums1[p1] = sorted[p1];
   }
 };
 // @lc code=end

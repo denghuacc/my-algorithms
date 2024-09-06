@@ -84,13 +84,21 @@ function maxConsecutiveAnswers(answerKey: string, k: number): number {
   ): number {
     const n = answerKey.length;
     let res = 0;
-    for (let left = 0, right = 0, sum = 0; right < n; right++) {
-      sum += answerKey[right] !== char ? 1 : 0;
+    let left = 0;
+    let right = 0;
+    let sum = 0;
+    while (right < n) {
+      if (answerKey[right] !== char) {
+        sum++;
+      }
       while (sum > k) {
-        sum -= answerKey[left] !== char ? 1 : 0;
+        if (answerKey[left] !== char) {
+          sum--;
+        }
         left++;
       }
       res = Math.max(res, right - left + 1);
+      right++;
     }
     return res;
   }
