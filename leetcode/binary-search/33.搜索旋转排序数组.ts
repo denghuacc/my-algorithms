@@ -51,13 +51,18 @@ var search = function (nums: number[], target: number): number {
     const mid = Math.floor((left + right) / 2);
     if (nums[mid] === target) return mid;
 
+    // 有序数组
     if (nums[0] <= nums[mid]) {
+      // 在范围内
       if (nums[0] <= target && target < nums[mid]) {
+        // 移动 mid 缩小范围
         right = mid - 1;
       } else {
+        // 在无序的另一半
         left = mid + 1;
       }
     } else {
+      // 在范围内
       if (nums[mid] < target && target <= nums[n - 1]) {
         left = mid + 1;
       } else {

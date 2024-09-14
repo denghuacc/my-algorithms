@@ -32,29 +32,6 @@
  */
 
 // @lc code=start
-// array 线性扫描
-var searchRange = function (nums: number[], target: number): number[] {
-  const ret = [-1, -1];
-
-  for (let i = 0; i < nums.length; i++) {
-    if (nums[i] === target) {
-      ret[0] = i;
-      break;
-    }
-  }
-
-  if (ret[0] === -1) return ret;
-
-  for (let j = nums.length - 1; j >= 0; j--) {
-    if (nums[j] === target) {
-      ret[1] = j;
-      break;
-    }
-  }
-
-  return ret;
-};
-
 // binary search
 var searchRange = function (nums: number[], target: number): number[] {
   let ret = [-1, -1];
@@ -88,5 +65,32 @@ var searchRange = function (nums: number[], target: number): number[] {
 
     return ret;
   }
+};
+
+var searchRange = function (nums: number[], target: number): number[] {
+  const n = nums.length;
+  let l = 0;
+  let r = n - 1;
+  while (l <= r) {
+    let m = Math.floor((r - l) / 2) + l;
+    if (nums[m] === target) {
+      let first = m;
+      let last = m;
+      // 向左扩展
+      while (nums[first - 1] === nums[first]) {
+        first--;
+      }
+      // 向右扩展
+      while (nums[last + 1] === nums[last]) {
+        last++;
+      }
+      return [first, last];
+    } else if (nums[m] < target) {
+      l = m + 1;
+    } else {
+      r = m - 1;
+    }
+  }
+  return [-1, -1];
 };
 // @lc code=end

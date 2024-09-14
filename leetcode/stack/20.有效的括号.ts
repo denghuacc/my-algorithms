@@ -57,32 +57,19 @@
 // stack
 var isValid = function (s: string): boolean {
   const stack: string[] = [];
-
-  for (let i = 0; i < s.length; i++) {
-    const c = s[i];
-    if (c === "(" || c === "[" || c === "{") {
+  for (const c of s) {
+    if (c === "(" || c === "{" || c === "[") {
       stack.push(c);
+    } else if (c === ")" && stack[stack.length - 1] === "(") {
+      stack.pop();
+    } else if (c === "}" && stack[stack.length - 1] === "{") {
+      stack.pop();
+    } else if (c === "]" && stack[stack.length - 1] === "[") {
+      stack.pop();
     } else {
-      if (stack.length === 0) {
-        return false;
-      }
-
-      const popC = stack.pop();
-
-      if (c === ")" && popC !== "(") {
-        return false;
-      }
-
-      if (c === "]" && popC !== "[") {
-        return false;
-      }
-
-      if (c === "}" && popC !== "{") {
-        return false;
-      }
+      return false;
     }
   }
-
   return stack.length === 0;
 };
 // @lc code=end

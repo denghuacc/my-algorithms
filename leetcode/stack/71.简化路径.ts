@@ -82,4 +82,25 @@ var simplifyPath = function (path: string): string {
 
   return "/" + stack.join("/");
 };
+
+// 不使用 split
+var simplifyPath = function (path: string): string {
+  const stack = [];
+  const n = path.length;
+  let idx = 0;
+  while (idx < n) {
+    let s = "";
+    while (idx < n && path[idx] !== "/") {
+      s += path[idx];
+      idx++;
+    }
+    if (s === "..") {
+      stack.pop();
+    } else if (s !== "" && s !== ".") {
+      stack.push(s);
+    }
+    idx++;
+  }
+  return "/" + stack.join("/");
+};
 // @lc code=end
