@@ -91,38 +91,36 @@
 // @lc code=start
 // stack
 function evalRPN(tokens: string[]): number {
-  const stack: (string | number)[] = [];
-  let ret = 0;
-
-  if (tokens.length <= 2) {
-    return Number(tokens.pop()!);
-  }
-
-  for (let i = 0; i < tokens.length; i++) {
-    const token = tokens[i];
-    if (!isOperator(token)) {
-      stack.push(token);
-    } else {
-      const ch2 = stack.pop()!;
-      const ch1 = stack.pop()!;
-      if (token === "+") {
-        ret = Number(ch1) + Number(ch2);
-      } else if (token === "-") {
-        ret = Number(ch1) - Number(ch2);
-      } else if (token === "*") {
-        ret = Number(ch1) * Number(ch2);
+  const stk: number[] = [];
+  for (const t of tokens) {
+    if (isOperator(t)) {
+      const b = stk.pop()!;
+      const a = stk.pop()!;
+      let r: number;
+      if (t === "+") {
+        r = a + b;
+      } else if (t === "-") {
+        r = a - b;
+      } else if (t === "*") {
+        r = a * b;
       } else {
-        const val = Number(ch1) / Number(ch2);
-        ret = val < 0 ? Math.ceil(val) : Math.floor(val); // 这是一个『坑』
+        r = division(a, b);
       }
-      stack.push(ret);
+      stk.push(r);
+    } else {
+      stk.push(Number(t));
     }
   }
-
-  return ret;
+  return stk[0];
 
   function isOperator(ch: string) {
     return ch === "+" || ch === "-" || ch === "*" || ch === "/";
+  }
+
+  function division(a: number, b: number): number {
+    const res = a / b;
+    // 除法向零截断
+    return res > 0 ? Math.floor(a / b) : Math.ceil(a / b);
   }
 }
 // @lc code=end
