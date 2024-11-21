@@ -1,0 +1,11 @@
+[package]
+name = "my-algorithms"
+version = "0.1.0"
+authors = ["denghua <denghuacc@gmail.com>"]
+edition = "2024"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+[workspace]
+numbers = ['leetcode']
