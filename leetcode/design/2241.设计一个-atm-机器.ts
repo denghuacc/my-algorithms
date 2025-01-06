@@ -1,3 +1,4 @@
+/*
  * @lc app=leetcode.cn id=2241 lang=typescript
  *
  * [2241] 设计一个 ATM 机器
