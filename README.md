@@ -73,3 +73,5 @@
 - trie
 - two-pointers
 - union-find
+
+Note: The majority of comments in this project are created by AI.
