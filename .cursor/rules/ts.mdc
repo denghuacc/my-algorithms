@@ -3,125 +3,136 @@ description: TypeScript 代码规范
 globs: "**/*.ts"
 alwaysApply: true
 ---
+
 # TypeScript 代码规范
 
 ## 变量声明规范
 
 1. 每个变量应该单独声明，避免在一行中声明多个变量
+
    ```typescript
    // ❌ 错误示例
-   let a = 1, b = 2;
-   
+   let a = 1,
+     b = 2;
+
    // ✅ 正确示例
    let a = 1;
    let b = 2;
    ```
 
 2. 变量命名应该使用驼峰命名法
+
    ```typescript
    // ❌ 错误示例
-   let user_name = 'John';
-   
+   let user_name = "John";
+
    // ✅ 正确示例
-   let userName = 'John';
+   let userName = "John";
    ```
 
 3. 优先使用类型推断，只在必要时显式声明类型
+
    ```typescript
    // ✅ 推荐：让 TypeScript 推断类型
    const age = 25; // 自动推断为 number
-   const users = ['Alice', 'Bob']; // 自动推断为 string[]
-   
+   const users = ["Alice", "Bob"]; // 自动推断为 string[]
+
    // ✅ 必要时显式声明类型
    const userId: string | number = getUserId();
    const config: ApiConfig = loadConfig();
-   
+
    // ❌ 不必要的类型声明
-   const name: string = 'John';
+   const name: string = "John";
    const count: number = 0;
    ```
 
 4. 优先使用 const，只在需要重新赋值时使用 let，避免使用 var
+
    ```typescript
    // ✅ 推荐
    const PI = 3.14;
-   const users = ['Alice', 'Bob'];
+   const users = ["Alice", "Bob"];
    let currentIndex = 0; // 需要重新赋值
-   
+
    // ❌ 避免
-   var globalVar = 'avoid';
+   var globalVar = "avoid";
    let PI = 3.14; // 不会重新赋值，应该用 const
    ```
 
 5. 使用 const assertions 保持字面量类型
+
    ```typescript
    // ✅ 使用 const assertion
-   const themes = ['light', 'dark'] as const;
+   const themes = ["light", "dark"] as const;
    const config = {
-     api: 'https://api.example.com',
-     timeout: 5000
+     api: "https://api.example.com",
+     timeout: 5000,
    } as const;
-   
+
    // ❌ 失去精确类型信息
-   const themes = ['light', 'dark']; // 类型为 string[]
+   const themes = ["light", "dark"]; // 类型为 string[]
    ```
 
 ## 接口和类型规范
 
 1. 接口名称应该使用描述性的名称，不需要 I 前缀
+
    ```typescript
    // ❌ 错误示例（过时的约定）
    interface IUser {}
    interface IApiResponse {}
-   
+
    // ✅ 正确示例（现代最佳实践）
    interface User {}
    interface ApiResponse {}
    ```
 
 2. 类型名称应该使用描述性的名称，不需要 T 前缀
+
    ```typescript
    // ❌ 错误示例（过时的约定）
-   type TStatus = 'active' | 'inactive';
-   type TUserRole = 'admin' | 'user';
-   
+   type TStatus = "active" | "inactive";
+   type TUserRole = "admin" | "user";
+
    // ✅ 正确示例（现代最佳实践）
-   type Status = 'active' | 'inactive';
-   type UserRole = 'admin' | 'user';
+   type Status = "active" | "inactive";
+   type UserRole = "admin" | "user";
    ```
 
 3. 当类型名称与值重名时，可以使用 Type 后缀区分
+
    ```typescript
    // 当需要区分类型和值时
    interface User {
      id: number;
      name: string;
    }
-   
-   type UserType = 'admin' | 'regular';
-   
+
+   type UserType = "admin" | "regular";
+
    // 或者使用更具描述性的名称
-   type UserRole = 'admin' | 'regular';
+   type UserRole = "admin" | "regular";
    ```
 
 4. 使用 union types 而不是枚举（除非必要）
+
    ```typescript
    // ✅ 推荐：使用 union types
-   type Theme = 'light' | 'dark' | 'auto';
-   type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
-   
+   type Theme = "light" | "dark" | "auto";
+   type HttpMethod = "GET" | "POST" | "PUT" | "DELETE";
+
    // ❌ 通常不推荐：枚举
    enum Theme {
-     Light = 'light',
-     Dark = 'dark',
-     Auto = 'auto'
+     Light = "light",
+     Dark = "dark",
+     Auto = "auto",
    }
-   
+
    // ✅ 枚举适用的场景：需要反向映射或复杂逻辑
    enum ErrorCode {
      NetworkError = 1000,
      ValidationError = 1001,
-     AuthError = 1002
+     AuthError = 1002,
    }
    ```
 
@@ -130,27 +141,35 @@ alwaysApply: true
 ## 函数规范
 
 1. 优先使用箭头函数，特别是在回调和简短函数中
+
    ```typescript
    // ✅ 推荐：箭头函数
    const add = (a: number, b: number) => a + b;
-   const users = data.map(item => item.user);
-   
+   const users = data.map((item) => item.user);
+
    // ✅ 也可以：传统函数声明（特别是顶层函数）
    function calculateTotal(items: Item[]): number {
      return items.reduce((sum, item) => sum + item.price, 0);
    }
-   
+
    // ❌ 避免：不必要的 function 关键字
-   const add = function(a: number, b: number) { return a + b; };
+   const add = function (a: number, b: number) {
+     return a + b;
+   };
    ```
 
 2. 函数名称应该使用动词开头，清楚表达功能
+
    ```typescript
    // ✅ 推荐：清晰的函数命名
-   const getUserById = (id: string) => users.find(user => user.id === id);
-   const validateEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-   const transformUserData = (rawData: RawUser) => ({ ...rawData, isActive: true });
-   
+   const getUserById = (id: string) => users.find((user) => user.id === id);
+   const validateEmail = (email: string) =>
+     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+   const transformUserData = (rawData: RawUser) => ({
+     ...rawData,
+     isActive: true,
+   });
+
    // ❌ 避免：模糊的命名
    const getData = () => {}; // 获取什么数据？
    const process = () => {}; // 处理什么？
@@ -158,29 +177,35 @@ alwaysApply: true
    ```
 
 3. 异步函数应该使用描述性的名称，可以包含动作词
+
    ```typescript
    // ✅ 推荐示例
    const fetchUserData = async (id: string) => {
      const response = await fetch(`/api/users/${id}`);
      return response.json();
    };
-   
+
    const saveUserProfile = async (user: User) => {
-     await fetch('/api/users', {
-       method: 'POST',
-       body: JSON.stringify(user)
+     await fetch("/api/users", {
+       method: "POST",
+       body: JSON.stringify(user),
      });
    };
-   
+
    // ❌ 避免的示例
    const asyncGetData = async () => {}; // 不需要 async 前缀
    const getUserDataAsync = async () => {}; // 不需要 Async 后缀
    ```
 
 4. 使用参数解构提高可读性
+
    ```typescript
    // ✅ 推荐：参数解构
-   const createUser = ({ name, email, age }: {
+   const createUser = ({
+     name,
+     email,
+     age,
+   }: {
      name: string;
      email: string;
      age: number;
@@ -189,63 +214,65 @@ alwaysApply: true
      name,
      email,
      age,
-     isActive: true
+     isActive: true,
    });
-   
+
    // ✅ 或者使用接口
    interface CreateUserParams {
      name: string;
      email: string;
      age: number;
    }
-   
+
    const createUser = ({ name, email, age }: CreateUserParams) => ({
      id: generateId(),
      name,
      email,
      age,
-     isActive: true
+     isActive: true,
    });
    ```
 
 ## 代码组织规范
 
 1. 导入语句应该按以下顺序排列，并使用分组
+
    ```typescript
    // 1. Node.js 内置模块
-   import { readFile } from 'fs/promises';
-   import { join } from 'path';
-   
+   import { readFile } from "fs/promises";
+   import { join } from "path";
+
    // 2. 第三方库
-   import React, { useState, useEffect } from 'react';
-   import axios from 'axios';
-   import { clsx } from 'clsx';
-   
+   import React, { useState, useEffect } from "react";
+   import axios from "axios";
+   import { clsx } from "clsx";
+
    // 3. 内部模块（按层级排序）
-   import { config } from '@/config';
-   import { ApiService } from '@/services';
-   import { Button, Modal } from '@/components';
-   import { useAuth } from '@/hooks';
-   
+   import { config } from "@/config";
+   import { ApiService } from "@/services";
+   import { Button, Modal } from "@/components";
+   import { useAuth } from "@/hooks";
+
    // 4. 相对导入
-   import { validateForm } from '../utils';
-   import { UserCard } from './UserCard';
-   
+   import { validateForm } from "../utils";
+   import { UserCard } from "./UserCard";
+
    // 5. 类型导入（单独分组）
-   import type { User, ApiResponse } from '@/types';
-   import type { ComponentProps } from 'react';
+   import type { User, ApiResponse } from "@/types";
+   import type { ComponentProps } from "react";
    ```
 
 2. 使用命名导出而不是默认导出（除非确实需要）
+
    ```typescript
    // ✅ 推荐：命名导出
    export const UserService = {
      getUser: (id: string) => fetch(`/api/users/${id}`),
      createUser: (user: User) => fetch('/api/users', { method: 'POST', body: JSON.stringify(user) })
    };
-   
+
    export const validateEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-   
+
    // ✅ 默认导出适用的场景
    export default function HomePage() {
      return <div>Home</div>;
@@ -253,84 +280,91 @@ alwaysApply: true
    ```
 
 3. 代码分组和组织
+
    ```typescript
    // ✅ 良好的代码组织
-   
+
    // 常量
-   const API_BASE_URL = 'https://api.example.com';
+   const API_BASE_URL = "https://api.example.com";
    const DEFAULT_TIMEOUT = 5000;
-   
+
    // 类型定义
    interface User {
      id: string;
      name: string;
      email: string;
    }
-   
+
    // 工具函数
-   const formatDate = (date: Date) => date.toISOString().split('T')[0];
+   const formatDate = (date: Date) => date.toISOString().split("T")[0];
    const generateId = () => Math.random().toString(36).substr(2, 9);
-   
+
    // 主要功能
    export const UserService = {
      async fetchUser(id: string): Promise<User> {
        const response = await fetch(`${API_BASE_URL}/users/${id}`);
        return response.json();
      },
-     
-     async createUser(userData: Omit<User, 'id'>): Promise<User> {
+
+     async createUser(userData: Omit<User, "id">): Promise<User> {
        const user = { ...userData, id: generateId() };
        const response = await fetch(`${API_BASE_URL}/users`, {
-         method: 'POST',
-         headers: { 'Content-Type': 'application/json' },
-         body: JSON.stringify(user)
+         method: "POST",
+         headers: { "Content-Type": "application/json" },
+         body: JSON.stringify(user),
        });
        return response.json();
-     }
+     },
    };
    ```
 
 ## 现代 TypeScript 特性
 
 1. 使用可选链和空值合并
+
    ```typescript
    // ✅ 使用可选链
-   const userName = user?.profile?.name ?? 'Anonymous';
+   const userName = user?.profile?.name ?? "Anonymous";
    const userEmail = user?.contact?.email;
-   
+
    // ✅ 使用空值合并
    const timeout = config.timeout ?? DEFAULT_TIMEOUT;
-   const theme = userPreferences.theme ?? 'light';
-   
+   const theme = userPreferences.theme ?? "light";
+
    // ❌ 传统的检查方式
-   const userName = user && user.profile && user.profile.name ? user.profile.name : 'Anonymous';
+   const userName =
+     user && user.profile && user.profile.name
+       ? user.profile.name
+       : "Anonymous";
    ```
 
 2. 使用模板字面量类型
+
    ```typescript
    // ✅ 模板字面量类型
    type EventName = `on${Capitalize<string>}`;
-   type Theme = 'light' | 'dark';
+   type Theme = "light" | "dark";
    type ThemeClass = `theme-${Theme}`;
-   
+
    // 用法
-   const className: ThemeClass = 'theme-light';
+   const className: ThemeClass = "theme-light";
    ```
 
 3. 使用 satisfies 操作符
+
    ```typescript
    // ✅ 使用 satisfies 保持类型推断
    const config = {
      development: {
-       apiUrl: 'http://localhost:3000',
-       debug: true
+       apiUrl: "http://localhost:3000",
+       debug: true,
      },
      production: {
-       apiUrl: 'https://api.example.com',
-       debug: false
-     }
+       apiUrl: "https://api.example.com",
+       debug: false,
+     },
    } satisfies Record<string, { apiUrl: string; debug: boolean }>;
-   
+
    // 现在可以安全地访问属性，同时保持精确的类型
    const devUrl = config.development.apiUrl; // 类型为 string
    ```
@@ -338,14 +372,15 @@ alwaysApply: true
 ## 注释规范
 
 1. 使用 TSDoc 格式编写函数注释
-   ```typescript
+
+   ````typescript
    /**
     * 根据用户ID获取用户信息
-    * 
+    *
     * @param userId - 用户的唯一标识符
     * @returns Promise that resolves to user data
     * @throws {Error} 当用户不存在时抛出错误
-    * 
+    *
     * @example
     * ```typescript
     * const user = await getUserInfo('user-123');
@@ -359,28 +394,33 @@ alwaysApply: true
      }
      return response.json();
    };
-   ```
+   ````
 
 2. 复杂逻辑使用清晰的注释说明
+
    ```typescript
    /**
     * 计算用户积分
-    * 
+    *
     * 积分计算规则：
     * - 基础积分：消费金额 × 1
     * - 会员加成：基础积分 × 会员等级系数
     * - 活动加成：满足条件时额外获得 20% 积分
     */
-   const calculateUserPoints = (amount: number, memberLevel: number, hasPromotion = false): number => {
+   const calculateUserPoints = (
+     amount: number,
+     memberLevel: number,
+     hasPromotion = false
+   ): number => {
      // 计算基础积分
      const basePoints = amount;
-     
+
      // 应用会员等级加成
      const memberBonus = basePoints * (memberLevel * 0.1);
-     
+
      // 应用活动加成
      const promotionBonus = hasPromotion ? basePoints * 0.2 : 0;
-     
+
      return Math.floor(basePoints + memberBonus + promotionBonus);
    };
    ```
@@ -389,15 +429,15 @@ alwaysApply: true
    ```typescript
    /**
     * 用户配置选项
-    * 
+    *
     * @property theme - 用户界面主题设置
     * @property notifications - 通知相关设置
     * @property privacy - 隐私相关设置
     */
    interface UserSettings {
      /** 界面主题，支持浅色、深色和自动模式 */
-     theme: 'light' | 'dark' | 'auto';
-     
+     theme: "light" | "dark" | "auto";
+
      /** 通知设置 */
      notifications: {
        /** 是否接收邮件通知 */
@@ -405,9 +445,9 @@ alwaysApply: true
        /** 是否接收推送通知 */
        push: boolean;
        /** 通知频率 */
-       frequency: 'immediate' | 'daily' | 'weekly';
+       frequency: "immediate" | "daily" | "weekly";
      };
-     
+
      /** 隐私设置 */
      privacy: {
        /** 个人资料是否公开 */
@@ -421,6 +461,7 @@ alwaysApply: true
 ## 错误处理规范
 
 1. 使用具体的错误类型
+
    ```typescript
    // ✅ 创建具体的错误类
    class ValidationError extends Error {
@@ -430,10 +471,10 @@ alwaysApply: true
        public code: string
      ) {
        super(message);
-       this.name = 'ValidationError';
+       this.name = "ValidationError";
      }
    }
-   
+
    class ApiError extends Error {
      constructor(
        message: string,
@@ -441,30 +482,31 @@ alwaysApply: true
        public endpoint: string
      ) {
        super(message);
-       this.name = 'ApiError';
+       this.name = "ApiError";
      }
    }
-   
+
    // 使用
    const validateUser = (user: User) => {
      if (!user.email) {
-       throw new ValidationError('Email is required', 'email', 'REQUIRED');
+       throw new ValidationError("Email is required", "email", "REQUIRED");
      }
    };
    ```
 
 2. 使用 Result 类型模式处理可能失败的操作
+
    ```typescript
    // ✅ Result 类型模式
-   type Result<T, E = Error> = 
+   type Result<T, E = Error> =
      | { success: true; data: T }
      | { success: false; error: E };
-   
+
    const fetchUser = async (id: string): Promise<Result<User>> => {
      try {
        const response = await fetch(`/api/users/${id}`);
        if (!response.ok) {
-         return { success: false, error: new Error('User not found') };
+         return { success: false, error: new Error("User not found") };
        }
        const user = await response.json();
        return { success: true, data: user };
@@ -472,9 +514,9 @@ alwaysApply: true
        return { success: false, error: error as Error };
      }
    };
-   
+
    // 使用
-   const result = await fetchUser('123');
+   const result = await fetchUser("123");
    if (result.success) {
      console.log(result.data.name); // 类型安全
    } else {
@@ -485,6 +527,7 @@ alwaysApply: true
 ## 性能优化建议
 
 1. 使用 readonly 修饰符防止意外修改
+
    ```typescript
    // ✅ 使用 readonly
    interface Config {
@@ -492,30 +535,31 @@ alwaysApply: true
      readonly timeout: number;
      readonly features: readonly string[];
    }
-   
+
    const config: Config = {
-     apiUrl: 'https://api.example.com',
+     apiUrl: "https://api.example.com",
      timeout: 5000,
-     features: ['auth', 'analytics'] as const
+     features: ["auth", "analytics"] as const,
    };
    ```
 
 2. 优化类型定义，避免过度计算
+
    ```typescript
    // ✅ 使用映射类型优化
    type ApiEndpoints = {
-     users: '/api/users';
-     posts: '/api/posts';
-     comments: '/api/comments';
+     users: "/api/users";
+     posts: "/api/posts";
+     comments: "/api/comments";
    };
-   
+
    type ApiMethods<T> = {
      [K in keyof T]: {
        get: () => Promise<unknown>;
        post: (data: unknown) => Promise<unknown>;
      };
    };
-   
+
    // 自动生成类型
    type Api = ApiMethods<ApiEndpoints>;
    ```
@@ -523,6 +567,7 @@ alwaysApply: true
 ---
 
 **本规范基于：**
+
 - [TypeScript 官方文档](mdc:https:/www.typescriptlang.org/docs)
 - [Google TypeScript 风格指南](mdc:https:/google.github.io/styleguide/tsguide.html)
 - [Airbnb JavaScript/TypeScript 风格指南](mdc:https:/github.com/airbnb/javascript)
