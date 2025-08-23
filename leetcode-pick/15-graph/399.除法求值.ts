@@ -76,16 +76,21 @@
  */
 
 // @lc code=start
-// Floyd
+/**
+ * Floyd-Warshall 算法解决方案
+ *
+ * 核心思想：将变量之间的关系建模为有向图，使用Floyd算法计算所有变量对之间的比值
+ */
 function calcEquation(
   equations: string[][],
   values: number[],
   queries: string[][]
 ): number[] {
-  let count = 0;
-  const map: Map<string, number> = new Map();
+  let count = 0; // 变量计数器
+  const map: Map<string, number> = new Map(); // 变量名到索引的映射
   const eLen = equations.length;
 
+  // 第一步：为所有变量分配索引
   for (let i = 0; i < eLen; i++) {
     if (!map.has(equations[i][0])) {
       map.set(equations[i][0], count++);
@@ -95,20 +100,24 @@ function calcEquation(
     }
   }
 
+  // 第二步：初始化邻接矩阵，-1表示不可达
   const graph: number[][] = Array.from(new Array(count), () =>
     new Array(count).fill(-1.0)
   );
 
+  // 第三步：填充已知的比值关系
   for (let i = 0; i < eLen; i++) {
-    const va = map.get(equations[i][0])!;
-    const vb = map.get(equations[i][1])!;
-    graph[va][vb] = values[i];
-    graph[vb][va] = 1.0 / values[i];
+    const va = map.get(equations[i][0])!; // 变量a的索引
+    const vb = map.get(equations[i][1])!; // 变量b的索引
+    graph[va][vb] = values[i]; // a / b = values[i]
+    graph[vb][va] = 1.0 / values[i]; // b / a = 1 / values[i]
   }
 
+  // 第四步：Floyd算法，计算所有变量对之间的比值
   for (let k = 0; k < count; k++) {
     for (let i = 0; i < count; i++) {
       for (let j = 0; j < count; j++) {
+        // 如果i->k和k->j都有路径，则i->j的路径为i->k->j
         if (graph[i][k] > 0 && graph[k][j] > 0) {
           graph[i][j] = graph[i][k] * graph[k][j];
         }
@@ -116,14 +125,19 @@ function calcEquation(
     }
   }
 
+  // 第五步：处理查询
   const qLen = queries.length;
   const ret: number[] = [];
   for (let i = 0; i < qLen; i++) {
     const query = queries[i];
-    let result = -1.0;
+    let result = -1.0; // 默认不可达
+
+    // 检查两个变量是否都存在
     if (map.has(query[0]) && map.has(query[1])) {
-      const ia = map.get(query[0])!;
-      const ib = map.get(query[1])!;
+      const ia = map.get(query[0])!; // 变量a的索引
+      const ib = map.get(query[1])!; // 变量b的索引
+
+      // 如果存在路径，返回比值
       if (graph[ia][ib] > 0) {
         result = graph[ia][ib];
       }
@@ -133,3 +147,73 @@ function calcEquation(
   return ret;
 }
 // @lc code=end
+
+/*
+解题思路详解：
+
+1. 问题本质：
+   - 将变量之间的关系建模为有向加权图
+   - 每个变量是一个节点，比值是边的权重
+   - 需要计算任意两个变量之间的比值
+   - 等价于：在有向图中寻找两点间的路径权重
+
+2. 算法分析：
+   - 时间复杂度：O(n³)，其中n是变量的数量
+     * Floyd算法三重循环：O(n³)
+     * 预处理和查询：O(n² + q)，q是查询数量
+   - 空间复杂度：O(n²)，邻接矩阵
+   - 算法类型：Floyd-Warshall 算法
+
+3. 实现要点：
+   - 变量映射：将字符串变量名映射为数字索引
+   - 邻接矩阵：使用二维数组存储所有变量对之间的比值
+   - Floyd算法：通过中间节点计算所有路径
+   - 查询处理：直接查表获取结果
+
+4. 算法步骤：
+   - 变量索引化：为每个变量分配唯一索引
+   - 图构建：根据已知等式构建邻接矩阵
+   - 全源最短路：使用Floyd算法计算所有路径
+   - 查询处理：直接查表返回结果
+
+5. 关键技巧：
+   - 双向边：a/b = x 意味着 b/a = 1/x
+   - 传递性：a/b * b/c = a/c
+   - 不可达标记：使用-1表示无法计算比值
+   - 字符串映射：使用Map提高查找效率
+
+6. Floyd算法原理：
+   - 三重循环：k, i, j
+   - 核心思想：通过中间节点k更新i到j的路径
+   - 条件：i->k和k->j都存在路径
+   - 更新：graph[i][j] = graph[i][k] * graph[k][j]
+
+7. 边界情况处理：
+   - 变量不存在：返回-1
+   - 变量相同：返回1（自己除以自己）
+   - 无路径可达：返回-1
+   - 除数为0：题目保证不会出现
+
+8. 类似问题：
+   - 最短路径问题
+   - 传递闭包问题
+   - 图的可达性问题
+   - 任何需要计算全源路径的问题
+
+9. 算法优势：
+   - 一次性计算所有路径，查询时O(1)
+   - 处理传递关系：a/b * b/c = a/c
+   - 代码简洁，易于实现
+   - 适合处理稠密图
+
+10. 优化思路：
+    - 使用邻接表代替邻接矩阵（稀疏图）
+    - 使用Union-Find处理连通性
+    - 使用DFS/BFS处理单次查询
+    - 记忆化搜索避免重复计算
+
+11. 复杂度分析：
+    - 预处理：O(n³)时间，O(n²)空间
+    - 查询：O(1)时间
+    - 总体：适合查询次数多的情况
+*/

@@ -32,40 +32,99 @@
  */
 
 // @lc code=start
-// array + prefix sum
+/**
+ * 方法一：前缀和 + 暴力解法
+ * 预计算前缀和数组，然后暴力枚举所有子数组
+ */
 var subarraySum = function (nums: number[], k: number): number {
   const n = nums.length;
+  // 构建前缀和数组，sums[i] 表示 nums[0..i-1] 的和
   const sums: number[] = new Array(n + 1).fill(0);
+
   for (let i = 0; i < n; i++) {
     sums[i + 1] = sums[i] + nums[i];
   }
-  let res = 0;
+
+  let count = 0;
+  // 枚举所有可能的子数组 [j, i)
   for (let i = 1; i <= n; i++) {
     for (let j = 0; j < i; j++) {
+      // 子数组 nums[j..i-1] 的和为 sums[i] - sums[j]
       if (sums[i] - sums[j] === k) {
-        res += 1;
+        count++;
       }
     }
   }
-  return res;
+
+  return count;
 };
 
-// array + prefix sum + hash table
+/**
+ * 方法二：前缀和 + 哈希表优化（推荐）
+ * 一次遍历，用哈希表记录前缀和出现次数，避免重复计算
+ */
 var subarraySum = function (nums: number[], k: number): number {
   const n = nums.length;
-  const sumToCount: Map<number, number> = new Map();
-  sumToCount.set(0, 1);
+  // 哈希表：前缀和 -> 出现次数
+  const prefixSumCount: Map<number, number> = new Map();
 
-  let res = 0;
-  let sum = 0;
+  // 初始化：前缀和为0出现1次，处理从开头开始的子数组
+  prefixSumCount.set(0, 1);
+
+  let count = 0;
+  let currentSum = 0;
+
   for (let i = 0; i < n; i++) {
-    sum += nums[i];
-    if (sumToCount.has(sum - k)) {
-      res += sumToCount.get(sum - k)!;
-    }
-    sumToCount.set(sum, (sumToCount.get(sum) ?? 0) + 1);
-  }
-  return res;
-};
+    // 计算当前前缀和
+    currentSum += nums[i];
 
+    // 查找是否存在前缀和为 currentSum - k 的位置
+    // 如果存在，说明从那些位置到当前位置的子数组和为k
+    const targetSum = currentSum - k;
+    if (prefixSumCount.has(targetSum)) {
+      count += prefixSumCount.get(targetSum)!;
+    }
+
+    // 更新当前前缀和的出现次数
+    prefixSumCount.set(currentSum, (prefixSumCount.get(currentSum) ?? 0) + 1);
+  }
+
+  return count;
+};
 // @lc code=end
+
+/*
+解题思路详解：
+
+1. 问题本质：
+   - 找到数组中和为k的连续子数组的个数
+   - 需要考虑所有可能的子数组，包括负数的情况
+   - 利用前缀和的性质：如果prefixSum[i] - prefixSum[j] = k，则nums[j+1..i]的和为k
+
+2. 算法分析：
+   方法一（前缀和 + 暴力）：
+   - 时间复杂度：O(n²) - 双重循环枚举所有子数组
+   - 空间复杂度：O(n) - 前缀和数组
+   
+   方法二（前缀和 + 哈希表）：
+   - 时间复杂度：O(n) - 一次遍历，哈希表操作O(1)
+   - 空间复杂度：O(n) - 哈希表存储前缀和
+
+3. 实现要点：
+   - 前缀和转换：子数组和问题转化为前缀和差值问题
+   - 哈希表优化：记录每个前缀和出现的次数，而不是位置
+   - 初始化技巧：设置prefixSumCount[0] = 1，处理从索引0开始的情况
+   - 边遍历边查找：避免重复计算，提高效率
+
+4. 优化思路：
+   - 核心转换：子数组和问题 → 前缀和差值问题
+   - 哈希表加速：O(1)时间查找目标前缀和
+   - 计数优化：记录出现次数而不是位置，支持重复的前缀和
+   - 一次遍历：边计算前缀和边查找，避免二次遍历
+
+例子分析：nums = [1,1,1], k = 2
+- i=0: sum=1, target=-1, count=0, map=[(0,1),(1,1)]
+- i=1: sum=2, target=0, count=1, map=[(0,1),(1,1),(2,1)]
+- i=2: sum=3, target=1, count=2, map=[(0,1),(1,1),(2,1),(3,1)]
+结果：2个子数组和为2
+*/

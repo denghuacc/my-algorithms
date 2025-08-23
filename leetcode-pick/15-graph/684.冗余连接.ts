@@ -56,39 +56,109 @@
  */
 
 // @lc code=start
-// union-find
-// 遍历所有的边 edges，将连通的结点放入同一个集合，形成一个联通分量G。
-// 在遍历的过程中，如果边 (a, b)的两个结点 a, b已经属于同一联通分量，
-// 则 (a, b)就是该联通分量的冗余边。
-var findRedundantConnection = function (edges: number[][]): number[] {
+/**
+ * 并查集 (Union Find) 解决方案
+ *
+ * 核心思想：遍历所有边，使用并查集维护连通分量，当发现一条边连接的两个节点已经在同一连通分量中时，这条边就是冗余边
+ */
+function findRedundantConnection(edges: number[][]): number[] {
+  // 初始化并查集，节点编号从1开始
   const parent: number[] = new Array(1001).fill(0);
   for (let i = 1; i <= 1000; i++) {
-    parent[i] = i;
+    parent[i] = i; // 每个节点初始时是自己的父节点
   }
+
+  // 遍历所有边
   for (const edge of edges) {
+    // 尝试合并两个节点，如果失败说明这条边是冗余的
     if (!union(edge[0], edge[1])) {
-      return edge;
+      return edge; // 返回冗余边
     }
   }
 
-  return [];
+  return []; // 理论上不会到达这里
 
+  /**
+   * 合并两个节点所在的集合
+   * @param x 第一个节点
+   * @param y 第二个节点
+   * @returns 是否成功合并（true表示成功，false表示已经在同一集合中）
+   */
   function union(x: number, y: number): boolean {
-    const rootX = find(x);
-    const rootY = find(y);
+    const rootX = find(x); // 找到x的根节点
+    const rootY = find(y); // 找到y的根节点
+
+    // 如果根节点相同，说明已经在同一集合中，无法合并
     if (rootX === rootY) {
       return false;
     }
+
+    // 合并两个集合
     parent[rootX] = rootY;
     return true;
   }
 
+  /**
+   * 查找节点的根节点（带路径压缩优化）
+   * @param x 要查找的节点
+   * @returns 节点x的根节点
+   */
   function find(x: number): number {
     while (parent[x] !== x) {
+      // 路径压缩：将x的父节点直接指向祖父节点
       parent[x] = parent[parent[x]];
       x = parent[x];
     }
     return x;
   }
-};
+}
 // @lc code=end
+
+/*
+解题思路详解：
+
+1. 问题本质：
+   - 给定一个无向图，其中包含一棵树和一条额外的边
+   - 需要找到那条额外的边，使得删除后图变成一棵树
+   - 本质是检测图中形成环的边
+
+2. 算法分析：
+   - 时间复杂度：O(n * α(n))，其中n是边的数量，α是阿克曼函数的反函数
+     * 并查集的查找和合并操作接近O(1)
+     * 需要遍历所有边
+   - 空间复杂度：O(n)，并查集数组
+   - 算法类型：并查集 (Union Find)
+
+3. 实现要点：
+   - 使用并查集维护连通分量
+   - 遍历边时，如果两个端点已经在同一连通分量中，则该边是冗余的
+   - 路径压缩优化查找效率
+   - 按顺序遍历边，返回最后出现的冗余边
+
+4. 优化思路：
+   - 路径压缩：find函数中直接更新父节点
+   - 按秩合并：可以进一步优化（此题数据规模较小，未使用）
+   - 提前返回：发现冗余边立即返回，无需继续处理
+
+5. 关键技巧：
+   - 并查集的路径压缩：parent[x] = parent[parent[x]]
+   - 冗余边检测：union返回false时说明形成环
+   - 按顺序处理：返回最后出现的冗余边
+
+6. 算法步骤：
+   - 初始化并查集，每个节点属于自己
+   - 遍历每条边，尝试合并两个端点
+   - 如果合并失败，说明这条边会形成环，返回该边
+   - 如果所有边都处理完，返回空数组（理论上不会发生）
+
+7. 类似问题：
+   - 冗余连接II (685)
+   - 最小生成树问题
+   - 图的连通性问题
+   - 任何需要检测环的问题
+
+8. 算法优势：
+   - 时间复杂度接近线性
+   - 代码简洁，逻辑清晰
+   - 适合处理图的连通性问题
+*/

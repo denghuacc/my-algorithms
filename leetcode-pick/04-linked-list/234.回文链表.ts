@@ -43,16 +43,25 @@ class ListNode {
 }
 
 // @lc code=start
-// two pointers
+/**
+ * 方法一：转换为数组 + 双指针
+ *
+ * 核心思想：
+ * 1. 将链表值复制到数组中
+ * 2. 使用双指针从数组两端向中间比较
+ * 3. 如果所有对应位置值相等，则为回文链表
+ */
 var isPalindrome = function (head: ListNode | null): boolean {
   const arr: number[] = [];
 
+  // 将链表值存入数组
   let cur = head;
   while (cur) {
     arr.push(cur.val);
     cur = cur.next;
   }
 
+  // 双指针检查回文
   let first = 0;
   let last = arr.length - 1;
   while (first < last) {
@@ -65,28 +74,36 @@ var isPalindrome = function (head: ListNode | null): boolean {
   return true;
 };
 
-// two pointers 2
+/**
+ * 方法二：快慢指针 + 反转链表（推荐）
+ *
+ * 核心思想：
+ * 1. 用快慢指针找到链表中点
+ * 2. 反转后半部分链表
+ * 3. 比较前半部分和反转后的后半部分
+ */
 var isPalindrome = function (head: ListNode | null): boolean {
   if (!head || !head.next) return true;
+
   let fast = head;
   let slow = head;
-  let pre = null;
 
+  // 快慢指针找中点
   while (fast && fast.next) {
     slow = slow.next!;
     fast = fast.next.next!;
   }
 
-  // now the slow node is the middle node
-  // reverse the next half of node
+  // 反转后半部分链表
+  let pre = null;
   while (slow) {
-    const p = slow.next!;
+    const nextTemp = slow.next;
     slow.next = pre;
     pre = slow;
-    slow = p;
+    slow = nextTemp;
   }
 
-  // compare with prev and next half of middle linked list
+  // 比较前半部分和反转后的后半部分
   while (head && pre) {
     if (head.val !== pre.val) return false;
     head = head.next;
@@ -96,7 +113,14 @@ var isPalindrome = function (head: ListNode | null): boolean {
   return true;
 };
 
-// recursive
+/**
+ * 方法三：递归法
+ *
+ * 核心思想：
+ * 1. 使用递归到达链表末尾
+ * 2. 在回溯过程中与前方指针比较
+ * 3. 前方指针在每次比较后向前移动
+ */
 var isPalindrome = function (head: ListNode | null): boolean {
   let frontPointer = head!;
   return recursivelyCheck(head);
@@ -111,3 +135,30 @@ var isPalindrome = function (head: ListNode | null): boolean {
   }
 };
 // @lc code=end
+
+/*
+解题思路详解：
+
+1. 问题本质：
+   - 判断链表是否为回文结构
+   - 回文：正序和逆序读取结果相同
+   - 关键挑战：链表无法随机访问，难以直接从两端比较
+
+2. 算法分析：
+   - 方法一：时间 O(n)，空间 O(n) - 使用额外数组
+   - 方法二：时间 O(n)，空间 O(1) - 快慢指针 + 反转链表
+   - 方法三：时间 O(n)，空间 O(n) - 递归栈空间
+   - 算法类型：双指针 / 链表操作 / 递归
+
+3. 实现要点：
+   - 快慢指针精确定位中点（奇数链表中点，偶数链表右中点）
+   - 反转后半部分链表，注意不会影响判断结果
+   - 比较时处理链表长度奇偶性差异
+   - 递归法：利用递归栈特性实现"后进先出"的比较
+
+4. 优化思路：
+   - 空间最优：方法二，O(1) 空间复杂度
+   - 如需保持原链表结构，可在比较后再次反转
+   - 实际面试推荐方法二：既满足空间要求又体现算法能力
+   - 边界情况：空链表、单节点、两节点链表的处理
+*/

@@ -43,13 +43,15 @@ class ListNode {
   }
 }
 
-// 解题思路
-// 1. 先求出链表长度 len，
-// 2. 然后通过 len - n 找到删除节点的索引
-// 3. 最后删除节点
-
 // @lc code=start
-// two traverse
+/**
+ * 方法一：两次遍历
+ *
+ * 核心思想：
+ * 1. 第一次遍历计算链表长度
+ * 2. 第二次遍历找到要删除节点的前驱节点
+ * 3. 删除目标节点
+ */
 var removeNthFromEnd = function (
   head: ListNode | null,
   n: number
@@ -57,49 +59,83 @@ var removeNthFromEnd = function (
   const dummy = new ListNode(0);
   dummy.next = head;
 
+  // 第一次遍历：计算链表长度
   let len = 0;
   let cur = head;
   while (cur) {
-    len++; // list len
+    len++;
     cur = cur.next;
   }
 
-  len -= n; // new Len
+  // 第二次遍历：找到要删除节点的前驱
+  len -= n; // 计算要删除节点的前驱位置
   let pre = dummy;
   while (len && pre.next) {
     len--;
     pre = pre.next;
   }
-  pre.next = pre.next!.next; // remove the targeted node
+
+  // 删除目标节点
+  pre.next = pre.next!.next;
   return dummy.next;
 };
 
-// one traverse
-// two pointer
+/**
+ * 方法二：双指针一次遍历（推荐）
+ *
+ * 核心思想：
+ * 1. 使用快慢双指针，快指针先走 n+1 步
+ * 2. 然后快慢指针同时移动，直到快指针到达末尾
+ * 3. 此时慢指针指向要删除节点的前驱
+ */
 var removeNthFromEnd = function (
   head: ListNode | null,
   n: number
 ): ListNode | null {
   const dummy = new ListNode(0);
   dummy.next = head;
-  let first = dummy;
-  let second = dummy;
+  let first = dummy; // 快指针
+  let second = dummy; // 慢指针
 
+  // 快指针先走 n+1 步，建立双指针间距
   for (let i = 0; i < n + 1; i++) {
     first = first.next!;
   }
 
+  // 双指针同时移动，直到快指针到达末尾
   while (first) {
-    first = first.next!;
+    first = first.next;
     second = second.next!;
   }
 
-  second.next = second.next!.next; // remove the targeted node
+  // 此时 second 指向要删除节点的前驱，执行删除
+  second.next = second.next!.next;
   return dummy.next;
 };
 // @lc code=end
 
-// 解题思路 双指针
-// 1. 两个指针，一个指针先走 n + 1 步
-// 2. 然后两个指针同时走，当第一个指针走到底时，第二个指针刚好指向要删除的节点
-// 3. 最后删除节点
+/*
+解题思路详解：
+
+1. 问题本质：
+   - 删除链表的倒数第 n 个节点
+   - 需要找到该节点的前驱节点才能执行删除操作
+   - 关键挑战：如何在一次遍历中定位倒数第 n 个节点
+
+2. 算法分析：
+   - 时间复杂度：O(L)，其中 L 是链表长度
+   - 空间复杂度：O(1)，只使用常数额外空间
+   - 算法类型：双指针
+
+3. 实现要点：
+   - 使用虚拟头节点处理删除头节点的边界情况
+   - 双指针技巧：保持两指针间距为 n+1，确保慢指针指向前驱
+   - 快指针先移动 n+1 步的原因：需要找到前驱节点而非目标节点
+   - 边界情况：删除头节点、链表只有一个节点
+
+4. 优化思路：
+   - 双指针解法是最优解：一次遍历 + 常数空间
+   - 两次遍历解法更直观但效率略低
+   - 虚拟头节点简化边界情况处理
+   - 注意指针移动的步数和顺序，避免空指针异常
+*/

@@ -56,20 +56,91 @@
  */
 
 // @lc code=start
+
+/**
+ * 栈模拟解法：使用栈模拟行星碰撞过程
+ * 时间复杂度：O(n)，空间复杂度：O(n)
+ */
 function asteroidCollision(asteroids: number[]): number[] {
-  const res: number[] = [];
+  const result: number[] = []; // 用作栈，存储碰撞后剩余的行星
+
   for (const asteroid of asteroids) {
-    let alive = true;
-    while (alive && asteroid < 0 && res.length > 0 && res.at(-1)! > 0) {
-      alive = res.at(-1)! < -asteroid;
-      if (res.at(-1)! <= -asteroid) {
-        res.pop();
+    let alive = true; // 当前行星是否存活
+
+    // 只有当前行星向左移动且栈顶行星向右移动时才会发生碰撞
+    while (alive && asteroid < 0 && result.length > 0 && result.at(-1)! > 0) {
+      const topAsteroid = result.at(-1)!;
+
+      // 比较行星大小（绝对值）
+      if (topAsteroid < -asteroid) {
+        // 栈顶行星较小，会被摧毁
+        result.pop();
+        // 当前行星继续存活，可能与下一个栈顶行星碰撞
+      } else if (topAsteroid === -asteroid) {
+        // 两个行星大小相等，都会被摧毁
+        result.pop();
+        alive = false; // 当前行星也被摧毁
+      } else {
+        // 栈顶行星较大，当前行星被摧毁
+        alive = false;
       }
     }
+
+    // 如果当前行星存活，将其加入结果
     if (alive) {
-      res.push(asteroid);
+      result.push(asteroid);
     }
   }
-  return res;
+
+  return result;
 }
 // @lc code=end
+
+/*
+解题思路详解：
+
+1. 问题本质：
+   - 模拟行星碰撞过程，正数表示向右移动，负数表示向左移动
+   - 只有向右的行星和向左的行星相遇时才会发生碰撞
+   - 碰撞结果由行星大小（绝对值）决定
+
+2. 算法分析：
+   - 时间复杂度：O(n) - 每个行星最多进栈出栈一次
+   - 空间复杂度：O(n) - 栈空间
+   - 算法类型：栈模拟
+
+3. 实现要点：
+   - 使用栈存储当前稳定的行星状态
+   - 碰撞条件：当前行星向左(负数) 且 栈顶行星向右(正数)
+   - 碰撞规则：
+     * 小的行星爆炸
+     * 相等大小的行星都爆炸
+     * 大的行星存活
+   - 一个向左的行星可能与多个向右的行星连续碰撞
+
+4. 关键观察：
+   - 同向移动的行星永远不会碰撞
+   - 向左的行星只会与之前的向右行星碰撞
+   - 用栈维护当前稳定状态，新行星只与栈顶行星可能发生碰撞
+   - 碰撞可能是连锁的：一个大的向左行星可能摧毁多个小的向右行星
+
+5. 示例分析：
+   输入：[5,10,-5]
+   过程：
+   - 5 → 栈：[5] (向右移动)
+   - 10 → 栈：[5,10] (向右移动)
+   - -5 → 与10碰撞，10>5，-5被摧毁 → 栈：[5,10]
+   结果：[5,10]
+
+   输入：[8,-8]
+   过程：
+   - 8 → 栈：[8] (向右移动)
+   - -8 → 与8碰撞，8=8，都被摧毁 → 栈：[]
+   结果：[]
+
+6. 常见错误：
+   - 忘记处理连锁碰撞的情况
+   - 碰撞条件判断错误（同向行星不会碰撞）
+   - 大小比较时忘记取绝对值
+   - 没有正确处理相等大小的情况
+*/

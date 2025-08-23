@@ -86,7 +86,16 @@ class ListNode {
 }
 
 // @lc code=start
-// two pointers
+/**
+ * 方法一：双指针法（推荐）
+ *
+ * 核心思想：
+ * 1. 两个指针分别从两个链表头开始遍历
+ * 2. 当指针到达链表末尾时，跳转到另一个链表的头部
+ * 3. 如果有交点，两指针会在交点相遇；无交点则同时到达 null
+ *
+ * 巧妙之处：通过切换链表，抵消了两链表长度差
+ */
 var getIntersectionNode = function (
   headA: ListNode | null,
   headB: ListNode | null
@@ -94,31 +103,71 @@ var getIntersectionNode = function (
   let pA = headA;
   let pB = headB;
 
-  while (pA || pB) {
-    if (pA === pB) return pA;
+  // 两指针同时移动，到达末尾后切换到另一链表
+  while (pA !== pB) {
     pA = pA ? pA.next : headB;
     pB = pB ? pB.next : headA;
+  }
+
+  // 相遇点即为交点（或都为 null 表示无交点）
+  return pA;
+};
+
+/**
+ * 方法二：哈希表法
+ *
+ * 核心思想：
+ * 1. 遍历链表 A，将所有节点存入哈希表
+ * 2. 遍历链表 B，检查每个节点是否在哈希表中
+ * 3. 第一个在哈希表中的节点即为交点
+ */
+var getIntersectionNode = function (
+  headA: ListNode | null,
+  headB: ListNode | null
+): ListNode | null {
+  const visited = new Set<ListNode>();
+
+  // 将链表 A 的所有节点加入哈希表
+  let cur = headA;
+  while (cur) {
+    visited.add(cur);
+    cur = cur.next;
+  }
+
+  // 遍历链表 B，查找第一个重复节点
+  cur = headB;
+  while (cur) {
+    if (visited.has(cur)) return cur;
+    cur = cur.next;
   }
 
   return null;
 };
 // @lc code=end
 
-// hash table
-var getIntersectionNode = function (
-  headA: ListNode | null,
-  headB: ListNode | null
-): ListNode | null {
-  const set: Set<ListNode> = new Set();
-  while (headA) {
-    set.add(headA);
-    headA = headA.next;
-  }
+/*
+解题思路详解：
 
-  while (headB) {
-    if (set.has(headB)) return headB;
-    headB = headB.next;
-  }
+1. 问题本质：
+   - 找到两个单链表的第一个公共节点
+   - 相交是指节点相同（地址相同），不仅仅是值相等
+   - 相交后的部分完全重合，形成 Y 字形结构
+   - 可能无交点，需要返回 null
 
-  return null;
-};
+2. 算法分析：
+   - 方法一：时间 O(m+n)，空间 O(1) - 双指针法
+   - 方法二：时间 O(m+n)，空间 O(m) - 哈希表法
+   - 算法类型：双指针 / 哈希表
+
+3. 实现要点：
+   - 双指针巧妙之处：pA 走完链表 A 再走链表 B，pB 走完链表 B 再走链表 A
+   - 这样两指针走过的路程相等：(a+c) + (b+c) = (b+c) + (a+c)
+   - 如果有交点，必在第二轮遍历时相遇；无交点则同时到达 null
+   - 哈希表法更直观：先记录再查找
+
+4. 优化思路：
+   - 双指针法是最优解：O(1) 空间 + 优雅的数学思想
+   - 核心洞察：通过路径切换消除长度差异
+   - 边界情况：无交点、一个或两个链表为空
+   - 也可先计算长度差，让长链表先走几步，但双指针法更简洁
+*/

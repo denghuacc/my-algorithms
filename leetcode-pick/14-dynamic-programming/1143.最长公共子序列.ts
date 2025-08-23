@@ -62,23 +62,31 @@
  */
 
 // @lc code=start
-// dp
+/**
+ * 动态规划解法
+ * 核心思想：dp[i][j]表示text1前i个字符和text2前j个字符的最长公共子序列长度
+ */
 function longestCommonSubsequence(text1: string, text2: string): number {
   const m = text1.length;
   const n = text2.length;
 
-  // dp[i][j] -> text1[0:i] 和 text2[0:j] 的最长公共子序列的长度
+  // dp[i][j] 表示 text1[0:i] 和 text2[0:j] 的最长公共子序列的长度
   const dp: number[][] = Array.from(new Array(m + 1), () =>
     new Array(n + 1).fill(0)
   );
 
+  // 填充dp数组
   for (let i = 1; i <= m; i++) {
     const c1 = text1[i - 1];
     for (let j = 1; j <= n; j++) {
       const c2 = text2[j - 1];
       if (c1 === c2) {
+        // 如果当前字符相同，则最长公共子序列长度加1
         dp[i][j] = dp[i - 1][j - 1] + 1;
       } else {
+        // 如果当前字符不同，则取两种情况的最大值：
+        // 1. 不使用text1[i-1]：dp[i-1][j]
+        // 2. 不使用text2[j-1]：dp[i][j-1]
         dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
       }
     }
@@ -86,5 +94,64 @@ function longestCommonSubsequence(text1: string, text2: string): number {
 
   return dp[m][n];
 }
-
 // @lc code=end
+
+/*
+解题思路详解：
+
+1. 问题本质：
+   - 求两个字符串的最长公共子序列长度
+   - 子序列：保持相对顺序，可以删除某些字符
+   - 公共子序列：两个字符串都包含的子序列
+
+2. 算法分析：
+   - 时间复杂度：O(m*n)，其中m和n是两个字符串的长度
+   - 空间复杂度：O(m*n)
+   - 算法类型：动态规划
+
+3. 实现要点：
+   - 状态定义：dp[i][j]表示text1前i个字符和text2前j个字符的最长公共子序列长度
+   - 状态转移：
+     * 如果text1[i-1] == text2[j-1]：dp[i][j] = dp[i-1][j-1] + 1
+     * 否则：dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+   - 边界条件：dp[0][j] = dp[i][0] = 0
+
+4. 优化思路：
+   - 空间优化：可以使用一维数组代替二维数组
+   - 滚动数组：只保存必要的状态
+   - 提前返回：如果某个字符串为空，直接返回0
+
+5. 边界情况：
+   - 空字符串：返回0
+   - 单个字符：检查是否相等
+   - 没有公共子序列：返回0
+
+6. 类似问题：
+   - 最长公共子串（连续）
+   - 编辑距离
+   - 字符串匹配问题
+
+7. 关键洞察：
+   - 每个位置的状态依赖于左上方的状态
+   - 如果字符相同，可以扩展公共子序列
+   - 如果字符不同，选择不使用其中一个字符
+
+8. 示例分析：
+   text1 = "abcde", text2 = "ace"
+   - dp[1][1] = 1 (a == a)
+   - dp[2][2] = 1 (ab vs ac, 取max(dp[1][2], dp[2][1]) = 1)
+   - dp[3][2] = 2 (abc vs ac, c == c, dp[2][1] + 1 = 2)
+   - dp[4][3] = 3 (abcd vs ace, d != e, 取max(dp[3][3], dp[4][2]) = 3)
+   - 结果：3
+
+9. 状态转移理解：
+    - 对于位置(i,j)，有两种情况：
+      1. text1[i-1] == text2[j-1]：可以匹配，长度加1
+      2. text1[i-1] != text2[j-1]：不能匹配，选择不使用其中一个字符
+    - 选择最优的子问题解
+
+10. 与最长公共子串的区别：
+    - 最长公共子序列：可以不连续，保持相对顺序
+    - 最长公共子串：必须连续
+    - 状态转移方程不同
+*/

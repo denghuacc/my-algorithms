@@ -61,25 +61,36 @@
  */
 
 // @lc code=start
-// union find
+/**
+ * 并查集 (Union Find) 解决方案
+ *
+ * 核心思想：将相似的字符串合并到同一个连通分量中，最后统计连通分量的数量
+ */
 function numSimilarGroups(strs: string[]): number {
   const n = strs.length;
   const m = strs[0].length;
+  // 初始化并查集，每个字符串初始时属于自己的集合
   const f: number[] = new Array(n).fill(0).map((_, index) => index);
 
+  // 遍历所有字符串对，检查是否相似
   for (let i = 0; i < n; i++) {
     for (let j = i + 1; j < n; j++) {
-      const fi = find(i);
-      const fj = find(j);
+      const fi = find(i); // 找到i的根节点
+      const fj = find(j); // 找到j的根节点
+
+      // 如果已经在同一个集合中，跳过
       if (fi === fj) {
         continue;
       }
+
+      // 如果两个字符串相似，合并它们的集合
       if (check(strs[i], strs[j], m)) {
-        f[fi] = fj;
+        f[fi] = fj; // 将fi的根节点指向fj的根节点
       }
     }
   }
 
+  // 统计连通分量的数量（根节点等于自己的节点数量）
   let ret = 0;
   for (let i = 0; i < n; i++) {
     if (f[i] === i) {
@@ -88,21 +99,78 @@ function numSimilarGroups(strs: string[]): number {
   }
   return ret;
 
+  /**
+   * 并查集查找函数（带路径压缩）
+   * @param x 要查找的节点
+   * @returns 节点x的根节点
+   */
   function find(x: number): number {
     return f[x] === x ? x : (f[x] = find(f[x]));
   }
 
+  /**
+   * 检查两个字符串是否相似
+   * 相似条件：最多只有两个位置的字符不同
+   * @param a 第一个字符串
+   * @param b 第二个字符串
+   * @param len 字符串长度
+   * @returns 是否相似
+   */
   function check(a: string, b: string, len: number): boolean {
-    let num = 0;
+    let num = 0; // 不同字符的数量
     for (let i = 0; i < len; i++) {
       if (a[i] !== b[i]) {
         num++;
+        // 如果不同字符超过2个，则不相似
         if (num > 2) {
           return false;
         }
       }
     }
-    return true;
+    return true; // 最多2个不同字符，相似
   }
 }
 // @lc code=end
+
+/*
+解题思路详解：
+
+1. 问题本质：
+   - 将字符串按相似性分组，相似字符串在同一组
+   - 相似性具有传递性：A相似B，B相似C，则A、B、C在同一组
+   - 本质是求图的连通分量数量
+
+2. 算法分析：
+   - 时间复杂度：O(n² * m)，其中n是字符串数量，m是字符串长度
+     * 需要比较所有字符串对：O(n²)
+     * 每次比较需要遍历字符串：O(m)
+   - 空间复杂度：O(n)，并查集数组
+   - 算法类型：并查集 (Union Find)
+
+3. 实现要点：
+   - 使用并查集维护连通分量
+   - 相似性判断：最多2个位置字符不同
+   - 路径压缩优化查找效率
+   - 统计根节点数量得到连通分量数
+
+4. 优化思路：
+   - 路径压缩：find函数中直接更新父节点
+   - 按秩合并：可以进一步优化（此题数据规模较小，未使用）
+   - 提前退出：发现超过2个不同字符时立即返回false
+
+5. 关键技巧：
+   - 并查集的路径压缩：f[x] = find(f[x])
+   - 相似性判断的优化：计数不同字符，超过2个立即返回
+   - 连通分量统计：根节点等于自己的节点数量
+
+6. 类似问题：
+   - 朋友圈问题 (547)
+   - 岛屿数量问题 (200)
+   - 冗余连接问题 (684)
+   - 任何需要分组或连通分量统计的问题
+
+7. 算法优势：
+   - 并查集操作接近O(1)时间复杂度
+   - 代码简洁，逻辑清晰
+   - 适合处理具有传递性的关系问题
+*/

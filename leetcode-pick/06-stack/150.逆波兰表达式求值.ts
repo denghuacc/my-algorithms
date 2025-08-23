@@ -89,38 +89,98 @@
  */
 
 // @lc code=start
-// stack
+
+/**
+ * 栈解法：利用栈的特性处理后缀表达式
+ * 时间复杂度：O(n)，空间复杂度：O(n)
+ */
 function evalRPN(tokens: string[]): number {
-  const stk: number[] = [];
-  for (const t of tokens) {
-    if (isOperator(t)) {
-      const b = stk.pop()!;
-      const a = stk.pop()!;
-      let r: number;
-      if (t === "+") {
-        r = a + b;
-      } else if (t === "-") {
-        r = a - b;
-      } else if (t === "*") {
-        r = a * b;
+  const stk: number[] = []; // 操作数栈
+
+  for (const token of tokens) {
+    if (isOperator(token)) {
+      // 遇到操作符，弹出两个操作数进行计算
+      const b = stk.pop()!; // 第二个操作数
+      const a = stk.pop()!; // 第一个操作数
+      let result: number;
+
+      // 根据操作符进行相应计算
+      if (token === "+") {
+        result = a + b;
+      } else if (token === "-") {
+        result = a - b; // 注意：a - b，不是 b - a
+      } else if (token === "*") {
+        result = a * b;
       } else {
-        r = division(a, b);
+        result = division(a, b); // 注意：a / b，不是 b / a
       }
-      stk.push(r);
+
+      // 将计算结果压入栈中
+      stk.push(result);
     } else {
-      stk.push(Number(t));
+      // 遇到数字，直接压入栈中
+      stk.push(Number(token));
     }
   }
+
+  // 最终栈中只有一个元素，即表达式的结果
   return stk[0];
 
-  function isOperator(ch: string) {
+  /**
+   * 判断是否为操作符
+   */
+  function isOperator(ch: string): boolean {
     return ch === "+" || ch === "-" || ch === "*" || ch === "/";
   }
 
+  /**
+   * 除法运算，需要向零截断
+   * JavaScript的Math.floor()和Math.ceil()处理负数的方式需要特别注意
+   */
   function division(a: number, b: number): number {
     const res = a / b;
-    // 除法向零截断
-    return res > 0 ? Math.floor(a / b) : Math.ceil(a / b);
+    // 除法向零截断：正数向下取整，负数向上取整
+    return res > 0 ? Math.floor(res) : Math.ceil(res);
   }
 }
 // @lc code=end
+
+/*
+解题思路详解：
+
+1. 问题本质：
+   - 逆波兰表达式（后缀表达式）求值
+   - 操作符位于操作数之后，无需考虑运算符优先级和括号
+   - 天然适合用栈来处理
+
+2. 算法分析：
+   - 时间复杂度：O(n) - 只需遍历一次tokens数组
+   - 空间复杂度：O(n) - 栈空间，最坏情况下所有token都是数字
+   - 算法类型：栈
+
+3. 实现要点：
+   - 遇到数字：压入栈中
+   - 遇到操作符：弹出两个操作数，计算结果，将结果压入栈
+   - 注意操作数的顺序：先弹出的是第二个操作数，后弹出的是第一个操作数
+   - 除法需要向零截断，而不是向下取整
+
+4. 关键细节：
+   - 栈的顺序很重要：对于减法和除法，操作数顺序不能颠倒
+   - JavaScript的除法截断：正数用Math.floor()，负数用Math.ceil()
+   - 最终栈中只剩一个元素，就是表达式的结果
+
+5. 示例分析：
+   输入：["2","1","+","3","*"]
+   过程：
+   - "2" → 栈：[2]
+   - "1" → 栈：[2, 1]  
+   - "+" → 弹出1,2，计算2+1=3 → 栈：[3]
+   - "3" → 栈：[3, 3]
+   - "*" → 弹出3,3，计算3*3=9 → 栈：[9]
+   结果：9
+
+6. 常见错误：
+   - 操作数顺序错误：减法和除法时注意 a op b 的顺序
+   - 除法截断方式错误：需要向零截断，不是向下取整
+   - 忘记处理负数的情况
+*/

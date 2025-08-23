@@ -112,30 +112,53 @@ class Node {
 }
 
 // @lc code=start
+/**
+ * 扁平化多级双向链表 - DFS 深度优先搜索
+ *
+ * 核心思想：
+ * 1. 遍历链表，遇到有 child 的节点时，优先处理子链表
+ * 2. 将子链表递归扁平化，并插入到当前位置
+ * 3. 正确维护双向链表的 prev 和 next 指针关系
+ * 4. 清除原有的 child 指针
+ */
 function flatten(head: Node | null): Node | null {
   dfs(head);
   return head;
 
+  /**
+   * DFS 扁平化函数
+   * @param node 当前处理的起始节点
+   * @returns 返回当前层级的最后一个节点
+   */
   function dfs(node: Node | null): Node | null {
     let cur = node;
     let last = null;
 
     while (cur) {
-      let next = cur?.next;
+      const next = cur.next;
+
+      // 如果当前节点有子链表
       if (cur.child) {
+        // 递归扁平化子链表，获取子链表的尾节点
         const childLast = dfs(cur.child)!;
-        next = cur.next;
+
+        // 将子链表插入到当前位置
         cur.next = cur.child;
-        cur.next.prev = cur;
+        cur.child.prev = cur;
+
+        // 如果原来有后继节点，连接子链表尾部和后继节点
         if (next) {
           childLast.next = next;
           next.prev = childLast;
         }
+
+        // 清除 child 指针
         cur.child = null;
         last = childLast;
       } else {
         last = cur;
       }
+
       cur = next;
     }
 
@@ -143,3 +166,31 @@ function flatten(head: Node | null): Node | null {
   }
 }
 // @lc code=end
+
+/*
+解题思路详解：
+
+1. 问题本质：
+   - 将多级双向链表扁平化为单级双向链表
+   - 子链表要插入到父节点的后面，按深度优先的顺序
+   - 保持双向链表的 prev 和 next 指针正确性
+   - 清除所有 child 指针
+
+2. 算法分析：
+   - 时间复杂度：O(n)，每个节点访问一次
+   - 空间复杂度：O(d)，其中 d 是最大深度（递归栈空间）
+   - 算法类型：深度优先搜索（DFS）+ 链表操作
+
+3. 实现要点：
+   - 遇到有 child 的节点时，先递归处理子链表
+   - 将扁平化的子链表插入到当前节点后面
+   - 正确连接四个指针：cur->child, child->prev, childLast->next, next->prev
+   - 递归函数返回当前层级的最后一个节点，用于连接
+   - 记得清除 child 指针
+
+4. 优化思路：
+   - DFS 递归解法最直观，代码清晰易懂
+   - 也可用栈实现迭代版本，避免递归栈溢出
+   - 关键是维护双向链表的指针关系完整性
+   - 边界情况：空链表、无子链表、多层嵌套子链表
+*/

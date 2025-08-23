@@ -26,16 +26,29 @@
  *
  */
 
-// @lc code=start
-// backtracking
-function restoreIpAddresses(s: string): string[] {
-  const SEG_COUNT = 4;
-  const segments: number[] = new Array(SEG_COUNT);
-  const ret: string[] = [];
+export {};
 
-  dfs(0, 0);
+// @lc code=start
+/**
+ * 复原IP地址 - 回溯算法
+ *
+ * 核心思想：
+ * 使用回溯算法，将字符串分割成4段，每段代表IP地址的一个部分
+ * 通过深度优先搜索尝试所有可能的分割方式
+ */
+function restoreIpAddresses(s: string): string[] {
+  const SEG_COUNT = 4; // IP地址由4段组成
+  const segments: number[] = new Array(SEG_COUNT); // 存储当前IP地址的4段
+  const ret: string[] = []; // 存储所有有效的IP地址
+
+  dfs(0, 0); // 从第0段，字符串位置0开始
   return ret;
 
+  /**
+   * 深度优先搜索函数
+   * @param segId - 当前处理的是第几段IP地址 (0-3)
+   * @param segStart - 当前段在字符串中的起始位置
+   */
   function dfs(segId: number, segStart: number) {
     // 找到四段 IP 并且遍历完字符串，那么就是一种答案
     if (segId === SEG_COUNT) {
@@ -62,9 +75,33 @@ function restoreIpAddresses(s: string): string[] {
         segments[segId] = addr;
         dfs(segId + 1, i + 1);
       } else {
-        break;
+        break; // 超过255，后续更大，直接退出
       }
     }
   }
 }
 // @lc code=end
+
+/*
+解题思路详解：
+
+1. 问题本质：
+   - 将数字字符串分割成4段，每段代表IP地址的一个部分
+   - 每段必须在0-255范围内，且不能有前导零（除非是0本身）
+
+2. 算法分析：
+   - 时间复杂度：O(3^4) = O(81)，每段最多3位数字，4段
+   - 空间复杂度：O(4) = O(1)，递归深度最多4层
+   - 算法类型：回溯算法
+
+3. 实现要点：
+   - 使用segId跟踪当前处理第几段IP地址
+   - 使用segStart跟踪当前段在字符串中的起始位置
+   - 特殊处理前导零的情况：如果当前位是0，只能单独作为一段
+   - 剪枝优化：当数值超过255时立即停止当前分支
+
+4. 优化思路：
+   - 提前判断字符串长度是否合理（4-12位）
+   - 使用数字计算而不是字符串拼接提高效率
+   - 剪枝条件：数值范围检查、长度检查
+*/

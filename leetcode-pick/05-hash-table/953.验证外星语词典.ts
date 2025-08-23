@@ -57,33 +57,89 @@
  */
 
 // @lc code=start
-// hash table
+/**
+ * 验证外星语词典
+ * 核心思路：将外星语字母表映射为索引，然后按照字典序规则比较相邻单词
+ *
+ * 算法步骤：
+ * 1. 建立外星语字母到索引的映射关系
+ * 2. 依次比较相邻的两个单词
+ * 3. 逐字符比较，找到第一个不同的字符
+ * 4. 如果前面的字符索引更大，则违反字典序
+ * 5. 如果所有字符都相同，检查长度关系
+ *
+ * 时间复杂度：O(n * m)，n为单词数量，m为单词平均长度
+ * 空间复杂度：O(1)，只需要常数额外空间（字母表固定26个字母）
+ */
 function isAlienSorted(words: string[], order: string): boolean {
-  const map: Map<string, number> = new Map();
+  // 建立外星语字母到索引的映射
+  const charToIndex: Map<string, number> = new Map();
   for (let i = 0; i < order.length; i++) {
-    map.set(order[i], i);
+    charToIndex.set(order[i], i);
   }
 
   const n = words.length;
+
+  // 依次比较相邻的两个单词
   for (let i = 0; i < n - 1; i++) {
-    let valid = false;
-    for (let j = 0; j < words[i].length && j < words[i + 1].length; j++) {
-      const prev = map.get(words[i][j])!;
-      const next = map.get(words[i + 1][j])!;
-      if (prev < next) {
-        valid = true;
+    const word1 = words[i];
+    const word2 = words[i + 1];
+    let isValidOrder = false;
+
+    // 逐字符比较两个单词
+    const minLength = Math.min(word1.length, word2.length);
+    for (let j = 0; j < minLength; j++) {
+      const index1 = charToIndex.get(word1[j])!;
+      const index2 = charToIndex.get(word2[j])!;
+
+      if (index1 < index2) {
+        // 找到第一个字符使得word1 < word2，符合字典序
+        isValidOrder = true;
         break;
-      } else if (prev > next) {
+      } else if (index1 > index2) {
+        // 找到第一个字符使得word1 > word2，违反字典序
         return false;
       }
+      // 如果字符相同，继续比较下一个字符
     }
-    if (!valid) {
-      if (words[i].length > words[i + 1].length) {
-        return false;
-      }
+
+    // 如果前缀完全相同，检查长度关系
+    // 短单词应该排在长单词前面
+    if (!isValidOrder && word1.length > word2.length) {
+      return false;
     }
   }
 
   return true;
 }
 // @lc code=end
+
+/*
+解题思路详解：
+
+1. 问题本质：
+   - 验证单词列表是否按照自定义字母表的字典序排列
+   - 需要理解字典序的比较规则：逐字符比较，遇到不同字符时按字母表顺序判断
+
+2. 算法分析：
+   - 时间复杂度：O(n * m)，n为单词数量，m为单词平均长度
+   - 空间复杂度：O(1)，哈希表存储固定26个字母的映射
+   - 算法类型：哈希表 + 字符串比较
+
+3. 实现要点：
+   - 关键数据结构：Map存储字符到索引的映射关系
+   - 比较策略：只需比较相邻单词，如果相邻都符合则整体符合
+   - 字符比较：找到第一个不同字符，根据索引大小判断顺序
+   - 长度处理：前缀相同时，短单词应排在长单词前面
+
+4. 边界情况：
+   - 单词完全相同：继续比较下一对
+   - 一个单词是另一个的前缀：短的应该在前面
+   - 单个单词：直接返回true
+   - 空单词列表：直接返回true
+
+5. 优化思路：
+   - 可以用数组代替Map，因为字母固定26个
+   - 提前终止：一旦发现违反顺序的情况立即返回false
+   - 字符预处理：将字符转为索引避免重复查找
+*/

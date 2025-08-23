@@ -51,18 +51,66 @@
  */
 
 // @lc code=start
-// prefix sum
+/**
+ * 前缀和解法
+ * 利用数学关系：leftSum = rightSum 等价于 2*leftSum + nums[i] = total
+ */
 var pivotIndex = function (nums: number[]): number {
-  const total = nums.reduce((a, b) => a + b);
-  let sum = 0;
+  // 计算数组总和
+  const total = nums.reduce((sum, num) => sum + num, 0);
+
+  let leftSum = 0; // 当前索引左边所有元素的和
+
+  // 遍历数组，检查每个位置是否为中心索引
   for (let i = 0; i < nums.length; i++) {
-    // leftSum -> pivotIndex -> rightSum
-    // sum === total - nums[i] - sum
-    if (2 * sum + nums[i] === total) {
+    // 检查当前位置是否满足中心索引条件
+    // 左边和 = 右边和 等价于 leftSum = total - nums[i] - leftSum
+    // 即：2 * leftSum + nums[i] = total
+    if (2 * leftSum + nums[i] === total) {
       return i;
     }
-    sum += nums[i];
+
+    // 更新左边和，为下一次迭代做准备
+    leftSum += nums[i];
   }
+
+  // 没有找到中心索引
   return -1;
 };
 // @lc code=end
+
+/*
+解题思路详解：
+
+1. 问题本质：
+   - 找到数组的中心索引，使得左边所有元素和等于右边所有元素和
+   - 如果存在多个中心索引，返回最左边的那个
+   - 如果不存在中心索引，返回-1
+
+2. 算法分析：
+   - 时间复杂度：O(n) - 一次遍历计算总和，一次遍历查找中心索引
+   - 空间复杂度：O(1) - 只使用常数额外空间
+   - 算法类型：前缀和 + 数学关系
+
+3. 实现要点：
+   - 数学转换：leftSum = rightSum 转化为 2*leftSum + nums[i] = total
+   - 推导过程：
+     * leftSum = rightSum
+     * leftSum = total - nums[i] - leftSum  (rightSum的定义)
+     * 2*leftSum = total - nums[i]
+     * 2*leftSum + nums[i] = total
+   - 一次遍历：边遍历边检查，找到第一个满足条件的索引
+
+4. 优化思路：
+   - 数学优化：避免每次计算rightSum，通过数学关系简化
+   - 早期返回：找到第一个满足条件的索引就立即返回
+   - 空间优化：不需要额外的前缀和数组，只用一个变量记录当前leftSum
+   - 边界处理：正确处理空数组和单元素数组的情况
+
+例子分析：nums = [1, 7, 3, 6, 5, 6], total = 28
+- i=0: leftSum=0, 2*0+1=1≠28, leftSum=1
+- i=1: leftSum=1, 2*1+7=9≠28, leftSum=8  
+- i=2: leftSum=8, 2*8+3=19≠28, leftSum=11
+- i=3: leftSum=11, 2*11+6=28=28 ✓, 返回3
+索引3处：左边和=1+7+3=11，右边和=5+6=11，满足条件
+*/

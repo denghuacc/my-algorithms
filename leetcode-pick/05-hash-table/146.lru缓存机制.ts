@@ -49,11 +49,15 @@ export {};
 
 // @lc code=start
 
+/**
+ * 双向链表节点
+ * 用于LRU缓存中维护访问顺序
+ */
 class Node {
   key: number;
   value: number;
-  prev!: Node;
-  next!: Node;
+  prev!: Node; // 前驱节点
+  next!: Node; // 后继节点
 
   constructor(key: number, value: number) {
     this.key = key;
@@ -61,70 +65,118 @@ class Node {
   }
 }
 
-// one DoublyLinkedList O(1)
+/**
+ * LRU (Least Recently Used) 缓存机制
+ * 核心思路：哈希表 + 双向链表，实现O(1)的get和put操作
+ *
+ * 设计思想：
+ * - 哈希表：提供O(1)的查找和删除
+ * - 双向链表：维护访问顺序，头部是最近访问的，尾部是最久未访问的
+ * - 伪头尾节点：简化边界条件的处理
+ *
+ * 时间复杂度：get和put操作都是O(1)
+ * 空间复杂度：O(capacity)
+ */
 class LRUCache {
-  capacity: number;
-  size: number;
-  cache: Map<number, Node>;
-  head: Node;
-  tail: Node;
+  private capacity: number; // 缓存容量
+  private size: number; // 当前缓存大小
+  private cache: Map<number, Node>; // 哈希表，key到节点的映射
+  private head: Node; // 伪头节点（最近访问）
+  private tail: Node; // 伪尾节点（最久未访问）
 
   constructor(capacity: number) {
     this.size = 0;
     this.capacity = capacity;
     this.cache = new Map();
+
+    // 创建伪头尾节点，简化链表操作
     this.head = new Node(0, 0);
     this.tail = new Node(0, 0);
     this.head.next = this.tail;
     this.tail.prev = this.head;
   }
 
+  /**
+   * 获取缓存值
+   * @param key 要获取的键
+   * @returns 如果存在返回对应值，否则返回-1
+   */
   get(key: number): number {
     const node = this.cache.get(key);
-    if (!node) return -1;
+    if (!node) {
+      return -1;
+    }
+
+    // 访问时将节点移动到头部（标记为最近使用）
     this.moveToHead(node);
     return node.value;
   }
 
+  /**
+   * 放入缓存
+   * @param key 键
+   * @param value 值
+   */
   put(key: number, value: number): void {
-    const node = this.cache.get(key);
-    if (!node) {
+    const existingNode = this.cache.get(key);
+
+    if (!existingNode) {
+      // 新键值对
       const newNode = new Node(key, value);
       this.cache.set(key, newNode);
       this.addToHead(newNode);
       this.size++;
+
+      // 如果超出容量，删除最久未使用的节点（尾部节点）
       if (this.size > this.capacity) {
-        this.tail = this.removeTail();
-        this.cache.delete(this.tail.key);
+        const removedNode = this.removeTail();
+        this.cache.delete(removedNode.key);
         this.size--;
       }
     } else {
-      node.value = value;
-      this.moveToHead(node);
+      // 更新已存在的键值对
+      existingNode.value = value;
+      this.moveToHead(existingNode);
     }
   }
 
-  private moveToHead(node: Node) {
+  /**
+   * 将节点移动到头部
+   * @param node 要移动的节点
+   */
+  private moveToHead(node: Node): void {
     this.removeNode(node);
     this.addToHead(node);
   }
 
-  private removeNode(node: Node) {
+  /**
+   * 从链表中移除节点
+   * @param node 要移除的节点
+   */
+  private removeNode(node: Node): void {
     node.prev.next = node.next;
-    if (node.next) node.next.prev = node.prev; // why judge
+    node.next.prev = node.prev;
   }
 
-  private addToHead(node: Node) {
+  /**
+   * 在头部添加节点
+   * @param node 要添加的节点
+   */
+  private addToHead(node: Node): void {
     node.prev = this.head;
     node.next = this.head.next;
     this.head.next.prev = node;
     this.head.next = node;
   }
 
+  /**
+   * 移除尾部节点
+   * @returns 被移除的节点
+   */
   private removeTail(): Node {
-    const ret = this.tail.prev;
-    this.removeNode(this.tail);
-    return ret;
+    const lastNode = this.tail.prev;
+    this.removeNode(lastNode);
+    return lastNode;
   }
 }
 
@@ -135,3 +187,46 @@ class LRUCache {
  * obj.put(key,value)
  */
 // @lc code=end
+
+/*
+解题思路详解：
+
+1. 问题本质：
+   - 设计一个支持O(1)时间复杂度的LRU缓存机制
+   - 需要快速访问、插入、删除，并维护访问顺序
+
+2. 算法分析：
+   - 时间复杂度：get和put操作都是O(1)
+   - 空间复杂度：O(capacity)，存储缓存数据
+   - 算法类型：哈希表 + 双向链表的组合设计
+
+3. 实现要点：
+   - 核心数据结构：哈希表存储key到节点的映射，双向链表维护访问顺序
+   - 哈希表作用：提供O(1)的查找、插入、删除操作
+   - 双向链表作用：维护元素的访问顺序，支持O(1)的头尾操作
+   - 伪头尾节点：简化边界条件处理，避免空指针判断
+
+4. 关键操作：
+   - get操作：查找节点，如果存在则移动到头部并返回值
+   - put操作：如果key存在则更新并移动到头部，否则插入新节点
+   - 容量控制：当超出容量时删除尾部最久未使用的节点
+   - 节点移动：先删除节点，再添加到头部
+
+5. 设计亮点：
+   - 双向链表支持O(1)删除任意节点（已知节点指针）
+   - 伪头尾节点消除边界情况，简化代码逻辑
+   - 哈希表和链表的完美结合，各自发挥优势
+   - 访问即更新：每次访问都会更新元素的位置
+
+6. 常见错误：
+   - 忘记更新链表指针导致内存泄漏或访问错误
+   - 删除节点时没有同时更新哈希表
+   - 边界条件处理不当（如容量为1的情况）
+   - moveToHead操作的顺序错误
+
+7. 扩展思考：
+   - 可以扩展为LFU（最少使用频次）缓存
+   - 支持过期时间的缓存机制
+   - 线程安全的并发LRU缓存
+   - 基于磁盘的大容量LRU缓存
+*/
