@@ -74,33 +74,47 @@
  */
 
 // @lc code=start
+/**
+ * 判断一个9x9的数独是否有效
+ * @param board 9x9的数独矩阵，空格用'.'表示
+ * @returns 如果数独有效返回true，否则返回false
+ */
 var isValidSudoku = function (board: string[][]): boolean {
-  const rows: Map<string, number>[] = [];
-  const columns: Map<string, number>[] = [];
-  const boxes: Map<string, number>[] = [];
+  // 创建三个Map数组分别记录每行、每列和每个3x3宫格中数字的出现次数
+  const rows: Map<string, number>[] = Array.from(
+    { length: 9 },
+    () => new Map()
+  );
+  const columns: Map<string, number>[] = Array.from(
+    { length: 9 },
+    () => new Map()
+  );
+  const boxes: Map<string, number>[] = Array.from(
+    { length: 9 },
+    () => new Map()
+  );
 
-  for (let i = 0; i < 9; i++) {
-    rows[i] = new Map();
-    columns[i] = new Map();
-    boxes[i] = new Map();
-  }
-
+  // 遍历整个数独板
   for (let i = 0; i < 9; i++) {
     for (let j = 0; j < 9; j++) {
       const num = board[i][j];
 
+      // 只需要检查非空格子
       if (num !== ".") {
-        const n = num;
+        // 计算当前位置属于哪个3x3宫格
+        // boxIndex = ⌊i/3⌋ * 3 + ⌊j/3⌋，确保每个3x3宫格有唯一的索引
         const boxIndex = Math.floor(i / 3) * 3 + Math.floor(j / 3);
 
-        rows[i].set(n, (rows[i].get(n) || 0) + 1);
-        columns[j].set(n, (columns[j].get(n) || 0) + 1);
-        boxes[boxIndex].set(n, (boxes[boxIndex].get(n) || 0) + 1);
+        // 更新该数字在行、列和宫格中的出现次数
+        rows[i].set(num, (rows[i].get(num) || 0) + 1);
+        columns[j].set(num, (columns[j].get(num) || 0) + 1);
+        boxes[boxIndex].set(num, (boxes[boxIndex].get(num) || 0) + 1);
 
+        // 如果在任何一个维度上出现重复，则数独无效
         if (
-          rows[i].get(n)! > 1 ||
-          columns[j].get(n)! > 1 ||
-          boxes[boxIndex].get(n)! > 1
+          rows[i].get(num)! > 1 ||
+          columns[j].get(num)! > 1 ||
+          boxes[boxIndex].get(num)! > 1
         ) {
           return false;
         }
@@ -108,6 +122,94 @@ var isValidSudoku = function (board: string[][]): boolean {
     }
   }
 
+  // 如果没有发现重复，则数独有效
   return true;
 };
 // @lc code=end
+
+/*
+解题思路：
+
+1. 题目理解
+---------------------
+问题本质：
+- 验证9x9数独矩阵是否满足三个基本规则：
+  1. 每行不能有重复数字
+  2. 每列不能有重复数字
+  3. 每个3x3宫格不能有重复数字
+- 只需验证已填入的数字，不需要解数独
+
+关键特点：
+- 矩阵大小固定为9x9
+- 只包含数字1-9和字符'.'
+- 不需要考虑数独是否可解
+- 需要同时检查三个维度的约束
+
+2. 解题思路
+---------------------
+核心思想：
+使用哈希表记录每个数字在行、列和3x3宫格中的出现次数，
+一次遍历即可完成所有规则的验证。
+
+算法步骤：
+1. 创建三个数组，每个数组包含9个Map：
+   - rows[i]：记录第i行每个数字的出现次数
+   - columns[j]：记录第j列每个数字的出现次数
+   - boxes[k]：记录第k个3x3宫格中每个数字的出现次数
+
+2. 遍历数独矩阵：
+   - 对于每个非空格子(i,j)：
+     * 计算所属的3x3宫格索引
+     * 更新数字在三个维度的出现次数
+     * 如果任何维度出现重复，返回false
+
+3. 遍历完成后返回true
+
+3x3宫格索引计算：
+- boxIndex = ⌊i/3⌋ * 3 + ⌊j/3⌋
+- 这样可以把9x9矩阵划分为9个3x3宫格
+- 每个宫格有唯一的索引0-8
+
+3. 复杂度分析
+---------------------
+时间复杂度：O(1)
+- 固定大小的9x9矩阵
+- 只需要遍历一次，81个格子
+- Map操作的时间复杂度为O(1)
+
+空间复杂度：O(1)
+- 使用固定大小的额外空间
+- 9个Map用于行
+- 9个Map用于列
+- 9个Map用于3x3宫格
+
+4. 边界情况
+---------------------
+1. 空格子('.')：
+   - 直接跳过，不需要验证
+2. 首次出现的数字：
+   - 在Map中创建新记录
+3. 重复出现的数字：
+   - 立即返回false
+4. 非法字符：
+   - 题目保证只有数字1-9和'.'
+
+5. 优化思路
+---------------------
+1. 空间优化：
+   - 可以使用位运算替代Map
+   - 每个数字用一个bit位表示
+   - 可以将空间复杂度进一步降低
+
+2. 代码优化：
+   - 可以合并三个检查条件
+   - 可以使用Set代替Map计数
+
+3. 可读性优化：
+   - 抽取3x3宫格索引计算为独立函数
+   - 使用常量定义边界值9和3
+
+4. 其他思考：
+   - 如果矩阵大小不固定，需要修改算法
+   - 如果需要验证数独是否可解，需要另外的算法
+*/
