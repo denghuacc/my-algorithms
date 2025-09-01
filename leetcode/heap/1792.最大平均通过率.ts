@@ -58,18 +58,24 @@ export {};
 
 // @lc code=start
 function maxAverageRatio(classes: number[][], extraStudents: number): number {
+  // 贪心：每次把一个额外学生分配给“增益”最大的班级
+  // 增益定义：Δ(p,t) = (p+1)/(t+1) - p/t = (t - p) / (t * (t + 1))
+  // 使用大根堆按增益排序；比较时用交叉相乘避免浮点误差
   const pq = new Heap<number[]>((a, b) => {
     const v1 = (b[1] + 1) * b[1] * (a[1] - a[0]);
     const v2 = (a[1] + 1) * a[1] * (b[1] - b[0]);
     return v1 > v2;
   });
-  for (const c of classes) {
-    pq.push(c);
+  // 初始化：将所有班级入堆
+  for (const cls of classes) {
+    pq.push(cls);
   }
+  // 逐个分配额外学生：每次取出当前增益最大的班级并更新
   for (let i = 0; i < extraStudents; i++) {
     const [pass, total] = pq.pop()!;
     pq.push([pass + 1, total + 1]);
   }
+  // 计算最终平均通过率
   let sum = 0;
   while (!pq.isEmpty()) {
     const [pass, total] = pq.pop()!;
@@ -163,3 +169,26 @@ class Heap<T> {
   }
 }
 // @lc code=end
+
+/*
+解题思路详解：
+
+1. 问题本质：
+   - 将 k 个“必过”的额外学生分配到若干班级，使平均通过率最大化。
+   - 每次给某个班级再加 1 名通过的学生，会带来一个“边际增益”。
+
+2. 算法分析：
+   - 时间复杂度：O((n + k) log n)。n 为班级数，建堆 O(n)，每次分配并调整堆 O(log n)，共 k 次。
+   - 空间复杂度：O(n)，用于堆存储 n 个班级。
+   - 算法类型：贪心 + 优先队列（大根堆）。
+
+3. 实现要点：
+   - 增益公式：Δ(p,t) = (p+1)/(t+1) - p/t = (t - p) / (t·(t+1))。
+   - 使用大根堆，按增益从大到小取出；比较时用交叉相乘避免浮点误差。
+   - 每次从堆顶取出增益最大班级 (p,t)，更新为 (p+1,t+1) 后重新入堆。
+   - 所有额外学生分配完后，计算各班通过率之和再除以班级数。
+
+4. 优化思路：
+   - 比较增益时避免直接除法，使用整型交叉相乘提高精度与性能。
+   - 若语言/库支持，可直接使用带自定义比较器的优先队列减少样板代码。
+*/
