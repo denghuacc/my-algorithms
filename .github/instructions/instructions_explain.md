@@ -1,3 +1,8 @@
+---
+applyTo: "**/leetcode/**,**/leetcode-pick/*.ts"
+description: "算法题解答规范"
+---
+
 # 算法题解答规范
 
 当解答算法题时，请按照以下结构提供详细的解答：

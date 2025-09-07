@@ -1,3 +1,8 @@
+---
+applyTo: "**/*.ts,**/*.tsx"
+description: "TypeScript 代码规范"
+---
+
 # TypeScript 代码规范
 
 ## 变量声明规范
