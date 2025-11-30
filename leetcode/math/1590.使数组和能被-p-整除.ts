@@ -68,28 +68,88 @@
  */
 
 // @lc code=start
-// cv
+/**
+ * 查找需要移除的最短子数组，使剩余元素和可被 p 整除。
+ *
+ * @param nums - 正整数数组，长度范围 [1, 1e5]
+ * @param p - 取模值，范围 [1, 1e9]
+ * @returns 需要移除的最短子数组长度；无法满足时返回 -1
+ */
 function minSubarray(nums: number[], p: number): number {
-  // 1. if y % p == x -> when (y-z) % p == 0 then z % p == x;
-  // 2. if (y - z) % p == x then z % p == (y - x) % p;
-  let x = 0;
+  // 计算总和的模值 remainder，若本身能整除直接返回 0。
+  let remainder = 0;
   for (const num of nums) {
-    x = (x + num) % p;
+    remainder = (remainder + num) % p;
   }
-  if (x === 0) {
+  if (remainder === 0) {
     return 0;
   }
-  const index: Map<number, number> = new Map();
-  let y = 0;
-  let res = nums.length;
+
+  // 使用前缀和取模与哈希表定位：如果子数组和 % p = remainder，
+  // 则 prefix[j] - prefix[i] 与 remainder 同余，等价于
+  // prefix[i] % p = (prefix[j] - remainder + p) % p。
+  const lastIndex: Map<number, number> = new Map();
+  let prefix = 0;
+  let shortest = nums.length;
   for (let i = 0; i < nums.length; i++) {
-    index.set(y, i);
-    y = (y + nums[i]) % p;
-    const mod = (y - x + p) % p;
-    if (index.has(mod)) {
-      res = Math.min(res, i - index.get(mod)! + 1);
+    // 先记录当前位置之前的前缀模值，保证区间长度计算正确。
+    lastIndex.set(prefix, i);
+
+    // 更新当前前缀模值。
+    prefix = (prefix + nums[i]) % p;
+
+    // 需要找到的前缀模值，使得移除 [storedIndex, i] 后余下和可整除。
+    const need = (prefix - remainder + p) % p;
+    if (lastIndex.has(need)) {
+      shortest = Math.min(shortest, i - lastIndex.get(need)! + 1);
     }
   }
-  return res === nums.length ? -1 : res;
+
+  // 未找到合法区间则返回 -1。
+  return shortest === nums.length ? -1 : shortest;
 }
 // @lc code=end
+
+/*
+解题思路详解：
+
+1. 问题本质：
+   - 目标是删除最短的连续子数组，使剩余元素和能被 p 整除。
+   - 等价于找到一个子数组，其和与总和在模 p 意义下相等（和 % p = remainder）。
+   - 不能移除整段数组，否则无解。
+
+2. 算法分析：
+   - 时间复杂度：O(n)，单次遍历配合哈希表查询需要的前缀模值。
+   - 空间复杂度：O(n)，记录前缀模值到最近下标的映射。
+   - 算法类型：前缀和 + 同余性质 + 哈希表。
+
+3. 解题思路：
+   - 核心思想：若 prefix[j] - prefix[i] 与 remainder 同余，则移除区间 [i, j] 即可。
+     转化为寻找 prefix[i] % p = (prefix[j] - remainder + p) % p 的最短区间。
+   - 推导过程：同余的减法仍保持模关系，先减 remainder 后加 p 再取模避免负数。
+   - 主要步骤：
+     1）计算总和模值 remainder，若为 0 直接返回 0。
+     2）遍历数组，维护当前前缀模值 prefix。
+     3）查询 need = (prefix - remainder + p) % p 是否出现，更新最短长度。
+
+4. 实现要点：
+   - 哈希表存最近的前缀下标，保证得到最短可移除区间。
+   - 先存旧前缀再更新当前前缀，避免长度计算偏移。
+   - 通过 (x + p) % p 处理可能的负数取模，TypeScript 取模结果可能为负。
+   - 若未更新答案则返回 -1，防止移除整段或无解的情况。
+
+5. 示例分析：
+   - [3,1,4,2], p=6：remainder=4，在 i=2 找到 need=2，对应子数组 [4] 长度 1。
+   - [6,3,5,2], p=9：remainder=7，在 i=3 找到 need=5，移除 [5,2] 长度 2。
+   - [1,2,3], p=7：remainder=6，遍历无匹配，返回 -1。
+
+6. 常见错误：
+   - 负模处理遗漏：计算 need 时不加 p 直接取模会得到负值，导致哈希表查询失败。
+   - 插入顺序错误：若先更新前缀再存入，会使区间长度少 1。
+   - 忽略 remainder 为 0 的早退出，导致本可返回 0 却继续计算。
+
+7. 核心算法步骤：
+   - 求总和模值 remainder。
+   - 遍历维护前缀模值 prefix，查询 need 更新最短长度。
+   - 找到则返回最短长度，否则返回 -1。
+ */
