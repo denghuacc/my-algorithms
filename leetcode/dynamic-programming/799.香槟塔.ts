@@ -61,25 +61,109 @@
  */
 
 // @lc code=start
+/**
+ * 计算香槟塔中指定杯子的装满比例。
+ *
+ * @param poured - 倾倒的香槟总杯数
+ * @param queryRow - 目标杯子所在行（从 0 开始）
+ * @param queryGlass - 目标杯子所在列（从 0 开始）
+ * @returns 目标杯子的装满比例，范围 [0, 1]
+ */
 function champagneTower(
   poured: number,
   queryRow: number,
   queryGlass: number
 ): number {
-  // dp[i][j] -> 第 i 行第 j 列杯子所经过的水的流量
-  const dp = Array.from(new Array(queryRow + 10), () =>
-    new Array(queryRow + 10).fill(0)
+  // dp[i][j]：第 i 行第 j 列杯子“接收到”的香槟总量（可大于 1）
+  // 只需模拟到 queryRow + 1 行，故开到 queryRow + 2 足够安全
+  const dp = Array.from(new Array(queryRow + 2), () =>
+    new Array(queryRow + 2).fill(0)
   );
   dp[0][0] = poured;
+
+  // 逐层向下分流：每个杯子超过 1 的部分平均流向下一层左右两杯
   for (let i = 0; i <= queryRow; i++) {
     for (let j = 0; j <= i; j++) {
       if (dp[i][j] <= 1) {
+        // 没有溢出，不会继续向下层贡献
         continue;
       }
-      dp[i + 1][j] += (dp[i][j] - 1) / 2;
-      dp[i + 1][j + 1] += (dp[i][j] - 1) / 2;
+      const overflow = (dp[i][j] - 1) / 2;
+      dp[i + 1][j] += overflow;
+      dp[i + 1][j + 1] += overflow;
     }
   }
+  // 杯子最多装满 1 杯
   return Math.min(1, dp[queryRow][queryGlass]);
 }
 // @lc code=end
+
+/*
+解题思路详解：
+
+1. 题目理解
+   - 问题本质：模拟香槟在三角形杯塔中的逐层溢出与分流。
+   - 关键特点：每个杯子容量为 1，超过部分按 1:1 分给下一层左右杯子。
+   - 目标：求指定位置杯子的最终装满比例（最大为 1）。
+
+2. 解题思路
+   核心思想
+   - 使用动态规划按层模拟：
+     dp[i][j] 表示第 i 行第 j 个杯子接收到的总香槟量。
+   - 若 dp[i][j] > 1，溢出量为 dp[i][j] - 1，下一层左右各得到一半。
+
+   算法步骤
+   1) 初始化 dp[0][0] = poured。
+   2) 从第 0 行遍历到 queryRow：
+      - 若当前杯子不满（<=1），跳过。
+      - 否则计算溢出量 overflow = (dp[i][j] - 1) / 2。
+      - 累加到 dp[i+1][j] 和 dp[i+1][j+1]。
+   3) 返回 min(1, dp[queryRow][queryGlass])。
+
+3. 代码实现
+   实现步骤
+   - 二维数组记录“流经量”，而非最终容量，便于继续分流。
+   - 只开到 queryRow + 2 行列，避免无意义的额外空间。
+   - 对不溢出的杯子直接剪枝。
+
+   关键函数说明
+   - champagneTower：主函数，完成动态规划模拟并输出结果。
+
+4. 复杂度分析
+   - 时间复杂度：O(queryRow^2)，最多遍历前 queryRow 层三角区域。
+   - 空间复杂度：O(queryRow^2)，使用二维 DP 表。
+   - 关键观察：只需模拟到目标行，不必计算第 100 层全量状态。
+
+5. 示例分析
+   示例一：poured=1, queryRow=1, queryGlass=1
+   - 顶层刚好装满，无溢出，下一层都为 0，答案 0。
+
+   示例二：poured=2, queryRow=1, queryGlass=1
+   - 顶层溢出 1 杯，下一层两侧各得 0.5，答案 0.5。
+
+   示例三：poured=4（直观）
+   - 顶层溢出 3 杯，第二层各 1.5，再继续向第三层分流。
+   - 最终每个杯子最多记为 1（装满）。
+
+   边界情况
+   - poured=0：所有杯子均为 0。
+   - queryRow=0 且 queryGlass=0：答案为 min(1, poured)。
+
+6. 算法要点总结
+   核心技巧
+   - 溢出才传播，且传播是线性的、局部的。
+   - DP 状态定义为“接收总量”比“当前容量”更易推导。
+
+   优化要点
+   - 空间可进一步压缩为一维滚动数组（从右往左更新）。
+   - 当前实现保留二维，教学性与可读性更强。
+
+   类似问题
+   - 三角结构上的逐层转移 DP。
+   - 带容量上限与溢出传播的模拟题。
+
+7. 常见错误
+   - 把当前杯子的“容量 1”继续向下传，导致多流。
+   - 未对结果取 min(1, x)，返回超过 1 的值。
+   - DP 数组开得过小，访问 i+1 越界。
+*/
