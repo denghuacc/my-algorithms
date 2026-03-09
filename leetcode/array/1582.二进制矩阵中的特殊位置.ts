@@ -71,27 +71,137 @@
  */
 
 // @lc code=start
+/**
+ * 统计二进制矩阵中的特殊位置数量。
+ *
+ * 特殊位置定义：
+ * - mat[i][j] === 1
+ * - 第 i 行中 1 的数量为 1
+ * - 第 j 列中 1 的数量为 1
+ *
+ * @param mat - rows x cols 的二进制矩阵
+ * @returns 特殊位置总数
+ *
+ * 时间复杂度：O(rows * cols)
+ * 空间复杂度：O(rows + cols)
+ */
 function numSpecial(mat: number[][]): number {
-  const m = mat.length;
-  const n = mat[0].length;
-  const rowsSum: number[] = new Array(m).fill(0);
-  const colsSum: number[] = new Array(n).fill(0);
+  const rows = mat.length;
+  const cols = mat[0].length;
+  const rowSum: number[] = new Array(rows).fill(0);
+  const colSum: number[] = new Array(cols).fill(0);
 
-  for (let i = 0; i < m; i++) {
-    for (let j = 0; j < n; j++) {
-      rowsSum[i] += mat[i][j];
-      colsSum[j] += mat[i][j];
+  // 第一次遍历：分别统计每一行、每一列中 1 的数量。
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      rowSum[i] += mat[i][j];
+      colSum[j] += mat[i][j];
     }
   }
 
-  let res = 0;
-  for (let i = 0; i < m; i++) {
-    for (let j = 0; j < n; j++) {
-      if (mat[i][j] === 1 && rowsSum[i] === 1 && colsSum[j] === 1) {
-        res++;
+  let specialCount = 0;
+
+  // 第二次遍历：只有行和为 1 的行才可能包含特殊位置，
+  // 其他行可直接跳过。
+  for (let i = 0; i < rows; i++) {
+    if (rowSum[i] !== 1) {
+      continue;
+    }
+
+    for (let j = 0; j < cols; j++) {
+      // 当前位置为 1 且对应列和也为 1，则该点是特殊位置。
+      if (mat[i][j] === 1 && colSum[j] === 1) {
+        specialCount++;
       }
     }
   }
-  return res;
+
+  return specialCount;
 }
 // @lc code=end
+
+/*
+解题思路详解：
+
+1. 题目理解
+   - 问题本质：
+     找出矩阵中满足“该点为 1，且同行同列其他位置全为 0”的元素个数。
+   - 关键特点：
+     1) 矩阵只包含 0/1，适合做计数统计。
+     2) 特殊位置的判定可以拆成“行唯一 + 列唯一”。
+   - 目标：
+     高效统计特殊位置数量，避免对每个 1 都再扫描整行整列。
+
+2. 解题思路
+
+   核心思想：
+   - 若位置 (i, j) 是特殊位置，则必须满足：
+     1) mat[i][j] = 1
+     2) 第 i 行 1 的个数等于 1
+     3) 第 j 列 1 的个数等于 1
+   - 因此可以先预处理：
+     - rowSum[i] = 第 i 行 1 的数量
+     - colSum[j] = 第 j 列 1 的数量
+   - 再遍历矩阵判断上述条件即可。
+
+   算法步骤：
+   1. 初始化 `rowSum` 和 `colSum` 计数数组。
+   2. 第一次遍历矩阵，统计每行和每列中 1 的数量。
+   3. 第二次遍历矩阵：
+      - 先筛掉 `rowSum[i] !== 1` 的行（该行不可能有特殊位置）。
+      - 对剩余行，检查 `mat[i][j] === 1 && colSum[j] === 1`。
+   4. 累加满足条件的位置数并返回。
+
+3. 代码实现说明
+   - 使用了两次 O(rows * cols) 遍历：
+     1) 预处理行列计数
+     2) 判定特殊位置
+   - 第二次遍历增加了行级剪枝：
+     - 仅当 `rowSum[i] === 1` 才进入该行的列判断，减少无效比较。
+
+4. 复杂度分析
+   - 时间复杂度：O(rows * cols)
+     两次完整遍历同阶，常数较小。
+   - 空间复杂度：O(rows + cols)
+     额外使用两个计数数组。
+   - 关键观察：
+     特殊位置判定依赖“行和、列和”两个聚合信息，
+     先统计再判断最直接。
+
+5. 示例分析
+
+   示例 1：
+   mat = [[1,0,0],[0,0,1],[1,0,0]]
+   - rowSum = [1,1,1]
+   - colSum = [2,0,1]
+   - 只有 (1,2) 同时满足 `mat[i][j]=1`、`rowSum[i]=1`、`colSum[j]=1`
+   - 答案为 1
+
+   示例 2：
+   mat = [[1,0,0],[0,1,0],[0,0,1]]
+   - rowSum = [1,1,1]
+   - colSum = [1,1,1]
+   - 对角线三个 1 都满足条件
+   - 答案为 3
+
+   示例 3：
+   mat = [[0,0,0,1],[1,0,0,0],[0,1,1,0],[0,0,0,0]]
+   - 第 2 行 `rowSum[2]=2`，该行的 1 全部不可能是特殊位置
+   - 其他满足条件的位置有两个
+   - 答案为 2
+
+   边界情况：
+   - 只有 1 行或 1 列时，逻辑同样成立。
+   - 全 0 矩阵：答案为 0。
+   - 多个 1 在同一行或同一列：都会被行和/列和条件过滤。
+
+6. 算法要点总结
+   - 将“行列全 0”条件转化为“行和、列和都为 1”。
+   - 先聚合统计，再常数时间判定单点。
+   - 相比对每个 1 扫行扫列，避免了重复计算。
+
+7. 常见错误
+   - 只判断行唯一，漏掉列唯一条件（或反之）。
+   - 在第二次遍历中忘记检查 `mat[i][j] === 1`。
+   - 行列下标混淆，导致 `rowSum` / `colSum` 统计错误。
+*/
